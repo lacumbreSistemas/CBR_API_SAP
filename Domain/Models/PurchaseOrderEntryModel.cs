@@ -14,7 +14,7 @@ namespace SAP.Models
         public string nombreProducto { get; set; }
         public string codigoProducto { get; set; }
         public  double cantidadOrdenada { get; set; }
-        public double cantidadResibida { get; set; }
+        public double cantidadRecibida { get; set; }
 
         private cbrComprasSAPEntryRepository intermediaRepository { get; set; }
 
@@ -26,7 +26,7 @@ namespace SAP.Models
             this.nombreProducto = nombreProducto;
             this.codigoProducto = codigoProducto;
             this.cantidadOrdenada = cantidadOrdenada;
-            this.cantidadResibida = this.intermediaRepository.GetItemReceived(docEntry, codigoProducto);
+            this.cantidadRecibida = this.intermediaRepository.GetItemReceived(docEntry, codigoProducto);
         }
 
 
@@ -36,7 +36,7 @@ namespace SAP.Models
             this.nombreProducto = newEntry.nombreProducto;
             this.codigoProducto = newEntry.codigoProducto;
             this.cantidadOrdenada = newEntry.cantidadOrdenada;
-            this.cantidadResibida = 0;
+            this.cantidadRecibida = 0;
         }
 
         public void agregar()

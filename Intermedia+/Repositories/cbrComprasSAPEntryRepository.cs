@@ -21,5 +21,10 @@ namespace Intermedia_.Repositories
                 return 0;
             }
         }
+
+        public void actualizarIsSap(int docEntry, string itemCode)
+        {
+
+        }
     }
 }

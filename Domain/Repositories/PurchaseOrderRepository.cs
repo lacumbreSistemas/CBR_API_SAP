@@ -1,4 +1,5 @@
 ﻿using Domain.Models;
+using Intermedia_.Repositories;
 using SAP.Models;
 using SAP.Repositories;
 using System;
@@ -12,6 +13,8 @@ namespace Domain.Repositories
     public class PurchaseOrderRepository
     {
         PurchaseOrderHeaderRepository headerRepo = new PurchaseOrderHeaderRepository();
+        EntradaDeMercanciaRepository entradaMercaciaRepo = new EntradaDeMercanciaRepository();
+        cbrComprasSAPEntryRepository SAPEntryRepo = new cbrComprasSAPEntryRepository();
 
         //public List<PurchaseOrderEntryModel> getPurchaseOrderEntries(int docEntry)
         //{
@@ -29,9 +32,9 @@ namespace Domain.Repositories
 
         public void addNewEntry(PurchaseOrderEntryModel newEntry) 
         {
-            //PurchaseOrderEntryModel aa = new PurchaseOrderEntryModel(newEntry);
+            PurchaseOrderEntryModel NewEntry = new PurchaseOrderEntryModel(newEntry);
 
-            //aa.agregar();
+            //NewEntry.agregar()
         }
 
 
@@ -41,9 +44,9 @@ namespace Domain.Repositories
             return aa;
         }
 
-        public List<PurchaseOrderModel> getPurchaseOrderAbiertasHeaders()
+        public List<PurchaseOrderModel> getPurchaseOrderAbiertasHeaders(string Whscode)
         {
-            var ordenes = headerRepo.getAbiertas();
+            var ordenes = headerRepo.getAbiertas(Whscode);
 
             var res = new List<PurchaseOrderModel>();
 
@@ -53,6 +56,18 @@ namespace Domain.Repositories
             });
 
             return res;
+        }
+
+        public void generarEntradaMercancia(int docEntry)
+        {
+            PurchaseOrderModel po = new PurchaseOrderModel(docEntry);
+
+            EntradaDeMercancia em = new EntradaDeMercancia();
+
+            entradaMercaciaRepo.generarEntradaDeMercancia(em);
+
+
+
         }
 
 
