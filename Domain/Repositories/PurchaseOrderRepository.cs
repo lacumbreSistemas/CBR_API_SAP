@@ -41,14 +41,16 @@ namespace Domain.Repositories
             return aa;
         }
 
-        public List<PurchaseOrderModel> getPurchaseOrderAbiertasHeaders()
+        public List<PurchaseOrderModel> getPurchaseOrderAbiertasHeaders(string WhsCode)
         {
-            var ordenes = headerRepo.getAbiertas();
+            var ordenes = headerRepo.getAbiertas(WhsCode);
 
             var res = new List<PurchaseOrderModel>();
 
             ordenes.ForEach(docEntry =>
             {
+
+                //PurchaseOrderModel Poe = new PurchaseOrderModel(docEntry);
                 res.Add(new PurchaseOrderModel(docEntry));
             });
 
