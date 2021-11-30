@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Intermedia_.Repositories
 {
-    public class cbrComprasSAPEntryRepository
+    public class cbrComprasSAPEntryRepository:MasterRespository
     {
-        Data db = new Data();
+      
         public double GetItemReceived(int docEntry, string itemCode) 
         {
            var cantidad = db.cbr_ComprasSAP_Entry.Where(i => i.ItemCode == itemCode && i.BaseEntry == docEntry).Sum(i => i.Quantity);
@@ -20,6 +20,21 @@ namespace Intermedia_.Repositories
             {
                 return 0;
             }
+        }
+
+
+        public List<cbr_ComprasSAP_Entry> GetItemReceivedDetail(int docEntry, string itemCode) {
+
+
+            return null;
+        }
+
+
+        public void Post(cbr_ComprasSAP_Entry Entry) {
+
+            db.cbr_ComprasSAP_Entry.Add(Entry);
+            db.SaveChanges();
+            
         }
     }
 }

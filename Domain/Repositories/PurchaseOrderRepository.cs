@@ -27,11 +27,11 @@ namespace Domain.Repositories
         //    //return res;
         //}
 
-        public void addNewEntry(PurchaseOrderEntryModel newEntry) 
+        public void addNewEntry(PurchaseOrderEntryModel newEntry,string usuario) 
         {
-            //PurchaseOrderEntryModel aa = new PurchaseOrderEntryModel(newEntry);
+            PurchaseOrderEntryModel aa = new PurchaseOrderEntryModel(newEntry);
 
-            //aa.agregar();
+            aa.agregar();
         }
 
 
@@ -46,38 +46,16 @@ namespace Domain.Repositories
             var ordenes = headerRepo.getAbiertas(WhsCode);
 
             var res = new List<PurchaseOrderModel>();
-            res = mápearOCs(ordenes);
-            ////var p = new List<int>();
-
-            //ordenes.ForEach(OCs =>
-            //{
-
-
-            //    PurchaseOrderModel Poe = new PurchaseOrderModel();
-
-            //    Poe.docEntry = OCs.docEntry;
-            //    Poe.docNum = OCs.docNum;
-            //    Poe.codigoProveedor = OCs.cardCode;
-            //    Poe.nombreProveedor = OCs.cardName;
-            //    Poe.fechaCreacion = OCs.docDueDate;
-            //    Poe.fechaEntrega = OCs.taxDate;
-
-
-
-            //    res.Add(Poe);
-            //});
-
+            res = mapearOCs(ordenes);
             return res;
         }
 
 
 
-        private List<PurchaseOrderModel> mápearOCs(List<PurchaseOrderHeader> OCsSAP) {
+        private List<PurchaseOrderModel> mapearOCs(List<PurchaseOrderHeader> OCsSAP) {
             var OCs = new List<PurchaseOrderModel>();
             OCsSAP.ForEach(OC =>
             {
-
-
                 PurchaseOrderModel oc = new PurchaseOrderModel();
 
                 oc.docEntry = OC.docEntry;
@@ -86,7 +64,6 @@ namespace Domain.Repositories
                 oc.nombreProveedor = OC.cardName;
                 oc.fechaCreacion = OC.docDueDate;
                 oc.fechaEntrega = OC.taxDate;
-
 
 
                 OCs.Add(oc);

@@ -63,6 +63,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\tiendas.cs" />
     <Compile Include="Repositories\cbrComprasSAPEntryRepository.cs" />
+    <Compile Include="Repositories\cbrComprasSAPHeaderRepository.cs" />
+    <Compile Include="Repositories\MasterRespository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -17,10 +17,12 @@ namespace SAP.Repositories
     
         public List<PurchaseOrderEntry> getPurchaseOrderEntries(int docEntry)
         {
-       doQuery(@"select            E.ItemCode as codigoProducto,
-                                        i.ItemName as nombreProducto,
-                                        E.Quantity as cantidadOrdenada,
-                                        E.DocEntry as docEntry
+          doQuery(@"select                      E.ItemCode as codigoProducto,
+                                                i.ItemName as nombreProducto,
+                                                E.Quantity as cantidadOrdenada,
+                                                E.DocEntry as docEntry,
+                                                E.Baseline as Baseline,
+                                              E.OcrCode  as NormaReparto
                                         FROM POR1 E
                                         inner join OITM i on i.ItemCode = E.ItemCode
                                         where  E.DocEntry =" + docEntry);
@@ -29,7 +31,19 @@ namespace SAP.Repositories
 
             for (int i = 0; i < recordSet.RecordCount; i++)
             {
-                PurchaseOrderEntry newPurchaseOrderEntry = new PurchaseOrderEntry (recordSet.Fields.Item("docEntry").Value, recordSet.Fields.Item("nombreProducto").Value, recordSet.Fields.Item("codigoProducto").Value, recordSet.Fields.Item("cantidadOrdenada").Value);
+                
+                PurchaseOrderEntry newPurchaseOrderEntry = new PurchaseOrderEntry(
+
+                                        recordSet.Fields.Item("docEntry").Value,
+                                        recordSet.Fields.Item("nombreProducto").Value,
+                                        recordSet.Fields.Item("codigoProducto").Value,
+                                        recordSet.Fields.Item("cantidadOrdenada").Value,
+                                        recordSet.Fields.Item("Baseline").Value,
+                                        recordSet.Fields.Item("NormaReparto").Value
+
+                                        );
+
+
                 poe.Add(newPurchaseOrderEntry);
                 recordSet.MoveNext();
             }
@@ -38,6 +52,33 @@ namespace SAP.Repositories
 
 
         }
+
+        public PurchaseOrderEntry getPurchaseOneEntrie(int docEntry, string itemCode) {
+
+            doQuery(@"select                E.ItemCode as codigoProducto,
+                                            i.ItemName as nombreProducto,
+                                            E.Quantity as cantidadOrdenada,
+                                            E.DocEntry as docEntry,
+                                            E.Baseline as Baseline,
+                                            E.OcrCode  as NormaReparto
+                                        FROM POR1 E
+                                        inner join OITM i on i.ItemCode = E.ItemCode
+                                        where  E.DocEntry = " + docEntry+"and E.itemCode = '"+itemCode+"'");
+
+
+            return new PurchaseOrderEntry(
+
+                                        recordSet.Fields.Item("docEntry").Value, 
+                                        recordSet.Fields.Item("nombreProducto").Value, 
+                                        recordSet.Fields.Item("codigoProducto").Value, 
+                                        recordSet.Fields.Item("cantidadOrdenada").Value,
+                                        recordSet.Fields.Item("Baseline").Value,
+                                        recordSet.Fields.Item("NormaReparto").Value
+
+
+                                        );
+
+        } 
 
     }
 }

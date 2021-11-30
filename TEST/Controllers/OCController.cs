@@ -22,7 +22,7 @@ namespace TEST.Controllers
        
 
         [HttpGet("OCAbiertas")]
-        public IActionResult Get([FromHeader] string WhsCode)
+        public IActionResult GetOpen([FromHeader] string WhsCode)
         {
 
             List<PurchaseOrderModel> OCs = po.getPurchaseOrderAbiertasHeaders(WhsCode);
@@ -30,5 +30,18 @@ namespace TEST.Controllers
 
             return Ok(OCs);
         }
+
+
+        [HttpPost("Escaneo/{usuario}")]
+        public IActionResult Post([FromBody] PurchaseOrderEntryModel Entry, string usuario)
+        {
+            PurchaseOrderEntryModel aa = new PurchaseOrderEntryModel(Entry);
+            po.addNewEntry(aa, usuario);
+
+
+            return Ok("Bien");
+        }
+
+
     }
 }
