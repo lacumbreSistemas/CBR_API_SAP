@@ -46,18 +46,55 @@ namespace Domain.Repositories
             var ordenes = headerRepo.getAbiertas(WhsCode);
 
             var res = new List<PurchaseOrderModel>();
+            res = mápearOCs(ordenes);
+            ////var p = new List<int>();
 
-            ordenes.ForEach(docEntry =>
-            {
+            //ordenes.ForEach(OCs =>
+            //{
 
-                //PurchaseOrderModel Poe = new PurchaseOrderModel(docEntry);
-                res.Add(new PurchaseOrderModel(docEntry));
-            });
+
+            //    PurchaseOrderModel Poe = new PurchaseOrderModel();
+
+            //    Poe.docEntry = OCs.docEntry;
+            //    Poe.docNum = OCs.docNum;
+            //    Poe.codigoProveedor = OCs.cardCode;
+            //    Poe.nombreProveedor = OCs.cardName;
+            //    Poe.fechaCreacion = OCs.docDueDate;
+            //    Poe.fechaEntrega = OCs.taxDate;
+
+
+
+            //    res.Add(Poe);
+            //});
 
             return res;
         }
 
 
+
+        private List<PurchaseOrderModel> mápearOCs(List<PurchaseOrderHeader> OCsSAP) {
+            var OCs = new List<PurchaseOrderModel>();
+            OCsSAP.ForEach(OC =>
+            {
+
+
+                PurchaseOrderModel oc = new PurchaseOrderModel();
+
+                oc.docEntry = OC.docEntry;
+                oc.docNum = OC.docNum;
+                oc.codigoProveedor = OC.cardCode;
+                oc.nombreProveedor = OC.cardName;
+                oc.fechaCreacion = OC.docDueDate;
+                oc.fechaEntrega = OC.taxDate;
+
+
+
+                OCs.Add(oc);
+            });
+
+            return OCs;
+
+        }
 
 
 

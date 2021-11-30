@@ -33,7 +33,12 @@ namespace Domain.Models
             getPurchaseOrderHeader(docEntry, includeEntries);
         }
 
-       public void getPurchaseOrderHeader(int docEntry, bool includeEntries)
+        public PurchaseOrderModel()
+        {
+            
+        }
+
+        public void getPurchaseOrderHeader(int docEntry, bool includeEntries)
         {
             var header = this.headerRepository.getOne(docEntry);
             this.docEntry = header.docEntry;
@@ -43,10 +48,11 @@ namespace Domain.Models
             this.fechaEntrega = header.taxDate;
             this.nombreProveedor = header.cardName;
 
-           var entries = entriesRepository.getPurchaseOrderEntries(docEntry);
-
+          
+            
             if (includeEntries)
             {
+                var entries = entriesRepository.getPurchaseOrderEntries(docEntry);
                 entries.ForEach(entry =>
                 {
                     this.entries.Add(new PurchaseOrderEntryModel(entry.docEntry, entry.nombreProducto, entry.codigoProducto, entry.cantidadOrdenada));
