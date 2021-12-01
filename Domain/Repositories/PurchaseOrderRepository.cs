@@ -13,26 +13,9 @@ namespace Domain.Repositories
     {
         PurchaseOrderHeaderRepository headerRepo = new PurchaseOrderHeaderRepository();
 
-        //public List<PurchaseOrderEntryModel> getPurchaseOrderEntries(int docEntry)
-        //{
+       
 
-        //    //var entries = repository.getPurchaseOrderEntries(docEntry);
-        //    //List<PurchaseOrderEntryModel> res = new List<PurchaseOrderEntryModel>();
-
-        //    //entries.ForEach(item =>
-        //    //{
-        //    //    res.Add(new PurchaseOrderEntryModel(item.docEntry, item.nombreProducto, item.codigoProducto, item.cantidadOrdenada));
-        //    //});
-
-        //    //return res;
-        //}
-
-        public void addNewEntry(PurchaseOrderEntryModel newEntry,string usuario) 
-        {
-            PurchaseOrderEntryModel aa = new PurchaseOrderEntryModel(newEntry);
-
-            aa.agregar();
-        }
+      
 
 
         public PurchaseOrderModel getPurchaseOrder(int docEntrey)
@@ -51,27 +34,29 @@ namespace Domain.Repositories
         }
 
 
-
-        private List<PurchaseOrderModel> mapearOCs(List<PurchaseOrderHeader> OCsSAP) {
-            var OCs = new List<PurchaseOrderModel>();
-            OCsSAP.ForEach(OC =>
-            {
-                PurchaseOrderModel oc = new PurchaseOrderModel();
-
-                oc.docEntry = OC.docEntry;
-                oc.docNum = OC.docNum;
-                oc.codigoProveedor = OC.cardCode;
-                oc.nombreProveedor = OC.cardName;
-                oc.fechaCreacion = OC.docDueDate;
-                oc.fechaEntrega = OC.taxDate;
+        //private
 
 
-                OCs.Add(oc);
-            });
+                private List<PurchaseOrderModel> mapearOCs(List<PurchaseOrderHeader> OCsSAP) {
+                    var OCs = new List<PurchaseOrderModel>();
+                    OCsSAP.ForEach(OC =>
+                    {
+                        PurchaseOrderModel oc = new PurchaseOrderModel();
 
-            return OCs;
+                        oc.docEntry = OC.docEntry;
+                        oc.docNum = OC.docNum;
+                        oc.codigoProveedor = OC.cardCode;
+                        oc.nombreProveedor = OC.cardName;
+                        oc.fechaCreacion = OC.docDueDate;
+                        oc.fechaEntrega = OC.taxDate;
 
-        }
+
+                        OCs.Add(oc);
+                    });
+
+                    return OCs;
+
+                }
 
 
 

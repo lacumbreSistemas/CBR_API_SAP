@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Intermedia_.Repositories
 {
-    public class cbrComprasSAPEntryRepository:MasterRespository
+    public class cbr_ComprasSAP_Escaneo_Repository:MasterRespository
     {
       
         public double GetItemReceived(int docEntry, string itemCode) 
         {
-           var cantidad = db.cbr_ComprasSAP_Entry.Where(i => i.ItemCode == itemCode && i.BaseEntry == docEntry).Sum(i => i.Quantity);
+           var cantidad = db.cbr_ComprasSAP_Escaneo.Where(i => i.itemCode == itemCode && i.baseEntry == docEntry).Sum(i => i.cantidad);
 
             if(cantidad != null)
             {
@@ -23,16 +23,17 @@ namespace Intermedia_.Repositories
         }
 
 
-        public List<cbr_ComprasSAP_Entry> GetItemReceivedDetail(int docEntry, string itemCode) {
+        public List<cbr_ComprasSAP_Escaneo> GetItemReceivedDetail(int docEntry, string itemCode) {
 
+            //en proceso
 
             return null;
         }
 
 
-        public void Post(cbr_ComprasSAP_Entry Entry) {
+        public void Post(cbr_ComprasSAP_Escaneo Entry) {
 
-            db.cbr_ComprasSAP_Entry.Add(Entry);
+            db.cbr_ComprasSAP_Escaneo.Add(Entry);
             db.SaveChanges();
             
         }
