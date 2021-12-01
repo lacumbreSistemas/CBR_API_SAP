@@ -10,6 +10,10 @@ namespace Intermedia_
     {
         public int id { get; set; }
 
+
+
+
+
         public int? baseEntry { get; set; }
 
         [StringLength(255)]
