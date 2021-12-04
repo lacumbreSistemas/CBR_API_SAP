@@ -10,4 +10,8 @@
     <ProjectReference Include="..\SAP\SAP.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\ItemRepository\" />
+  </ItemGroup>
+
 </Project>

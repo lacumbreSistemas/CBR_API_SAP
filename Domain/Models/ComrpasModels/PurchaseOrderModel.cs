@@ -27,13 +27,18 @@ namespace Domain.Models
 
         public PurchaseOrderModel(int docEntry,bool includeEntries = false)
         {
-            this.headerRepository = new PurchaseOrderHeaderRepository();
+          // this.headerRepository = new PurchaseOrderHeaderRepository();
             this.entriesRepository = new PurchaseOrderEntryRespository();
             this.entries = new List<PurchaseOrderEntryModel>();
             getPurchaseOrderHeader(docEntry, includeEntries);
         }
 
-       public void getPurchaseOrderHeader(int docEntry, bool includeEntries)
+        public PurchaseOrderModel()
+        {
+            
+        }
+
+        public void getPurchaseOrderHeader(int docEntry, bool includeEntries)
         {
             var header = this.headerRepository.getOne(docEntry);
             this.docEntry = header.docEntry;
@@ -43,13 +48,20 @@ namespace Domain.Models
             this.fechaEntrega = header.taxDate;
             this.nombreProveedor = header.cardName;
 
-           var entries = entriesRepository.getPurchaseOrderEntries(docEntry);
-
+          
+            
             if (includeEntries)
             {
-                entries.ForEach(entry =>
+                var entriesSAP = entriesRepository.ObtenerListaDeEntriesOrdenDeCompra(docEntry);
+                entriesSAP.ForEach(entry =>
                 {
-                    this.entries.Add(new PurchaseOrderEntryModel(entry.docEntry, entry.nombreProducto, entry.codigoProducto, entry.cantidadOrdenada));
+                    PurchaseOrderEntryModel Entry = new PurchaseOrderEntryModel();
+                    Entry.docEntry = entry.docEntry;
+                    Entry.codigoProducto = entry.codigoProducto;
+                    Entry.nombreProducto = entry.nombreProducto;
+                    Entry.cantidadOrdenada = entry.cantidadOrdenada;
+
+                    this.entries.Add(Entry);
                 });
             }
           

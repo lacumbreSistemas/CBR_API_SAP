@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAP.Models
 {
-    class Item
+    class PurchaseOrderModel
     {
-        int DocEntry { get; set; }
-
-        string ItemName { get; set; }
-        string ItemCode { get; set; }
-
     }
 }

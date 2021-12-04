@@ -14,5 +14,6 @@ namespace HQ.Repositories
             var itemID = data.Alias.FirstOrDefault(i => i.Alias1 == itemLookupCode);
             return itemID != null ? itemID.ItemID : 0; 
         }
+
     }
 }
