@@ -16,13 +16,19 @@ namespace TEST.Controllers
     [Route("api/[controller]")]
     public class OCController : ControllerBase
     {
-        PurchaseOrderRepository po = new PurchaseOrderRepository();
 
+       private EscaneoRepository Escaneos = new EscaneoRepository();
+       //private PurchaseOrderRepository po = new PurchaseOrderRepository();
+        private PurchaseOrderRepository po;
+        private readonly ILogger<OCController> _logger;
 
-       
+        public OCController(ILogger<OCController> logger) {
+            _logger = logger;
+        }
+
 
         [HttpGet("OCAbiertas")]
-        public IActionResult GetOpen([FromHeader] string WhsCode)
+        public IActionResult GetAbiertas([FromHeader] string WhsCode)
         {
 
             List<PurchaseOrderModel> OCs = po.getPurchaseOrderAbiertasHeaders(WhsCode);
@@ -33,14 +39,22 @@ namespace TEST.Controllers
 
 
         [HttpPost("Escaneo/{usuario}")]
-        public IActionResult Post([FromBody] PurchaseOrderEntryModel Entry, string usuario)
+        public IActionResult Post([FromBody] EscaneoModel escaneo)
         {
-            PurchaseOrderEntryModel aa = new PurchaseOrderEntryModel(Entry);
-            po.addNewEntry(aa, usuario);
+
+            Escaneos.Agregar(escaneo);
 
 
             return Ok("Bien");
         }
+
+        [HttpGet("Resumen/{numeroDeOrdenDeCompra}")]
+        public IActionResult GetResumen(int numeroDeOrdenDeCompra)
+        {
+            PurchaseOrderModel OC = po.getPurchaseOrder(numeroDeOrdenDeCompra);
+            return Ok(OC);
+        }
+
 
 
     }

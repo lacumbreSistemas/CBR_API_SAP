@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace SAP.Models
 {
-    class Item
+   public  class ItemSAP
     {
-        int DocEntry { get; set; }
 
-        string ItemName { get; set; }
-        string ItemCode { get; set; }
+      public  ItemSAP() { 
+        }
+
+
+      public  string ItemName { get; set; }
+      public string ItemCode { get; set; }
 
     }
 }

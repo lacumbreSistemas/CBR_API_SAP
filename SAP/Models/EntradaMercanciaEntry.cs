@@ -11,7 +11,7 @@ namespace SAP.Models
 
         int id;
 
-        Item item { get; set; }
+        ItemSAP item { get; set; }
 
         double quantityOrdened { get; set; }
     }

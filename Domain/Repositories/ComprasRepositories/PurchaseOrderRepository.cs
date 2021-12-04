@@ -13,14 +13,12 @@ namespace Domain.Repositories
     {
         PurchaseOrderHeaderRepository headerRepo = new PurchaseOrderHeaderRepository();
 
+
+        
        
-
-      
-
-
-        public PurchaseOrderModel getPurchaseOrder(int docEntrey)
+        public PurchaseOrderModel getPurchaseOrder(int numeroDeOrdenDeCompra)
         {
-            PurchaseOrderModel aa = new PurchaseOrderModel(docEntrey,true);
+            PurchaseOrderModel aa = new PurchaseOrderModel(numeroDeOrdenDeCompra, true);
             return aa;
         }
 
@@ -49,7 +47,7 @@ namespace Domain.Repositories
                         oc.nombreProveedor = OC.cardName;
                         oc.fechaCreacion = OC.docDueDate;
                         oc.fechaEntrega = OC.taxDate;
-
+                        
 
                         OCs.Add(oc);
                     });

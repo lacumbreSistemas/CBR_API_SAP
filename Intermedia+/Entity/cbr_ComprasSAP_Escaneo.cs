@@ -10,10 +10,6 @@ namespace Intermedia_
     {
         public int id { get; set; }
 
-
-
-
-
         public int? baseEntry { get; set; }
 
         [StringLength(255)]
@@ -25,6 +21,6 @@ namespace Intermedia_
 
         public DateTime? fecha { get; set; }
 
-        public int? DocEntry { get; set; }
+        public int? entradaMercanciaDocEntry { get; set; }
     }
 }

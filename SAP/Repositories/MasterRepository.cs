@@ -17,12 +17,11 @@ namespace SAP.Repositories
             connection.DbUserName = "sa";
             connection.DbPassword = "SAP#Sql_";
             //connection.CompanyDB = "SBO_COLONIAL_PRODUCTIVA";
-            //connection.UserName = "manager";
-            //connection.Password = "@dmiN123*";
+            connection.UserName = "manager";
+            connection.Password = "@dmiN123*";
 
             connection.CompanyDB = "SBO_COLONIAL_Pruebas";
-            connection.UserName = "manager";
-            connection.Password = "12345";
+          
 
 
         }

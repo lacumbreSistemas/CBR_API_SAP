@@ -9,7 +9,7 @@ namespace Intermedia_.Repositories
     public class cbr_ComprasSAP_Escaneo_Repository:MasterRespository
     {
       
-        public double GetItemReceived(int docEntry, string itemCode) 
+        public double obtenerCantidadRecibida(int docEntry, string itemCode) 
         {
            var cantidad = db.cbr_ComprasSAP_Escaneo.Where(i => i.itemCode == itemCode && i.baseEntry == docEntry).Sum(i => i.cantidad);
 
@@ -23,15 +23,16 @@ namespace Intermedia_.Repositories
         }
 
 
-        public List<cbr_ComprasSAP_Escaneo> GetItemReceivedDetail(int docEntry, string itemCode) {
+        public List<cbr_ComprasSAP_Escaneo> ObteneDetalleEscaneos(int docEntry, string itemCode) {
 
-            //en proceso
+
+            
 
             return null;
         }
 
 
-        public void Post(cbr_ComprasSAP_Escaneo Entry) {
+        public void GuardarEscaneo(cbr_ComprasSAP_Escaneo Entry) {
 
             db.cbr_ComprasSAP_Escaneo.Add(Entry);
             db.SaveChanges();

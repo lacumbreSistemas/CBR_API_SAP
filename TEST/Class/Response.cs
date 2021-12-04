@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http.ExceptionHandling;
 
 namespace TEST
 {
     public class Response
     {
-        int status { get; set; }
-        string mensaje { get; set; }
-        object data { get; set; }
+      public int status { get; set; }
+       public string mensaje { get; set; }
+       public object data { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace SAP.Repositories
         //_masterRespository = MasterRepository.Instance;
         }
     
-        public List<PurchaseOrderEntry> getPurchaseOrderEntries(int docEntry)
+        public List<PurchaseOrderEntry> ObtenerListaDeEntriesOrdenDeCompra(int docEntry)
         {
           doQuery(@"select                      E.ItemCode as codigoProducto,
                                                 i.ItemName as nombreProducto,
@@ -53,7 +53,7 @@ namespace SAP.Repositories
 
         }
 
-        public PurchaseOrderEntry getPurchaseOneEntrie(int docEntry, string itemCode) {
+        public PurchaseOrderEntry ObtenerEntrieDeOrdenDeCompra(int docEntry, string itemCode) {
 
             doQuery(@"select                E.ItemCode as codigoProducto,
                                             i.ItemName as nombreProducto,
@@ -78,7 +78,16 @@ namespace SAP.Repositories
 
                                         );
 
-        } 
+        }
+
+
+        public double ObtenerCantidadOrdenada(int docEntry, string itemCode) {
+
+            doQuery("select quantity from Por1 where docentry = "+docEntry+" and itemCode = '"+itemCode+"'");
+
+            double cantidadOrdenada = recordSet.Fields.Item("Quantity").Value;
+            return cantidadOrdenada;
+        }
 
     }
 }

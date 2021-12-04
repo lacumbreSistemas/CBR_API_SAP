@@ -53,23 +53,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\cbr_ComprasSAP_Entry.cs" />
-    <Compile Include="Models\cbr_ComprasSAP_Header.cs" />
-    <Compile Include="Models\cbr_TrasladosSAP_Entry.cs" />
-    <Compile Include="Models\cbr_TrasladosSAP_Header.cs" />
-    <Compile Include="Models\cbr_UsuariosApiSAP.cs" />
+    <Compile Include="Entity\cbr_ComprasSAP_Escaneo.cs" />
     <Compile Include="Data.cs" />
-    <Compile Include="Models\inventarioSAP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\tiendas.cs" />
-    <Compile Include="Repositories\cbrComprasSAPEntryRepository.cs" />
-    <Compile Include="Repositories\cbrComprasSAPHeaderRepository.cs" />
+    <Compile Include="Repositories\cbr_ComprasSAP_Escaneo_Repository.cs" />
     <Compile Include="Repositories\MasterRespository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

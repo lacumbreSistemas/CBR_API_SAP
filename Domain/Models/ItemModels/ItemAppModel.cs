@@ -7,7 +7,7 @@ using HQ.Contracts;
 using HQ.Repositories;
 namespace Domain.Models
 {
-    class Item
+    class ItemAppModel
     {
         public int itemId { get; set; }
         public  string itemloockupcode { get; set; }
@@ -17,7 +17,7 @@ namespace Domain.Models
 
         private IItemRepository itemRepository;
 
-        Item()
+       public ItemAppModel()
         {
             this.aliasRepository = new AliasRepository();
             this.itemRepository = new ItemRepository();
@@ -27,13 +27,14 @@ namespace Domain.Models
         {
             int itemid = aliasRepository.getItemId(itemloockupcode);
 
-            if(itemId == 0)
+            if (itemId == 0)
             {
                 var item = itemRepository.getByItemLoockupCode(itemloockupcode);
                 this.itemId = item.ID;
                 this.itemloockupcode = item.ItemLookupCode;
                 this.descripcion = item.Description;
-            } else
+            }
+            else
             {
                 var item = itemRepository.getByID(itemid);
                 this.itemId = item.ID;
