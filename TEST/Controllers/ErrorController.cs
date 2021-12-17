@@ -13,7 +13,7 @@ namespace TEST.Controllers
     {
 
         [Route("Error")]
-        [HttpGet]
+        //[HttpGet]
         public IActionResult Error()
         {
             Response response = new Response();
@@ -25,7 +25,7 @@ namespace TEST.Controllers
             response.data = null;
 
 
-            return Ok("asfd");
+            return Ok(response);
         }
     }
 }

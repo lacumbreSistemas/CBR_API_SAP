@@ -10,37 +10,24 @@ using SAP.Repositories;
 
 namespace Domain.Repositories
 {
-    class ItemAppRepository
+   public class ItemAppRepository
     {
-        private ItemRepository ItemRepo;
-        private AliasRepository AliasRepo;
-        private ItemSAPRepository SAPRepo;
+     
         public ItemAppRepository() {
-            ItemRepo = new ItemRepository();
-            AliasRepo = new AliasRepository();
-            SAPRepo = new ItemSAPRepository();
+            
         
         }
 
 
+        public ItemAppModel obtenerItem(string ItemCode) {
 
-        //public ItemAppModel ObtenerItemPorItemCode(string ItemCode) {
+            ItemAppModel item = new ItemAppModel();
 
-        //    ItemAppModel Item = new ItemAppModel();
+            item.findByItemloockupcode(ItemCode);
 
-
-        //    var AliasHQItemId=0;
-        //    var ItemSAP = SAPRepo.ObtenerItemPorItemCode(ItemCode);
-
-        //    if (ItemSAP == null) {
-
-        //        AliasHQItemId = AliasRepo.getItemId(ItemCode);
-        //        ItemRepo.getByID(AliasHQItemId);
-        //    }
-
-        //    // cuando el codigo de barra es el item y en sap está registrado el alias
-                
-        //}
+            return item;
+        
+        }
 
 
     }

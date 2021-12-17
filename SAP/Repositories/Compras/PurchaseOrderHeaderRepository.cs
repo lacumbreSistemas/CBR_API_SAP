@@ -28,16 +28,7 @@ namespace SAP.Repositories
 
             PurchaseOrderHeader newPurchaseOrderHeader = new PurchaseOrderHeader();
 
-            //for (int i = 0; i < _masterRespository.recordSet.RecordCount; i++)
-            //{
-            //    newPurchaseOrderHeader.docEntry = _masterRespository.recordSet.Fields.Item("DocEntry").Value;
-            //    newPurchaseOrderHeader.taxDate = _masterRespository.recordSet.Fields.Item("TaxDate").Value;
-            //    newPurchaseOrderHeader.docNum = _masterRespository.recordSet.Fields.Item("DocNum").Value;
-            //    newPurchaseOrderHeader.cardCode = _masterRespository.recordSet.Fields.Item("CardCode").Value;
-            //    newPurchaseOrderHeader.docDueDate = _masterRespository.recordSet.Fields.Item("DocDueDate").Value;
-            //    newPurchaseOrderHeader.cardName = _masterRespository.recordSet.Fields.Item("CardCode").Value;
-            //    _masterRespository.recordSet.MoveNext();
-            //}
+            
 
             while (!recordSet.EoF) {
                 newPurchaseOrderHeader.docEntry = recordSet.Fields.Item("DocEntry").Value;
@@ -62,7 +53,7 @@ namespace SAP.Repositories
                            left join OPDN T3 ON T2.DocEntry = T3.DocEntry
                   where T0.DocStatus = 'O' and (T3.DocStatus is null or t3.CANCELED = 'Y') and t1.WhsCode ='" + WhsCode + @"'
                                      and T0.DocType = 'I'
-				  group by  T0.DocEntry,T0.TaxDate,T0.DocNum,T0.CardCode,T0.DocDueDate,p.CardName  ");
+				  group by  T0.DocEntry,T0.TaxDate,T0.DocNum,T0.CardCode,T0.DocDueDate,p.CardName  order by t0.DocNum desc");
 
             List<PurchaseOrderHeader> OCAbiertas = new List<PurchaseOrderHeader>();
 

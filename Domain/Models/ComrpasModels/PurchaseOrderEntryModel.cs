@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Domain.Interfaces;
 
 namespace Domain.Models
 {
-    public class PurchaseOrderEntryModel
+    public class PurchaseOrderEntryModel: IOCEntry
     {
 
         //Publics
@@ -18,30 +18,31 @@ namespace Domain.Models
         public string nombreProducto { get; set; }
         public string codigoProducto { get; set; }
         public  double cantidadOrdenada { get; set; }
-        public double cantidadRecibida { get; set; }
+        public double cantidadEscneada { get; set; }
       
 
 
         //Privates
         private cbr_ComprasSAP_Escaneo_Repository intermediaEntryRepository { get; set; }
-              
-              
-            
+
+        //private PurchaseOrderEntryRespository entriesRepository { get; set; }
+
         //Constructores
 
-        public PurchaseOrderEntryModel(int docEntry, string nombreProducto, string codigoProducto)
+        public PurchaseOrderEntryModel(int docEntry, string nombreProducto)
         {
             intermediaEntryRepository = new cbr_ComprasSAP_Escaneo_Repository();
             this.docEntry = docEntry;
             this.nombreProducto = nombreProducto;
             this.codigoProducto = codigoProducto;
         
-            this.cantidadRecibida = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
+            this.cantidadEscneada = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
         }
 
         public PurchaseOrderEntryModel()
         {
-
+            intermediaEntryRepository = new cbr_ComprasSAP_Escaneo_Repository();
+            this.cantidadEscneada = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
         }
         public PurchaseOrderEntryModel(PurchaseOrderEntryModel newEntry)
         {
@@ -50,10 +51,10 @@ namespace Domain.Models
             this.nombreProducto = newEntry.nombreProducto;
             this.codigoProducto = newEntry.codigoProducto;
             this.cantidadOrdenada = newEntry.cantidadOrdenada;
-            this.cantidadRecibida = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
+            this.cantidadEscneada = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
         }
 
      
-
+            
     }
 }

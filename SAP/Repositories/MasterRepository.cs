@@ -10,67 +10,93 @@ namespace SAP.Repositories
     {
        public  MasterRepository() {
 
-            connection = new Company();
-            connection.Server = "10.10.1.12";
-            connection.LicenseServer = "10.10.1.12";
-            connection.DbServerType = BoDataServerTypes.dst_MSSQL2019;
-            connection.DbUserName = "sa";
-            connection.DbPassword = "SAP#Sql_";
-            //connection.CompanyDB = "SBO_COLONIAL_PRODUCTIVA";
-            connection.UserName = "manager";
-            connection.Password = "@dmiN123*";
+         
+            //connection.Server = "10.10.1.12";
+            //connection.LicenseServer = "10.10.1.12";
+            //connection.DbServerType = BoDataServerTypes.dst_MSSQL2019;
+            //connection.DbUserName = "sa";
+            //connection.DbPassword = "SAP#Sql_";
+            ////connection.CompanyDB = "SBO_COLONIAL_PRODUCTIVA";
+            //connection.UserName = "manager";
+            //connection.Password = "@dmiN123*";
 
-            connection.CompanyDB = "SBO_COLONIAL_Pruebas";
+            //connection.CompanyDB = "SBO_COLONIAL_Pruebas";
           
 
 
         }
 
         //Instancia SAP
-       Company connection { get; set; }
+       public  Company connection { get; set; }
        public Recordset recordSet { get; set; }
-      
 
+        #region singleton instance
 
         //Singleton appllierd
-       // private static readonly object lockf = new object ();   
-       //private static MasterRepository instance = null;
-  
-       // public static MasterRepository Instance {
+        // private static readonly object lockf = new object ();   
+        //private static MasterRepository instance = null;
 
-       //     get {
-       //         if (instance == null)
-       //         {
-       //             lock (lockf) {
-       //                 if (instance == null)
-       //                 {
-       //                     instance = new MasterRepository();
+        // public static MasterRepository Instance {
 
-       //                 }
+        //     get {
+        //         if (instance == null)
+        //         {
+        //             lock (lockf) {
+        //                 if (instance == null)
+        //                 {
+        //                     instance = new MasterRepository();
 
-       //             }
+        //                 }
 
-       //         }
+        //             }
 
-
-       //         return instance;
-       //     }
-       // }
+        //         }
 
 
+        //         return instance;
+        //     }
+        // }
+
+        #endregion
 
 
 
-        #region 
-     
-        
+        #region  doQuery abstract
+
+        public void Desconectar()
+        {
+
+            connection.Disconnect();
+            connection = null;
+        }
+
+        public void Conectar() {
+            connection = new Company();
+
+            connection.Server = "10.10.1.12";
+            connection.LicenseServer = "10.10.1.12";
+            connection.DbServerType = BoDataServerTypes.dst_MSSQL2019;
+            connection.DbUserName = "sa";
+            connection.DbPassword = "SAP#Sql_";
+            connection.UserName = "manager";
+            connection.Password = "@dmiN123*";
+            connection.CompanyDB = "SBO_COLONIAL_Pruebas";
+
+
+           
+            connection.Connect();
+            
+        }
 
         public void doQuery(string query)
         {
-            connection.Connect();
-            recordSet = connection.GetBusinessObject(BoObjectTypes.BoRecordset);
+            Conectar();
+       
+                recordSet = connection.GetBusinessObject(BoObjectTypes.BoRecordset);
             recordSet.DoQuery(query);
-            connection.Disconnect();
+        
+
+            Desconectar();
           
         }
         #endregion

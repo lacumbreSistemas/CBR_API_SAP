@@ -10,7 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
-
+using TEST.Filtros;
+using TEST.Middlewares;
 
 namespace TEST
 {
@@ -26,8 +27,9 @@ namespace TEST
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            
             services.AddControllers();
+            services.AddScoped<FiltroResponse>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,12 +42,15 @@ namespace TEST
             }
 
              app.UseExceptionHandler("/Error");
+      
 
             app.UseRouting();
 
             app.UseAuthorization();
 
-            
+            app.UseMiddleware<ResonseMiddleware>();
+
+          
 
             app.UseEndpoints(endpoints =>
             {

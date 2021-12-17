@@ -9,9 +9,9 @@ namespace Intermedia_.Repositories
     public class cbr_ComprasSAP_Escaneo_Repository:MasterRespository
     {
       
-        public double obtenerCantidadRecibida(int docEntry, string itemCode) 
+        public double obtenerCantidadRecibida(int? docEntry, string itemCode) 
         {
-           var cantidad = db.cbr_ComprasSAP_Escaneo.Where(i => i.itemCode == itemCode && i.baseEntry == docEntry).Sum(i => i.cantidad);
+           var cantidad = db.cbr_ComprasSAP_Escaneo.Where(i => i.itemCode == itemCode && i.baseEntry == docEntry).ToList().Sum(i => i.cantidad);
 
             if(cantidad != null)
             {
@@ -23,13 +23,16 @@ namespace Intermedia_.Repositories
         }
 
 
-        public List<cbr_ComprasSAP_Escaneo> ObteneDetalleEscaneos(int docEntry, string itemCode) {
+        public List<cbr_ComprasSAP_Escaneo> ObtenerEscaneosPorDocEntry(int docEntry) {
 
+            List<cbr_ComprasSAP_Escaneo> Escaneos = db.cbr_ComprasSAP_Escaneo.Where(i => i.baseEntry == docEntry && i.entradaMercanciaDocEntry == 0).ToList();
+   
+          
 
-            
-
-            return null;
+            return Escaneos;
         }
+
+
 
 
         public void GuardarEscaneo(cbr_ComprasSAP_Escaneo Entry) {
@@ -38,5 +41,19 @@ namespace Intermedia_.Repositories
             db.SaveChanges();
             
         }
+
+
+        public void guardadoEntradaMercancia(int baseEntry, string itemCode, int DocentryEM) {
+
+            var itemEscaneos = db.cbr_ComprasSAP_Escaneo.FirstOrDefault(i => i.baseEntry == baseEntry && i.itemCode == itemCode);
+            itemEscaneos.entradaMercanciaDocEntry = DocentryEM;
+
+            db.SaveChanges();
+           
+        
+        }
+
+
+
     }
 }

@@ -7,7 +7,7 @@ using HQ.Contracts;
 using HQ.Repositories;
 namespace Domain.Models
 {
-    class ItemAppModel
+   public class ItemAppModel
     {
         public int itemId { get; set; }
         public  string itemloockupcode { get; set; }

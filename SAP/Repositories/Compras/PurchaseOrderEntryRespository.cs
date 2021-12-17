@@ -1,4 +1,5 @@
-﻿using SAP.Models;
+﻿using SAP.Contracts;
+using SAP.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace SAP.Repositories
 {
-    public class PurchaseOrderEntryRespository:MasterRepository
+    public class PurchaseOrderEntryRespository:MasterRepository , IOCEntryRepo
     {
 
         //private MasterRepository _masterRespository;
@@ -15,7 +16,7 @@ namespace SAP.Repositories
         //_masterRespository = MasterRepository.Instance;
         }
     
-        public List<PurchaseOrderEntry> ObtenerListaDeEntriesOrdenDeCompra(int docEntry)
+        public List<PurchaseOrderEntry> ObtenerListaDeEntriesOrdenDeCompra(int? docEntry)
         {
           doQuery(@"select                      E.ItemCode as codigoProducto,
                                                 i.ItemName as nombreProducto,
@@ -53,7 +54,7 @@ namespace SAP.Repositories
 
         }
 
-        public PurchaseOrderEntry ObtenerEntrieDeOrdenDeCompra(int docEntry, string itemCode) {
+        public PurchaseOrderEntry ObtenerEntrieDeOrdenDeCompra(int? docEntry, string itemCode) {
 
             doQuery(@"select                E.ItemCode as codigoProducto,
                                             i.ItemName as nombreProducto,
@@ -81,12 +82,23 @@ namespace SAP.Repositories
         }
 
 
-        public double ObtenerCantidadOrdenada(int docEntry, string itemCode) {
+        public double ObtenerCantidadOrdenada(int? docEntry, string itemCode) {
 
             doQuery("select quantity from Por1 where docentry = "+docEntry+" and itemCode = '"+itemCode+"'");
 
             double cantidadOrdenada = recordSet.Fields.Item("Quantity").Value;
+
+            if (cantidadOrdenada == 0 || cantidadOrdenada == null)
+                throw new Exception("Item no existe en orden de compra");
+
             return cantidadOrdenada;
+        }
+
+
+        public int obtenerLineNum(int? docEntry, string itemCode) {
+            //Conectar();
+            doQuery("select LineNum from Por1 where docentry = " + docEntry + " and itemCode = '" + itemCode + "'");
+            return  recordSet.Fields.Item("LineNum").Value;
         }
 
     }
