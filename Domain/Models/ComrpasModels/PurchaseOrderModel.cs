@@ -22,14 +22,9 @@ namespace Domain.Models
         public DateTime fechaEntrega { get; set; }
         public string nombreProveedor { get; set; }
 
-
+        public IOrdenCompraEstrategia estrategia { get; set; }
 
         public List<PurchaseOrderEntryModel> entries { get; set; }
-
-
-        //private
-
-        private PurchaseOrderHeaderRepository headerRepository { get; set; }
 
         private PurchaseOrderEntryRespository entriesRepository { get; set; }
 
@@ -44,7 +39,6 @@ namespace Domain.Models
 
         public PurchaseOrderModel(int docEntry, bool includeEntries = false,bool includeEscaneos = false)
         {
-            this.headerRepository = new PurchaseOrderHeaderRepository();
             this.entriesRepository = new PurchaseOrderEntryRespository();
             this.entries = new List<PurchaseOrderEntryModel>();
 
@@ -88,7 +82,7 @@ namespace Domain.Models
 
         public void getPurchaseOrderHeader(int docEntry, bool includeEntries)
         {
-            var header = this.headerRepository.getOne(docEntry);
+            var header = estrategia.getPurchaseOrderHeader(docEntry);
             this.docEntry = header.docEntry;
             this.fechaCreacion = header.docDueDate;
             this.docNum = header.docNum;
