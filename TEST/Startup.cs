@@ -64,8 +64,8 @@ namespace TEST
 
             app.UseMiddleware<ResonseMiddleware>();
 
-          
 
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
