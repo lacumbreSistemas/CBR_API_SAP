@@ -102,7 +102,7 @@ namespace TEST.Controllers
         }
 
 
-        [HttpDelete("{escaneoId}")]
+        [HttpDelete("Escaneo/{escaneoId}")]
         public IActionResult anularEscaneo(int escaneoId)
         {
           

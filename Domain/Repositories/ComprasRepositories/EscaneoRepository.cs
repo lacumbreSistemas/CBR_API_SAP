@@ -54,8 +54,7 @@ namespace Domain.Repositories
 
        public  EscaneoConsultaModel  anularEscaneo(int escaneo) {
         
-             EscaneoConsultaModel es = new EscaneoConsultaModel(escaneo);
-
+            EscaneoConsultaModel es = new EscaneoConsultaModel(escaneo);
 
             EscaneoConsultaModel anulado = new EscaneoConsultaModel(es.Anular());
 
