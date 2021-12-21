@@ -16,6 +16,5 @@ namespace Domain.Models
 
         public DateTime fecha { get; set; }
         public int baseLine { get; set; }
-        public int numeroEntradaDeMercancía { get; set; }
     }
 }
