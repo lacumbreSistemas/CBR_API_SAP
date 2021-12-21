@@ -72,7 +72,7 @@ namespace TEST.Controllers
 
 
 
-        [HttpPost("Escaneo/{usuario}")]
+        [HttpPost("Escaneo")]
         public IActionResult Post([FromBody] EscaneoBuildModel escaneo)
         {
 
