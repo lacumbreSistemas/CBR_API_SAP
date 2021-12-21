@@ -40,7 +40,7 @@ namespace Domain.Repositories.ComprasInternacionales
                 PurchaseOrderModel oc = new PurchaseOrderModel();
 
                 oc.docEntry = OC.docEntry;
-                oc.docNum = OC.docNum;
+                oc.numeroOrdenDeCompra = OC.docNum;
                 oc.codigoProveedor = OC.cardCode;
                 oc.nombreProveedor = OC.cardName;
                 oc.fechaCreacion = OC.docDueDate;

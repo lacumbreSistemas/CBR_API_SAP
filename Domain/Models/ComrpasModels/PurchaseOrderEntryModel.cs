@@ -18,7 +18,7 @@ namespace Domain.Models
         public string nombreProducto { get; set; }
         public string codigoProducto { get; set; }
         public  double cantidadOrdenada { get; set; }
-        public double cantidadEscneada { get; set; }
+        public double cantidadEscaneada { get; set; }
       
 
 
@@ -36,13 +36,13 @@ namespace Domain.Models
             this.nombreProducto = nombreProducto;
             this.codigoProducto = codigoProducto;
         
-            this.cantidadEscneada = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
+            this.cantidadEscaneada = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
         }
 
         public PurchaseOrderEntryModel()
         {
             intermediaEntryRepository = new cbr_ComprasSAP_Escaneo_Repository();
-            this.cantidadEscneada = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
+            this.cantidadEscaneada = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
         }
         public PurchaseOrderEntryModel(PurchaseOrderEntryModel newEntry)
         {
@@ -51,7 +51,7 @@ namespace Domain.Models
             this.nombreProducto = newEntry.nombreProducto;
             this.codigoProducto = newEntry.codigoProducto;
             this.cantidadOrdenada = newEntry.cantidadOrdenada;
-            this.cantidadEscneada = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
+            this.cantidadEscaneada = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
         }
 
      
