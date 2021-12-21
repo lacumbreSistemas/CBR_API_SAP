@@ -15,7 +15,7 @@ namespace Intermedia_
         [StringLength(255)]
         public string itemCode { get; set; }
 
-        public int userID { get; set; }
+        public string nombreUsuario { get; set; }
 
         public double cantidad { get; set; }
 

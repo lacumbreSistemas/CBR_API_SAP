@@ -66,10 +66,10 @@ namespace Domain.Models
 
                                         escaneo.baseEntry = ordenCompraDocEntry;
                                         escaneo.cantidad = cantidad;
-                                        escaneo.entradaMercanciaDocEntry = numeroEntradaDeMercancía;
+                                        //escaneo.entradaMercanciaDocEntry = numeroEntradaDeMercancía;
                                         escaneo.itemCode = codigoProducto;
                                         escaneo.fecha = fecha;
-                                        escaneo.userID = usuario;
+                                        escaneo.nombreUsuario = usuario;
                                         escaneo.baseLine = _estrategia.obtenerLineNum(ordenCompraDocEntry,codigoProducto);
 
 

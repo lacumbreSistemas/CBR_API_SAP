@@ -42,7 +42,7 @@ namespace Domain.Repositories
                 historial.codigoProducto = i.itemCode;
                 historial.fecha = i.fecha;
                 historial.entradaMercanciaDocEntry = i.entradaMercanciaDocEntry;
-
+                historial.usuario = i.nombreUsuario;
                 Historial.Add(historial);
 
             });

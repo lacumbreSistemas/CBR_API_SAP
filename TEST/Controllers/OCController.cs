@@ -60,12 +60,12 @@ namespace TEST.Controllers
         }
 
 
-        [HttpGet("Historial/{numeroDeOrdenDeCompra}/{itemCode}")]
-        public IActionResult Historial(int numeroDeOrdenDeCompra, string itemCode)
+        [HttpGet("Historial/{ordenDeCompraDocEntry}/{itemCode}")]
+        public IActionResult Historial(int ordenDeCompraDocEntry, string itemCode)
         {
             response.status = 1;
-            response.mensaje = "Historial de escaneo para el item " + itemCode + "en la orden de compra " + numeroDeOrdenDeCompra;
-            response.data = escaneiRepository.obtenerHistorial(numeroDeOrdenDeCompra, itemCode);
+            response.mensaje = "Historial de escaneo para el item " + itemCode + " en la orden de compra " + ordenDeCompraDocEntry;
+            response.data = escaneiRepository.obtenerHistorial(ordenDeCompraDocEntry, itemCode);
             return Ok(response);
 
         }

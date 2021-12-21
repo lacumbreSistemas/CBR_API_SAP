@@ -24,8 +24,11 @@ namespace Intermedia_.Repositories
 
         public List<cbr_ComprasSAP_Escaneo> ObtenerHistorialDeEscaneos(int docEntry, string itemCode) {
 
-            return db.cbr_ComprasSAP_Escaneo.Where(i => i.baseEntry == docEntry && i.itemCode == itemCode).ToList();
+           var h = db.cbr_ComprasSAP_Escaneo.Where(i => i.baseEntry == docEntry && i.itemCode == itemCode).ToList();
+            return h;
         }
+
+
         public List<cbr_ComprasSAP_Escaneo> ObtenerEscaneosPorDocEntrySinIngresarSAP(int docEntry) {
 
             List<cbr_ComprasSAP_Escaneo> Escaneos = db.cbr_ComprasSAP_Escaneo.Where(i => i.baseEntry == docEntry && i.entradaMercanciaDocEntry == 0).ToList();

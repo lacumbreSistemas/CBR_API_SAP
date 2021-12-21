@@ -78,7 +78,7 @@ namespace Domain.Models
                 _Escaneo.cantidad = i.cantidad;
                 _Escaneo.codigoProducto = i.itemCode;
                 _Escaneo.fecha = i.fecha;
-                _Escaneo.numeroEntradaDeMercancía = i.entradaMercanciaDocEntry;
+                //_Escaneo.numeroEntradaDeMercancía = i.entradaMercanciaDocEntry;
                 _Escaneo.ordenCompraDocEntry = i.baseEntry;
                 Escaneos.Add(_Escaneo);
                 
