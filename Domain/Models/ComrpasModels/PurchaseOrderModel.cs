@@ -18,7 +18,7 @@ namespace Domain.Models
         public int docEntry { get; set; }
         public DateTime fechaCreacion { get; set; }
 
-        public int docNum { get; set; }
+        public int numeroOrdenDeCompra { get; set; }
         public string codigoProveedor { get; set; }
 
         public DateTime fechaEntrega { get; set; }
@@ -92,7 +92,7 @@ namespace Domain.Models
             var header = _estrategia.getPurchaseOrderHeader(docEntry);
             this.docEntry = header.docEntry;
             this.fechaCreacion = header.docDueDate;
-            this.docNum = header.docNum;
+            this.numeroOrdenDeCompra = header.docNum;
             this.codigoProveedor = header.cardCode;
             this.fechaEntrega = header.taxDate;
             this.nombreProveedor = header.cardName;

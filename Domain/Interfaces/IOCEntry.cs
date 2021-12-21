@@ -15,7 +15,7 @@ namespace Domain.Interfaces
         public string nombreProducto { get; set; }
         public string codigoProducto { get; set; }
         public double cantidadOrdenada { get; set; }
-        public double cantidadEscneada { get; set; }
+        public double cantidadEscaneada { get; set; }
 
 
         //pivate 
