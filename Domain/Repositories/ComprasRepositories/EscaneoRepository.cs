@@ -36,7 +36,7 @@ namespace Domain.Repositories
 
             escaneosHistorialIntermedia.ForEach(i=> {
                 EscaneoConsultaModel historial = new EscaneoConsultaModel();
-                historial.numeroOrdenDeCompra = i.baseEntry;
+                historial.ordenCompraDocEntry = i.baseEntry;
                 historial.baseLine = i.baseLine;
                 historial.cantidad = i.cantidad;
                 historial.codigoProducto = i.itemCode;

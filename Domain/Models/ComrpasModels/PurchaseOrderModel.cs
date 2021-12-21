@@ -68,7 +68,7 @@ namespace Domain.Models
 
         public void getPurchaseOrderEscaneos()
         {
-            var escaneos = escaneosIntermedia.ObtenerEscaneosPorDocEntry(this.docEntry);
+            var escaneos = escaneosIntermedia.ObtenerEscaneosPorDocEntrySinIngresarSAP (this.docEntry);
 
             escaneos.ForEach(i=> {
 
@@ -79,7 +79,7 @@ namespace Domain.Models
                 _Escaneo.codigoProducto = i.itemCode;
                 _Escaneo.fecha = i.fecha;
                 _Escaneo.numeroEntradaDeMercancía = i.entradaMercanciaDocEntry;
-                _Escaneo.numeroOrdenDeCompra = i.baseEntry;
+                _Escaneo.ordenCompraDocEntry = i.baseEntry;
                 Escaneos.Add(_Escaneo);
                 
 
@@ -105,8 +105,8 @@ namespace Domain.Models
 
                 entriesSAP.ForEach(entry =>
                 {
-                    PurchaseOrderEntryModel Entry = new PurchaseOrderEntryModel();
-                    Entry.docEntry = entry.docEntry;
+                    PurchaseOrderEntryModel Entry = new PurchaseOrderEntryModel(entry.docEntry,entry.codigoProducto);
+                    //Entry.docEntry = entry.docEntry;
                     Entry.codigoProducto = entry.codigoProducto;
                     Entry.nombreProducto = entry.nombreProducto;
                     Entry.cantidadOrdenada = entry.cantidadOrdenada;
@@ -164,11 +164,11 @@ namespace Domain.Models
             EM.CardCode = this.codigoProveedor;
 
 
-            Escaneos.GroupBy(i => new { i.numeroOrdenDeCompra, i.codigoProducto }).ToList().ForEach(i =>
+            Escaneos.GroupBy(i => new { i.ordenCompraDocEntry, i.codigoProducto }).ToList().ForEach(i =>
             {
 
                 EntradaMercanciaEntry EME = new EntradaMercanciaEntry();
-                EME.BaseEntry = Convert.ToInt32(i.FirstOrDefault().numeroOrdenDeCompra.ToString());
+                EME.BaseEntry = Convert.ToInt32(i.FirstOrDefault().ordenCompraDocEntry.ToString());
                 EME.BaseLine = Convert.ToInt32(i.FirstOrDefault().baseLine.ToString());
                 EME.ItemCode = i.FirstOrDefault().codigoProducto.ToString();
                 EME.Quantity = Convert.ToDouble(i.Sum(i => i.cantidad));

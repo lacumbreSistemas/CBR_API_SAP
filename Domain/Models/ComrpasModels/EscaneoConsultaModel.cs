@@ -48,7 +48,7 @@ namespace Domain.Models
 
         public void establercerEntradaMercancia(int DocEntryEM) {
 
-            ComprasSAPEscaneoRepository.guardadoEntradaMercancia(this.numeroOrdenDeCompra, this.codigoProducto, this.entradaMercanciaDocEntry); 
+            ComprasSAPEscaneoRepository.guardadoEntradaMercancia(this.ordenCompraDocEntry, this.codigoProducto, this.entradaMercanciaDocEntry); 
 
         }
 

@@ -21,7 +21,7 @@ namespace TEST.Controllers
         public IActionResult Get(string ItemCode)
         {
             var Item =  item.obtenerItem(ItemCode);
-
+            response.status = 1;
             response.mensaje = "Item " + Item.descripcion + "con código" + Item.itemloockupcode;
             response.data = Item;
            

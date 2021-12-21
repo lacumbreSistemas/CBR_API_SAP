@@ -29,18 +29,26 @@ namespace Domain.Models
 
         //Constructores
 
-        public PurchaseOrderEntryModel(int docEntry, string nombreProducto)
-        {
-            intermediaEntryRepository = new cbr_ComprasSAP_Escaneo_Repository();
-            this.docEntry = docEntry;
-            this.nombreProducto = nombreProducto;
-            this.codigoProducto = codigoProducto;
+        //public PurchaseOrderEntryModel(int docEntry, string nombreProducto)
+        //{
+        //    intermediaEntryRepository = new cbr_ComprasSAP_Escaneo_Repository();
+        //    this.docEntry = docEntry;
+        //    this.nombreProducto = nombreProducto;
+        //    this.codigoProducto = codigoProducto;
         
-            this.cantidadEscaneada = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
-        }
+        //    this.cantidadEscaneada = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
+        //}
 
         public PurchaseOrderEntryModel()
         {
+            intermediaEntryRepository = new cbr_ComprasSAP_Escaneo_Repository();
+            this.cantidadEscaneada = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
+        }
+
+        public PurchaseOrderEntryModel(int docentry, string itemCode)
+        {
+            this.docEntry = docentry;
+            this.codigoProducto = itemCode;
             intermediaEntryRepository = new cbr_ComprasSAP_Escaneo_Repository();
             this.cantidadEscaneada = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
         }

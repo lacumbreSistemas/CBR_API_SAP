@@ -32,12 +32,12 @@ namespace Domain.Models
        public EscaneoBuildModel(EscaneoBuildModel newEscaneo, IEscaneoBuildEstrategia estrategia)
         {
 
-            numeroOrdenDeCompra = newEscaneo.numeroOrdenDeCompra;
+            ordenCompraDocEntry = newEscaneo.ordenCompraDocEntry;
             codigoProducto = newEscaneo.codigoProducto;
             usuario = newEscaneo.usuario;
             cantidad = newEscaneo.cantidad;
             fecha = DateTime.Now;
-            numeroEntradaDeMercancía = newEscaneo.numeroEntradaDeMercancía;
+         
             intermediaEscaneoRepository = new cbr_ComprasSAP_Escaneo_Repository();
 
             _estrategia = estrategia;
@@ -49,12 +49,12 @@ namespace Domain.Models
                 public EscaneoBuildModel agreagar() {
                    //sapEntryRepository = new PurchaseOrderEntryRespository();
 
-                            double cantidadEscaneada = intermediaEscaneoRepository.obtenerCantidadRecibida(numeroOrdenDeCompra, codigoProducto);
+                            double cantidadEscaneada = intermediaEscaneoRepository.obtenerCantidadRecibida(ordenCompraDocEntry, codigoProducto);
                             double? cantidadTotalProxima = cantidadEscaneada + cantidad;
            
 
 
-                            double cantidadOrdenada = _estrategia.ObtenerCantidadOrdenada(numeroOrdenDeCompra, codigoProducto);
+                            double cantidadOrdenada = _estrategia.ObtenerCantidadOrdenada(ordenCompraDocEntry, codigoProducto);
             
                              if (cantidadOrdenada < cantidadTotalProxima)
                              {
@@ -64,13 +64,13 @@ namespace Domain.Models
                              {
                                      cbr_ComprasSAP_Escaneo escaneo = new cbr_ComprasSAP_Escaneo();
 
-                                        escaneo.baseEntry = numeroOrdenDeCompra;
+                                        escaneo.baseEntry = ordenCompraDocEntry;
                                         escaneo.cantidad = cantidad;
                                         escaneo.entradaMercanciaDocEntry = numeroEntradaDeMercancía;
                                         escaneo.itemCode = codigoProducto;
                                         escaneo.fecha = fecha;
                                         escaneo.userID = usuario;
-                                        escaneo.baseLine = _estrategia.obtenerLineNum(numeroOrdenDeCompra,codigoProducto);
+                                        escaneo.baseLine = _estrategia.obtenerLineNum(ordenCompraDocEntry,codigoProducto);
 
 
                                     intermediaEscaneoRepository.GuardarEscaneo(escaneo);

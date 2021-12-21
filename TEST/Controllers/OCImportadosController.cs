@@ -64,7 +64,7 @@ namespace TEST.Controllers
 
 
             response.status = 1;
-            response.mensaje = "Escaneo del item " + guardarEscaneo.codigoProducto + "para la orden de compra " + guardarEscaneo.numeroOrdenDeCompra;
+            response.mensaje = "Escaneo del item " + guardarEscaneo.codigoProducto + "para la orden de compra " + guardarEscaneo.ordenCompraDocEntry;
             response.data = guardarEscaneo;
 
             return Ok(response);

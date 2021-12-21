@@ -26,7 +26,7 @@ namespace Intermedia_.Repositories
 
             return db.cbr_ComprasSAP_Escaneo.Where(i => i.baseEntry == docEntry && i.itemCode == itemCode).ToList();
         }
-        public List<cbr_ComprasSAP_Escaneo> ObtenerEscaneosPorDocEntry(int docEntry) {
+        public List<cbr_ComprasSAP_Escaneo> ObtenerEscaneosPorDocEntrySinIngresarSAP(int docEntry) {
 
             List<cbr_ComprasSAP_Escaneo> Escaneos = db.cbr_ComprasSAP_Escaneo.Where(i => i.baseEntry == docEntry && i.entradaMercanciaDocEntry == 0).ToList();
    
@@ -35,7 +35,15 @@ namespace Intermedia_.Repositories
             return Escaneos;
         }
 
+        public List<cbr_ComprasSAP_Escaneo> ObtenerEscaneosPorDocEntryTodos(int docEntry)
+        {
 
+            List<cbr_ComprasSAP_Escaneo> Escaneos = db.cbr_ComprasSAP_Escaneo.Where(i => i.baseEntry == docEntry ).ToList();
+
+
+
+            return Escaneos;
+        }
 
 
         public void GuardarEscaneo(cbr_ComprasSAP_Escaneo Entry) {

@@ -8,7 +8,7 @@ namespace Domain.Models
 {
     public class EscaneoMasterModel
     {
-        public int numeroOrdenDeCompra { get; set; }
+        public int ordenCompraDocEntry { get; set; }
         public string codigoProducto { get; set; }
 
         public string usuario { get; set; }
