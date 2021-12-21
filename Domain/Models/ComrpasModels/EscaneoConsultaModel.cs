@@ -32,6 +32,7 @@ namespace Domain.Models
         public EscaneoConsultaModel(int id)
         {
             this.id = id;
+            ComprasSAPEscaneoRepository = new cbr_ComprasSAP_Escaneo_Repository();
 
             obtenerEscaneoporID();
            

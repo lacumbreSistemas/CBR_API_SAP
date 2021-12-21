@@ -72,6 +72,7 @@ namespace Intermedia_.Repositories
 
             escaneoNegativo = escaneo;
 
+            escaneoNegativo.deleted = true;
             escaneoNegativo.cantidad = escaneoNegativo.cantidad * (-1);
             escaneoNegativo.escaneoAnuladoID = escaneo.id; 
 
