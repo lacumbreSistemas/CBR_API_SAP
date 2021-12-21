@@ -12,25 +12,47 @@ namespace Domain.Models
     {
   
 
-     
+        public int id { get; set; } 
 
-        public int DocEntryEM { get; set; } 
+        public int entradaMercanciaDocEntry { get; set; } 
+
+        public bool elimnado { get; set; }
+
+        public bool escaneoAnuladoID { get; set; }
         // private 
 
-        private cbr_ComprasSAP_Escaneo_Repository escaneosIntermedia { get; set; };
+        private cbr_ComprasSAP_Escaneo_Repository ComprasSAPEscaneoRepository { get; set; }
 
         public EscaneoConsultaModel() {
 
-            escaneosIntermedia = new cbr_ComprasSAP_Escaneo_Repository();
+            ComprasSAPEscaneoRepository = new cbr_ComprasSAP_Escaneo_Repository();
         
         }
 
+        public EscaneoConsultaModel(int id)
+        {
+            this.id = id;
 
-        public void establercerEntradaMercancia(int docEntry) {
+            obtenerEscaneoporID();
+           
+            ComprasSAPEscaneoRepository = new cbr_ComprasSAP_Escaneo_Repository();
 
-            escaneosIntermedia.guardadoEntradaMercancia(this.numeroOrdenDeCompra, this.codigoProducto, this.DocEntryEM);
-                
+        }
 
+        private void obtenerEscaneoporID() {
+
+            ComprasSAPEscaneoRepository.obtenerEscaneoPorID(id);
+        }
+
+
+        public void establercerEntradaMercancia(int DocEntryEM) {
+
+            ComprasSAPEscaneoRepository.guardadoEntradaMercancia(this.numeroOrdenDeCompra, this.codigoProducto, this.entradaMercanciaDocEntry); 
+
+        }
+
+        public int Anular() {
+         return  ComprasSAPEscaneoRepository.borrarEscaneo(this.id);
         }
 
       

@@ -15,7 +15,7 @@ namespace SAP.Repositories.ComprasInternacionales
 
         public FacturasReservaHeaderEntity getOne(int docEntry)
         {
-            doQuery(@"Select oc.DocEntry,TaxDate,DocNum,oc.CardCode,DocDueDate,p.CardName from OPOR oc
+            doQuery(@"Select oc.DocEntry,TaxDate,DocNum,oc.CardCode,DocDueDate,p.CardName from OPCH oc
 
                             inner join OCRD P on oc.CardCode = p.CardCode
 
@@ -28,14 +28,14 @@ namespace SAP.Repositories.ComprasInternacionales
 
             while (!recordSet.EoF)
             {
-                //newPurchaseOrderHeader.docEntry = recordSet.Fields.Item("DocEntry").Value;
-                //newPurchaseOrderHeader.taxDate = recordSet.Fields.Item("TaxDate").Value;
-                //newPurchaseOrderHeader.docNum = recordSet.Fields.Item("DocNum").Value;
-                //newPurchaseOrderHeader.cardCode = recordSet.Fields.Item("CardCode").Value;
-                //newPurchaseOrderHeader.docDueDate = recordSet.Fields.Item("DocDueDate").Value;
-                //newPurchaseOrderHeader.cardName = recordSet.Fields.Item("CardCode").Value;
+                newPurchaseOrderHeader.docEntry = recordSet.Fields.Item("DocEntry").Value;
+                newPurchaseOrderHeader.taxDate = recordSet.Fields.Item("TaxDate").Value;
+                newPurchaseOrderHeader.docNum = recordSet.Fields.Item("DocNum").Value;
+                newPurchaseOrderHeader.cardCode = recordSet.Fields.Item("CardCode").Value;
+                newPurchaseOrderHeader.docDueDate = recordSet.Fields.Item("DocDueDate").Value;
+                newPurchaseOrderHeader.cardName = recordSet.Fields.Item("CardCode").Value;
 
-                
+
 
                 recordSet.MoveNext();
             }
@@ -53,11 +53,11 @@ namespace SAP.Repositories.ComprasInternacionales
                             T0.DocDueDate,
                             p.CardName 
                       from OPCH T0
-                           inner join PCH1 T1 ON T0.DocEntry = T1.DocEntry
+                            inner join PCH1 T1 ON T0.DocEntry = T1.DocEntry
                            inner join OCRD P on t0.CardCode = P.CardCode
-                           left join PDN1 T2 ON T1.DocEntry = T2.BaseEntry and T1.LineNum = T2.BaseLine
-                           left join OPDN T3 ON T2.DocEntry = T3.DocEntry
-                       where T0.DocStatus = 'O' and t0.InvntSttus = 'O' and T0.isIns = 'Y' and(T3.DocStatus is null or t3.CANCELED = 'Y') and t1.WhsCode = '"+WhsCode+ @"'
+						   inner join por1 t4 on t4.TrgetEntry = t1.DocEntry
+						   inner join OPOR t5 on t5.DocEntry = t4.DocEntry AND T5.SERIES = 79
+                       where T0.DocStatus = 'O' and t0.InvntSttus = 'O' and T0.isIns = 'Y'  and t1.WhsCode = '" + WhsCode+ @"'
                            and T0.DocType = 'I'
                        group by  T0.DocEntry, T0.TaxDate, T0.DocNum, T0.CardCode, T0.DocDueDate, p.CardName
                        order by t0.DocNum desc");
@@ -75,6 +75,7 @@ namespace SAP.Repositories.ComprasInternacionales
                 FR.docDueDate = recordSet.Fields.Item("docDueDate").Value;
 
                 FRAbiertas.Add(FR);
+                recordSet.MoveNext();
             }
 
 

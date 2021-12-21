@@ -13,6 +13,8 @@ namespace Domain.Models
 {
     public class PurchaseOrderModel
     {
+
+        // public
         public int docEntry { get; set; }
         public DateTime fechaCreacion { get; set; }
 
@@ -22,11 +24,14 @@ namespace Domain.Models
         public DateTime fechaEntrega { get; set; }
         public string nombreProveedor { get; set; }
 
-        public IOrdenCompraEstrategia estrategia { get; set; }
+       
 
         public List<PurchaseOrderEntryModel> entries { get; set; }
 
+        // private
+
         private PurchaseOrderEntryRespository entriesRepository { get; set; }
+        private IOrdenCompraEstrategia _estrategia { get; set; }
 
         private cbr_ComprasSAP_Escaneo_Repository escaneosIntermedia;
          
@@ -37,10 +42,12 @@ namespace Domain.Models
 
 
 
-        public PurchaseOrderModel(int docEntry, bool includeEntries = false,bool includeEscaneos = false)
+        public PurchaseOrderModel(int docEntry, IOrdenCompraEstrategia estrategia, bool includeEntries = false,bool includeEscaneos = false)
         {
             this.entriesRepository = new PurchaseOrderEntryRespository();
             this.entries = new List<PurchaseOrderEntryModel>();
+            _estrategia = estrategia;
+
 
                 getPurchaseOrderHeader(docEntry, includeEntries);
                
@@ -82,7 +89,7 @@ namespace Domain.Models
 
         public void getPurchaseOrderHeader(int docEntry, bool includeEntries)
         {
-            var header = estrategia.getPurchaseOrderHeader(docEntry);
+            var header = _estrategia.getPurchaseOrderHeader(docEntry);
             this.docEntry = header.docEntry;
             this.fechaCreacion = header.docDueDate;
             this.docNum = header.docNum;
@@ -94,7 +101,7 @@ namespace Domain.Models
 
             if (includeEntries)
             {
-                var entriesSAP = entriesRepository.ObtenerListaDeEntriesOrdenDeCompra(docEntry);
+                var entriesSAP = _estrategia.ObtenerListaDeEntriesOrdenDeCompra(docEntry);
 
                 entriesSAP.ForEach(entry =>
                 {
@@ -181,15 +188,16 @@ namespace Domain.Models
 
         public int GenerarEntradaMercancia(){
 
-          int DocEntryEM =   entradaDeMercanciaRepository.GenerarEntradaMercancia(mapearEM());
+          int entradaMercanciaDocEntry =   _estrategia.GenerarEntradaMercancia(mapearEM());
 
             Escaneos.ForEach(escaneo =>
             {
-                escaneo.establercerEntradaMercancia(DocEntryEM);
+                escaneo.entradaMercanciaDocEntry = entradaMercanciaDocEntry;
+                escaneo.establercerEntradaMercancia(entradaMercanciaDocEntry);
             });
 
 
-            return DocEntryEM;
+            return entradaMercanciaDocEntry;
 
         }
     }   

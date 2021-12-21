@@ -19,15 +19,18 @@ namespace Domain.Models
         //privaate
 
         private cbr_ComprasSAP_Escaneo_Repository intermediaEscaneoRepository { get; set; }
-        private PurchaseOrderEntryRespository sapEntryRepository { get; set; }
+        //private PurchaseOrderEntryRespository sapEntryRepository { get; set; }
+
+        private IEscaneoBuildEstrategia _estrategia { get; set; } 
 
         //constructores
-        public EscaneoBuildModel( ) { 
-        
+        public EscaneoBuildModel() {
+          
         }
 
        
-       public EscaneoBuildModel(EscaneoBuildModel newEscaneo) {
+       public EscaneoBuildModel(EscaneoBuildModel newEscaneo, IEscaneoBuildEstrategia estrategia)
+        {
 
             numeroOrdenDeCompra = newEscaneo.numeroOrdenDeCompra;
             codigoProducto = newEscaneo.codigoProducto;
@@ -35,22 +38,23 @@ namespace Domain.Models
             cantidad = newEscaneo.cantidad;
             fecha = DateTime.Now;
             numeroEntradaDeMercancía = newEscaneo.numeroEntradaDeMercancía;
-
             intermediaEscaneoRepository = new cbr_ComprasSAP_Escaneo_Repository();
+
+            _estrategia = estrategia;
             //sapEntryRepository = new PurchaseOrderEntryRespository();
 
         }
 
         //metodos
                 public EscaneoBuildModel agreagar() {
-                   sapEntryRepository = new PurchaseOrderEntryRespository();
+                   //sapEntryRepository = new PurchaseOrderEntryRespository();
 
                             double cantidadEscaneada = intermediaEscaneoRepository.obtenerCantidadRecibida(numeroOrdenDeCompra, codigoProducto);
                             double? cantidadTotalProxima = cantidadEscaneada + cantidad;
            
 
 
-                            double cantidadOrdenada = sapEntryRepository.ObtenerCantidadOrdenada(numeroOrdenDeCompra, codigoProducto);
+                            double cantidadOrdenada = _estrategia.ObtenerCantidadOrdenada(numeroOrdenDeCompra, codigoProducto);
             
                              if (cantidadOrdenada < cantidadTotalProxima)
                              {
@@ -66,7 +70,7 @@ namespace Domain.Models
                                         escaneo.itemCode = codigoProducto;
                                         escaneo.fecha = fecha;
                                         escaneo.userID = usuario;
-                                        escaneo.baseLine = sapEntryRepository.obtenerLineNum(numeroOrdenDeCompra,codigoProducto);
+                                        escaneo.baseLine = _estrategia.obtenerLineNum(numeroOrdenDeCompra,codigoProducto);
 
 
                                     intermediaEscaneoRepository.GuardarEscaneo(escaneo);

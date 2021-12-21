@@ -28,10 +28,10 @@ namespace SAP.Repositories.Compras
         public int GenerarEM(EntradaDeMercancia EM, BoObjectTypes objectoBase)
         {
             int DocumentoAgregado = 0;
+            Conectar();
             string numeroNuevaEM = "";
           
 
-            Conectar();
 
             Documents DocumentoEntradaMercancia = connection.GetBusinessObject(BoObjectTypes.oPurchaseDeliveryNotes);
             DocumentoEntradaMercancia.CardCode = EM.CardCode;
@@ -63,7 +63,7 @@ namespace SAP.Repositories.Compras
                 return  Convert.ToInt32(numeroNuevaEM);
                
             }
-            throw new Exception ("Entrada de mercancía [" + connection.GetLastErrorDescription() + "] creada!");
+            throw new Exception ("Entrada de mercancía Error [" + connection.GetLastErrorDescription() + "] ");
 
 
         }

@@ -51,7 +51,7 @@ namespace SAP.Repositories
                            inner join OCRD P on t0.CardCode = P.CardCode
                            left join PDN1 T2 ON T1.DocEntry= T2.BaseEntry and T1.LineNum=T2.BaseLine 
                            left join OPDN T3 ON T2.DocEntry = T3.DocEntry
-                  where T0.DocStatus = 'O' and (T3.DocStatus is null or t3.CANCELED = 'Y') and t1.WhsCode ='" + WhsCode + @"'
+                  where T0.DocStatus = 'O'  and t1.WhsCode ='" + WhsCode + @"' and T0.Series = 15
                                      and T0.DocType = 'I'
 				  group by  T0.DocEntry,T0.TaxDate,T0.DocNum,T0.CardCode,T0.DocDueDate,p.CardName  order by t0.DocNum desc");
 

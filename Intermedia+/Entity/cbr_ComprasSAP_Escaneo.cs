@@ -23,5 +23,7 @@ namespace Intermedia_
 
         public int entradaMercanciaDocEntry { get; set; }
         public int baseLine { get; set; }
+        public bool deleted { get; set; }
+        public int escaneoAnuladoID { get; set; }
     }
 }

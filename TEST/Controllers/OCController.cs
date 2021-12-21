@@ -18,16 +18,16 @@ namespace TEST.Controllers
     public class OCController : ControllerBase
     {
 
-        private EscaneoRepository Escaneos;
- 
-       private PurchaseOrderRepository po;
+        private EscaneoRepository escaneiRepository;
+
+        private PurchaseOrderRepository po;
         private FacturasReservaRepository fe;
-  
+
         Response response = new Response();
-   
+
 
         public OCController() {
-            Escaneos = new EscaneoRepository();
+            escaneiRepository = new Domain.Repositories.EscaneoRepository();
             po = new PurchaseOrderRepository();
             fe = new FacturasReservaRepository();
         }
@@ -41,22 +41,8 @@ namespace TEST.Controllers
             response.mensaje = "Ordenes abiertas para almacen " + WhsCode;
             response.data = po.getPurchaseOrderAbiertasHeaders(WhsCode);
 
-           
+
             return Ok(response);
-        }
-
-
-
-        [HttpGet("FRAbiertas")]
-        public IActionResult FRAbiertas([FromHeader] string WhsCode)
-        {
-            //response.status = 1;
-            //response.mensaje = "Ordenes abiertas para almacen " + WhsCode;
-            //response.data = po.getPurchaseOrderAbiertasHeaders(WhsCode);
-
-            //List<PurchaseOrderModel> OCs = po.getPurchaseOrderAbiertasHeaders(WhsCode);
-            //return Ok(OCs);
-            return Ok();
         }
 
 
@@ -64,12 +50,25 @@ namespace TEST.Controllers
         [HttpGet("Resumen/{numeroDeOrdenDeCompra}")]
         public IActionResult GetResumen(int numeroDeOrdenDeCompra)
         {
-            PurchaseOrderModel OC = po.getPurchaseOrder(numeroDeOrdenDeCompra,true);
-            return Ok(OC);
+
+            response.status = 1;
+            response.mensaje = "Resumen de la ordend e compra " + numeroDeOrdenDeCompra;
+            response.data = po.getPurchaseOrder(numeroDeOrdenDeCompra, true);
+
+
+            return Ok(response);
         }
 
 
-       
+        [HttpGet("Historial/{numeroDeOrdenDeCompra}/{itemCode}")]
+        public IActionResult Historial(int numeroDeOrdenDeCompra, string itemCode)
+        {
+            response.status = 1;
+            response.mensaje = "Historial de escaneo para el item " + itemCode + "en la orden de compra " + numeroDeOrdenDeCompra;
+            response.data = escaneiRepository.obtenerHistorial(numeroDeOrdenDeCompra, itemCode);
+            return Ok(response);
+
+        }
 
 
 
@@ -77,11 +76,11 @@ namespace TEST.Controllers
         public IActionResult Post([FromBody] EscaneoBuildModel escaneo)
         {
 
-            var guardarEscaneo = Escaneos.Agregar(escaneo);
+            var guardarEscaneo = escaneiRepository.Agregar(escaneo);
 
 
             response.status = 1;
-            response.mensaje = "Escaneo del item "+ guardarEscaneo.codigoProducto+ "para la orden de compra "+guardarEscaneo.numeroOrdenDeCompra;
+            response.mensaje = "Escaneo del item " + guardarEscaneo.codigoProducto + "para la orden de compra " + guardarEscaneo.numeroOrdenDeCompra;
             response.data = guardarEscaneo;
 
             return Ok(response);
@@ -93,7 +92,7 @@ namespace TEST.Controllers
         [HttpPost("{DocEntry}")]
         public IActionResult Guardar(int DocEntry)
         {
-            var escaneo = 
+            var escaneo =
             response.status = 1;
             response.mensaje = "exitoso";
             response.data = po.guardarEntradaMercancia(DocEntry);
@@ -103,17 +102,18 @@ namespace TEST.Controllers
         }
 
 
-        [HttpPost("{DocEntry}")]
-        public IActionResult GuardarImportados(int DocEntry)
+        [HttpDelete("{escaneoId}")]
+        public IActionResult anularEscaneo(int escaneoId)
         {
-            var escaneo =
+          
             response.status = 1;
             response.mensaje = "exitoso";
-            response.data = fe.guardarEntradaMercancia(DocEntry);
+            response.data = escaneiRepository.anularEscaneo(escaneoId);
 
 
             return Ok(response);
         }
+
 
 
     }

@@ -12,13 +12,13 @@ namespace Domain.Repositories
     public class PurchaseOrderRepository
     {
         PurchaseOrderHeaderRepository headerRepo = new PurchaseOrderHeaderRepository();
-
+        OrdenCompraNacionalEstrategia estrategia = new OrdenCompraNacionalEstrategia();
 
         
        
         public PurchaseOrderModel getPurchaseOrder(int numeroDeOrdenDeCompra, bool includeEntries =false, bool includeEscaneos= false)
         {
-            PurchaseOrderModel aa = new PurchaseOrderModel(numeroDeOrdenDeCompra, includeEntries, includeEscaneos);
+            PurchaseOrderModel aa = new PurchaseOrderModel(numeroDeOrdenDeCompra, estrategia, includeEntries, includeEscaneos);
             return aa;
         }
 

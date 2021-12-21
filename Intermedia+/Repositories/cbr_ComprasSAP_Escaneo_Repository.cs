@@ -22,13 +22,16 @@ namespace Intermedia_.Repositories
             }
         }
 
+        public List<cbr_ComprasSAP_Escaneo> ObtenerHistorialDeEscaneos(int docEntry, string itemCode) {
 
+            return db.cbr_ComprasSAP_Escaneo.Where(i => i.baseEntry == docEntry && i.itemCode == itemCode).ToList();
+        }
         public List<cbr_ComprasSAP_Escaneo> ObtenerEscaneosPorDocEntry(int docEntry) {
 
             List<cbr_ComprasSAP_Escaneo> Escaneos = db.cbr_ComprasSAP_Escaneo.Where(i => i.baseEntry == docEntry && i.entradaMercanciaDocEntry == 0).ToList();
    
           
-
+                
             return Escaneos;
         }
 
@@ -51,6 +54,33 @@ namespace Intermedia_.Repositories
             db.SaveChanges();
            
         
+        }
+
+
+        public cbr_ComprasSAP_Escaneo obtenerEscaneoPorID(int id) {
+
+            return db.cbr_ComprasSAP_Escaneo.FirstOrDefault(i=> i.id == id);
+        
+        
+        }
+
+
+        public int borrarEscaneo(int id) {
+            var escaneo = db.cbr_ComprasSAP_Escaneo.FirstOrDefault(i=> i.id == id);
+
+            cbr_ComprasSAP_Escaneo escaneoNegativo = new cbr_ComprasSAP_Escaneo();
+
+            escaneoNegativo = escaneo;
+
+            escaneoNegativo.cantidad = escaneoNegativo.cantidad * (-1);
+            escaneoNegativo.escaneoAnuladoID = escaneo.id; 
+
+
+            db.cbr_ComprasSAP_Escaneo.Add(escaneoNegativo);
+            db.SaveChanges();
+
+            return escaneoNegativo.id;
+
         }
 
 

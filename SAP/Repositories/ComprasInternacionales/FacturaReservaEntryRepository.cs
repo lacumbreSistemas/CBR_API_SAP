@@ -95,7 +95,7 @@ namespace SAP.Repositories.ComprasInternacionales
         public int obtenerLineNum(int? docEntry, string itemCode)
         {
             //Conectar();
-            doQuery("select LineNum from Por1 where docentry = " + docEntry + " and itemCode = '" + itemCode + "'");
+            doQuery("select LineNum from Pch1 where docentry = " + docEntry + " and itemCode = '" + itemCode + "'");
             return recordSet.Fields.Item("LineNum").Value;
         }
 

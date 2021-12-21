@@ -10,5 +10,10 @@ namespace Domain.Models
     public interface IOrdenCompraEstrategia
     {
         PurchaseOrderHeader getPurchaseOrderHeader(int docEntry);
-   }
+
+        List<PurchaseOrderEntry> ObtenerListaDeEntriesOrdenDeCompra(int docEntry);
+
+        int GenerarEntradaMercancia(EntradaDeMercancia docEntry);
+
+    }
 }

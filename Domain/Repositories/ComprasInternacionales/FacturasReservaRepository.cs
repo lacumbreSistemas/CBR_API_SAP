@@ -1,5 +1,5 @@
 ﻿using Domain.Models;
-using Domain.Models.ComprasInternacionalesModels;
+
 using SAP.Models.ComprasInternacionalesEntitys;
 using SAP.Repositories.ComprasInternacionales;
 using System;
@@ -13,31 +13,31 @@ namespace Domain.Repositories.ComprasInternacionales
     public class FacturasReservaRepository
     {
         FacturaReservaHeaderRepository headerRepo = new FacturaReservaHeaderRepository();
+        OrdenCompraImportadoEstrategia estrategia = new OrdenCompraImportadoEstrategia();
 
-
-        public FacturaReservaModel getFacturaReserva(int numeroDeOrdenDeCompra, bool includeEntries = false, bool includeEscaneos = false)
+        public PurchaseOrderModel getFacturaReserva(int numeroDeOrdenDeCompra, bool includeEntries = false, bool includeEscaneos = false)
         {
-            FacturaReservaModel aa = new FacturaReservaModel(numeroDeOrdenDeCompra, includeEntries, includeEscaneos);
+            PurchaseOrderModel aa = new PurchaseOrderModel(numeroDeOrdenDeCompra,estrategia, includeEntries, includeEscaneos);
             return aa;
         }
 
 
-        public List<FacturaReservaModel> getPurchaseOrderAbiertasHeaders(string WhsCode)
+        public List<PurchaseOrderModel> getPurchaseOrderAbiertasHeaders(string WhsCode)
         {
             var ordenes = headerRepo.getAbiertas(WhsCode);
 
-            var res = new List<FacturaReservaModel>();
+            var res = new List<PurchaseOrderModel>();
             res = mapearOCs(ordenes);
             return res;
         }
 
 
-        private List<FacturaReservaModel> mapearOCs(List<FacturasReservaHeaderEntity> OCsSAP)
+        private List<PurchaseOrderModel> mapearOCs(List<FacturasReservaHeaderEntity> OCsSAP)
         {
-            var OCs = new List<FacturaReservaModel>();
+            var OCs = new List<PurchaseOrderModel>();
             OCsSAP.ForEach(OC =>
             {
-                FacturaReservaModel oc = new FacturaReservaModel();
+                PurchaseOrderModel oc = new PurchaseOrderModel();
 
                 oc.docEntry = OC.docEntry;
                 oc.docNum = OC.docNum;
