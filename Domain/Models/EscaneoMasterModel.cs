@@ -11,7 +11,7 @@ namespace Domain.Models
         public int numeroOrdenDeCompra { get; set; }
         public string codigoProducto { get; set; }
 
-        public int usuario { get; set; }
+        public string usuario { get; set; }
         public double cantidad { get; set; }
 
         public DateTime fecha { get; set; }

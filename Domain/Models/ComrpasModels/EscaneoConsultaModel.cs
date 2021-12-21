@@ -18,7 +18,7 @@ namespace Domain.Models
 
         public bool elimnado { get; set; }
 
-        public bool escaneoAnuladoID { get; set; }
+        public int escaneoAnuladoID { get; set; }
         // private 
 
         private cbr_ComprasSAP_Escaneo_Repository ComprasSAPEscaneoRepository { get; set; }
