@@ -24,8 +24,8 @@ namespace Intermedia_.Repositories
 
         public List<cbr_ComprasSAP_Escaneo> ObtenerHistorialDeEscaneos(int docEntry, string itemCode) {
 
-           var h = db.cbr_ComprasSAP_Escaneo.Where(i => i.baseEntry == docEntry && i.itemCode == itemCode).ToList();
-            return h;
+    
+            return db.cbr_ComprasSAP_Escaneo.Where(i => i.baseEntry == docEntry && i.itemCode == itemCode).ToList(); 
         }
 
 

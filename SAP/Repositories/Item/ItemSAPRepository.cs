@@ -12,9 +12,9 @@ namespace SAP.Repositories
 
         public ItemSAP ObtenerItemPorItemCode(string ItemCode) {
 
-           
 
-            doQuery("select ItemCode, ItemName from Oitm where itemCode"+ ItemCode);
+        
+            doQuery("select ItemCode, ItemName from Oitm where itemCode = '"+ ItemCode+"'");
             ItemSAP Item = new ItemSAP();
            
             
@@ -26,7 +26,7 @@ namespace SAP.Repositories
                 recordSet.MoveNext(); 
             }
 
-            return recordSet.RecordCount == 0? throw new Exception("Item no existente en SAP") : Item ;
+            return recordSet.RecordCount == 0? null : Item ;
         }
     }
 }
