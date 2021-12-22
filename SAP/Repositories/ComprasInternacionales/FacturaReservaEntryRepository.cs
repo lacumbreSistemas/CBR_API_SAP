@@ -86,7 +86,7 @@ namespace SAP.Repositories.ComprasInternacionales
 
             double cantidadOrdenada = recordSet.Fields.Item("Quantity").Value;
 
-            if (cantidadOrdenada == 0 || cantidadOrdenada == null)
+            if (cantidadOrdenada == 0 )
                 throw new Exception("Item no existe en orden de compra");
 
             return cantidadOrdenada;

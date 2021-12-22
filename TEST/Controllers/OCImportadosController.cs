@@ -16,16 +16,18 @@ namespace TEST.Controllers
 
 
         //private PurchaseOrderRepository po;
-        private FacturasReservaRepository fe;
-
+        private FacturasReservaRepository fe { get; set; }
+        EscaneoRepository escaneoRepo { get; set; }
         Response response ;
       public   OCImportadosController() {
             response =  new Response();
             fe = new FacturasReservaRepository();
-            Escaneos = new EscaneoImportadosRepository();
+            escaneoRespository = new EscaneoImportadosRepository();
+            escaneoRepo = new EscaneoRepository();
         }
 
-        private EscaneoImportadosRepository Escaneos;
+
+        private EscaneoImportadosRepository escaneoRespository;
 
       
 
@@ -56,11 +58,11 @@ namespace TEST.Controllers
         }
 
 
-        [HttpPost("Escaneo/{usuario}")]
+        [HttpPost("Escaneo")]
         public IActionResult Post([FromBody] EscaneoBuildModel escaneo)
         {
 
-            var guardarEscaneo = Escaneos.Agregar(escaneo);
+            var guardarEscaneo = escaneoRespository.Agregar(escaneo);
 
 
             response.status = 1;
@@ -83,7 +85,17 @@ namespace TEST.Controllers
             return Ok(response);
         }
 
+           [HttpDelete("Escaneo/{escaneoId}")]
+        public IActionResult anularEscaneo(int escaneoId)
+        {
+          
+            response.status = 1;
+            response.mensaje = "exitoso";
+            response.data = escaneoRepo.anularEscaneo(escaneoId);
 
+
+            return Ok(response);
+        }
 
     }
 }
