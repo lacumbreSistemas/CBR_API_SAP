@@ -45,6 +45,16 @@ namespace TEST.Controllers
             return Ok(response);
         }
 
+        [HttpGet("Historial/{ordenDeCompraDocEntry}/{itemCode}")]
+        public IActionResult Historial(int ordenDeCompraDocEntry, string itemCode)
+        {
+            response.status = 1;
+            response.mensaje = "Historial de escaneo para el item " + itemCode + " en la orden de compra " + ordenDeCompraDocEntry;
+            response.data = escaneoRepo.obtenerHistorial(ordenDeCompraDocEntry, itemCode);
+            return Ok(response);
+
+        }
+
 
         [HttpGet("Resumen/{numeroDeOrdenDeCompra}")]
         public IActionResult GetResumen(int numeroDeOrdenDeCompra)
