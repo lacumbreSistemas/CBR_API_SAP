@@ -24,6 +24,7 @@ namespace Domain.Models
 
         public void setNombreProducto()
         {
+
             item = new ItemAppModel();
 
             item.findByItemloockupcode(codigoProducto);
