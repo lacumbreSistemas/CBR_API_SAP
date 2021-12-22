@@ -78,12 +78,13 @@ namespace Intermedia_.Repositories
 
         public int borrarEscaneo(int id) {
             var escaneo = db.cbr_ComprasSAP_Escaneo.FirstOrDefault(i=> i.id == id);
+            escaneo.deleted = true;
 
             cbr_ComprasSAP_Escaneo escaneoNegativo = new cbr_ComprasSAP_Escaneo();
 
             escaneoNegativo = escaneo;
 
-            escaneoNegativo.deleted = true;
+            escaneoNegativo.deleted = false;
             escaneoNegativo.cantidad = escaneoNegativo.cantidad * (-1);
             escaneoNegativo.escaneoAnuladoID = escaneo.id; 
 

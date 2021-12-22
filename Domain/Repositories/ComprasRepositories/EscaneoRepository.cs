@@ -44,6 +44,7 @@ namespace Domain.Repositories
                 historial.fecha = i.fecha;
                 historial.entradaMercanciaDocEntry = i.entradaMercanciaDocEntry;
                 historial.usuario = i.nombreUsuario;
+                historial.setNombreProducto();
                 Historial.Add(historial);
 
             });

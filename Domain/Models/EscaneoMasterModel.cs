@@ -11,7 +11,7 @@ namespace Domain.Models
         public int ordenCompraDocEntry { get; set; }
         public string codigoProducto { get; set; }
 
-        public string descripciónProducto { get; set; }
+        public string nombreProducto { get; set; }
         public string usuario { get; set; }
         public double cantidad { get; set; }
 
@@ -22,15 +22,16 @@ namespace Domain.Models
         private ItemAppModel item { get; set; }
 
 
-        public EscaneoMasterModel() {
-
+        public void setNombreProducto()
+        {
             item = new ItemAppModel();
 
             item.findByItemloockupcode(codigoProducto);
 
-            this.descripciónProducto = item.descripcion;
-
+            this.nombreProducto = item.descripcion;
         }
+
+       
       
     }
 }

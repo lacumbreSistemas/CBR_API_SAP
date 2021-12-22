@@ -23,26 +23,34 @@ namespace Domain.Models
 
         private cbr_ComprasSAP_Escaneo_Repository ComprasSAPEscaneoRepository { get; set; }
 
-        public EscaneoConsultaModel() {
 
-            ComprasSAPEscaneoRepository = new cbr_ComprasSAP_Escaneo_Repository();
-        
-        }
+        public EscaneoConsultaModel() { }
 
         public EscaneoConsultaModel(int id)
         {
-            this.id = id;
             ComprasSAPEscaneoRepository = new cbr_ComprasSAP_Escaneo_Repository();
 
-            obtenerEscaneoporID();
-           
-            ComprasSAPEscaneoRepository = new cbr_ComprasSAP_Escaneo_Repository();
+            obtenerEscaneoporID(id);
+       
 
         }
 
-        private void obtenerEscaneoporID() {
+       private void obtenerEscaneoporID(int id) {
 
-            ComprasSAPEscaneoRepository.obtenerEscaneoPorID(id);
+          var escaneo = ComprasSAPEscaneoRepository.obtenerEscaneoPorID(id);
+            this.id = escaneo.id;
+            this.fecha = escaneo.fecha;
+            this.escaneoAnuladoID = escaneo.escaneoAnuladoID;
+            this.elimnado = escaneo.deleted;
+            this.entradaMercanciaDocEntry = escaneo.entradaMercanciaDocEntry;
+            this.codigoProducto = escaneo.itemCode;
+            this.baseLine = escaneo.baseLine;
+            this.cantidad = escaneo.cantidad;
+            this.setNombreProducto();
+            this.ordenCompraDocEntry = escaneo.baseEntry;
+            this.usuario = escaneo.nombreUsuario;
+  
+
         }
 
 
@@ -53,6 +61,10 @@ namespace Domain.Models
         }
 
         public int Anular() {
+            if (this.elimnado)
+            {
+                throw new Exception("Este escaneo ya fue elimiando por: " + this.usuario);
+            }
          return  ComprasSAPEscaneoRepository.borrarEscaneo(this.id);
         }
 

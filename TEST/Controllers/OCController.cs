@@ -53,7 +53,7 @@ namespace TEST.Controllers
 
             response.status = 1;
             response.mensaje = "Resumen de la ordend e compra " + numeroDeOrdenDeCompra;
-            response.data = po.getPurchaseOrder(numeroDeOrdenDeCompra, true);
+            response.data = po.getPurchaseOrder(numeroDeOrdenDeCompra,true,false);
 
 
             return Ok(response);
