@@ -6,73 +6,28 @@ using System.Threading.Tasks;
 using SAPbobsCOM;
 namespace SAP.Repositories
 {
-    public  abstract class MasterRepository
+    public  class MasterRepository
     {
-       public  MasterRepository() {
+        public Company connection { get; set; }
 
-         
-            //connection.Server = "10.10.1.12";
-            //connection.LicenseServer = "10.10.1.12";
-            //connection.DbServerType = BoDataServerTypes.dst_MSSQL2019;
-            //connection.DbUserName = "sa";
-            //connection.DbPassword = "SAP#Sql_";
-            ////connection.CompanyDB = "SBO_COLONIAL_PRODUCTIVA";
-            //connection.UserName = "manager";
-            //connection.Password = "@dmiN123*";
+        private static MasterRepository _instance;
 
-            //connection.CompanyDB = "SBO_COLONIAL_Pruebas";
-          
-
-
-        }
-
-        //Instancia SAP
-       public  Company connection { get; set; }
-       public Recordset recordSet { get; set; }
-
-        #region singleton instance
-
-        //Singleton appllierd
-        // private static readonly object lockf = new object ();   
-        //private static MasterRepository instance = null;
-
-        // public static MasterRepository Instance {
-
-        //     get {
-        //         if (instance == null)
-        //         {
-        //             lock (lockf) {
-        //                 if (instance == null)
-        //                 {
-        //                     instance = new MasterRepository();
-
-        //                 }
-
-        //             }
-
-        //         }
-
-
-        //         return instance;
-        //     }
-        // }
-
-        #endregion
-
-
-
-        #region  doQuery abstract
-
-        public void Desconectar()
+        public static MasterRepository GetInstance()
         {
-
-            connection.Disconnect();
-            connection = null;
+            if (_instance == null)
+            {
+                _instance = new MasterRepository();
+            }
+            return _instance;
+        }
+        public MasterRepository()
+        {
+            Conectar();
         }
 
-        public void Conectar() {
+        public void Conectar()
+        {
             connection = new Company();
-
             connection.Server = "10.10.1.12";
             connection.LicenseServer = "10.10.1.12";
             connection.DbServerType = BoDataServerTypes.dst_MSSQL2019;
@@ -81,27 +36,16 @@ namespace SAP.Repositories
             connection.UserName = "manager";
             connection.Password = "@dmiN123*";
             connection.CompanyDB = "SBO_COLONIAL_PRODUCTIVA";
-
-
-           
             connection.Connect();
-            
         }
 
-        public void doQuery(string query)
+        public Recordset doQuery(string query)
         {
-            Conectar();
-       
-                recordSet = connection.GetBusinessObject(BoObjectTypes.BoRecordset);
-            recordSet.DoQuery(query);
-        
+            var res = connection.GetBusinessObject(BoObjectTypes.BoRecordset);
+            res.DoQuery(query);
+            return res;
 
-            Desconectar();
-          
         }
-        #endregion
-
-
 
 
     }

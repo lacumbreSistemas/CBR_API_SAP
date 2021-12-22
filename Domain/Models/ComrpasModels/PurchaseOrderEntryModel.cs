@@ -50,7 +50,7 @@ namespace Domain.Models
             this.docEntry = docentry;
             this.codigoProducto = itemCode;
             intermediaEntryRepository = new cbr_ComprasSAP_Escaneo_Repository();
-            this.cantidadEscaneada = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
+          this.cantidadEscaneada = this.intermediaEntryRepository.obtenerCantidadRecibida(docEntry, codigoProducto);
         }
         public PurchaseOrderEntryModel(PurchaseOrderEntryModel newEntry)
         {

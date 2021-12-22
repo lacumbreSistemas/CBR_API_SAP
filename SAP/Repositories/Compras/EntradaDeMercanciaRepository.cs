@@ -9,9 +9,10 @@ using SAPbobsCOM;
 
 namespace SAP.Repositories.Compras
 {
-    public class EntradaDeMercanciaRepository:MasterRepository 
+    public class EntradaDeMercanciaRepository 
     {
 
+        MasterRepository masterRepo = MasterRepository.GetInstance();
 
         public int  GenerarEntradaMercancia(EntradaDeMercancia EM) {
 
@@ -28,12 +29,11 @@ namespace SAP.Repositories.Compras
         public int GenerarEM(EntradaDeMercancia EM, BoObjectTypes objectoBase)
         {
             int DocumentoAgregado = 0;
-            Conectar();
             string numeroNuevaEM = "";
           
 
 
-            Documents DocumentoEntradaMercancia = connection.GetBusinessObject(BoObjectTypes.oPurchaseDeliveryNotes);
+            Documents DocumentoEntradaMercancia = masterRepo.connection.GetBusinessObject(BoObjectTypes.oPurchaseDeliveryNotes);
             DocumentoEntradaMercancia.CardCode = EM.CardCode;
 
             EM.Entries.ForEach(i => {
@@ -58,12 +58,11 @@ namespace SAP.Repositories.Compras
             if (DocumentoAgregado == 0)
             {
 
-                numeroNuevaEM = connection.GetNewObjectKey();
-                Desconectar();
+                numeroNuevaEM = masterRepo.connection.GetNewObjectKey();
                 return  Convert.ToInt32(numeroNuevaEM);
                
             }
-            throw new Exception ("Entrada de mercancía Error [" + connection.GetLastErrorDescription() + "] ");
+            throw new Exception ("Entrada de mercancía Error [" + masterRepo.connection.GetLastErrorDescription() + "] ");
 
 
         }

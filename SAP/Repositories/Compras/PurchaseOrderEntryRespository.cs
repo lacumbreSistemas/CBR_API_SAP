@@ -7,8 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 namespace SAP.Repositories
 {
-    public class PurchaseOrderEntryRespository:MasterRepository , IOCEntryRepo
+    public class PurchaseOrderEntryRespository: IOCEntryRepo
     {
+
+        MasterRepository masterRepo = MasterRepository.GetInstance();
+
 
         //private MasterRepository _masterRespository;
         public PurchaseOrderEntryRespository() {
@@ -18,7 +21,7 @@ namespace SAP.Repositories
     
         public List<PurchaseOrderEntry> ObtenerListaDeEntriesOrdenDeCompra(int? docEntry)
         {
-          doQuery(@"select                      E.ItemCode as codigoProducto,
+         var recordSet =  masterRepo.doQuery(@"select                      E.ItemCode as codigoProducto,
                                                 i.ItemName as nombreProducto,
                                                 E.Quantity as cantidadOrdenada,
                                                 E.DocEntry as docEntry,
@@ -56,7 +59,7 @@ namespace SAP.Repositories
 
         public PurchaseOrderEntry ObtenerEntrieDeOrdenDeCompra(int? docEntry, string itemCode) {
 
-            doQuery(@"select                E.ItemCode as codigoProducto,
+            var recordSet = masterRepo.doQuery(@"select                E.ItemCode as codigoProducto,
                                             i.ItemName as nombreProducto,
                                             E.Quantity as cantidadOrdenada,
                                             E.DocEntry as docEntry,
@@ -69,9 +72,9 @@ namespace SAP.Repositories
 
             return new PurchaseOrderEntry(
 
-                                        recordSet.Fields.Item("docEntry").Value, 
-                                        recordSet.Fields.Item("nombreProducto").Value, 
-                                        recordSet.Fields.Item("codigoProducto").Value, 
+                                        recordSet.Fields.Item("docEntry").Value,
+                                        recordSet.Fields.Item("nombreProducto").Value,
+                                        recordSet.Fields.Item("codigoProducto").Value,
                                         recordSet.Fields.Item("cantidadOrdenada").Value,
                                         recordSet.Fields.Item("Baseline").Value,
                                         recordSet.Fields.Item("NormaReparto").Value
@@ -84,7 +87,7 @@ namespace SAP.Repositories
 
         public double ObtenerCantidadOrdenada(int? docEntry, string itemCode) {
 
-            doQuery("select quantity from Por1 where docentry = "+docEntry+" and itemCode = '"+itemCode+"'");
+            var recordSet = masterRepo.doQuery("select quantity from Por1 where docentry = "+docEntry+" and itemCode = '"+itemCode+"'");
 
             double cantidadOrdenada = recordSet.Fields.Item("Quantity").Value;
 
@@ -97,8 +100,8 @@ namespace SAP.Repositories
 
         public int obtenerLineNum(int? docEntry, string itemCode) {
             //Conectar();
-            doQuery("select LineNum from Por1 where docentry = " + docEntry + " and itemCode = '" + itemCode + "'");
-            return  recordSet.Fields.Item("LineNum").Value;
+            var recordSet = masterRepo.doQuery("select LineNum from Por1 where docentry = " + docEntry + " and itemCode = '" + itemCode + "'");
+            return recordSet.Fields.Item("LineNum").Value;
         }
 
     }

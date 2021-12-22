@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace SAP.Repositories
 {
-    public class PurchaseOrderHeaderRepository: MasterRepository
+    public class PurchaseOrderHeaderRepository
     {
+
+        MasterRepository masterRepo = MasterRepository.GetInstance();
 
         public PurchaseOrderHeaderRepository() {
 
@@ -20,7 +22,7 @@ namespace SAP.Repositories
 
         public PurchaseOrderHeader getOne(int docEntry)
         {
-            doQuery(@"Select oc.DocEntry,TaxDate,DocNum,oc.CardCode,DocDueDate,p.CardName from OPOR oc
+            var recordSet = masterRepo.doQuery(@"Select oc.DocEntry,TaxDate,DocNum,oc.CardCode,DocDueDate,p.CardName from OPOR oc
 
                             inner join OCRD P on oc.CardCode = p.CardCode
 
@@ -34,10 +36,10 @@ namespace SAP.Repositories
                 newPurchaseOrderHeader.docEntry = recordSet.Fields.Item("DocEntry").Value;
                 newPurchaseOrderHeader.taxDate = recordSet.Fields.Item("TaxDate").Value;
                 newPurchaseOrderHeader.docNum = recordSet.Fields.Item("DocNum").Value;
-                newPurchaseOrderHeader.cardCode = recordSet.Fields.Item("CardCode").Value;
+                newPurchaseOrderHeader.cardCode =recordSet.Fields.Item("CardCode").Value;
                 newPurchaseOrderHeader.docDueDate = recordSet.Fields.Item("DocDueDate").Value;
                 newPurchaseOrderHeader.cardName = recordSet.Fields.Item("CardName").Value;
-               recordSet.MoveNext();            }
+                recordSet.MoveNext();            }
 
             return newPurchaseOrderHeader;
         }
@@ -45,7 +47,7 @@ namespace SAP.Repositories
 
         public List<PurchaseOrderHeader> getAbiertas(string WhsCode)
         {
-            doQuery(@" select T0.DocEntry,T0.TaxDate,T0.DocNum,T0.CardCode,T0.DocDueDate,p.CardName 
+            var recordSet = masterRepo.doQuery(@" select T0.DocEntry,T0.TaxDate,T0.DocNum,T0.CardCode,T0.DocDueDate,p.CardName 
                       from OPOR T0 
                            inner join POR1 T1 ON T0.DocEntry = T1.DocEntry 
                            inner join OCRD P on t0.CardCode = P.CardCode

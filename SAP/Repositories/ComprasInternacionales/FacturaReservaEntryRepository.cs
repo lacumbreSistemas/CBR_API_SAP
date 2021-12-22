@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace SAP.Repositories.ComprasInternacionales
 {
-    public class FacturaReservaEntryRepository : MasterRepository
+    public class FacturaReservaEntryRepository 
     {
+        MasterRepository masterRepo = MasterRepository.GetInstance();
 
         public FacturaReservaEntryRepository(){
             
@@ -20,7 +21,7 @@ namespace SAP.Repositories.ComprasInternacionales
 
         public List<FacturasReservaEntryEntity> ObtenerListaDeEntriesFacturaReserva(int? docEntry)
         {
-            doQuery(@"select  E.ItemCode as codigoProducto,
+            var recordSet = masterRepo.doQuery(@"select  E.ItemCode as codigoProducto,
                               i.ItemName as nombreProducto,
                               E.Quantity as cantidadOrdenada,
                               E.DocEntry as docEntry,
@@ -57,7 +58,7 @@ namespace SAP.Repositories.ComprasInternacionales
         public FacturasReservaEntryEntity ObtenerEntrieDeFacturaReserva(int? docEntry, string itemCode)
         {
 
-            doQuery(@"select                E.ItemCode as codigoProducto,
+            var recordSet = masterRepo.doQuery(@"select                E.ItemCode as codigoProducto,
                                             i.ItemName as nombreProducto,
                                             E.Quantity as cantidadOrdenada,
                                             E.DocEntry as docEntry,
@@ -82,7 +83,7 @@ namespace SAP.Repositories.ComprasInternacionales
         public double ObtenerCantidadOrdenada(int? docEntry, string itemCode)
         {
 
-            doQuery("select quantity from PCH1 where docentry = " + docEntry + " and itemCode = '" + itemCode + "'");
+            var recordSet = masterRepo.doQuery("select quantity from PCH1 where docentry = " + docEntry + " and itemCode = '" + itemCode + "'");
 
             double cantidadOrdenada = recordSet.Fields.Item("Quantity").Value;
 
@@ -95,7 +96,7 @@ namespace SAP.Repositories.ComprasInternacionales
         public int obtenerLineNum(int? docEntry, string itemCode)
         {
             //Conectar();
-            doQuery("select LineNum from Pch1 where docentry = " + docEntry + " and itemCode = '" + itemCode + "'");
+            var recordSet =  masterRepo.doQuery("select LineNum from Pch1 where docentry = " + docEntry + " and itemCode = '" + itemCode + "'");
             return recordSet.Fields.Item("LineNum").Value;
         }
 

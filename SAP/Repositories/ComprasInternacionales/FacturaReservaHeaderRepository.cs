@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 
 namespace SAP.Repositories.ComprasInternacionales
 {
-    public class FacturaReservaHeaderRepository: MasterRepository
+    public class FacturaReservaHeaderRepository
     {
+        MasterRepository masterRepo = MasterRepository.GetInstance();
 
         public FacturasReservaHeaderEntity getOne(int docEntry)
         {
-            doQuery(@"Select oc.DocEntry,TaxDate,DocNum,oc.CardCode,DocDueDate,p.CardName from OPCH oc
+            var recordSet = masterRepo.doQuery(@"Select oc.DocEntry,TaxDate,DocNum,oc.CardCode,DocDueDate,p.CardName from OPCH oc
 
                             inner join OCRD P on oc.CardCode = p.CardCode
 
@@ -46,7 +47,7 @@ namespace SAP.Repositories.ComprasInternacionales
 
         public List<FacturasReservaHeaderEntity> getAbiertas(string WhsCode) {
 
-            doQuery(@"select T0.DocEntry,
+            var recordSet = masterRepo.doQuery(@"select T0.DocEntry,
                             T0.TaxDate,
                             T0.DocNum,
                             T0.CardCode,
