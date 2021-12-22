@@ -24,7 +24,9 @@ namespace Domain.Models
         private cbr_ComprasSAP_Escaneo_Repository ComprasSAPEscaneoRepository { get; set; }
 
 
-        public EscaneoConsultaModel() { }
+        public EscaneoConsultaModel() {
+            ComprasSAPEscaneoRepository = new cbr_ComprasSAP_Escaneo_Repository();
+        }
 
         public EscaneoConsultaModel(int id)
         {
