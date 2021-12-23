@@ -92,10 +92,11 @@ namespace TEST.Controllers
         [HttpPost("{DocEntry}")]
         public IActionResult Guardar(int DocEntry)
         {
-            var escaneo =
+            var EM = po.guardarEntradaMercancia(DocEntry);
+
             response.status = 1;
-            response.mensaje = "exitoso";
-            response.data = po.guardarEntradaMercancia(DocEntry);
+            response.mensaje = "Se ha generado entrada de mercancía numero "+ EM.ToString();
+            response.data = EM;
 
 
             return Ok(response);

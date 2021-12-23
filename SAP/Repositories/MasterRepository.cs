@@ -35,7 +35,7 @@ namespace SAP.Repositories
             connection.DbPassword = "SAP#Sql_";
             connection.UserName = "manager";
             connection.Password = "@dmiN123*";
-            connection.CompanyDB = "SBO_COLONIAL_PRODUCTIVA";
+            connection.CompanyDB = "SBO_COLONIAL_Pruebas";
             connection.Connect();
         }
 
