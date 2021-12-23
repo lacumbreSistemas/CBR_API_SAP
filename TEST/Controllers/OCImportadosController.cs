@@ -76,7 +76,7 @@ namespace TEST.Controllers
 
 
             response.status = 1;
-            response.mensaje = "Escaneo del item " + guardarEscaneo.codigoProducto + "para la orden de compra " + guardarEscaneo.ordenCompraDocEntry;
+            response.mensaje = "Escaneo de Item: " + guardarEscaneo.codigoProducto + " agregado correctamente";
             response.data = guardarEscaneo;
 
             return Ok(response);
@@ -100,7 +100,7 @@ namespace TEST.Controllers
         {
           
             response.status = 1;
-            response.mensaje = "exitoso";
+            response.mensaje = "Escaneo eliminado";
             response.data = escaneoRepo.anularEscaneo(escaneoId);
 
 

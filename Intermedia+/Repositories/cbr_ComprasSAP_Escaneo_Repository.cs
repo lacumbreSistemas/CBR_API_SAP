@@ -32,9 +32,7 @@ namespace Intermedia_.Repositories
         public List<cbr_ComprasSAP_Escaneo> ObtenerEscaneosPorDocEntrySinIngresarSAP(int docEntry) {
 
             List<cbr_ComprasSAP_Escaneo> Escaneos = db.cbr_ComprasSAP_Escaneo.Where(i => i.baseEntry == docEntry && i.entradaMercanciaDocEntry == 0).ToList();
-   
-          
-                
+  
             return Escaneos;
         }
 
@@ -57,14 +55,15 @@ namespace Intermedia_.Repositories
         }
 
 
-        public void guardadoEntradaMercancia(int baseEntry, string itemCode, int DocentryEM) {
+        public void establecerEntradaMercanciaPorRango(int baseEntry, string itemCode, int DocentryEM) {
 
-            var itemEscaneos = db.cbr_ComprasSAP_Escaneo.FirstOrDefault(i => i.baseEntry == baseEntry && i.itemCode == itemCode);
-            itemEscaneos.entradaMercanciaDocEntry = DocentryEM;
+            var itemEscaneos = db.cbr_ComprasSAP_Escaneo.Where(i => i.baseEntry == baseEntry && i.itemCode == itemCode).ToList();
+            itemEscaneos.ForEach(escaneo =>
+            {
+                escaneo.entradaMercanciaDocEntry = DocentryEM;
+                db.SaveChanges();
+            });
 
-            db.SaveChanges();
-           
-        
         }
 
 

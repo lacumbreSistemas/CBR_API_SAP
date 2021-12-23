@@ -15,9 +15,9 @@ namespace Domain.Repositories.ComprasInternacionales
         FacturaReservaHeaderRepository headerRepo = new FacturaReservaHeaderRepository();
         OrdenCompraImportadoEstrategia estrategia = new OrdenCompraImportadoEstrategia();
 
-        public PurchaseOrderModel getFacturaReserva(int numeroDeOrdenDeCompra, bool includeEntries = false, bool includeEscaneos = false)
+        public PurchaseOrderModel getFacturaReserva(int numeroDeOrdenDeCompra, bool includeEntries = false)
         {
-            PurchaseOrderModel aa = new PurchaseOrderModel(numeroDeOrdenDeCompra,estrategia, includeEntries, includeEscaneos);
+            PurchaseOrderModel aa = new PurchaseOrderModel(numeroDeOrdenDeCompra,estrategia, includeEntries);
             return aa;
         }
 
@@ -61,7 +61,7 @@ namespace Domain.Repositories.ComprasInternacionales
             //PO.GenerarEntradaMercancia();
             //return PO.GenerarEntradaMercancia();
 
-            var FR = getFacturaReserva(docEntry, false, true);
+            var FR = getFacturaReserva(docEntry, false);
 
 
             return FR.GenerarEntradaMercancia();

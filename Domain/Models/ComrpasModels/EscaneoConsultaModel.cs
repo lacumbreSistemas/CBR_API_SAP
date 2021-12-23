@@ -56,9 +56,9 @@ namespace Domain.Models
         }
 
 
-        public void establercerEntradaMercancia(int DocEntryEM) {
+        public void establercerEntradaMercancia() {
 
-            ComprasSAPEscaneoRepository.guardadoEntradaMercancia(this.ordenCompraDocEntry, this.codigoProducto, this.entradaMercanciaDocEntry); 
+            ComprasSAPEscaneoRepository.establecerEntradaMercanciaPorRango(this.ordenCompraDocEntry, this.codigoProducto, this.entradaMercanciaDocEntry); 
 
         }
 
@@ -67,7 +67,13 @@ namespace Domain.Models
             {
                 throw new Exception("Este escaneo ya fue elimiando por: " + this.usuario);
             }
-         return  ComprasSAPEscaneoRepository.borrarEscaneo(this.id);
+
+            if (this.entradaMercanciaDocEntry != 0)
+            {
+                throw new Exception("No puede eliminar este escaneo porque ya fue ingresado en la entrada de mercancia: " + this.entradaMercanciaDocEntry);
+            }
+
+            return  ComprasSAPEscaneoRepository.borrarEscaneo(this.id);
         }
 
       

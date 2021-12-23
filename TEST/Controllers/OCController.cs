@@ -53,7 +53,7 @@ namespace TEST.Controllers
 
             response.status = 1;
             response.mensaje = "Resumen de la ordend e compra " + numeroDeOrdenDeCompra;
-            response.data = po.getPurchaseOrder(numeroDeOrdenDeCompra,true,false);
+            response.data = po.getPurchaseOrder(numeroDeOrdenDeCompra,true);
 
 
             return Ok(response);
@@ -80,7 +80,7 @@ namespace TEST.Controllers
 
 
             response.status = 1;
-            response.mensaje = "Escaneo del item " + guardarEscaneo.codigoProducto + "para la orden de compra " + guardarEscaneo.ordenCompraDocEntry;
+            response.mensaje = "Escaneo de Item: " + guardarEscaneo.codigoProducto + " agregado correctamente";
             response.data = guardarEscaneo;
 
             return Ok(response);
@@ -108,7 +108,7 @@ namespace TEST.Controllers
         {
           
             response.status = 1;
-            response.mensaje = "exitoso";
+            response.mensaje = "Escaneo eliminado";
             response.data = escaneiRepository.anularEscaneo(escaneoId);
 
 

@@ -37,28 +37,17 @@ namespace Domain.Models
          
         private EntradaDeMercanciaRepository entradaDeMercanciaRepository { get; set; }
 
-      
-        private List<EscaneoConsultaModel> Escaneos { get; set; }
+     
 
 
-
-        public PurchaseOrderModel(int docEntry, IOrdenCompraEstrategia estrategia, bool includeEntries = false,bool includeEscaneos = false)
+        public PurchaseOrderModel(int docEntry, IOrdenCompraEstrategia estrategia, bool includeEntries = false)
         {
             this.entriesRepository = new PurchaseOrderEntryRespository();
             this.entries = new List<PurchaseOrderEntryModel>();
+            escaneosIntermedia = new cbr_ComprasSAP_Escaneo_Repository();
+            entradaDeMercanciaRepository = new EntradaDeMercanciaRepository();
             _estrategia = estrategia;
-
-
-                getPurchaseOrderHeader(docEntry, includeEntries);
-               
-                entradaDeMercanciaRepository = new EntradaDeMercanciaRepository();
-
-            if (includeEscaneos)
-            {
-                Escaneos = new List<EscaneoConsultaModel>();
-                escaneosIntermedia = new cbr_ComprasSAP_Escaneo_Repository();
-                getPurchaseOrderEscaneos();
-            }
+            getPurchaseOrderHeader(docEntry, includeEntries);
         }
 
         public PurchaseOrderModel()
@@ -66,25 +55,25 @@ namespace Domain.Models
 
         }
 
-        public void getPurchaseOrderEscaneos()
+
+        public List<EscaneoConsultaModel> getEscaneosSinEntradaDeMercancia()
         {
+            List<EscaneoConsultaModel> escaneosConsulta = new List<EscaneoConsultaModel>();
+           
             var escaneos = escaneosIntermedia.ObtenerEscaneosPorDocEntrySinIngresarSAP (this.docEntry);
 
             escaneos.ForEach(i=> {
-
                 EscaneoConsultaModel _Escaneo = new EscaneoConsultaModel();
-
                 _Escaneo.baseLine = i.baseLine;
                 _Escaneo.cantidad = i.cantidad;
                 _Escaneo.codigoProducto = i.itemCode;
                 _Escaneo.fecha = i.fecha;
-                //_Escaneo.numeroEntradaDeMercancía = i.entradaMercanciaDocEntry;
+                _Escaneo.entradaMercanciaDocEntry = i.entradaMercanciaDocEntry;
                 _Escaneo.ordenCompraDocEntry = i.baseEntry;
-                Escaneos.Add(_Escaneo);
-                
-
+                escaneosConsulta.Add(_Escaneo);
             });
 
+            return escaneosConsulta;
         }
 
         public void getPurchaseOrderHeader(int docEntry, bool includeEntries)
@@ -118,53 +107,16 @@ namespace Domain.Models
 
 
         }
+        public int GenerarEntradaMercancia(){
 
-        public void withEscaneos() {
-          
-
-
-        }
-        #region 
-        //private List<EscaneoConsultaModel> ObtenerEscaneos()
-        //{
-
-        //    //var escaneos = escaneosIntermedia.ObtenerEscaneosPorDocEntry(this.docEntry).GroupBy(i => new { i.baseEntry, i.itemCode }).ToList();
-        //    //var escaneos = Escaneos.GroupBy(i => new { i.baseEntry, i.itemCode }).ToList();
-
-        //    //Escaneos.ForEach(i => {
-
-        //    //    EscaneoConsultaModel _escaneo = new EscaneoConsultaModel();
-
-        //    //    _escaneo.cantidad = Convert.ToDouble(i.Sum(i => i.cantidad));
-        //    //    _escaneo.codigoProducto = i.FirstOrDefault().itemCode.ToString();
-        //    //    //_escaneo.numeroEntradaDeMercancía = null; 
-        //    //    _escaneo.numeroOrdenDeCompra = Convert.ToInt32(i.FirstOrDefault().baseEntry.ToString());
-        //    //    _escaneo.fecha = DateTime.Now;
-        //    //    _escaneo.usuario = Convert.ToInt32(i.FirstOrDefault().userID.ToString());
-        //    //    _escaneo.baseLine = Convert.ToInt32(i.FirstOrDefault().baseLine.ToString());
-
-        //    //    Escaneos.Add(_escaneo);
-
-        //    //});
-
-        //    //return Escaneos;
-
-
-        //}
-        #endregion
-
-
-
-        private EntradaDeMercancia mapearEM() {
-
-            //var escaneos = ObtenerEscaneos();
-
+            var escaneos = getEscaneosSinEntradaDeMercancia();
+           
 
             EntradaDeMercancia EM = new EntradaDeMercancia();
             EM.CardCode = this.codigoProveedor;
 
 
-            Escaneos.GroupBy(i => new { i.ordenCompraDocEntry, i.codigoProducto }).ToList().ForEach(i =>
+            escaneos.GroupBy(i => new { i.ordenCompraDocEntry, i.codigoProducto }).ToList().ForEach(i =>
             {
 
                 EntradaMercanciaEntry EME = new EntradaMercanciaEntry();
@@ -173,27 +125,23 @@ namespace Domain.Models
                 EME.ItemCode = i.FirstOrDefault().codigoProducto.ToString();
                 EME.Quantity = Convert.ToDouble(i.Sum(i => i.cantidad));
 
-
-                EM.Entries.Add(EME);
+                if (EME.Quantity > 0)
+                {
+                    EM.Entries.Add(EME);
+                }
             });
 
+            if (EM.Entries.Count() <= 0)
+            {
+                throw new Exception("No hay escaneos para generar una nueva entrada de mercancia");
+            }
 
+            int entradaMercanciaDocEntry =   _estrategia.GenerarEntradaMercancia(EM);
 
-            return EM;
-
-
-
-        }
-
-
-        public int GenerarEntradaMercancia(){
-
-          int entradaMercanciaDocEntry =   _estrategia.GenerarEntradaMercancia(mapearEM());
-
-            Escaneos.ForEach(escaneo =>
+            escaneos.ForEach(escaneo =>
             {
                 escaneo.entradaMercanciaDocEntry = entradaMercanciaDocEntry;
-                escaneo.establercerEntradaMercancia(entradaMercanciaDocEntry);
+                escaneo.establercerEntradaMercancia();
             });
 
 

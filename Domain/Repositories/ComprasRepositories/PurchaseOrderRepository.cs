@@ -16,9 +16,9 @@ namespace Domain.Repositories
 
         
        
-        public PurchaseOrderModel getPurchaseOrder(int numeroDeOrdenDeCompra, bool includeEntries =false, bool includeEscaneos= false)
+        public PurchaseOrderModel getPurchaseOrder(int numeroDeOrdenDeCompra, bool includeEntries =false)
         {
-            PurchaseOrderModel aa = new PurchaseOrderModel(numeroDeOrdenDeCompra, estrategia, includeEntries, includeEscaneos);
+            PurchaseOrderModel aa = new PurchaseOrderModel(numeroDeOrdenDeCompra, estrategia, includeEntries);
             return aa;
         }
 
@@ -58,7 +58,7 @@ namespace Domain.Repositories
 
         public int guardarEntradaMercancia(int docEntry) {
 
-            var PO = getPurchaseOrder(docEntry,false, true);
+            var PO = getPurchaseOrder(docEntry,false);
 
             return   PO.GenerarEntradaMercancia(); 
         }
