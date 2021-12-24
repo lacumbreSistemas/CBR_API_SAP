@@ -121,7 +121,7 @@ namespace Domain.Models
 
                 EntradaMercanciaEntry EME = new EntradaMercanciaEntry();
                 EME.BaseEntry = Convert.ToInt32(i.FirstOrDefault().ordenCompraDocEntry.ToString());
-                EME.BaseLine = Convert.ToInt32(i.FirstOrDefault().baseLine.ToString());
+                EME.BaseLine = Convert.ToInt32(i.Min(e=>e.baseLine).ToString());
                 EME.ItemCode = i.FirstOrDefault().codigoProducto.ToString();
                 EME.Quantity = Convert.ToDouble(i.Sum(i => i.cantidad));
 
