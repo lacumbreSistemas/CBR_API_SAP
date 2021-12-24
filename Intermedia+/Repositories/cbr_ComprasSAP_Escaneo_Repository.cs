@@ -82,7 +82,7 @@ namespace Intermedia_.Repositories
             cbr_ComprasSAP_Escaneo escaneoNegativo = new cbr_ComprasSAP_Escaneo();
 
             escaneoNegativo.baseEntry = escaneo.baseEntry;
-            escaneoNegativo.baseLine = escaneo.baseEntry;
+            escaneoNegativo.baseLine = escaneo.baseLine;
             escaneoNegativo.cantidad = escaneo.cantidad;
             escaneoNegativo.deleted = false;
             escaneoNegativo.entradaMercanciaDocEntry = 0;
