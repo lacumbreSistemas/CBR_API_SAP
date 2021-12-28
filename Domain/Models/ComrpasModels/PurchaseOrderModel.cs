@@ -70,6 +70,7 @@ namespace Domain.Models
                 _Escaneo.fecha = i.fecha;
                 _Escaneo.entradaMercanciaDocEntry = i.entradaMercanciaDocEntry;
                 _Escaneo.ordenCompraDocEntry = i.baseEntry;
+                _Escaneo.id = i.id;
                 escaneosConsulta.Add(_Escaneo);
             });
 

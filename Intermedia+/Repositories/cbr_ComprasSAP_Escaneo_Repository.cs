@@ -55,14 +55,11 @@ namespace Intermedia_.Repositories
         }
 
 
-        public void establecerEntradaMercanciaPorRango(int baseEntry, string itemCode, int DocentryEM) {
+        public void establecerEntradaMercanciaAEscaneo(int idEscaneo,int DocentryEM) {
 
-            var itemEscaneos = db.cbr_ComprasSAP_Escaneo.Where(i => i.baseEntry == baseEntry && i.itemCode == itemCode).ToList();
-            itemEscaneos.ForEach(escaneo =>
-            {
-                escaneo.entradaMercanciaDocEntry = DocentryEM;
-                db.SaveChanges();
-            });
+            var escaneo = db.cbr_ComprasSAP_Escaneo.Find(idEscaneo);
+            escaneo.entradaMercanciaDocEntry = DocentryEM;
+            db.SaveChanges();
 
         }
 
