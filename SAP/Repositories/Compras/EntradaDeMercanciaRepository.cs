@@ -67,8 +67,5 @@ namespace SAP.Repositories.Compras
 
         }
 
-
-
-       
     }
 }

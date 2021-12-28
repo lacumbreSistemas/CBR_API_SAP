@@ -25,27 +25,28 @@ namespace Domain.Models
         public string nombreProveedor { get; set; }
 
        
+       
 
         public List<PurchaseOrderEntryModel> entries { get; set; }
 
         // private
 
-        private PurchaseOrderEntryRespository entriesRepository { get; set; }
+     
         private IOrdenCompraEstrategia _estrategia { get; set; }
 
         private cbr_ComprasSAP_Escaneo_Repository escaneosIntermedia;
          
-        private EntradaDeMercanciaRepository entradaDeMercanciaRepository { get; set; }
+   
 
      
 
 
         public PurchaseOrderModel(int docEntry, IOrdenCompraEstrategia estrategia, bool includeEntries = false)
         {
-            this.entriesRepository = new PurchaseOrderEntryRespository();
+          
             this.entries = new List<PurchaseOrderEntryModel>();
             escaneosIntermedia = new cbr_ComprasSAP_Escaneo_Repository();
-            entradaDeMercanciaRepository = new EntradaDeMercanciaRepository();
+            
             _estrategia = estrategia;
             getPurchaseOrderHeader(docEntry, includeEntries);
         }
