@@ -55,14 +55,11 @@ namespace Intermedia_.Repositories
         }
 
 
-        public void establecerEntradaMercanciaPorRango(int baseEntry, string itemCode, int DocentryEM) {
+        public void establecerEntradaMercanciaAEscaneo(int idEscaneo,int DocentryEM) {
 
-            var itemEscaneos = db.cbr_ComprasSAP_Escaneo.Where(i => i.baseEntry == baseEntry && i.itemCode == itemCode).ToList();
-            itemEscaneos.ForEach(escaneo =>
-            {
-                escaneo.entradaMercanciaDocEntry = DocentryEM;
-                db.SaveChanges();
-            });
+            var escaneo = db.cbr_ComprasSAP_Escaneo.Find(idEscaneo);
+            escaneo.entradaMercanciaDocEntry = DocentryEM;
+            db.SaveChanges();
 
         }
 
@@ -83,13 +80,12 @@ namespace Intermedia_.Repositories
 
             escaneoNegativo.baseEntry = escaneo.baseEntry;
             escaneoNegativo.baseLine = escaneo.baseLine;
-            escaneoNegativo.cantidad = escaneo.cantidad;
             escaneoNegativo.deleted = false;
             escaneoNegativo.entradaMercanciaDocEntry = 0;
             escaneoNegativo.escaneoAnuladoID = escaneo.id;
             escaneoNegativo.fecha = DateTime.Now;
             escaneoNegativo.itemCode= escaneo.itemCode;
-            escaneoNegativo.cantidad = escaneoNegativo.cantidad * (-1);
+            escaneoNegativo.cantidad = escaneo.cantidad * (-1);
  
 
 

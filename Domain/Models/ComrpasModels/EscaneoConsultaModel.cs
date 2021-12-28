@@ -58,14 +58,14 @@ namespace Domain.Models
 
         public void establercerEntradaMercancia() {
 
-            ComprasSAPEscaneoRepository.establecerEntradaMercanciaPorRango(this.ordenCompraDocEntry, this.codigoProducto, this.entradaMercanciaDocEntry); 
+            ComprasSAPEscaneoRepository.establecerEntradaMercanciaAEscaneo(this.id,  this.entradaMercanciaDocEntry); 
 
         }
 
         public int Anular() {
             if (this.elimnado)
             {
-                throw new Exception("Este escaneo ya fue elimiando por: " + this.usuario);
+                throw new Exception("Este escaneo ya fue elimiando");
             }
 
             if (this.entradaMercanciaDocEntry != 0)
