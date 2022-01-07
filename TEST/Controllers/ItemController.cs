@@ -14,8 +14,11 @@ namespace TEST.Controllers
     [Route("api/[controller]")]
     public class ItemController : Controller
     {
-      private  ItemAppRepository item = new ItemAppRepository();
+       private  ItemAppRepository item = new ItemAppRepository();
         private Response response = new Response();
+
+
+
         //[ServiceFilter(typeof(FiltroResponse))]
         [HttpGet("{ItemCode}")]
         public IActionResult Get(string ItemCode)

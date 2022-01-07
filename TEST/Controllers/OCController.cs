@@ -18,18 +18,17 @@ namespace TEST.Controllers
     public class OCController : ControllerBase
     {
 
-        private EscaneoRepository escaneiRepository;
-
-        private PurchaseOrderRepository po;
-        private FacturasReservaRepository fe;
-
-        Response response = new Response();
+        private EscaneoRepository escaneiRepository { get; set; }
+        private PurchaseOrderRepository po { get; set; }
+        Response response { get; set; } 
 
 
         public OCController() {
             escaneiRepository = new Domain.Repositories.EscaneoRepository();
             po = new PurchaseOrderRepository();
-            fe = new FacturasReservaRepository();
+            response = new Response();
+
+
         }
 
 

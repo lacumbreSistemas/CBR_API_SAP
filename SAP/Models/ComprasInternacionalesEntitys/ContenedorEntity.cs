@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SAP.Models
+namespace SAP.Models.ComprasInternacionalesEntitys
 {
-    class PurchaseOrderModel
+   public  class ContenedorEntity
     {
+        public string noContenedor { get; set; }
+
     }
 }

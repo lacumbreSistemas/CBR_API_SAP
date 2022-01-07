@@ -15,6 +15,7 @@ namespace Intermedia_
         [StringLength(255)]
         public string itemCode { get; set; }
 
+        [StringLength(50)]
         public string nombreUsuario { get; set; }
 
         public double cantidad { get; set; }
@@ -22,8 +23,13 @@ namespace Intermedia_
         public DateTime fecha { get; set; }
 
         public int entradaMercanciaDocEntry { get; set; }
+
         public int baseLine { get; set; }
+
         public bool deleted { get; set; }
+
         public int escaneoAnuladoID { get; set; }
+
+        public bool matriculado { get; set; }
     }
 }

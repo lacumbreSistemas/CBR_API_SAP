@@ -34,7 +34,7 @@ namespace SAP.Repositories.ComprasInternacionales
                 newPurchaseOrderHeader.docNum = recordSet.Fields.Item("DocNum").Value;
                 newPurchaseOrderHeader.cardCode = recordSet.Fields.Item("CardCode").Value;
                 newPurchaseOrderHeader.docDueDate = recordSet.Fields.Item("DocDueDate").Value;
-                newPurchaseOrderHeader.cardName = recordSet.Fields.Item("CardCode").Value;
+                newPurchaseOrderHeader.cardName = recordSet.Fields.Item("CardName").Value;
 
 
 

@@ -9,14 +9,28 @@ namespace Intermedia_.Repositories
     public class cbr_ComprasSAP_Escaneo_Repository:MasterRespository
     {
       
-        public double obtenerCantidadRecibida(int? docEntry, string itemCode) 
+        public double obtenerCantidadEscaneadaNoIngresada(int? docEntry, string itemCode) 
         {
-           var cantidad = db.cbr_ComprasSAP_Escaneo.Where(i => i.itemCode == itemCode && i.baseEntry == docEntry).ToList().Sum(i => i.cantidad);
+           var cantidad = db.cbr_ComprasSAP_Escaneo.Where(i => i.itemCode == itemCode && i.baseEntry == docEntry && i.entradaMercanciaDocEntry == 0).ToList().Sum(i => i.cantidad);
 
             if(cantidad != null)
             {
                 return (double) cantidad;
             } else
+            { 
+                return 0;
+            }
+        }
+
+        public double obtenerCantidadEscaneada(int? docEntry, string itemCode)
+        {
+            var cantidad = db.cbr_ComprasSAP_Escaneo.Where(i => i.itemCode == itemCode && i.baseEntry == docEntry).ToList().Sum(i => i.cantidad);
+
+            if (cantidad != null)
+            {
+                return (double)cantidad;
+            }
+            else
             {
                 return 0;
             }
@@ -47,11 +61,25 @@ namespace Intermedia_.Repositories
         }
 
 
-        public void GuardarEscaneo(cbr_ComprasSAP_Escaneo Entry) {
+        public void GuardarEscaneoNacional(cbr_ComprasSAP_Escaneo Entry) {
+            if (Entry.matriculado)
+            {
+                db.cbr_ComprasSAP_Escaneo.Add(Entry);
+                db.SaveChanges();
+
+            }
+            else {
+                throw new Exception("Item " + Entry.itemCode + " no está  matriculado");
+            }
+
+        }
+
+        public void GuardarEscaneoInternacional(cbr_ComprasSAP_Escaneo Entry)
+        {
 
             db.cbr_ComprasSAP_Escaneo.Add(Entry);
             db.SaveChanges();
-            
+
         }
 
 

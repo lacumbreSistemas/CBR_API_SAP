@@ -37,7 +37,7 @@ namespace Domain.Models
             usuario = newEscaneo.usuario;
             cantidad = newEscaneo.cantidad;
             fecha = DateTime.Now;
-         
+            matriculado = newEscaneo.matriculado;
             intermediaEscaneoRepository = new cbr_ComprasSAP_Escaneo_Repository();
 
             _estrategia = estrategia;
@@ -47,40 +47,8 @@ namespace Domain.Models
 
         //metodos
                 public EscaneoBuildModel agreagar() {
-                   //sapEntryRepository = new PurchaseOrderEntryRespository();
-
-                            double cantidadEscaneada = intermediaEscaneoRepository.obtenerCantidadRecibida(ordenCompraDocEntry, codigoProducto);
-                            double? cantidadTotalProxima = cantidadEscaneada + cantidad;
-           
-
-
-                            double cantidadOrdenada = _estrategia.ObtenerCantidadOrdenada(ordenCompraDocEntry, codigoProducto);
-            
-                             if (cantidadOrdenada < cantidadTotalProxima)
-                             {
-                                    throw new Exception("Cantidad ingresada excede la cantidad pedida en la orden de compra");
-                             }
-                             else
-                             {
-                                     cbr_ComprasSAP_Escaneo escaneo = new cbr_ComprasSAP_Escaneo();
-
-                                        escaneo.baseEntry = ordenCompraDocEntry;
-                                        escaneo.cantidad = cantidad;
-                                        //escaneo.entradaMercanciaDocEntry = numeroEntradaDeMercancía;
-                                        escaneo.itemCode = codigoProducto;
-                                        escaneo.fecha = fecha;
-                                        escaneo.nombreUsuario = usuario;
-                                        escaneo.baseLine = _estrategia.obtenerLineNum(ordenCompraDocEntry,codigoProducto);
-
-
-                                    intermediaEscaneoRepository.GuardarEscaneo(escaneo);
-
-                              }
-
-
-
+                    _estrategia.GuardarEscaneo(this);
                     return this;
-                
                 }
 
     }

@@ -14,6 +14,7 @@ namespace Domain.Models
         public int itemId { get; set; }
         public string itemloockupcode { get; set; }
         public string descripcion { get; set; }
+        public bool matriculado { get; set; }
 
         private IAliasRepository aliasRepository { get; set; }
 
@@ -37,14 +38,13 @@ namespace Domain.Models
 
             if (itemsap == null)
             {
-
+               
 
                 if (itemId == 0)
                 {
-                    var item = itemRepository.getByItemLoockupCode(itemloockupcode);
-                    this.itemId = item.ID;
-                    this.itemloockupcode = item.ItemLookupCode;
-                    this.descripcion = item.Description;
+                    this.descripcion = "N/A";
+                    this.matriculado = false;
+                    this.itemloockupcode = itemloockupcode;
                 }
                 else
                 {
@@ -52,6 +52,7 @@ namespace Domain.Models
                     this.itemId = item.ID;
                     this.itemloockupcode = item.ItemLookupCode;
                     this.descripcion = item.Description;
+                    this.matriculado = true;
                 }
 
 
@@ -61,7 +62,7 @@ namespace Domain.Models
                 this.itemId = itemid;
                 this.itemloockupcode = itemsap.ItemCode;
                 this.descripcion = itemsap.ItemName;
-            
+                this.matriculado = true;
             }
 
             

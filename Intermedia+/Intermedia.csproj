@@ -54,9 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\cbr_ComprasSAP_Escaneo.cs" />
+    <Compile Include="Entity\cbr_listaItemsRecepcionImportados.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\cbr_ComprasSAP_Escaneo_Repository.cs" />
+    <Compile Include="Repositories\cbr_ComprasSAP_NoMatriculados_Repository.cs" />
+    <Compile Include="Repositories\cbr_listaItemsRecepcionImportadosRepository.cs" />
     <Compile Include="Repositories\MasterRespository.cs" />
   </ItemGroup>
   <ItemGroup>

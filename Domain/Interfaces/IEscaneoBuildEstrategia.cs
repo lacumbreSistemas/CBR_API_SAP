@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domain.Models;
+using Intermedia_;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +13,7 @@ namespace Domain.Interfaces
         double ObtenerCantidadOrdenada(int? docEntry, string itemCode);
         int obtenerLineNum(int? docEntry, string itemCode);
 
+
+         void GuardarEscaneo(EscaneoBuildModel escaneo);
     }
 }

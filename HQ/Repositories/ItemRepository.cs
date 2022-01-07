@@ -11,7 +11,7 @@ namespace HQ.Repositories
     {
         public Item getByID(int id)
         {
-            return data.Item.Find(id);
+            return data.Item.FirstOrDefault(i=> i.ID==id);
         }
 
         public Item getByItemLoockupCode(string itemLoockupCode)

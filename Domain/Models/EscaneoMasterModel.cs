@@ -13,11 +13,13 @@ namespace Domain.Models
 
         public string nombreProducto { get; set; }
         public string usuario { get; set; }
+
         public double cantidad { get; set; }
 
         public DateTime fecha { get; set; }
         public int baseLine { get; set; }
-        
+
+        public bool matriculado { get; set; }
         //private
         private ItemAppModel item { get; set; }
 

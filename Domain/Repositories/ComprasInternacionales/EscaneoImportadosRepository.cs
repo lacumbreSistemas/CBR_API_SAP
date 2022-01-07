@@ -18,9 +18,8 @@ namespace Domain.Repositories.ComprasInternacionales
 
             estrategia = new EscaneoBuildInternacionalEstrategia();
         }
-
-
-
+ 
+    
         public EscaneoBuildModel Agregar(EscaneoBuildModel escaneo)
         {
 

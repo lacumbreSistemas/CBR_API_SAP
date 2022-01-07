@@ -18,7 +18,9 @@ namespace TEST.Controllers
         //private PurchaseOrderRepository po;
         private FacturasReservaRepository fe { get; set; }
         EscaneoRepository escaneoRepo { get; set; }
-        Response response ;
+
+        private EscaneoImportadosRepository escaneoRespository { get; set; }
+        Response response { get; set; }
       public   OCImportadosController() {
             response =  new Response();
             fe = new FacturasReservaRepository();
@@ -27,7 +29,7 @@ namespace TEST.Controllers
         }
 
 
-        private EscaneoImportadosRepository escaneoRespository;
+       
 
       
 
@@ -39,9 +41,6 @@ namespace TEST.Controllers
             response.status = 1;
             response.mensaje = "Ordenes de compra abiertas para almacen " + WhsCode;
             response.data = fe.getPurchaseOrderAbiertasHeaders(WhsCode);
-
-           
-     
             return Ok(response);
         }
 
@@ -86,14 +85,16 @@ namespace TEST.Controllers
         [HttpPost("{DocEntry}")]
         public IActionResult Guardar(int DocEntry)
         {
-            var escaneo =
+
+            var EM = fe.guardarEntradaMercancia(DocEntry);
             response.status = 1;
-            response.mensaje = "exitoso";
-            response.data = fe.guardarEntradaMercancia(DocEntry);
+            response.mensaje = "Se ha generado entrada de mercancía numero " + EM.ToString(); 
+            response.data = EM;
 
 
             return Ok(response);
         }
+
 
            [HttpDelete("Escaneo/{escaneoId}")]
         public IActionResult anularEscaneo(int escaneoId)

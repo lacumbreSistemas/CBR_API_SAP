@@ -120,12 +120,20 @@ namespace Domain.Models
 
             escaneos.GroupBy(i => new { i.ordenCompraDocEntry, i.codigoProducto }).ToList().ForEach(i =>
             {
+                var itemcode = i.FirstOrDefault().codigoProducto.ToString();
+               
 
                 EntradaMercanciaEntry EME = new EntradaMercanciaEntry();
                 EME.BaseEntry = Convert.ToInt32(i.FirstOrDefault().ordenCompraDocEntry.ToString());
                 EME.BaseLine = Convert.ToInt32(i.Min(e=>e.baseLine).ToString());
                 EME.ItemCode = i.FirstOrDefault().codigoProducto.ToString();
                 EME.Quantity = Convert.ToDouble(i.Sum(i => i.cantidad));
+
+                if (i.FirstOrDefault().matriculado == false)
+                {
+                    throw new Exception("Item " + itemcode + " No matriculado");
+                }
+
 
                 if (EME.Quantity > 0)
                 {
