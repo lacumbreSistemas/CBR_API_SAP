@@ -35,8 +35,8 @@ namespace Domain.Models.ComrpasModels
         public void GuardarEscaneo(EscaneoBuildModel _escaneo)
         {
 
-            if (_escaneo.matriculado)
-            {
+            //if (_escaneo.matriculado)
+            //{
                 double cantidadEscaneada = intermediaEscaneoRepository.obtenerCantidadEscaneada(_escaneo.ordenCompraDocEntry, _escaneo.codigoProducto);
                 double? cantidadTotalProxima = cantidadEscaneada + _escaneo.cantidad;
 
@@ -47,7 +47,7 @@ namespace Domain.Models.ComrpasModels
                     throw new Exception("Cantidad ingresada excede la cantidad pedida en la orden de compra");
                 }
 
-            }
+            //}
 
             cbr_ComprasSAP_Escaneo escaneo = new cbr_ComprasSAP_Escaneo();
 
@@ -58,7 +58,7 @@ namespace Domain.Models.ComrpasModels
             escaneo.fecha = _escaneo.fecha;
             escaneo.nombreUsuario = _escaneo.usuario;
             escaneo.baseLine = obtenerLineNum(_escaneo.ordenCompraDocEntry, _escaneo.codigoProducto);
-            escaneo.matriculado = _escaneo.matriculado;
+            //escaneo.matriculado = _escaneo.matriculado;
 
             intermediaEscaneoRepository.GuardarEscaneoInternacional(escaneo);
 

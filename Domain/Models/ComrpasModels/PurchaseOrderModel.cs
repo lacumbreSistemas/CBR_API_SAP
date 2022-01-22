@@ -129,10 +129,10 @@ namespace Domain.Models
                 EME.ItemCode = i.FirstOrDefault().codigoProducto.ToString();
                 EME.Quantity = Convert.ToDouble(i.Sum(i => i.cantidad));
 
-                if (i.FirstOrDefault().matriculado == false)
-                {
-                    throw new Exception("Item " + itemcode + " No matriculado");
-                }
+                //if (i.FirstOrDefault().matriculado == false)
+                //{
+                //    throw new Exception("Item " + itemcode + " No matriculado");
+                //}
 
 
                 if (EME.Quantity > 0)

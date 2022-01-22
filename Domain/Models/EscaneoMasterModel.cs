@@ -19,7 +19,7 @@ namespace Domain.Models
         public DateTime fecha { get; set; }
         public int baseLine { get; set; }
 
-        public bool matriculado { get; set; }
+       
         //private
         private ItemAppModel item { get; set; }
 

@@ -14,6 +14,7 @@ namespace Domain.Models
     public class PurchaseOrderEntryModel: IOCEntry
     {
 
+
         //Publics
         public int docEntry { get; set; }
         public string nombreProducto { get; set; }

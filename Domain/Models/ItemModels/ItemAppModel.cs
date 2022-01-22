@@ -34,15 +34,15 @@ namespace Domain.Models
         {
 
             var itemsap = itemSAP.ObtenerItemPorItemCode(itemloockupcode);
-            int itemid = aliasRepository.getItemId(itemloockupcode);
+            int itemid = 0;
 
             if (itemsap == null)
             {
-               
+                itemid = aliasRepository.getItemId(itemloockupcode);
 
-                if (itemId == 0)
+                if (itemid == 0)
                 {
-                    this.descripcion = "N/A";
+                    this.descripcion = "No matriculado";
                     this.matriculado = false;
                     this.itemloockupcode = itemloockupcode;
                 }

@@ -37,7 +37,7 @@ namespace Domain.Models
             usuario = newEscaneo.usuario;
             cantidad = newEscaneo.cantidad;
             fecha = DateTime.Now;
-            matriculado = newEscaneo.matriculado;
+            //matriculado = newEscaneo.matriculado;
             intermediaEscaneoRepository = new cbr_ComprasSAP_Escaneo_Repository();
 
             _estrategia = estrategia;
