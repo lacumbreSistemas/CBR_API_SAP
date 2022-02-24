@@ -48,9 +48,9 @@ namespace Intermedia_
                 .Property(e => e.usuario)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<cbr_SolicitudDevolucionHeader>()
-                .Property(e => e.number)
-                .IsUnicode(false);
+            //modelBuilder.Entity<cbr_SolicitudDevolucionHeader>()
+            //    .Property(e => e.number)
+            //    .IsUnicode(false);
 
             modelBuilder.Entity<cbr_SolicitudDevolucionHeader>()
                 .Property(e => e.whsCode)
