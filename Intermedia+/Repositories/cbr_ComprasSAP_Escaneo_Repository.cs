@@ -83,11 +83,34 @@ namespace Intermedia_.Repositories
         }
 
 
-        public void establecerEntradaMercanciaAEscaneo(int idEscaneo,int DocentryEM) {
+        public void establecerEntradaMercanciaAEscaneo(List<int> idEscaneos,int DocentryEM) {
 
-            var escaneo = db.cbr_ComprasSAP_Escaneo.Find(idEscaneo);
-            escaneo.entradaMercanciaDocEntry = DocentryEM;
-            db.SaveChanges();
+
+            using (Data dbContext = new Data()) {
+
+              var transaction =  dbContext.Database.BeginTransaction();
+
+                var escaneos = dbContext.cbr_ComprasSAP_Escaneo.Where(i => idEscaneos.Contains(i.id)).ToList();
+
+                escaneos.ForEach(i =>
+                {
+
+                    i.entradaMercanciaDocEntry = DocentryEM;
+                });
+
+                dbContext.SaveChanges();
+
+
+                transaction.Commit();
+
+
+                //var escaneo = dbContext.cbr_ComprasSAP_Escaneo.FirstOrDefault(i => i.id == idEscaneo);
+                //escaneo.entradaMercanciaDocEntry = DocentryEM;
+                //db.SaveChanges();
+
+            }
+
+           
 
         }
 

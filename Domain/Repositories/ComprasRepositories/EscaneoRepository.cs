@@ -17,7 +17,7 @@ namespace Domain.Repositories
 
 
         public EscaneoRepository() {
-          
+
             estrategia = new EscaneoBuildNacionalEstrategia();
             escaneosIntermedia = new cbr_ComprasSAP_Escaneo_Repository();
         }

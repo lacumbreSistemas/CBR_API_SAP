@@ -28,6 +28,7 @@ namespace SAP.Repositories.Compras
 
         public int GenerarEM(EntradaDeMercancia EM, BoObjectTypes objectoBase)
         {
+            //masterRepo.connection.StartTransaction();
             int DocumentoAgregado = 0;
             string numeroNuevaEM = "";
           
@@ -65,7 +66,22 @@ namespace SAP.Repositories.Compras
             throw new Exception ("Entrada de mercancía Error [" + masterRepo.connection.GetLastErrorDescription() + "] ");
 
 
+            //if (masterRepo.connection.InTransaction) 
+            //{
+            //    masterRepo.connection.EndTransaction(BoWfTransOpt.wf_Commit);
+            //}
+
         }
+
+        //obtiene la cantidad de escaneos que no están en entradas de mercancía, o que estén en entrada de mercancias canceladas.
+        public double ObtenerCantidadesEscaneadas(int DocEntry,string itemCode)
+        {
+           var cantidadEscaneada =  masterRepo.doQuery(@"select isnull(sum(cantidad),0) as cantidad 
+                                                        from  cbr_entradasMercanciaDeEscaneos
+                                                        where OCDocEntry ="+DocEntry+ " and itemCode = '"+itemCode+ "' and (CANCELED = 'N' or entradaMercanciaDocEntry = 0) and devolucionBaseEntry is null");
+            return cantidadEscaneada.Fields.Item("cantidad").Value;
+        }
+
 
     }
 }

@@ -64,6 +64,7 @@
     <Compile Include="Repositories\MasterRepository.cs" />
     <Compile Include="Repositories\Compras\PurchaseOrderEntryRespository.cs" />
     <Compile Include="Repositories\Compras\PurchaseOrderHeaderRepository.cs" />
+    <Compile Include="Repositories\SolicitudesDevoliciones\SolicitudesDevolucionesRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="SAPbobsCOM">

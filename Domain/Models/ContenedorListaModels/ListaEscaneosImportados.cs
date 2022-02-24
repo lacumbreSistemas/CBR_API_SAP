@@ -88,7 +88,7 @@ namespace Domain.Models.ComrpasModels
             if (item == null)
             {
 
-                nombreProdcuto = "N/A";
+                nombreProdcuto = "No matriculado";
             }
             else {
 

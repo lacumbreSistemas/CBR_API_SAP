@@ -15,7 +15,6 @@ namespace Intermedia_
         [StringLength(255)]
         public string usuario { get; set; }
 
-
         public DateTime fecha { get; set; }
 
         public bool deleted { get; set; }
@@ -24,6 +23,8 @@ namespace Intermedia_
 
         [StringLength(255)]
         public string numeroContenedor { get; set; }
+
+        [StringLength(255)]
         public string itemCode { get; set; }
     }
 }

@@ -60,9 +60,11 @@ namespace TEST
 
             app.UseRouting();
 
+            //app.Use
+
             app.UseAuthorization();
 
-            app.UseMiddleware<ResonseMiddleware>();
+            //app.UseMiddleware<ResonseMiddleware>();
 
 
             app.UseCors(MyAllowSpecificOrigins);

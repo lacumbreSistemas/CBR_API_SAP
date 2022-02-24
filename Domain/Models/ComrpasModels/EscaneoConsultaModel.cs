@@ -56,11 +56,11 @@ namespace Domain.Models
         }
 
 
-        public void establercerEntradaMercancia() {
+        //public void establercerEntradaMercancia() {
 
-            ComprasSAPEscaneoRepository.establecerEntradaMercanciaAEscaneo(this.id,  this.entradaMercanciaDocEntry); 
+        //    ComprasSAPEscaneoRepository.establecerEntradaMercanciaAEscaneo(this.id,  this.entradaMercanciaDocEntry); 
 
-        }
+        //}
 
         public int Anular() {
             if (this.elimnado)

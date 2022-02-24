@@ -1,4 +1,5 @@
 ﻿using Domain.Models;
+using Intermedia_.Repositories;
 using SAP.Repositories.ComprasInternacionales;
 using SAP.Repositories.ComprasInternacionalesContenedor;
 using System;
@@ -32,14 +33,21 @@ namespace Domain.Repositories.ComprasContenedorInternacionalLista
         {
 
             List<ContenedorListaModel> contenedores = new List<ContenedorListaModel>();
+            cbr_contenedoresInternacionalesCerradosRepo contenedoresInternacionalesCerradosRepo = new cbr_contenedoresInternacionalesCerradosRepo();
 
             var contenedoresAbiertos = comprasInternacionalesContenedorRepository.obtenerContenedorAbierto(WhsCode);
 
             contenedoresAbiertos.ForEach(numeroContenedor =>
             {
-                ContenedorListaModel ContenedorList = new ContenedorListaModel(numeroContenedor);
-              
-                contenedores.Add(ContenedorList);
+                if (!contenedoresInternacionalesCerradosRepo.siContenedorCerrado(numeroContenedor))
+                {
+                    ContenedorListaModel ContenedorList = new ContenedorListaModel(numeroContenedor);
+
+                    contenedores.Add(ContenedorList);
+
+                }
+
+               
 
             });
 

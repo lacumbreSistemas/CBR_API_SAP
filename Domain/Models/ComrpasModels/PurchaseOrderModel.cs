@@ -34,11 +34,16 @@ namespace Domain.Models
      
         private IOrdenCompraEstrategia _estrategia { get; set; }
 
-        private cbr_ComprasSAP_Escaneo_Repository escaneosIntermedia;
-         
-   
+        private cbr_ComprasSAP_Escaneo_Repository escaneosIntermedia { get; set; }
 
-     
+
+
+        private PurchaseOrderEntryRespository purchaseOrderEntryRespository { get; set; } 
+
+
+
+
+
 
 
         public PurchaseOrderModel(int docEntry, IOrdenCompraEstrategia estrategia, bool includeEntries = false)
@@ -46,7 +51,7 @@ namespace Domain.Models
           
             this.entries = new List<PurchaseOrderEntryModel>();
             escaneosIntermedia = new cbr_ComprasSAP_Escaneo_Repository();
-            
+            purchaseOrderEntryRespository = new PurchaseOrderEntryRespository(); 
             _estrategia = estrategia;
             getPurchaseOrderHeader(docEntry, includeEntries);
         }
@@ -72,6 +77,7 @@ namespace Domain.Models
                 _Escaneo.entradaMercanciaDocEntry = i.entradaMercanciaDocEntry;
                 _Escaneo.ordenCompraDocEntry = i.baseEntry;
                 _Escaneo.id = i.id;
+                _Escaneo.baseLine = purchaseOrderEntryRespository.obtenerLineNum(this.docEntry,i.itemCode); 
                 escaneosConsulta.Add(_Escaneo);
             });
 
@@ -143,16 +149,20 @@ namespace Domain.Models
 
             if (EM.Entries.Count() <= 0)
             {
+               
                 throw new Exception("No hay escaneos para generar una nueva entrada de mercancia");
             }
 
             int entradaMercanciaDocEntry =   _estrategia.GenerarEntradaMercancia(EM);
 
-            escaneos.ForEach(escaneo =>
-            {
-                escaneo.entradaMercanciaDocEntry = entradaMercanciaDocEntry;
-                escaneo.establercerEntradaMercancia();
-            });
+
+            escaneosIntermedia.establecerEntradaMercanciaAEscaneo(escaneos.Select(i => i.id).ToList(), entradaMercanciaDocEntry);
+
+            //escaneos.ForEach(escaneo =>
+            //{
+            //    escaneo.entradaMercanciaDocEntry = entradaMercanciaDocEntry;
+            //    escaneo.establercerEntradaMercancia();
+            //});
 
 
             return entradaMercanciaDocEntry;

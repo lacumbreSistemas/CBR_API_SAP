@@ -2,6 +2,7 @@
 using Intermedia_;
 using Intermedia_.Repositories;
 using SAP.Repositories;
+using SAP.Repositories.Compras;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,11 @@ namespace Domain.Models.ComrpasModels
 
         private PurchaseOrderEntryRespository sapEntryRepository { get; set; }
         private cbr_ComprasSAP_Escaneo_Repository intermediaEscaneoRepository { get; set; }
+        private EntradaDeMercanciaRepository entradaDeMercanciaRepository { get; set; }
         public EscaneoBuildNacionalEstrategia() {
             sapEntryRepository = new PurchaseOrderEntryRespository();
             intermediaEscaneoRepository = new cbr_ComprasSAP_Escaneo_Repository();
+            entradaDeMercanciaRepository = new EntradaDeMercanciaRepository();
         }
 
         public double ObtenerCantidadOrdenada(int? docEntry, string itemCode)
@@ -26,19 +29,20 @@ namespace Domain.Models.ComrpasModels
           
         }
 
-        public int obtenerLineNum(int? docEntry, string itemCode)
-        {
+        //public int obtenerLineNum(int? docEntry, string itemCode)
+        //{
 
-            return sapEntryRepository.obtenerLineNum(docEntry, itemCode);
-            
-        }
+        //    //return sapEntryRepository.obtenerLineNum(docEntry, itemCode);
+        //    return 1;
+        //}
 
         public void GuardarEscaneo(EscaneoBuildModel _escaneo)
         {
 
             //if (_escaneo.matriculado)
             //{
-                double cantidadEscaneada = intermediaEscaneoRepository.obtenerCantidadEscaneada(_escaneo.ordenCompraDocEntry, _escaneo.codigoProducto);
+            // double cantidadEscaneada = intermediaEscaneoRepository.obtenerCantidadEscaneada(_escaneo.ordenCompraDocEntry, _escaneo.codigoProducto);
+            double cantidadEscaneada = entradaDeMercanciaRepository.ObtenerCantidadesEscaneadas(_escaneo.ordenCompraDocEntry, _escaneo.codigoProducto);
                 double? cantidadTotalProxima = cantidadEscaneada + _escaneo.cantidad;
 
                 double cantidadOrdenada = this.ObtenerCantidadOrdenada(_escaneo.ordenCompraDocEntry, _escaneo.codigoProducto);
@@ -58,7 +62,7 @@ namespace Domain.Models.ComrpasModels
                     escaneo.itemCode = _escaneo.codigoProducto;
                     escaneo.fecha = _escaneo.fecha;
                     escaneo.nombreUsuario = _escaneo.usuario;
-                    escaneo.baseLine = obtenerLineNum(_escaneo.ordenCompraDocEntry, _escaneo.codigoProducto);
+                    //escaneo.baseLine = obtenerLineNum(_escaneo.ordenCompraDocEntry, _escaneo.codigoProducto);
                     //escaneo.matriculado = _escaneo.matriculado;
 
                     intermediaEscaneoRepository.GuardarEscaneoInternacional(escaneo);

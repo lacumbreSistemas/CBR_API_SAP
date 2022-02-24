@@ -11,7 +11,7 @@ namespace Domain.Interfaces
     public interface IEscaneoBuildEstrategia
     {
         double ObtenerCantidadOrdenada(int? docEntry, string itemCode);
-        int obtenerLineNum(int? docEntry, string itemCode);
+
 
 
          void GuardarEscaneo(EscaneoBuildModel escaneo);

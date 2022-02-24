@@ -35,7 +35,7 @@ namespace Domain.Repositories
         //private
 
 
-                private List<PurchaseOrderModel> mapearOCs(List<PurchaseOrderHeader> OCsSAP) {
+     private List<PurchaseOrderModel> mapearOCs(List<PurchaseOrderHeader> OCsSAP) {
                     var OCs = new List<PurchaseOrderModel>();
                     OCsSAP.ForEach(OC =>
                     {

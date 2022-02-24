@@ -22,7 +22,7 @@ namespace Domain.Models
         public  double cantidadOrdenada { get; set; }
         public double cantidadEscaneada { get; set; }
         
-        public double canridadIngresada { get; set; }
+        public double cantidadIngresada { get; set; }
 
 
         //Privates
@@ -64,7 +64,7 @@ namespace Domain.Models
         private void obtenerCantidadIngresadaSAP() {
 
               EntradaDeMercanciaEntryRepository entradaDeMercanciaEntryRepository = new EntradaDeMercanciaEntryRepository();
-            canridadIngresada = entradaDeMercanciaEntryRepository.ObtenerCantidadIngresada(this.docEntry, this.codigoProducto);
+            cantidadIngresada = entradaDeMercanciaEntryRepository.ObtenerCantidadIngresada(this.docEntry, this.codigoProducto);
 
         }
         public PurchaseOrderEntryModel(PurchaseOrderEntryModel newEntry)

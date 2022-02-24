@@ -17,16 +17,13 @@ namespace SAP.Repositories.ComprasInternacionalesContenedor
             List<string> contenedores = new List<string>();
 
             var recordSet = masterRepo.doQuery(@" select 
-                         t0.Comments
-                      from OPCH T0
-                            inner join PCH1 T1 ON T0.DocEntry = T1.DocEntry
-                  
-						   inner join por1 t4 on t4.TrgetEntry = t1.DocEntry
+                         t5.Comments
+                      from  por1 t4 
 						   inner join OPOR t5 on t5.DocEntry = t4.DocEntry AND T5.SERIES = 79
-                       where T0.DocStatus = 'O' and t0.InvntSttus = 'O' and T0.isIns = 'Y'  and t1.WhsCode = '" + WhsCode + @"'
-                           and T0.DocType = 'I'
-                       group by  t0.Comments
-                       order by  t0.Comments desc");
+                       where T5.DocStatus = 'O'    and t5.U_tiedest = '" + WhsCode + @"'
+                           and T5.DocType = 'I' and t5.Comments is not null
+                       group by  t5.Comments
+                       order by  t5.Comments desc");
 
             while (!recordSet.EoF)
             {
@@ -48,7 +45,7 @@ namespace SAP.Repositories.ComprasInternacionalesContenedor
                             T0.CardCode,
                             T0.DocDueDate,
                             T0.CardName 
-                          from OPCH T0 where Comments = '" + numeroContenedor+ "' and T0.DocStatus = 'O' and t0.InvntSttus = 'O'");
+                          from Opor T0 where Comments = '" + numeroContenedor+ "' and T0.DocStatus = 'O'");
 
             while (!recordSet.EoF)
             {
