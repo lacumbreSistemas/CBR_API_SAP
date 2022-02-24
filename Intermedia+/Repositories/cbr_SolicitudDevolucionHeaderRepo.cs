@@ -8,7 +8,7 @@ namespace Intermedia_.Repositories
 {
    public class cbr_SolicitudDevolucionHeaderRepo:MasterRespository
     {
-        public cbr_SolicitudDevolucionHeader obtenerSolicitudIntermediaNumber(string number) {
+        public cbr_SolicitudDevolucionHeader obtenerSolicitudIntermediaNumber(int number) {
             return db.cbr_SolicitudDevolucionHeader.FirstOrDefault(i=> i.number == number);
           }
 
@@ -19,9 +19,9 @@ namespace Intermedia_.Repositories
 
             solicitudDevolucionHeader.fecha = DateTime.Now;
 
-            if (solicitu) { 
+            //if (solicitu) { 
             
-            }
+            //}
 
                 return solicitudDevolucionHeader;
         }
