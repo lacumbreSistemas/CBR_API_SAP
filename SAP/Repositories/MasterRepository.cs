@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace SAP.Repositories
         public void Conectar()
         {
             connection = new Company();
-            connection.Server = "10.10.1.12";
+            connection.Server = ConfigurationManager.AppSettings["Server"].ToString();
             connection.LicenseServer = "10.10.1.12";
             connection.DbServerType = BoDataServerTypes.dst_MSSQL2019;
             connection.DbUserName = "sa";
