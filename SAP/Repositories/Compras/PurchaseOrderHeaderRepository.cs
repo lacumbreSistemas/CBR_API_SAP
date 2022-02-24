@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace SAP.Repositories
 {
-    public class PurchaseOrderHeaderRepository: MasterRepository
+    public class PurchaseOrderHeaderRepository
     {
+
+        MasterRepository masterRepo = MasterRepository.GetInstance();
 
         public PurchaseOrderHeaderRepository() {
 
@@ -20,7 +22,7 @@ namespace SAP.Repositories
 
         public PurchaseOrderHeader getOne(int docEntry)
         {
-            doQuery(@"Select oc.DocEntry,TaxDate,DocNum,oc.CardCode,DocDueDate,p.CardName from OPOR oc
+            var recordSet = masterRepo.doQuery(@"Select oc.DocEntry,TaxDate,DocNum,oc.CardCode,DocDueDate,p.CardName from OPOR oc
 
                             inner join OCRD P on oc.CardCode = p.CardCode
 
@@ -28,25 +30,16 @@ namespace SAP.Repositories
 
             PurchaseOrderHeader newPurchaseOrderHeader = new PurchaseOrderHeader();
 
-            //for (int i = 0; i < _masterRespository.recordSet.RecordCount; i++)
-            //{
-            //    newPurchaseOrderHeader.docEntry = _masterRespository.recordSet.Fields.Item("DocEntry").Value;
-            //    newPurchaseOrderHeader.taxDate = _masterRespository.recordSet.Fields.Item("TaxDate").Value;
-            //    newPurchaseOrderHeader.docNum = _masterRespository.recordSet.Fields.Item("DocNum").Value;
-            //    newPurchaseOrderHeader.cardCode = _masterRespository.recordSet.Fields.Item("CardCode").Value;
-            //    newPurchaseOrderHeader.docDueDate = _masterRespository.recordSet.Fields.Item("DocDueDate").Value;
-            //    newPurchaseOrderHeader.cardName = _masterRespository.recordSet.Fields.Item("CardCode").Value;
-            //    _masterRespository.recordSet.MoveNext();
-            //}
+            
 
             while (!recordSet.EoF) {
                 newPurchaseOrderHeader.docEntry = recordSet.Fields.Item("DocEntry").Value;
                 newPurchaseOrderHeader.taxDate = recordSet.Fields.Item("TaxDate").Value;
                 newPurchaseOrderHeader.docNum = recordSet.Fields.Item("DocNum").Value;
-                newPurchaseOrderHeader.cardCode = recordSet.Fields.Item("CardCode").Value;
+                newPurchaseOrderHeader.cardCode =recordSet.Fields.Item("CardCode").Value;
                 newPurchaseOrderHeader.docDueDate = recordSet.Fields.Item("DocDueDate").Value;
-                newPurchaseOrderHeader.cardName = recordSet.Fields.Item("CardCode").Value;
-               recordSet.MoveNext();            }
+                newPurchaseOrderHeader.cardName = recordSet.Fields.Item("CardName").Value;
+                recordSet.MoveNext();            }
 
             return newPurchaseOrderHeader;
         }
@@ -54,15 +47,15 @@ namespace SAP.Repositories
 
         public List<PurchaseOrderHeader> getAbiertas(string WhsCode)
         {
-            doQuery(@" select T0.DocEntry,T0.TaxDate,T0.DocNum,T0.CardCode,T0.DocDueDate,p.CardName 
+            var recordSet = masterRepo.doQuery(@" select T0.DocEntry,T0.TaxDate,T0.DocNum,T0.CardCode,T0.DocDueDate,p.CardName 
                       from OPOR T0 
                            inner join POR1 T1 ON T0.DocEntry = T1.DocEntry 
                            inner join OCRD P on t0.CardCode = P.CardCode
                            left join PDN1 T2 ON T1.DocEntry= T2.BaseEntry and T1.LineNum=T2.BaseLine 
                            left join OPDN T3 ON T2.DocEntry = T3.DocEntry
-                  where T0.DocStatus = 'O' and (T3.DocStatus is null or t3.CANCELED = 'Y') and t1.WhsCode ='" + WhsCode + @"'
+                  where T0.DocStatus = 'O'  and t1.WhsCode ='" + WhsCode + @"' and T0.Series = 15
                                      and T0.DocType = 'I'
-				  group by  T0.DocEntry,T0.TaxDate,T0.DocNum,T0.CardCode,T0.DocDueDate,p.CardName  ");
+				  group by  T0.DocEntry,T0.TaxDate,T0.DocNum,T0.CardCode,T0.DocDueDate,p.CardName  order by t0.DocNum desc");
 
             List<PurchaseOrderHeader> OCAbiertas = new List<PurchaseOrderHeader>();
 

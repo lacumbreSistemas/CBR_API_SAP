@@ -12,13 +12,13 @@ namespace Domain.Repositories
     public class PurchaseOrderRepository
     {
         PurchaseOrderHeaderRepository headerRepo = new PurchaseOrderHeaderRepository();
-
+        OrdenCompraNacionalEstrategia estrategia = new OrdenCompraNacionalEstrategia();
 
         
        
-        public PurchaseOrderModel getPurchaseOrder(int numeroDeOrdenDeCompra)
+        public PurchaseOrderModel getPurchaseOrder(int numeroDeOrdenDeCompra, bool includeEntries =false)
         {
-            PurchaseOrderModel aa = new PurchaseOrderModel(numeroDeOrdenDeCompra, true);
+            PurchaseOrderModel aa = new PurchaseOrderModel(numeroDeOrdenDeCompra, estrategia, includeEntries);
             return aa;
         }
 
@@ -35,14 +35,14 @@ namespace Domain.Repositories
         //private
 
 
-                private List<PurchaseOrderModel> mapearOCs(List<PurchaseOrderHeader> OCsSAP) {
+     private List<PurchaseOrderModel> mapearOCs(List<PurchaseOrderHeader> OCsSAP) {
                     var OCs = new List<PurchaseOrderModel>();
                     OCsSAP.ForEach(OC =>
                     {
                         PurchaseOrderModel oc = new PurchaseOrderModel();
 
                         oc.docEntry = OC.docEntry;
-                        oc.docNum = OC.docNum;
+                        oc.numeroOrdenDeCompra = OC.docNum;
                         oc.codigoProveedor = OC.cardCode;
                         oc.nombreProveedor = OC.cardName;
                         oc.fechaCreacion = OC.docDueDate;
@@ -55,6 +55,13 @@ namespace Domain.Repositories
                     return OCs;
 
                 }
+
+        public int guardarEntradaMercancia(int docEntry) {
+
+            var PO = getPurchaseOrder(docEntry,false);
+
+            return   PO.GenerarEntradaMercancia(); 
+        }
 
 
 

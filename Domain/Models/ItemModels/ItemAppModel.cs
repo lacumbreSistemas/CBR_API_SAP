@@ -5,42 +5,67 @@ using System.Text;
 using System.Threading.Tasks;
 using HQ.Contracts;
 using HQ.Repositories;
+using SAP.Repositories;
+
 namespace Domain.Models
 {
-    class ItemAppModel
+    public class ItemAppModel
     {
         public int itemId { get; set; }
-        public  string itemloockupcode { get; set; }
+        public string itemloockupcode { get; set; }
         public string descripcion { get; set; }
+        public bool matriculado { get; set; }
 
-        private IAliasRepository aliasRepository;
+        private IAliasRepository aliasRepository { get; set; }
 
-        private IItemRepository itemRepository;
+        private IItemRepository itemRepository { get; set; }
 
-       public ItemAppModel()
+        private ItemSAPRepository itemSAP { get; set; }
+
+        public ItemAppModel()
         {
+            itemSAP = new ItemSAPRepository();
             this.aliasRepository = new AliasRepository();
             this.itemRepository = new ItemRepository();
+            
         }
 
         public void findByItemloockupcode(string itemloockupcode)
         {
-            int itemid = aliasRepository.getItemId(itemloockupcode);
 
-            if (itemId == 0)
+            var itemsap = itemSAP.ObtenerItemPorItemCode(itemloockupcode);
+            int itemid = 0;
+
+            if (itemsap == null)
             {
-                var item = itemRepository.getByItemLoockupCode(itemloockupcode);
-                this.itemId = item.ID;
-                this.itemloockupcode = item.ItemLookupCode;
-                this.descripcion = item.Description;
+                itemid = aliasRepository.getItemId(itemloockupcode);
+
+                if (itemid == 0)
+                {
+                    this.descripcion = "No matriculado";
+                    this.matriculado = false;
+                    this.itemloockupcode = itemloockupcode;
+                }
+                else
+                {
+                    var item = itemRepository.getByID(itemid);
+                    this.itemId = item.ID;
+                    this.itemloockupcode = item.ItemLookupCode;
+                    this.descripcion = item.Description;
+                    this.matriculado = true;
+                }
+
+
             }
-            else
-            {
-                var item = itemRepository.getByID(itemid);
-                this.itemId = item.ID;
-                this.itemloockupcode = item.ItemLookupCode;
-                this.descripcion = item.Description;
+            else {
+
+                this.itemId = itemid;
+                this.itemloockupcode = itemsap.ItemCode;
+                this.descripcion = itemsap.ItemName;
+                this.matriculado = true;
             }
+
+            
         }
     }
 }

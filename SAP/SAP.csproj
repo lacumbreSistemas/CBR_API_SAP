@@ -42,16 +42,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IItemRepository.cs" />
-    <Compile Include="Models\EntradaMercanciaEntry.cs" />
+    <Compile Include="Contracts\IOCEntry.cs" />
+    <Compile Include="Contracts\IOCEntryRepo.cs" />
+    <Compile Include="Contracts\IOCHeader.cs" />
+    <Compile Include="Models\ComprasEntitys\EntradaDeMercancia.cs" />
+    <Compile Include="Models\ComprasEntitys\EntradaMercanciaEntry.cs" />
+    <Compile Include="Models\ComprasInternacionalesEntitys\ContenedorEntity.cs" />
+    <Compile Include="Models\ComprasInternacionalesEntitys\FacturasReservaEntryEntity.cs" />
+    <Compile Include="Models\ComprasInternacionalesEntitys\FacturasReservaHeaderEntity.cs" />
     <Compile Include="Models\ItemSAP.cs" />
-    <Compile Include="Models\PurchaseOrderEntry.cs" />
-    <Compile Include="Models\PurchaseOrderHeader.cs" />
-    <Compile Include="Models\PurchaseOrderModel.cs" />
+    <Compile Include="Models\ComprasEntitys\PurchaseOrderEntry.cs" />
+    <Compile Include="Models\ComprasEntitys\PurchaseOrderHeader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ComprasInternacionalesContenedor\ComprasInternacionalesListaContenedorEntryRepository.cs" />
+    <Compile Include="Repositories\ComprasInternacionalesContenedor\ComprasInternacionalesContenedorRepository.cs" />
+    <Compile Include="Repositories\ComprasInternacionales\FacturaReservaEntryRepository.cs" />
+    <Compile Include="Repositories\ComprasInternacionales\FacturaReservaHeaderRepository.cs" />
+    <Compile Include="Repositories\Compras\EntradaDeMercanciaEntryRepository.cs" />
+    <Compile Include="Repositories\Compras\EntradaDeMercanciaRepository.cs" />
     <Compile Include="Repositories\Item\ItemSAPRepository.cs" />
     <Compile Include="Repositories\MasterRepository.cs" />
     <Compile Include="Repositories\Compras\PurchaseOrderEntryRespository.cs" />
     <Compile Include="Repositories\Compras\PurchaseOrderHeaderRepository.cs" />
+    <Compile Include="Repositories\SolicitudesDevoliciones\SolicitudesDevolucionesRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="SAPbobsCOM">

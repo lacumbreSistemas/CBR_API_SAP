@@ -11,5 +11,10 @@ namespace TEST
       public int status { get; set; }
        public string mensaje { get; set; }
        public object data { get; set; }
+
+       public Response() {
+
+            status = 1;
+        }
     }
 }

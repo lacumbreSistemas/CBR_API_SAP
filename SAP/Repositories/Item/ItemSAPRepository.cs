@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace SAP.Repositories
 {
-   public class ItemSAPRepository: MasterRepository
+   public class ItemSAPRepository
     {
-
+        MasterRepository masterRepo = MasterRepository.GetInstance();
         public ItemSAP ObtenerItemPorItemCode(string ItemCode) {
 
-           
 
-            doQuery("select ItemCode, ItemName from Oitm where itemCode"+ ItemCode);
+
+            var recordSet = masterRepo.doQuery("select ItemCode, ItemName from Oitm where itemCode = '"+ ItemCode+"'");
             ItemSAP Item = new ItemSAP();
            
             
@@ -26,7 +26,7 @@ namespace SAP.Repositories
                 recordSet.MoveNext(); 
             }
 
-            return recordSet.RecordCount == 0? null: Item ;
+            return recordSet.RecordCount == 0? null : Item ;
         }
     }
 }

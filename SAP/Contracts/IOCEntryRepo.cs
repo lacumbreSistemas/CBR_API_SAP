@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SAP.Models
+namespace SAP.Contracts
 {
-    class PurchaseOrderModel
+    interface IOCEntryRepo
     {
+        //List<object> ObtenerListaDeEntriesOrdenDeCompra(int? docEntry);
     }
 }
+ 

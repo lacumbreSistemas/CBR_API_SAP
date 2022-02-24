@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace SAP.Models
 {
-    class EntradaMercanciaEntry
+    class EntradaMercanciaHeader 
     {
-
-        int id;
-
-        ItemSAP item { get; set; }
-
-        double quantityOrdened { get; set; }
+        public string CardCode { get; set; }
     }
 }
