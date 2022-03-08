@@ -23,5 +23,9 @@ namespace Intermedia_
 
         [StringLength(50)]
         public string usuario { get; set; }
+
+        public int number { get; set; }
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,15 +28,28 @@ namespace SAP.Repositories
 
         public void Conectar()
         {
+            var aa = ConfigurationManager.ConnectionStrings["SAP"];
             connection = new Company();
-            connection.Server = "10.10.1.12";
+            //connection.Server = ConfigurationManager.AppSettings["Server"];
+            //connection.LicenseServer = "10.10.1.12";
+            //connection.DbServerType = BoDataServerTypes.dst_MSSQL2019;
+            //connection.DbUserName = ConfigurationManager.AppSettings["DbUserName"]; 
+            //connection.DbPassword = ConfigurationManager.A ppSettings["DbPassword"];
+            //connection.UserName = ConfigurationManager.AppSettings["UserName"];
+            //connection.Password = ConfigurationManager.AppSettings["Password"];
+            //connection.CompanyDB = ConfigurationManager.AppSettings["CompanyDB"];
+
+
+
+            connection.Server ="10.10.1.12";
             connection.LicenseServer = "10.10.1.12";
             connection.DbServerType = BoDataServerTypes.dst_MSSQL2019;
             connection.DbUserName = "sa";
-            connection.DbPassword = "SAP#Sql_";
-            connection.UserName = "manager";
+            connection.DbPassword ="SAP#Sql_";
+            connection.UserName ="manager";
             connection.Password = "@dmiN123*";
-            connection.CompanyDB = "SBO_CBR_COLONIAL_PRODUCTIVA";
+            connection.CompanyDB = "SBO_CBR_COLONIAL_PRUEBAS";
+
             connection.Connect();
         }
 
