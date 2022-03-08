@@ -85,6 +85,7 @@
     <Compile Include="Repositories\cbr_ComprasSAP_NoMatriculados_Repository.cs" />
     <Compile Include="Repositories\cbr_contenedoresInternacionalesCerradosRepo.cs" />
     <Compile Include="Repositories\cbr_listaItemsRecepcionImportadosRepository.cs" />
+    <Compile Include="Repositories\cbr_SolicitudDevolucionEntryRepo.cs" />
     <Compile Include="Repositories\cbr_SolicitudDevolucionHeaderRepo.cs" />
     <Compile Include="Repositories\ErrorLogRepository.cs" />
     <Compile Include="Repositories\MasterRespository.cs" />

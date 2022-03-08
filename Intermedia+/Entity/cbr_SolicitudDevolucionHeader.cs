@@ -20,5 +20,12 @@ namespace Intermedia_
         public string cardCode { get; set; }
 
         public DateTime? fecha { get; set; }
+        public int docEntry { get; set; }
+
+        public bool? anulado { get; set; }
+
+        [StringLength(800)]
+        public string comentario { get; set; }
+
     }
 }
