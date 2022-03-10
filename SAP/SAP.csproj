@@ -73,6 +73,7 @@
     <Compile Include="Models\ItemSAP.cs" />
     <Compile Include="Models\ComprasEntitys\PurchaseOrderEntry.cs" />
     <Compile Include="Models\ComprasEntitys\PurchaseOrderHeader.cs" />
+    <Compile Include="Models\ProveedorModelSAP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -89,6 +90,7 @@
     <Compile Include="Repositories\MasterRepository.cs" />
     <Compile Include="Repositories\Compras\PurchaseOrderEntryRespository.cs" />
     <Compile Include="Repositories\Compras\PurchaseOrderHeaderRepository.cs" />
+    <Compile Include="Repositories\Proveedor\ProveedorSAPRepository.cs" />
     <Compile Include="Repositories\SolicitudesDevoliciones\SolicitudesDevolucionesRepo.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>

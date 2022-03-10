@@ -12,14 +12,17 @@ namespace TEST.Controllers
     [Route("api/[controller]")]
     public class SolicitudDevolucionController : Controller
     {
-        public Response _Response { get; set; } 
+        public Response _Response { get; set; }
+        private EscaneoEntrysRepo _EscaneoEntrysRepo { get; set;} 
         private SolicitudDevolucionRepo SolicitudDevolucionRepo { get; set; }
 
         public SolicitudDevolucionController() {
             _Response = new Response();
-
+            _EscaneoEntrysRepo = new EscaneoEntrysRepo();
             SolicitudDevolucionRepo = new SolicitudDevolucionRepo();
         }
+
+        //funciones get
 
 
         [HttpGet("{Whscode}")]
@@ -35,31 +38,7 @@ namespace TEST.Controllers
         }
 
 
-        [HttpPost]
-        public IActionResult guardarSolicitudDevolusion([FromBody]SolicitudDevolucionModelBuild solicitudTraslado)
-        {
-            var guardarSolicitudDevolucion = SolicitudDevolucionRepo.crearSolicitudDevolucionIntermedia(solicitudTraslado);
-
-            _Response.mensaje = "Solicitud de traslado " + guardarSolicitudDevolucion.Numero+" guardada con éxito";
-            _Response.data = guardarSolicitudDevolucion; 
-
-
-            return Ok(_Response);
-        }
-
-
-        [HttpPost("Escaneo")]
-        public IActionResult guardarSolicitudDevolusionEntry([FromBody] SolicitudDevolucionEntryModelBuild solicitudTraslado)
-        {
-           
-
-            _Response.mensaje = "Escaneo guardada con éxito";
-            _Response.data = SolicitudDevolucionRepo.crearSolicitudDevolusionEntry(solicitudTraslado);
-
-
-            return Ok(_Response);
-        }
-
+       
 
         [HttpGet("Resumen/{numero}")]
         public IActionResult resumenSolicitudDevolucion(int numero)
@@ -72,6 +51,51 @@ namespace TEST.Controllers
 
             return Ok(_Response);
         }
+
+
+        [HttpGet("Historial/{numero}/{itemCode}")]
+        public IActionResult historialEscaneosEntry(int numero,string itemCode)
+        {
+
+
+            _Response.mensaje = "Historial de escaneos del item " + itemCode+" en la solicitud de devolucion "+numero;
+            _Response.data = _EscaneoEntrysRepo.historialEscaneosEntries(numero,itemCode);
+
+
+            return Ok(_Response);
+        }
+
+
+        //funciones Post
+
+
+        [HttpPost]
+        public IActionResult guardarSolicitudDevolusion([FromBody] SolicitudDevolucionModelBuild solicitudTraslado)
+        {
+            var guardarSolicitudDevolucion = SolicitudDevolucionRepo.crearSolicitudDevolucionIntermedia(solicitudTraslado);
+
+            _Response.mensaje = "Solicitud de traslado " + guardarSolicitudDevolucion.Numero + " guardada con éxito";
+            _Response.data = guardarSolicitudDevolucion;
+
+
+            return Ok(_Response);
+        }
+
+
+        [HttpPost("Escaneo")]
+        public IActionResult guardarSolicitudDevolusionEntry([FromBody] SolicitudDevolucionEntryModelBuild solicitudTraslado)
+        {
+
+
+            _Response.mensaje = "Escaneo guardada con éxito";
+            _Response.data = _EscaneoEntrysRepo.crearSolicitudDevolusionEntry(solicitudTraslado);
+
+            return Ok(_Response);
+        }
+
+
+
+
 
     }
 }

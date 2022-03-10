@@ -10,13 +10,18 @@ namespace Domain.Models.SolicitudDevolucionModels
 {
     public class SolicitudDevolucionEntryModelConsulta: SolicitudDevolucionEntryModelMaster 
     {
-        public string id { get; set; }
+        public int? id { get; set; }
 
     
         public SolicitudDevolucionEntryModelConsulta() {
             
         }
 
+
+        public void anular() { 
+        
+        
+        }
 
       
     }

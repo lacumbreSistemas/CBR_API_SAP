@@ -13,7 +13,7 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
     {
 
         private cbr_SolicitudDevolucionHeaderRepo _SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
-        private cbr_SolicitudDevolucionEntry _cbr_SolicitudDevolucionEntry = new cbr_SolicitudDevolucionEntry();
+     
 
         public SolicitudDevolucionModelBuild crearSolicitudDevolucionIntermedia(SolicitudDevolucionModelBuild solicitudDevolucion)
         {
@@ -48,13 +48,7 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
             return solicituddesDevolucion;
         }
 
-        public SolicitudDevolucionEntryModelBuild crearSolicitudDevolusionEntry(SolicitudDevolucionEntryModelBuild _solicitudDevolucionEntryModelBuild) {
-
-            SolicitudDevolucionEntryModelBuild _newSolicitudDevolucionEntryModelBuild = new SolicitudDevolucionEntryModelBuild(_solicitudDevolucionEntryModelBuild);
-            return _newSolicitudDevolucionEntryModelBuild.guardar();
-        }
-
-
+     
         public SolicitudDevolucionModelConsulta resumenSolicitudDevolucion(int numero) {
             SolicitudDevolucionModelConsulta solicitudDevolucionModelConsulta = new SolicitudDevolucionModelConsulta(numero);
 
@@ -64,6 +58,9 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
 
         }
 
+
+       
+        
 
     }
 }
