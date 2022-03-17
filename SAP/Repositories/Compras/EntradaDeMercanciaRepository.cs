@@ -40,7 +40,7 @@ namespace SAP.Repositories.Compras
             EM.Entries.ForEach(i => {
 
                 Document_Lines entryEntradaMercancia = DocumentoEntradaMercancia.Lines;
-
+              
                 entryEntradaMercancia.BaseType = (int)objectoBase;
                 entryEntradaMercancia.BaseEntry = i.BaseEntry;
                 entryEntradaMercancia.ItemCode = i.ItemCode;

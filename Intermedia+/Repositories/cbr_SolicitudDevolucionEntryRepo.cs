@@ -37,23 +37,44 @@ namespace Intermedia_.Repositories
             return db.cbr_SolicitudDevolucionEntry.FirstOrDefault(i => i.id == id);
         }
 
-        public cbr_SolicitudDevolucionEntry anularEntrieEscaneo(cbr_SolicitudDevolucionEntry escaneoPorAnular) {
+        public cbr_SolicitudDevolucionEntry anularEntrieEscaneo(int id) {
 
-
+            cbr_SolicitudDevolucionEntry escaneoPorAnular = db.cbr_SolicitudDevolucionEntry.FirstOrDefault(i=> i.id == id);
             cbr_SolicitudDevolucionEntry escaneoAnulacion = new cbr_SolicitudDevolucionEntry();
+
+            if (escaneoPorAnular == null)
+            {
+                throw new Exception("Escaneo no encontrado");
+            }
+            else if ((bool) escaneoPorAnular.deleted) {
+
+                escaneoAnulacion = db.cbr_SolicitudDevolucionEntry.FirstOrDefault(i => i.deletedId == escaneoPorAnular.id);
+               
+
+                throw new Exception("Escaneo ya fue anulado por "+ escaneoAnulacion.usuario);
+            }
+
+            
+      
             
             
             escaneoPorAnular.deleted = true;
 
             escaneoAnulacion.deletedId = escaneoPorAnular.id; 
             escaneoAnulacion.itemCode = escaneoPorAnular.itemCode;
+            escaneoAnulacion.deleted = escaneoAnulacion.deleted;
             escaneoAnulacion.number = escaneoPorAnular.number;
             escaneoAnulacion.fecha = DateTime.Now;
             escaneoAnulacion.itemCode = escaneoPorAnular.itemCode;
             escaneoAnulacion.usuario = escaneoPorAnular.usuario;
+            escaneoAnulacion.quantity = escaneoPorAnular.quantity * (-1);
+            escaneoAnulacion.deleted = false;
 
-            escaneoAnulacion
+            db.cbr_SolicitudDevolucionEntry.Add(escaneoAnulacion);
 
+            db.SaveChanges();
+
+            return escaneoAnulacion; 
         }
 
     }

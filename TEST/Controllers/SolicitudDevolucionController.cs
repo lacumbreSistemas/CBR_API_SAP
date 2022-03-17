@@ -86,7 +86,6 @@ namespace TEST.Controllers
         public IActionResult guardarSolicitudDevolusionEntry([FromBody] SolicitudDevolucionEntryModelBuild solicitudTraslado)
         {
 
-
             _Response.mensaje = "Escaneo guardada con éxito";
             _Response.data = _EscaneoEntrysRepo.crearSolicitudDevolusionEntry(solicitudTraslado);
 
@@ -94,8 +93,27 @@ namespace TEST.Controllers
         }
 
 
+        //delete 
+
+        [HttpDelete("AnularEscaneo")]
+        public IActionResult anularEscaneo([FromBody] SolicitudDevolucionEntryModelConsulta _solicitudTrasladoEntry)
+        {
 
 
+            _Response.mensaje = "Escaneo anulado "; 
+             _Response.data = _EscaneoEntrysRepo.anularEscaneo(_solicitudTrasladoEntry);
 
+            return Ok(_Response);
+        }
+
+
+        [HttpDelete("AnularItem")]
+        public IActionResult anularEscaneosItem([FromBody]SolicitudDevolucionEntryResumenActualizar solicitudDevolucionEntryResumenActualizar) {
+
+            SolicitudDevolucionRepo.anularEscaneosItemCodeNumero(solicitudDevolucionEntryResumenActualizar);
+            _Response.status = 1;
+            _Response.mensaje = "Escaneos del item "+solicitudDevolucionEntryResumenActualizar.DescripcionProducto+" anulados con éxito";   
+            return Ok(_Response);
+        }
     }
 }

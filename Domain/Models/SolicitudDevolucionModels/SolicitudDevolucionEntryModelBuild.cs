@@ -1,4 +1,5 @@
-﻿using Intermedia_;
+﻿using Domain.Interfaces;
+using Intermedia_;
 using Intermedia_.Repositories;
 using System;
 using System.Collections.Generic;
@@ -8,25 +9,16 @@ using System.Threading.Tasks;
 
 namespace Domain.Models.SolicitudDevolucionModels
 {
-   public class SolicitudDevolucionEntryModelBuild
+   public class SolicitudDevolucionEntryModelBuild: SolicitudDevolucionEntryModelMaster 
     {
-        //public
-
-        public string itemCode { get; set; }
-        public double cantidad { get; set; }
-        public DateTime fecha { get; set; }
-        public bool deleted { get; set; }
-        public int deletedId { get; set; }
-        public string usuario { get; set; }
-        public int numero { get; set; }
 
 
-        //privates
         private cbr_SolicitudDevolucionEntryRepo _SolicitudDevolucionEntryRepo { get; set; }
 
+        private SolicitudDevolucionModelBuildEstrategia Estrategia { get; set; }
 
         public SolicitudDevolucionEntryModelBuild() {
-          
+
             _SolicitudDevolucionEntryRepo = new cbr_SolicitudDevolucionEntryRepo();
 
         }
@@ -36,14 +28,14 @@ namespace Domain.Models.SolicitudDevolucionModels
         {
             _SolicitudDevolucionEntryRepo = new cbr_SolicitudDevolucionEntryRepo();
 
-            itemCode = _solicitudDevolucionEntryModelBuild.itemCode;
+            CodigoProducto = _solicitudDevolucionEntryModelBuild.CodigoProducto;
             cantidad = _solicitudDevolucionEntryModelBuild.cantidad;
             fecha = _solicitudDevolucionEntryModelBuild.fecha;
             deleted = _solicitudDevolucionEntryModelBuild.deleted;
             deletedId = _solicitudDevolucionEntryModelBuild.deletedId;
             numero = _solicitudDevolucionEntryModelBuild.numero;
             usuario = _solicitudDevolucionEntryModelBuild.usuario;
-
+            setNombreProducto();
         }
 
 
@@ -54,13 +46,13 @@ namespace Domain.Models.SolicitudDevolucionModels
             deleted = false;
             deletedId = 0;
 
-            _cbr_SolicitudDevolucionEntryRepo.itemCode = itemCode;
+            _cbr_SolicitudDevolucionEntryRepo.itemCode = CodigoProducto;
             _cbr_SolicitudDevolucionEntryRepo.number = numero;
             _cbr_SolicitudDevolucionEntryRepo.quantity = cantidad;
             _cbr_SolicitudDevolucionEntryRepo.usuario = usuario;
             _cbr_SolicitudDevolucionEntryRepo.deleted = deleted;
             _cbr_SolicitudDevolucionEntryRepo.deletedId = deletedId;
-            _cbr_SolicitudDevolucionEntryRepo.fecha = fecha; 
+            _cbr_SolicitudDevolucionEntryRepo.fecha = fecha;
 
 
             _SolicitudDevolucionEntryRepo.crearCbr_SolicitudDevolucionEntry(_cbr_SolicitudDevolucionEntryRepo);

@@ -65,7 +65,7 @@ namespace Domain.Models
         public int Anular() {
             if (this.elimnado)
             {
-                throw new Exception("Este escaneo ya fue elimiando");
+                throw new Exception("Este escaneo ya fue eliminado");
             }
 
             if (this.entradaMercanciaDocEntry != 0)

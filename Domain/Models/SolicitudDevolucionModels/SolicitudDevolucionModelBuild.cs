@@ -1,4 +1,5 @@
-﻿using Intermedia_;
+﻿using Domain.Interfaces;
+using Intermedia_;
 using Intermedia_.Repositories;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,12 @@ namespace Domain.Models.SolicitudDevolucionModels
     public class SolicitudDevolucionModelBuild:SolicitudDevolucionModelMaster
     {
 
-    
-    
 
-        //privates 
-        cbr_SolicitudDevolucionHeaderRepo _SolicitudDevolucionHeaderRepo { get; set;     }
 
+       
+    //privates 
+    cbr_SolicitudDevolucionHeaderRepo _SolicitudDevolucionHeaderRepo { get; set;     }
+        private SolicitudDevolucionModelBuildEstrategia Estrategia { get; set; }
         //constructor
 
         public SolicitudDevolucionModelBuild() {

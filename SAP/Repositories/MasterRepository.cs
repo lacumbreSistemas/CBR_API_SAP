@@ -39,7 +39,7 @@ namespace SAP.Repositories
             //connection.Password = ConfigurationManager.AppSettings["Password"];
             //connection.CompanyDB = ConfigurationManager.AppSettings["CompanyDB"];
 
-
+#if (Debug)
 
             connection.Server ="10.10.1.12";
             connection.LicenseServer = "10.10.1.12";
@@ -51,6 +51,23 @@ namespace SAP.Repositories
             connection.CompanyDB = "SBO_CBR_COLONIAL_PRUEBAS";
 
             connection.Connect();
+
+
+#endif
+
+#if (Pruebas)
+            connection.Server ="10.10.1.12";
+            connection.LicenseServer = "10.10.1.12";
+            connection.DbServerType = BoDataServerTypes.dst_MSSQL2019;
+            connection.DbUserName = "sa";
+            connection.DbPassword ="SAP#Sql_";
+            connection.UserName ="manager";
+            connection.Password = "@dmiN123*";
+            connection.CompanyDB = "SBO_COLONIAL_PRODUCTIVA";
+
+            connection.Connect();
+
+#endif
         }
 
         public Recordset doQuery(string query)
