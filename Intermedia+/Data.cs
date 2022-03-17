@@ -8,7 +8,19 @@ namespace Intermedia_
     public partial class Data : DbContext
     {
         public Data()
-            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+            #if (Debug)
+                        : base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+            #endif
+            #if (Pruebas)
+                        : base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+
+            #endif
+
+             #if (Produccion)
+                        : base("data source=10.10.1.12;initial catalog=ApiSAP;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+
+            #endif
+
         {
         }
 
