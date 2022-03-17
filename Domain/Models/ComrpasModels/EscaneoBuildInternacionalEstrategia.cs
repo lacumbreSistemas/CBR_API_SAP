@@ -44,7 +44,7 @@ namespace Domain.Models.ComrpasModels
 
                 if (cantidadOrdenada < cantidadTotalProxima)
                 {
-                    throw new Exception("Cantidad ingresada excede la cantidad pedida en la orden de compra");
+                    throw new InvalidOperationException("Cantidad ingresada excede la cantidad pedida en la orden de compra");
                 }
 
             //}
