@@ -41,14 +41,14 @@ namespace SAP.Repositories
 
 
 #if (Debug)
-    connection.Server ="10.10.1.12";
+            connection.Server ="10.10.1.12";
             connection.LicenseServer = "10.10.1.12";
             connection.DbServerType = BoDataServerTypes.dst_MSSQL2019;
             connection.DbUserName = "sa";
             connection.DbPassword ="SAP#Sql_";
             connection.UserName ="manager";
             connection.Password = "@dmiN123*";
-            connection.CompanyDB = "SBO_COLONIAL_PRODUCTIVA";
+            connection.CompanyDB = "SBO_CBR_COLONIAL_PRUEBAS";
 #endif
 #if (Pruebas)
             connection.Server ="10.10.1.12";
@@ -61,14 +61,14 @@ namespace SAP.Repositories
             connection.CompanyDB = "SBO_CBR_COLONIAL_PRUEBAS";
 #endif
 #if (Produccion)
-            connection.Server = "10.10.1.12";
+            connection.Server ="10.10.1.12";
             connection.LicenseServer = "10.10.1.12";
             connection.DbServerType = BoDataServerTypes.dst_MSSQL2019;
             connection.DbUserName = "sa";
-            connection.DbPassword = "SAP#Sql_";
-            connection.UserName = "manager";
+            connection.DbPassword ="SAP#Sql_";
+            connection.UserName ="manager";
             connection.Password = "@dmiN123*";
-            connection.CompanyDB = "SBO_CBR_COLONIAL_PRUEBAS";
+            connection.CompanyDB = "SBO_COLONIAL_PRODUCTIVA";
 #endif
 
             connection.Connect();
