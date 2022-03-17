@@ -46,6 +46,34 @@ pipeline {
       }
     }
 
+    stage('Build') {
+      steps {
+          script { 
+            if (env.BRANCH_NAME == "develop") {                                          
+              echo "------------>Build Pruebas<------------"
+              bat "${tool 'MSBuild64'}/MSBuild.exe /p:DeployOnBuild=True /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:publishUrl=./release /p:Configuration=Pruebas"
+            } else {                                   
+              echo "------------>Build Produccion<------------"
+               bat "${tool 'MSBuild64'}/MSBuild.exe /p:DeployOnBuild=True /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:publishUrl=./release /p:Configuration=Produccion"
+            }   
+          }              
+        }
+    }
+
+    stage('Deploy') {
+      steps {
+          script { 
+            if (env.BRANCH_NAME == "develop") {                                          
+              echo "------------>Iss Deploy WMSColonialTest<------------"
+              bat ( script: "msdeploy.exe -source:contentPath='${WORKSPACE}\\release' -dest:contentPath=WMSColonialTest,ComputerName=https://10.10.1.12:8172/msdeploy.axd?site=WMSColonialTest,UserName=Administrador,Password=Server#Sap_,AuthType=Basic -allowUntrusted=true -verb:sync")
+            } else {                                   
+              echo "------------>Iss Deploy APISAP<------------"
+              bat ( script: "msdeploy.exe -source:contentPath='${WORKSPACE}\\release' -dest:contentPath=APISAP,ComputerName=https://10.10.1.12:8172/msdeploy.axd?site=APISAP,UserName=Administrador,Password=Server#Sap_,AuthType=Basic -allowUntrusted=true -verb:sync")
+            }   
+          }              
+        }
+    }
+
 
   }
         
