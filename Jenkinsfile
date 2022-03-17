@@ -65,10 +65,10 @@ pipeline {
           script { 
             if (env.BRANCH_NAME == "develop") {                                          
               echo "------------>Iss Deploy CRBAPISAPTest<------------"
-              bat ( script: "msdeploy.exe -source:contentPath='${WORKSPACE}\\release' -dest:contentPath=CRBAPISAPTest,ComputerName=https://10.10.1.12:8172/msdeploy.axd?site=CRBAPISAPTest,UserName=Administrador,Password=Server#Sap_,AuthType=Basic -allowUntrusted=true -verb:sync")
+              bat ( script: "msdeploy.exe -source:contentPath='${WORKSPACE}\\TEST\\release' -dest:contentPath=CRBAPISAPTest,ComputerName=https://10.10.1.12:8172/msdeploy.axd?site=CRBAPISAPTest,UserName=Administrador,Password=Server#Sap_,AuthType=Basic -allowUntrusted=true -verb:sync")
             } else {                                   
               echo "------------>Iss Deploy APISAP<------------"
-              bat ( script: "msdeploy.exe -source:contentPath='${WORKSPACE}\\release' -dest:contentPath=APISAP,ComputerName=https://10.10.1.12:8172/msdeploy.axd?site=APISAP,UserName=Administrador,Password=Server#Sap_,AuthType=Basic -allowUntrusted=true -verb:sync")
+              bat ( script: "msdeploy.exe -source:contentPath='${WORKSPACE}\\TEST\\release' -dest:contentPath=APISAP,ComputerName=https://10.10.1.12:8172/msdeploy.axd?site=APISAP,UserName=Administrador,Password=Server#Sap_,AuthType=Basic -allowUntrusted=true -verb:sync")
             }   
           }              
         }
