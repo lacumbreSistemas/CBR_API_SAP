@@ -52,7 +52,7 @@ namespace Intermedia_.Repositories
             escaneoAnulacion.itemCode = escaneoPorAnular.itemCode;
             escaneoAnulacion.usuario = escaneoPorAnular.usuario;
 
-            escaneoAnulacion
+            return escaneoPorAnular;
 
         }
 
