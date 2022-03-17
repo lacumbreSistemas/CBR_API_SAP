@@ -31,21 +31,28 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
 
             _SolicitudDevolucionEntryRepo.obtenerEntriesPorNumberItemCode(number, itemCode).ForEach(i=> {
 
-                SolicitudDevolucionEntryModelConsulta _entrie = new SolicitudDevolucionEntryModelConsulta();
+                SolicitudDevolucionEntryModelConsulta _entrie = new SolicitudDevolucionEntryModelConsulta(itemCode);
                 _entrie.cantidad = i.quantity;
                 _entrie.deleted = i.deleted;
                 _entrie.deletedId = i.deletedId;
                 _entrie.fecha = i.fecha;
                 _entrie.id = i.id;
-                _entrie.itemCode = i.itemCode;
+                _entrie.CodigoProducto = i.itemCode;
                 _entrie.numero = i.number;
                 _entrie.usuario = i.usuario;
-
+                
                 _historialEscaneosEntries.Add(_entrie);
 
             });
 
             return _historialEscaneosEntries;
         }
+
+        public SolicitudDevolucionEntryModelConsulta anularEscaneo(SolicitudDevolucionEntryModelConsulta _SolicitudDevolucionEntryModelConsulta) {
+
+           return  _SolicitudDevolucionEntryModelConsulta.anular();
+
+        }
+
     }
 }

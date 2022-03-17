@@ -23,6 +23,7 @@ namespace HQ
 #endif
 
         {
+
         }
 
         public virtual DbSet<Alias> Alias { get; set; }

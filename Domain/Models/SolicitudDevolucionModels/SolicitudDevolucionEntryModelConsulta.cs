@@ -1,4 +1,5 @@
-﻿using Intermedia_.Repositories;
+﻿using Intermedia_;
+using Intermedia_.Repositories;
 using SAP.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,52 @@ namespace Domain.Models.SolicitudDevolucionModels
 {
     public class SolicitudDevolucionEntryModelConsulta: SolicitudDevolucionEntryModelMaster 
     {
-        public int? id { get; set; }
+        
+        //public
+        public int id { get; set; }
 
-    
-        public SolicitudDevolucionEntryModelConsulta() {
-            
+       
+        //private
+        private cbr_SolicitudDevolucionEntryRepo _SolicitudDevolucionEntryRepo { get; set; }
+
+        public SolicitudDevolucionEntryModelConsulta(string CodigoProducto) {
+            this.CodigoProducto = CodigoProducto;
+            setNombreProducto();
+            _SolicitudDevolucionEntryRepo = new cbr_SolicitudDevolucionEntryRepo();
+        }
+        public SolicitudDevolucionEntryModelConsulta()
+        {
+           
         }
 
 
-        public void anular() { 
-        
-        
+        public SolicitudDevolucionEntryModelConsulta anular() {
+
+          
+           
+
+            cbr_SolicitudDevolucionEntry escaneoAnuladoEntity =  _SolicitudDevolucionEntryRepo.anularEntrieEscaneo(this.id);
+
+            SolicitudDevolucionEntryModelConsulta escaneoAnulado = new SolicitudDevolucionEntryModelConsulta();
+
+            escaneoAnulado.id = escaneoAnuladoEntity.id;
+            escaneoAnulado.deletedId = escaneoAnuladoEntity.deletedId;
+            escaneoAnulado.fecha = escaneoAnuladoEntity.fecha;
+            escaneoAnulado.CodigoProducto = escaneoAnuladoEntity.itemCode;
+            escaneoAnulado.numero = escaneoAnuladoEntity.number;
+            escaneoAnulado.cantidad = escaneoAnuladoEntity.quantity;
+            escaneoAnulado.usuario = escaneoAnuladoEntity.usuario;
+            escaneoAnulado.deleted = escaneoAnuladoEntity.deleted;
+
+
+            return escaneoAnulado;
+
+
+
         }
+
+
+
 
       
     }

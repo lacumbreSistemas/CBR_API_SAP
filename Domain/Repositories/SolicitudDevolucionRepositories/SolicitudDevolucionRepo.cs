@@ -58,7 +58,12 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
 
         }
 
+        public void anularEscaneosItemCodeNumero(SolicitudDevolucionEntryResumenActualizar solicitudDevolucionEntryResumenActualizar) {
 
+            solicitudDevolucionEntryResumenActualizar.anular();
+
+
+        }
        
         
 

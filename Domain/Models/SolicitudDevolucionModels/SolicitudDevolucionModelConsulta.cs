@@ -15,7 +15,7 @@ namespace Domain.Models.SolicitudDevolucionModels
 
      
       //private
-        public List <SolicitudDevolucionEntryResumen> _solicitudDevolucionEntryResumenList { get; set; }
+        public List <SolicitudDevolucionEntryResumenConsulta> _solicitudDevolucionEntryResumenList { get; set; }
 
         public SolicitudDevolucionModelConsulta() { 
         
@@ -26,9 +26,7 @@ namespace Domain.Models.SolicitudDevolucionModels
             Numero = numero;
             obtenerHeader();
 
-            _solicitudDevolucionEntryResumenList = new List<SolicitudDevolucionEntryResumen>();
-
-
+            _solicitudDevolucionEntryResumenList = new List<SolicitudDevolucionEntryResumenConsulta>();
         }
 
 
@@ -56,12 +54,17 @@ namespace Domain.Models.SolicitudDevolucionModels
 
             _SolicitudDevolucionEntryRepo.obtenerEntriesPornumber(Numero).GroupBy(i => new { i.number, i.itemCode }).ToList().ForEach(i => {
 
-                SolicitudDevolucionEntryResumen _solicitudDevolucionEntryResumen = new SolicitudDevolucionEntryResumen(i.FirstOrDefault().itemCode);
+                SolicitudDevolucionEntryResumenConsulta _solicitudDevolucionEntryResumen = new SolicitudDevolucionEntryResumenConsulta(i.FirstOrDefault().itemCode);
+                _solicitudDevolucionEntryResumen.Numero = this.Numero;
                 _solicitudDevolucionEntryResumen.CantidadEscaneada = i.Sum(i=> i.quantity);
                 _solicitudDevolucionEntryResumenList.Add(_solicitudDevolucionEntryResumen);
 
             });
 
         }
+
+      
+
+
     }
 }
