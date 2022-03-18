@@ -26,11 +26,11 @@ namespace Domain.Models.SolicitudDevolucionModels
 
         public SolicitudDevolucionModelBuild(SolicitudDevolucionModelBuild solicitudDevolucion)
         {
-            codigoTienda = solicitudDevolucion.codigoTienda;
+         
             codigoProveedor = solicitudDevolucion.codigoProveedor;
             fechaCreacion = DateTime.Now;
             comentario = solicitudDevolucion.comentario;
-     
+            anulado = solicitudDevolucion.anulado;
 
 
             _SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();

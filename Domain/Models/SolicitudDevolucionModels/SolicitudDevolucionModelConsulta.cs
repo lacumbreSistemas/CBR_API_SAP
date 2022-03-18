@@ -25,13 +25,14 @@ namespace Domain.Models.SolicitudDevolucionModels
         }
 
         public SolicitudDevolucionModelConsulta(int numero) {
-
+            proveedorSAPRepository = new ProveedorSAPRepository();
+             entries = new List<SolicitudDevolucionEntryResumenConsulta>();
             numeroDevolucion = numero;
           
             obtenerHeader();
           
-            entries = new List<SolicitudDevolucionEntryResumenConsulta>();
-            proveedorSAPRepository = new ProveedorSAPRepository();
+           
+            
         }
 
 

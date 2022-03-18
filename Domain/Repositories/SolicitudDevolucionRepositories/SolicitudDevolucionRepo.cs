@@ -19,6 +19,7 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
         {
             solicitudDevolucion.codigoTienda = WhsCode;
             SolicitudDevolucionModelBuild nuevaSolicitudDevolucionModel = new SolicitudDevolucionModelBuild(solicitudDevolucion);
+            nuevaSolicitudDevolucionModel.codigoTienda = WhsCode;
            nuevaSolicitudDevolucionModel.guardar();
            return nuevaSolicitudDevolucionModel.numeroDevolucion == 0 ? throw new Exception("No se creó solicitud de devolución"): nuevaSolicitudDevolucionModel;
 
