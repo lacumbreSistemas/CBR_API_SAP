@@ -15,11 +15,12 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
         private cbr_SolicitudDevolucionHeaderRepo _SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
      
 
-        public SolicitudDevolucionModelBuild crearSolicitudDevolucionIntermedia(SolicitudDevolucionModelBuild solicitudDevolucion)
+        public SolicitudDevolucionModelBuild crearSolicitudDevolucionIntermedia(SolicitudDevolucionModelBuild solicitudDevolucion, string WhsCode)
         {
+            solicitudDevolucion.codigoTienda = WhsCode;
             SolicitudDevolucionModelBuild nuevaSolicitudDevolucionModel = new SolicitudDevolucionModelBuild(solicitudDevolucion);
            nuevaSolicitudDevolucionModel.guardar();
-           return nuevaSolicitudDevolucionModel.Numero == 0 ? throw new Exception("No se creó solicitud de devolucion"): nuevaSolicitudDevolucionModel;
+           return nuevaSolicitudDevolucionModel.numeroDevolucion == 0 ? throw new Exception("No se creó solicitud de devolución"): nuevaSolicitudDevolucionModel;
 
         }
 
@@ -36,10 +37,12 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
             {
                 SolicitudDevolucionModelConsulta solicitudDevolucion = new SolicitudDevolucionModelConsulta();
                 solicitudDevolucion.id = i.id;
-                solicitudDevolucion.Numero = i.number;
-                solicitudDevolucion.ProveedorCode = i.cardCode;
-                solicitudDevolucion.TiendaCode = i.whsCode;
-                solicitudDevolucion.Fecha = i.fecha;
+                solicitudDevolucion.numeroDevolucion = i.number;
+                solicitudDevolucion.codigoProveedor = i.cardCode;
+                solicitudDevolucion.codigoTienda = i.whsCode;
+                solicitudDevolucion.fechaCreacion = i.fecha;
+
+                solicitudDevolucion.setNombreProveedor();
 
                 solicituddesDevolucion.Add(solicitudDevolucion);
 

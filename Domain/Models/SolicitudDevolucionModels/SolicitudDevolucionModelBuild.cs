@@ -26,10 +26,10 @@ namespace Domain.Models.SolicitudDevolucionModels
 
         public SolicitudDevolucionModelBuild(SolicitudDevolucionModelBuild solicitudDevolucion)
         {
-            TiendaCode = solicitudDevolucion.TiendaCode;
-            ProveedorCode = solicitudDevolucion.ProveedorCode;
-            Fecha = DateTime.Now;
-            Comentario = solicitudDevolucion.Comentario;
+            codigoTienda = solicitudDevolucion.codigoTienda;
+            codigoProveedor = solicitudDevolucion.codigoProveedor;
+            fechaCreacion = DateTime.Now;
+            comentario = solicitudDevolucion.comentario;
      
 
 
@@ -41,15 +41,15 @@ namespace Domain.Models.SolicitudDevolucionModels
         public SolicitudDevolucionModelBuild guardar() {
             cbr_SolicitudDevolucionHeader _solicitudDevolucionHeader = new cbr_SolicitudDevolucionHeader();
 
-            _solicitudDevolucionHeader.cardCode = ProveedorCode;
-            _solicitudDevolucionHeader.whsCode = TiendaCode;
+            _solicitudDevolucionHeader.cardCode = codigoProveedor;
+            _solicitudDevolucionHeader.whsCode = codigoTienda;
         
-            _solicitudDevolucionHeader.fecha =Fecha;
-            _solicitudDevolucionHeader.number = Numero;
-            _solicitudDevolucionHeader.comentario = Comentario;
+            _solicitudDevolucionHeader.fecha =fechaCreacion;
+            _solicitudDevolucionHeader.number = numeroDevolucion;
+            _solicitudDevolucionHeader.comentario = comentario;
             _solicitudDevolucionHeader.anulado = false; 
 
-            Numero =  _SolicitudDevolucionHeaderRepo.crearCbr_SolicitudDevolucionHeader(_solicitudDevolucionHeader);
+            numeroDevolucion =  _SolicitudDevolucionHeaderRepo.crearCbr_SolicitudDevolucionHeader(_solicitudDevolucionHeader);
 
             return this;
 

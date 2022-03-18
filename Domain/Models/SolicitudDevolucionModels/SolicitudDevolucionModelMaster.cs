@@ -9,14 +9,15 @@ namespace Domain.Models.SolicitudDevolucionModels
    public class SolicitudDevolucionModelMaster
     {
 
-        public int Numero { get; set; }
+        public int numeroDevolucion { get; set; }
         
-        public string TiendaCode { get; set; }
-        public string ProveedorCode { get; set; }
-        public DateTime? Fecha { get; set; }
+        public string codigoTienda { get; set; }
+        public string codigoProveedor { get; set; }
+      
+        public DateTime? fechaCreacion { get; set; }
 
-        public string Comentario { get; set; }
+        public string comentario { get; set; }
 
-        public bool? Anulado { get; set; }
+        public bool? anulado { get; set; }
     }
 }

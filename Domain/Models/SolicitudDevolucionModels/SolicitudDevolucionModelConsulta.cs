@@ -1,5 +1,6 @@
 ﻿using Intermedia_.Repositories;
 using SAP.Repositories;
+using SAP.Repositories.Proveedor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,53 +12,65 @@ namespace Domain.Models.SolicitudDevolucionModels
     public class SolicitudDevolucionModelConsulta: SolicitudDevolucionModelMaster
     {
         public int id { get; set; }
-        public int DocEntry { get; set;  } 
+        public int docEntry { get; set;  }
+        public string nombreProveedor { get; set; }
+        public List<SolicitudDevolucionEntryResumenConsulta> entries { get; set; }
 
-     
-      //private
-        public List <SolicitudDevolucionEntryResumenConsulta> _solicitudDevolucionEntryResumenList { get; set; }
+        //private
+       private ProveedorSAPRepository proveedorSAPRepository { get; set; }
+ 
 
-        public SolicitudDevolucionModelConsulta() { 
-        
+        public SolicitudDevolucionModelConsulta() {
+            proveedorSAPRepository = new ProveedorSAPRepository();
         }
 
         public SolicitudDevolucionModelConsulta(int numero) {
 
-            Numero = numero;
+            numeroDevolucion = numero;
+          
             obtenerHeader();
-
-            _solicitudDevolucionEntryResumenList = new List<SolicitudDevolucionEntryResumenConsulta>();
+          
+            entries = new List<SolicitudDevolucionEntryResumenConsulta>();
+            proveedorSAPRepository = new ProveedorSAPRepository();
         }
 
 
         private void obtenerHeader() {
             cbr_SolicitudDevolucionHeaderRepo _SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
-            var solicitudHeader = _SolicitudDevolucionHeaderRepo.obtenerSolicitudIntermediaNumber(Numero);
+
+          
+            var solicitudHeader = _SolicitudDevolucionHeaderRepo.obtenerSolicitudIntermediaNumber(numeroDevolucion);
 
             this.id = solicitudHeader.id;
-            this.Anulado = solicitudHeader.anulado;
-            this.Comentario = solicitudHeader.comentario;
-            this.Anulado = solicitudHeader.anulado;
-            this.Fecha = solicitudHeader.fecha;
-            this.DocEntry = solicitudHeader.docEntry;
-            this.ProveedorCode = solicitudHeader.cardCode;
-            this.TiendaCode = solicitudHeader.whsCode;
-           
+            this.anulado = solicitudHeader.anulado;
+            this.comentario = solicitudHeader.comentario;
+            this.anulado = solicitudHeader.anulado;
+            this.fechaCreacion = solicitudHeader.fecha;
+            this.docEntry = solicitudHeader.docEntry;
+            this.codigoProveedor = solicitudHeader.cardCode;
+            this.codigoTienda = solicitudHeader.whsCode;
+            setNombreProveedor();
 
         }
 
+        public void setNombreProveedor() {
+       
+            var proveedor = proveedorSAPRepository.obtenerProveedorCodigo(codigoProveedor);
+            nombreProveedor = proveedor.Nombre;
+
+        }
         public void resumenEntries()
         {
 
          
             cbr_SolicitudDevolucionEntryRepo _SolicitudDevolucionEntryRepo = new cbr_SolicitudDevolucionEntryRepo();
 
-            _SolicitudDevolucionEntryRepo.obtenerEntriesPornumber(Numero).GroupBy(i => new { i.number, i.itemCode }).ToList().ForEach(i => {
+            _SolicitudDevolucionEntryRepo.obtenerEntriesPornumber(numeroDevolucion).GroupBy(i => new { i.number, i.itemCode }).ToList().ForEach(i => {
 
                 SolicitudDevolucionEntryResumenConsulta _solicitudDevolucionEntryResumen = new SolicitudDevolucionEntryResumenConsulta(i.FirstOrDefault().itemCode);
-                _solicitudDevolucionEntryResumen.Numero = this.Numero;
+                _solicitudDevolucionEntryResumen.Numero = this.numeroDevolucion;
                 _solicitudDevolucionEntryResumen.CantidadEscaneada = i.Sum(i=> i.quantity);
-                _solicitudDevolucionEntryResumenList.Add(_solicitudDevolucionEntryResumen);
+                entries.Add(_solicitudDevolucionEntryResumen);
 
             });
 

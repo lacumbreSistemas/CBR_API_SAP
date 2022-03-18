@@ -25,13 +25,13 @@ namespace TEST.Controllers
         //funciones get
 
 
-        [HttpGet("{Whscode}")]
-        public IActionResult solititudDevolucion(string Whscode)
+        [HttpGet]
+        public IActionResult solititudDevolucion([FromHeader]string WhsCode)
         {
       
 
-            _Response.mensaje = "Lista de solicitudes de devolucion para tienda "+Whscode;
-            _Response.data = SolicitudDevolucionRepo.obtenerListaSolicitudesDevolucionSinDocentry(Whscode); ;
+            _Response.mensaje = "Lista de solicitudes de devolucion para tienda "+ WhsCode;
+            _Response.data = SolicitudDevolucionRepo.obtenerListaSolicitudesDevolucionSinDocentry(WhsCode); ;
 
 
             return Ok(_Response);
@@ -70,11 +70,12 @@ namespace TEST.Controllers
 
 
         [HttpPost]
-        public IActionResult guardarSolicitudDevolusion([FromBody] SolicitudDevolucionModelBuild solicitudTraslado)
+        public IActionResult guardarSolicitudDevolusion([FromBody] SolicitudDevolucionModelBuild solicitudTraslado, [FromHeader] string Whscode)
         {
-            var guardarSolicitudDevolucion = SolicitudDevolucionRepo.crearSolicitudDevolucionIntermedia(solicitudTraslado);
 
-            _Response.mensaje = "Solicitud de traslado " + guardarSolicitudDevolucion.Numero + " guardada con éxito";
+            var guardarSolicitudDevolucion = SolicitudDevolucionRepo.crearSolicitudDevolucionIntermedia(solicitudTraslado, Whscode);
+
+            _Response.mensaje = "Solicitud de traslado " + guardarSolicitudDevolucion.numeroDevolucion + " guardada con éxito";
             _Response.data = guardarSolicitudDevolucion;
 
 
