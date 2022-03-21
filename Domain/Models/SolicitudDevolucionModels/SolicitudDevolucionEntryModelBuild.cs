@@ -42,18 +42,19 @@ namespace Domain.Models.SolicitudDevolucionModels
         public SolicitudDevolucionEntryModelBuild guardar() {
             cbr_SolicitudDevolucionEntry _cbr_SolicitudDevolucionEntryRepo = new cbr_SolicitudDevolucionEntry();
 
-            fecha = DateTime.Now;
-            deleted = false;
-            deletedId = 0;
+            //fecha = DateTime.Now;
+            //deleted = false;
+            //deletedId = 0;
+
 
             _cbr_SolicitudDevolucionEntryRepo.itemCode = CodigoProducto;
             _cbr_SolicitudDevolucionEntryRepo.number = numero;
             _cbr_SolicitudDevolucionEntryRepo.quantity = cantidad;
             _cbr_SolicitudDevolucionEntryRepo.usuario = usuario;
-            _cbr_SolicitudDevolucionEntryRepo.deleted = deleted;
-            _cbr_SolicitudDevolucionEntryRepo.deletedId = deletedId;
-            _cbr_SolicitudDevolucionEntryRepo.fecha = fecha;
-
+            _cbr_SolicitudDevolucionEntryRepo.deleted = false;
+            _cbr_SolicitudDevolucionEntryRepo.deletedId = 0;
+            _cbr_SolicitudDevolucionEntryRepo.fecha = DateTime.Now;
+            _cbr_SolicitudDevolucionEntryRepo.cancelado = false; 
 
             _SolicitudDevolucionEntryRepo.crearCbr_SolicitudDevolucionEntry(_cbr_SolicitudDevolucionEntryRepo);
 

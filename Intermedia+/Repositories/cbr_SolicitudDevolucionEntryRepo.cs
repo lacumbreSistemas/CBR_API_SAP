@@ -25,10 +25,11 @@ namespace Intermedia_.Repositories
         }
 
 
+
         public List<cbr_SolicitudDevolucionEntry> obtenerEntriesPorNumberItemCode(int number, string itemCode)
         {
 
-            return db.cbr_SolicitudDevolucionEntry.Where(i => i.number == number && i.itemCode == itemCode).ToList();
+            return db.cbr_SolicitudDevolucionEntry.Where(i => i.number == number && i.itemCode == itemCode && !i.cancelado).ToList();
 
         }
 
@@ -52,11 +53,12 @@ namespace Intermedia_.Repositories
                
 
                 throw new Exception("Escaneo ya fue anulado por "+ escaneoAnulacion.usuario);
+            }else if (escaneoPorAnular.cancelado)
+            {
+                throw new Exception("Item cancelado");
+
             }
 
-            
-      
-            
             
             escaneoPorAnular.deleted = true;
 
@@ -75,6 +77,29 @@ namespace Intermedia_.Repositories
             db.SaveChanges();
 
             return escaneoAnulacion; 
+        }
+
+
+        public bool cancelarItem(int numero, string itemCode) {
+
+            bool todosCancelados = true;
+
+            var escaneosItems = db.cbr_SolicitudDevolucionEntry.Where(i => i.number == numero && i.itemCode == itemCode).ToList();
+            escaneosItems.ForEach(i=> {
+                if (!i.cancelado)
+                {
+                    todosCancelados = false;
+                    i.cancelado = true;
+                }
+              
+            });
+
+            
+
+            db.SaveChanges();
+
+            return todosCancelados;
+
         }
 
     }

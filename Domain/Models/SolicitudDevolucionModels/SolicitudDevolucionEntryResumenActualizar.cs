@@ -28,20 +28,17 @@ namespace Domain.Models.SolicitudDevolucionModels
             _SolicitudDevolucionEntryRepo = new cbr_SolicitudDevolucionEntryRepo();
         }
 
-        public void anular()
+        public string anular()
         {
 
-            List<cbr_SolicitudDevolucionEntry> escaneoAnuladoEntity = _SolicitudDevolucionEntryRepo.obtenerEntriesPorNumberItemCode(Numero, CodigoProducto);
+           bool itemsCancelados =  _SolicitudDevolucionEntryRepo.cancelarItem(Numero, CodigoProducto);
 
+            if (itemsCancelados) {
+                throw new Exception("El item " + DescripcionProducto + " ya había sido cancelado");
+            }
+                
 
-            escaneoAnuladoEntity.ForEach(i => {
-
-                _SolicitudDevolucionEntryRepo.anularEntrieEscaneo(i.id);
-
-            });
-
-
-
+            return "Item " + this.DescripcionProducto + " cancelado exitosamente";
         }
     }
 }
