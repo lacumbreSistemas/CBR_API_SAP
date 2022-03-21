@@ -26,7 +26,7 @@ namespace Domain.Models.SolicitudDevolucionModels
         }
         public SolicitudDevolucionEntryModelConsulta()
         {
-           
+            _SolicitudDevolucionEntryRepo = new cbr_SolicitudDevolucionEntryRepo();
         }
 
 
