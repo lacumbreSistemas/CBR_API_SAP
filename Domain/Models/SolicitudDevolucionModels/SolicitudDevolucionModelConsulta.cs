@@ -66,7 +66,7 @@ namespace Domain.Models.SolicitudDevolucionModels
          
             cbr_SolicitudDevolucionEntryRepo _SolicitudDevolucionEntryRepo = new cbr_SolicitudDevolucionEntryRepo();
 
-            _SolicitudDevolucionEntryRepo.obtenerEntriesPornumber(Numero).Where(i=> !i.cancelado).GroupBy(i => new { i.number, i.itemCode }).ToList().ForEach(i => {
+            _SolicitudDevolucionEntryRepo.obtenerEntriesPornumber(numeroDevolucion).Where(i=> !i.cancelado).GroupBy(i => new { i.number, i.itemCode }).ToList().ForEach(i => {
 
                 SolicitudDevolucionEntryResumenConsulta _solicitudDevolucionEntryResumen = new SolicitudDevolucionEntryResumenConsulta(i.FirstOrDefault().itemCode);
                 _solicitudDevolucionEntryResumen.Numero = this.numeroDevolucion;
