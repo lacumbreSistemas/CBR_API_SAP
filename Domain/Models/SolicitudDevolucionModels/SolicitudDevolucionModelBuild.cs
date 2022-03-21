@@ -24,9 +24,9 @@ namespace Domain.Models.SolicitudDevolucionModels
             _SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
         }
 
-        public SolicitudDevolucionModelBuild(SolicitudDevolucionModelBuild solicitudDevolucion)
+        public SolicitudDevolucionModelBuild(SolicitudDevolucionModelBuild solicitudDevolucion, SolicitudDevolucionModelBuildEstrategia estrategia)
         {
-         
+            Estrategia = estrategia;
             codigoProveedor = solicitudDevolucion.codigoProveedor;
             fechaCreacion = DateTime.Now;
             comentario = solicitudDevolucion.comentario;

@@ -9,7 +9,7 @@ namespace Domain.Interfaces
 {
     public interface SolicitudDevolucionModelBuildEstrategia
     {
-        SolicitudDevolucionEntryModelBuild guardar(SolicitudDevolucionEntryModelBuild solicitudDevolucionEntryModelBuild);
+        public SolicitudDevolucionModelBuild guardar(SolicitudDevolucionModelBuild solicitudDevolucionModelBuild);
     }
     
 }

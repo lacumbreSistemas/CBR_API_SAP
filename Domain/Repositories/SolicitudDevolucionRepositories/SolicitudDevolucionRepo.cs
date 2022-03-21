@@ -1,4 +1,5 @@
-﻿using Domain.Models.SolicitudDevolucionModels;
+﻿using Domain.Interfaces;
+using Domain.Models.SolicitudDevolucionModels;
 using Intermedia_;
 using Intermedia_.Repositories;
 using System;
@@ -17,8 +18,9 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
 
         public SolicitudDevolucionModelBuild crearSolicitudDevolucionIntermedia(SolicitudDevolucionModelBuild solicitudDevolucion, string WhsCode)
         {
+            SolicitudDevolucionBuildIntermediaEstrategia estrategia = new SolicitudDevolucionBuildIntermediaEstrategia();
             solicitudDevolucion.codigoTienda = WhsCode;
-            SolicitudDevolucionModelBuild nuevaSolicitudDevolucionModel = new SolicitudDevolucionModelBuild(solicitudDevolucion);
+            SolicitudDevolucionModelBuild nuevaSolicitudDevolucionModel = new SolicitudDevolucionModelBuild(solicitudDevolucion, estrategia);
             nuevaSolicitudDevolucionModel.codigoTienda = WhsCode;
            nuevaSolicitudDevolucionModel.guardar();
            return nuevaSolicitudDevolucionModel.numeroDevolucion == 0 ? throw new Exception("No se creó solicitud de devolución"): nuevaSolicitudDevolucionModel;

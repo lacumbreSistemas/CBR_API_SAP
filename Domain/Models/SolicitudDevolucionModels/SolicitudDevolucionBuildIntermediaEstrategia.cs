@@ -9,24 +9,26 @@ using Intermedia_;
 
 namespace Domain.Models.SolicitudDevolucionModels
 {
-    public class SolicitudDevolucionBuildIntermediaEstrategia 
+    public class SolicitudDevolucionBuildIntermediaEstrategia :SolicitudDevolucionModelBuildEstrategia
     {
-        //public SolicitudDevolucionEntryModelBuild guardar(SolicitudDevolucionEntryModelBuild solicitudDevolucionEntryModelBuild)
-        //{
-        //    cbr_SolicitudDevolucionHeader _solicitudDevolucionHeader = new cbr_SolicitudDevolucionHeader();
+        public SolicitudDevolucionModelBuild guardar(SolicitudDevolucionModelBuild solicitudDevolucionModelBuild)
+        {
+            cbr_SolicitudDevolucionHeader _solicitudDevolucionHeader = new cbr_SolicitudDevolucionHeader();
+            cbr_SolicitudDevolucionHeaderRepo solicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
 
-        //    _solicitudDevolucionHeader.cardCode = solicitudDevolucionModelBuild.ProveedorCode;
-        //    _solicitudDevolucionHeader.whsCode = solicitudDevolucionModelBuild.TiendaCode;
+            _solicitudDevolucionHeader.cardCode = solicitudDevolucionModelBuild.codigoProveedor;
+            _solicitudDevolucionHeader.whsCode = solicitudDevolucionModelBuild.codigoTienda;
+            _solicitudDevolucionHeader.fecha = solicitudDevolucionModelBuild.fechaCreacion;
+            _solicitudDevolucionHeader.number = solicitudDevolucionModelBuild.numeroDevolucion;
+            _solicitudDevolucionHeader.comentario = solicitudDevolucionModelBuild.comentario;
+            _solicitudDevolucionHeader.anulado = false;
 
-        //    _solicitudDevolucionHeader.fecha = solicitudDevolucionModelBuild.Fecha;
-        //    _solicitudDevolucionHeader.number = solicitudDevolucionModelBuild.Numero;
-        //    _solicitudDevolucionHeader.comentario = solicitudDevolucionModelBuild.Comentario;
-        //    _solicitudDevolucionHeader.anulado = false;
+            var nuevaSolicitudDevolucion =  solicitudDevolucionHeaderRepo.crearCbr_SolicitudDevolucionHeader(_solicitudDevolucionHeader);
 
+            solicitudDevolucionModelBuild.numeroDevolucion = nuevaSolicitudDevolucion;
 
-
-        //    return cbr_SolicitudDevolucionHeader;
-        //}
+            return solicitudDevolucionModelBuild;
+        }
 
     }
 }
