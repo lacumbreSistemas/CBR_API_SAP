@@ -14,6 +14,8 @@ namespace Domain.Models.SolicitudDevolucionModels
         
         //public
         public int id { get; set; }
+        public bool cancelado { get; set; }
+
 
        
         //private
