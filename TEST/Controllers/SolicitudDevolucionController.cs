@@ -26,7 +26,7 @@ namespace TEST.Controllers
 
 
         [HttpGet]
-        public IActionResult solititudDevolucion([FromHeader]string Whscode)
+        public IActionResult solititudDevolucion([FromHeader]string WhsCode)
         {
       
 
@@ -74,7 +74,7 @@ namespace TEST.Controllers
         {
             var guardarSolicitudDevolucion = SolicitudDevolucionRepo.crearSolicitudDevolucionIntermedia(solicitudTraslado,WhsCode);
 
-            var guardarSolicitudDevolucion = SolicitudDevolucionRepo.crearSolicitudDevolucionIntermedia(solicitudTraslado, Whscode);
+          
 
             _Response.mensaje = "Solicitud de traslado " + guardarSolicitudDevolucion.numeroDevolucion + " guardada con éxito";
             _Response.data = guardarSolicitudDevolucion;

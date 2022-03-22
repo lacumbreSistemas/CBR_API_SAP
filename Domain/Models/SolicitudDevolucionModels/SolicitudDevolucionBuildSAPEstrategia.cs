@@ -14,8 +14,8 @@ namespace Domain.Models.SolicitudDevolucionModels
 
             SolicitudDevolucionSAPEntity solicitudDevolucionSAPEntity = new SolicitudDevolucionSAPEntity();
 
-            solicitudDevolucionSAPEntity.CardCode = solicitudDevolucionModelBuild.ProveedorCode;
-            solicitudDevolucionSAPEntity.WhsCode = solicitudDevolucionModelBuild.TiendaCode; 
+            solicitudDevolucionSAPEntity.CardCode = solicitudDevolucionModelBuild.codigoProveedor;
+            solicitudDevolucionSAPEntity.WhsCode = solicitudDevolucionModelBuild.codigoTienda; 
            
 
 

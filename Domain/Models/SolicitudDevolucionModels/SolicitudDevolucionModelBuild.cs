@@ -24,13 +24,19 @@ namespace Domain.Models.SolicitudDevolucionModels
             //_SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
         }
 
-        public SolicitudDevolucionModelBuild(SolicitudDevolucionModelBuild solicitudDevolucion, SolicitudDevolucionModelBuildEstrategia estrategia)
+        public SolicitudDevolucionModelBuild(SolicitudDevolucionModelBuild solicitudDevolucion)
         {
-            TiendaCode = solicitudDevolucion.TiendaCode;
-            ProveedorCode = solicitudDevolucion.ProveedorCode;
-            Fecha = DateTime.Now;
-            Comentario = solicitudDevolucion.Comentario;
-        
+            codigoTienda = solicitudDevolucion.codigoTienda;
+            codigoProveedor = solicitudDevolucion.codigoProveedor;
+            fechaCreacion = DateTime.Now;
+            comentario = solicitudDevolucion.comentario;
+
+
+            //TiendaCode = solicitudDevolucion.TiendaCode;
+            //ProveedorCode = solicitudDevolucion.ProveedorCode;
+            //Fecha = DateTime.Now;
+            //Comentario = solicitudDevolucion.Comentario;
+
 
 
             //_SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();

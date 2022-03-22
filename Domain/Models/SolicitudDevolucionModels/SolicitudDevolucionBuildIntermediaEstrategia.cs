@@ -15,15 +15,15 @@ namespace Domain.Models.SolicitudDevolucionModels
             cbr_SolicitudDevolucionHeader _solicitudDevolucionHeader = new cbr_SolicitudDevolucionHeader();
             cbr_SolicitudDevolucionHeaderRepo _SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
 
-            _solicitudDevolucionHeader.cardCode = solicitudDevolucionModelBuild.ProveedorCode;
-            _solicitudDevolucionHeader.whsCode = solicitudDevolucionModelBuild.TiendaCode;
+            _solicitudDevolucionHeader.cardCode = solicitudDevolucionModelBuild.codigoProveedor;
+            _solicitudDevolucionHeader.whsCode = solicitudDevolucionModelBuild.codigoTienda;
 
-            _solicitudDevolucionHeader.fecha = solicitudDevolucionModelBuild.Fecha;
-            _solicitudDevolucionHeader.number = solicitudDevolucionModelBuild.Numero;
-            _solicitudDevolucionHeader.comentario = solicitudDevolucionModelBuild.Comentario;
+            _solicitudDevolucionHeader.fecha = solicitudDevolucionModelBuild.fechaCreacion;
+            _solicitudDevolucionHeader.number = solicitudDevolucionModelBuild.numeroDevolucion;
+            _solicitudDevolucionHeader.comentario = solicitudDevolucionModelBuild.comentario;
             _solicitudDevolucionHeader.anulado = false;
 
-            solicitudDevolucionModelBuild.Numero = _SolicitudDevolucionHeaderRepo.crearCbr_SolicitudDevolucionHeader(_solicitudDevolucionHeader);
+            solicitudDevolucionModelBuild.numeroDevolucion = _SolicitudDevolucionHeaderRepo.crearCbr_SolicitudDevolucionHeader(_solicitudDevolucionHeader);
 
             return solicitudDevolucionModelBuild;
         }

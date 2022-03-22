@@ -29,8 +29,8 @@ namespace Domain.Models.SolicitudDevolucionModels
             SolicitudDevolucionSAPEntity solicitudDevolucionSAP = new SolicitudDevolucionSAPEntity();
             SolicitudesDevolucionesRepo solicitudesDevolucionesRepo = new SolicitudesDevolucionesRepo();
             cbr_SolicitudDevolucionHeaderRepo solicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
-            solicitudDevolucionSAP.CardCode = ProveedorCode;
-            solicitudDevolucionSAP.WhsCode = TiendaCode;
+            solicitudDevolucionSAP.CardCode = codigoProveedor;
+            solicitudDevolucionSAP.WhsCode = codigoTienda;
 
             _solicitudDevolucionEntryResumenList.ForEach(i =>
             {
@@ -45,7 +45,7 @@ namespace Domain.Models.SolicitudDevolucionModels
 
             DocEntry = solicitudesDevolucionesRepo.generarSolicitudDevolicion(solicitudDevolucionSAP);
 
-            solicitudDevolucionHeaderRepo.setDocEntry(Numero,DocEntry);
+            solicitudDevolucionHeaderRepo.setDocEntry(numeroDevolucion,DocEntry);
 
 
             return this;

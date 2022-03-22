@@ -1,6 +1,7 @@
 ﻿using Intermedia_.Repositories;
 using SAP.Models.SolicitudDevolicionEntrys;
 using SAP.Repositories;
+using SAP.Repositories.Proveedor;
 using SAP.Repositories.SolicitudesDevoliciones;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,8 @@ namespace Domain.Models.SolicitudDevolucionModels
  
 
         public SolicitudDevolucionModelConsulta() {
-            _solicitudDevolucionEntryResumenList = new List<SolicitudDevolucionEntryResumenConsulta>();
+            proveedorSAPRepository = new ProveedorSAPRepository();
+            entries = new List<SolicitudDevolucionEntryResumenConsulta>();
         }
 
         public SolicitudDevolucionModelConsulta(int numero) {

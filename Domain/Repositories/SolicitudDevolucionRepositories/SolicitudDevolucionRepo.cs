@@ -19,7 +19,7 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
         public SolicitudDevolucionModelBuild crearSolicitudDevolucionIntermedia(SolicitudDevolucionModelBuild solicitudDevolucion,string WhsCode)
         {
             SolicitudDevolucionModelBuild nuevaSolicitudDevolucionModel = new SolicitudDevolucionModelBuild(solicitudDevolucion);
-            nuevaSolicitudDevolucionModel.TiendaCode = WhsCode;
+            nuevaSolicitudDevolucionModel.codigoTienda = WhsCode;
            nuevaSolicitudDevolucionModel.guardar();
            return nuevaSolicitudDevolucionModel.numeroDevolucion == 0 ? throw new Exception("No se creó solicitud de devolución"): nuevaSolicitudDevolucionModel;
 
@@ -76,15 +76,20 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
 
             SolicitudDevolucionModelSAP solicitudDevolucionSAP = new SolicitudDevolucionModelSAP();
 
-            solicitudDevolucionSAP.Numero = solicitudDevolucionIntermedia.Numero;
-            solicitudDevolucionSAP.ProveedorCode = solicitudDevolucionIntermedia.ProveedorCode;
-            solicitudDevolucionSAP.TiendaCode = solicitudDevolucionIntermedia.TiendaCode;
+            solicitudDevolucionSAP.numeroDevolucion = solicitudDevolucionIntermedia.numeroDevolucion;
+            solicitudDevolucionSAP.codigoProveedor = solicitudDevolucionIntermedia.codigoProveedor;
+            solicitudDevolucionSAP.codigoTienda = solicitudDevolucionIntermedia.codigoTienda;
 
-            solicitudDevolucionIntermedia._solicitudDevolucionEntryResumenList.ForEach(i =>
+            solicitudDevolucionIntermedia.entries.ForEach(i =>
             {
                 solicitudDevolucionSAP._solicitudDevolucionEntryResumenList.Add(i);
 
             });
+
+
+            if (solicitudDevolucionIntermedia.docEntry > 0) {
+                throw new Exception("Ya se generó un documento de SAP para esta devolucion"); 
+            }
 
 
             return solicitudDevolucionSAP.generarSolicitudDevolucion();
