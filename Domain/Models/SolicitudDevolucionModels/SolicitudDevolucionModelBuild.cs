@@ -16,30 +16,32 @@ namespace Domain.Models.SolicitudDevolucionModels
 
        
     //privates 
-    cbr_SolicitudDevolucionHeaderRepo _SolicitudDevolucionHeaderRepo { get; set;     }
-        private SolicitudDevolucionModelBuildEstrategia Estrategia { get; set; }
+    //cbr_SolicitudDevolucionHeaderRepo _SolicitudDevolucionHeaderRepo { get; set;     }
+  
         //constructor
 
         public SolicitudDevolucionModelBuild() {
-            _SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
+            //_SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
         }
 
         public SolicitudDevolucionModelBuild(SolicitudDevolucionModelBuild solicitudDevolucion, SolicitudDevolucionModelBuildEstrategia estrategia)
         {
-            Estrategia = estrategia;
-            codigoProveedor = solicitudDevolucion.codigoProveedor;
-            fechaCreacion = DateTime.Now;
-            comentario = solicitudDevolucion.comentario;
-            anulado = solicitudDevolucion.anulado;
+            TiendaCode = solicitudDevolucion.TiendaCode;
+            ProveedorCode = solicitudDevolucion.ProveedorCode;
+            Fecha = DateTime.Now;
+            Comentario = solicitudDevolucion.Comentario;
+        
 
 
-            _SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
+            //_SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
         }
 
 
 
         public SolicitudDevolucionModelBuild guardar() {
+
             cbr_SolicitudDevolucionHeader _solicitudDevolucionHeader = new cbr_SolicitudDevolucionHeader();
+            cbr_SolicitudDevolucionHeaderRepo _SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
 
             _solicitudDevolucionHeader.cardCode = codigoProveedor;
             _solicitudDevolucionHeader.whsCode = codigoTienda;
@@ -52,7 +54,6 @@ namespace Domain.Models.SolicitudDevolucionModels
             numeroDevolucion =  _SolicitudDevolucionHeaderRepo.crearCbr_SolicitudDevolucionHeader(_solicitudDevolucionHeader);
 
             return this;
-
         }
 
     }

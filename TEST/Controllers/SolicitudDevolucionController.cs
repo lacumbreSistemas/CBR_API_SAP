@@ -1,4 +1,4 @@
-﻿using Domain.Models.SolicitudDevolucionModels;
+using Domain.Models.SolicitudDevolucionModels;
 using Domain.Repositories.SolicitudDevolucionRepositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,7 +26,7 @@ namespace TEST.Controllers
 
 
         [HttpGet]
-        public IActionResult solititudDevolucion([FromHeader]string WhsCode)
+        public IActionResult solititudDevolucion([FromHeader]string Whscode)
         {
       
 
@@ -70,8 +70,9 @@ namespace TEST.Controllers
 
 
         [HttpPost]
-        public IActionResult guardarSolicitudDevolusion([FromBody] SolicitudDevolucionModelBuild solicitudTraslado, [FromHeader] string Whscode)
+        public IActionResult guardarSolicitudDevolusion([FromBody] SolicitudDevolucionModelBuild solicitudTraslado, [FromHeader] string WhsCode)
         {
+            var guardarSolicitudDevolucion = SolicitudDevolucionRepo.crearSolicitudDevolucionIntermedia(solicitudTraslado,WhsCode);
 
             var guardarSolicitudDevolucion = SolicitudDevolucionRepo.crearSolicitudDevolucionIntermedia(solicitudTraslado, Whscode);
 
@@ -111,10 +112,25 @@ namespace TEST.Controllers
         [HttpDelete("AnularItem")]
         public IActionResult anularEscaneosItem([FromBody]SolicitudDevolucionEntryResumenActualizar solicitudDevolucionEntryResumenActualizar) {
 
+
             SolicitudDevolucionRepo.anularEscaneosItemCodeNumero(solicitudDevolucionEntryResumenActualizar);
             _Response.status = 1;
             _Response.mensaje = "Escaneos del item "+solicitudDevolucionEntryResumenActualizar.DescripcionProducto+" anulados con éxito";   
             return Ok(_Response);
         }
+
+
+
+        [HttpPost("GenerarSolicitudDevolucionSAP")]
+        public IActionResult generarSolicitudDevolucionSAP([FromHeader] int numero)
+        {
+            var solicitudDevolucionSAP = SolicitudDevolucionRepo.generarSolicitudDevolucionSAP(numero);
+
+            _Response.mensaje = "Documento de solicitud de devolucion" + solicitudDevolucionSAP.DocEntry + "creado exitosamente en SAP";
+            _Response.data = solicitudDevolucionSAP;
+            return Ok(_Response);
+        }
+
+
     }
 }

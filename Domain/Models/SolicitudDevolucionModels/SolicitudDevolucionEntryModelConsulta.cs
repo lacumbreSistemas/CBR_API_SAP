@@ -1,5 +1,6 @@
 ﻿using Intermedia_;
 using Intermedia_.Repositories;
+using SAP.Models.SolicitudDevolicionEntrys;
 using SAP.Repositories;
 using System;
 using System.Collections.Generic;
@@ -58,8 +59,13 @@ namespace Domain.Models.SolicitudDevolucionModels
         }
 
 
-
-
       
+
+
+
+
+
+
+
     }
 }

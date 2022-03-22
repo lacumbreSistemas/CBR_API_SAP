@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAP.Models.SolicitudDevolicionEntrys
 {
-   public class SolicitudDevolucionHeaderSAPEntity
+   public class SolicitudDevolucionSAPEntity
     {
         public int DocEntry { get; set; }
 
@@ -16,6 +16,10 @@ namespace SAP.Models.SolicitudDevolicionEntrys
         public DateTime Fecha { get; set; }
 
         public List<SolicitudDevolucionEntrySAPEntity> solicitudDevolucionEntrySAPEntities { get; set; }
+
+        public SolicitudDevolucionSAPEntity() {
+            solicitudDevolucionEntrySAPEntities = new List<SolicitudDevolucionEntrySAPEntity>();
+        }
 
 
     }

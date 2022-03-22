@@ -12,16 +12,14 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
 {
     public class SolicitudDevolucionRepo
     {
-
+        
         private cbr_SolicitudDevolucionHeaderRepo _SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
      
 
-        public SolicitudDevolucionModelBuild crearSolicitudDevolucionIntermedia(SolicitudDevolucionModelBuild solicitudDevolucion, string WhsCode)
+        public SolicitudDevolucionModelBuild crearSolicitudDevolucionIntermedia(SolicitudDevolucionModelBuild solicitudDevolucion,string WhsCode)
         {
-            SolicitudDevolucionBuildIntermediaEstrategia estrategia = new SolicitudDevolucionBuildIntermediaEstrategia();
-            solicitudDevolucion.codigoTienda = WhsCode;
-            SolicitudDevolucionModelBuild nuevaSolicitudDevolucionModel = new SolicitudDevolucionModelBuild(solicitudDevolucion, estrategia);
-            nuevaSolicitudDevolucionModel.codigoTienda = WhsCode;
+            SolicitudDevolucionModelBuild nuevaSolicitudDevolucionModel = new SolicitudDevolucionModelBuild(solicitudDevolucion);
+            nuevaSolicitudDevolucionModel.TiendaCode = WhsCode;
            nuevaSolicitudDevolucionModel.guardar();
            return nuevaSolicitudDevolucionModel.numeroDevolucion == 0 ? throw new Exception("No se creó solicitud de devolución"): nuevaSolicitudDevolucionModel;
 
@@ -70,8 +68,30 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
 
 
         }
-       
-        
+
+        public SolicitudDevolucionModelSAP generarSolicitudDevolucionSAP(int numero) {
+
+
+            var solicitudDevolucionIntermedia  = resumenSolicitudDevolucion(numero);
+
+            SolicitudDevolucionModelSAP solicitudDevolucionSAP = new SolicitudDevolucionModelSAP();
+
+            solicitudDevolucionSAP.Numero = solicitudDevolucionIntermedia.Numero;
+            solicitudDevolucionSAP.ProveedorCode = solicitudDevolucionIntermedia.ProveedorCode;
+            solicitudDevolucionSAP.TiendaCode = solicitudDevolucionIntermedia.TiendaCode;
+
+            solicitudDevolucionIntermedia._solicitudDevolucionEntryResumenList.ForEach(i =>
+            {
+                solicitudDevolucionSAP._solicitudDevolucionEntryResumenList.Add(i);
+
+            });
+
+
+            return solicitudDevolucionSAP.generarSolicitudDevolucion();
+
+        }
+
+             
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Intermedia_.Repositories;
+using SAP.Models.SolicitudDevolicionEntrys;
 using SAP.Repositories;
-using SAP.Repositories.Proveedor;
+using SAP.Repositories.SolicitudesDevoliciones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Domain.Models.SolicitudDevolucionModels
  
 
         public SolicitudDevolucionModelConsulta() {
-            proveedorSAPRepository = new ProveedorSAPRepository();
+            _solicitudDevolucionEntryResumenList = new List<SolicitudDevolucionEntryResumenConsulta>();
         }
 
         public SolicitudDevolucionModelConsulta(int numero) {
@@ -77,7 +78,30 @@ namespace Domain.Models.SolicitudDevolucionModels
 
         }
 
-      
+        //public SolicitudDevolucionModelConsulta generarEntradaMercancia() {
+
+
+        //    SolicitudDevolucionSAPEntity solicitudDevolucionSAP = new SolicitudDevolucionSAPEntity();
+        //    SolicitudesDevolucionesRepo solicitudesDevolucionesRepo = new SolicitudesDevolucionesRepo();
+
+        //    solicitudDevolucionSAP.CardCode = ProveedorCode;
+        //    solicitudDevolucionSAP.WhsCode = TiendaCode;
+
+        //    _solicitudDevolucionEntryResumenList.ForEach(i =>
+        //    {
+
+        //        SolicitudDevolucionEntrySAPEntity solicitudDevolucionEntrySAPEntity = new SolicitudDevolucionEntrySAPEntity();
+        //        solicitudDevolucionEntrySAPEntity.ItemCode = i.CodigoProducto;
+        //        solicitudDevolucionEntrySAPEntity.Cantidad = (double) i.CantidadEscaneada; 
+
+        //        solicitudDevolucionSAP.solicitudDevolucionEntrySAPEntities.Add(solicitudDevolucionEntrySAPEntity); 
+
+        //    });
+
+        //   DocEntry =  solicitudesDevolucionesRepo.generarSolicitudDevolicion(solicitudDevolucionSAP);
+
+        //    return this;
+        //}
 
 
     }
