@@ -16,12 +16,12 @@ namespace Domain.Models.SolicitudDevolucionModels
 
        
     //privates 
-    cbr_SolicitudDevolucionHeaderRepo _SolicitudDevolucionHeaderRepo { get; set;     }
-        private SolicitudDevolucionModelBuildEstrategia Estrategia { get; set; }
+    //cbr_SolicitudDevolucionHeaderRepo _SolicitudDevolucionHeaderRepo { get; set;     }
+  
         //constructor
 
         public SolicitudDevolucionModelBuild() {
-            _SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
+            //_SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
         }
 
         public SolicitudDevolucionModelBuild(SolicitudDevolucionModelBuild solicitudDevolucion)
@@ -30,29 +30,30 @@ namespace Domain.Models.SolicitudDevolucionModels
             ProveedorCode = solicitudDevolucion.ProveedorCode;
             Fecha = DateTime.Now;
             Comentario = solicitudDevolucion.Comentario;
-     
+        
 
 
-            _SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
+            //_SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
         }
 
 
 
         public SolicitudDevolucionModelBuild guardar() {
-            cbr_SolicitudDevolucionHeader _solicitudDevolucionHeader = new cbr_SolicitudDevolucionHeader();
 
-            _solicitudDevolucionHeader.cardCode = ProveedorCode;
+            cbr_SolicitudDevolucionHeader _solicitudDevolucionHeader = new cbr_SolicitudDevolucionHeader();
+            cbr_SolicitudDevolucionHeaderRepo _SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
+
+            _solicitudDevolucionHeader.cardCode =ProveedorCode;
             _solicitudDevolucionHeader.whsCode = TiendaCode;
-        
-            _solicitudDevolucionHeader.fecha =Fecha;
+
+            _solicitudDevolucionHeader.fecha = Fecha;
             _solicitudDevolucionHeader.number = Numero;
             _solicitudDevolucionHeader.comentario = Comentario;
-            _solicitudDevolucionHeader.anulado = false; 
+            _solicitudDevolucionHeader.anulado = false;
 
-            Numero =  _SolicitudDevolucionHeaderRepo.crearCbr_SolicitudDevolucionHeader(_solicitudDevolucionHeader);
+          Numero = _SolicitudDevolucionHeaderRepo.crearCbr_SolicitudDevolucionHeader(_solicitudDevolucionHeader);
 
             return this;
-
         }
 
     }

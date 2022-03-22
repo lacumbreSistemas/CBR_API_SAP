@@ -11,13 +11,14 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
 {
     public class SolicitudDevolucionRepo
     {
-
+        
         private cbr_SolicitudDevolucionHeaderRepo _SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
      
 
-        public SolicitudDevolucionModelBuild crearSolicitudDevolucionIntermedia(SolicitudDevolucionModelBuild solicitudDevolucion)
+        public SolicitudDevolucionModelBuild crearSolicitudDevolucionIntermedia(SolicitudDevolucionModelBuild solicitudDevolucion,string WhsCode)
         {
             SolicitudDevolucionModelBuild nuevaSolicitudDevolucionModel = new SolicitudDevolucionModelBuild(solicitudDevolucion);
+            nuevaSolicitudDevolucionModel.TiendaCode = WhsCode;
            nuevaSolicitudDevolucionModel.guardar();
            return nuevaSolicitudDevolucionModel.Numero == 0 ? throw new Exception("No se creó solicitud de devolucion"): nuevaSolicitudDevolucionModel;
 
@@ -64,8 +65,30 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
 
 
         }
-       
-        
+
+        public SolicitudDevolucionModelSAP generarSolicitudDevolucionSAP(int numero) {
+
+
+            var solicitudDevolucionIntermedia  = resumenSolicitudDevolucion(numero);
+
+            SolicitudDevolucionModelSAP solicitudDevolucionSAP = new SolicitudDevolucionModelSAP();
+
+            solicitudDevolucionSAP.Numero = solicitudDevolucionIntermedia.Numero;
+            solicitudDevolucionSAP.ProveedorCode = solicitudDevolucionIntermedia.ProveedorCode;
+            solicitudDevolucionSAP.TiendaCode = solicitudDevolucionIntermedia.TiendaCode;
+
+            solicitudDevolucionIntermedia._solicitudDevolucionEntryResumenList.ForEach(i =>
+            {
+                solicitudDevolucionSAP._solicitudDevolucionEntryResumenList.Add(i);
+
+            });
+
+
+            return solicitudDevolucionSAP.generarSolicitudDevolucion();
+
+        }
+
+             
 
     }
 }

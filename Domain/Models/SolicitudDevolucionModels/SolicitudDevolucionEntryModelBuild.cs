@@ -15,7 +15,7 @@ namespace Domain.Models.SolicitudDevolucionModels
 
         private cbr_SolicitudDevolucionEntryRepo _SolicitudDevolucionEntryRepo { get; set; }
 
-        private SolicitudDevolucionModelBuildEstrategia Estrategia { get; set; }
+       
 
         public SolicitudDevolucionEntryModelBuild() {
 
@@ -36,6 +36,8 @@ namespace Domain.Models.SolicitudDevolucionModels
             numero = _solicitudDevolucionEntryModelBuild.numero;
             usuario = _solicitudDevolucionEntryModelBuild.usuario;
             setNombreProducto();
+
+         
         }
 
 

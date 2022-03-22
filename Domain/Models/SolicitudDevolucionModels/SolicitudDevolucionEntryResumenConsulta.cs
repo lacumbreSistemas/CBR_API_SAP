@@ -29,11 +29,15 @@ namespace Domain.Models.SolicitudDevolucionModels
 
         }
 
+        public SolicitudDevolucionEntryResumenConsulta()
+        {
+
+        }
 
 
 
 
-     
+
 
 
         private void setNombreProducto()

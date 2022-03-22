@@ -9,7 +9,7 @@ namespace SAP.Models.SolicitudDevolicionEntrys
     public class SolicitudDevolucionEntrySAPEntity
     {
         public string ItemCode { get; set;}
-        public int Cantidad { get; set;}
+        public double Cantidad { get; set;}
         public string NombreArticulo { get; set; }
     }
 }

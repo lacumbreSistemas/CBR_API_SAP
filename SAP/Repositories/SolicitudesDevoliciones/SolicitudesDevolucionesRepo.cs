@@ -13,7 +13,7 @@ namespace SAP.Repositories.SolicitudesDevoliciones
         MasterRepository _MasterRepository = MasterRepository.GetInstance();
       
 
-        public int generarSolicitudDevolicion(SolicitudDevolucionHeaderSAPEntity solicitudDevolucionHeaderSAPEntity) {
+        public int generarSolicitudDevolicion(SolicitudDevolucionSAPEntity solicitudDevolucionHeaderSAPEntity) {
 
           int siDocumentoAgregado = 0;
        string nuevaSolicitudDevolucion = "";

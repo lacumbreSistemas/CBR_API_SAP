@@ -46,6 +46,17 @@ namespace Intermedia_.Repositories
         }
 
 
+        public void setDocEntry(int number, int docentry)
+        {
+
+            var header = db.cbr_SolicitudDevolucionHeader.FirstOrDefault(i=> i.number == number);
+            header.docEntry = docentry;
+
+            db.SaveChanges();
+
+        }
+
+
        
      
 
