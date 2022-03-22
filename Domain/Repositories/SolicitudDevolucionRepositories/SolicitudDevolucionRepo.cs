@@ -80,6 +80,9 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
             solicitudDevolucionSAP.codigoProveedor = solicitudDevolucionIntermedia.codigoProveedor;
             solicitudDevolucionSAP.codigoTienda = solicitudDevolucionIntermedia.codigoTienda;
 
+            if (solicitudDevolucionIntermedia.entries.Count == 0)
+                throw new Exception("No tiene items escaneados para subir");
+
             solicitudDevolucionIntermedia.entries.ForEach(i =>
             {
                 solicitudDevolucionSAP._solicitudDevolucionEntryResumenList.Add(i);
@@ -87,15 +90,19 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
             });
 
 
-            if (solicitudDevolucionIntermedia.docEntry > 0) {
+            if (solicitudDevolucionIntermedia.docEntry > 0) 
                 throw new Exception("Ya se generó un documento de SAP para esta devolucion"); 
-            }
+            
 
 
             return solicitudDevolucionSAP.generarSolicitudDevolucion();
 
         }
 
+        public string  cancelarSolicitud(int numero) {
+            _SolicitudDevolucionHeaderRepo.cancelarSolicitud(numero);
+            return "Solicitud cancelada";
+        }
              
 
     }

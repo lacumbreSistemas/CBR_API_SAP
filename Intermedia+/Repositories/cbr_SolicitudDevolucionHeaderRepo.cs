@@ -40,7 +40,7 @@ namespace Intermedia_.Repositories
         public List<cbr_SolicitudDevolucionHeader> obtenerSolicitudesDevolucionSinDocEntry(string WhsCode) {
             List<cbr_SolicitudDevolucionHeader> _solicitudesDevolucionSinDocEntry = new List<cbr_SolicitudDevolucionHeader>();
 
-            _solicitudesDevolucionSinDocEntry = db.cbr_SolicitudDevolucionHeader.Where(i => i.docEntry == 0 && i.whsCode == WhsCode && i.anulado == false).ToList();
+            _solicitudesDevolucionSinDocEntry = db.cbr_SolicitudDevolucionHeader.Where(i => i.docEntry == 0 && i.whsCode == WhsCode && i.anulado == false).OrderByDescending(i=> i.number).ToList();
 
             return _solicitudesDevolucionSinDocEntry;
         }
@@ -60,8 +60,10 @@ namespace Intermedia_.Repositories
             var header = db.cbr_SolicitudDevolucionHeader.FirstOrDefault(i=> i.number == numero);
             if (header != null) {
                 if ((bool)header.anulado)
-                    throw new Exception("ESte documento ya había sido anulado");
+                    throw new Exception("Este documento ya había sido anulado");
 
+                if(header.docEntry > 0)
+                    throw new Exception("Este documento ya fue subido a SAP, no se puede cancelar");
                 header.anulado = true;
 
                 db.SaveChanges();
@@ -71,13 +73,14 @@ namespace Intermedia_.Repositories
             else
             {
 
-                //throw new Exception("");
+                throw new Exception("Solicitud de traslado no encontrada");
             }
            
 
         }
 
 
+       
        
      
 

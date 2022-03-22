@@ -126,11 +126,23 @@ namespace TEST.Controllers
         {
             var solicitudDevolucionSAP = SolicitudDevolucionRepo.generarSolicitudDevolucionSAP(numero);
 
-            _Response.mensaje = "Documento de solicitud de devolucion" + solicitudDevolucionSAP.DocEntry + "creado exitosamente en SAP";
+            _Response.mensaje = "Documento de solicitud de devolucion " + solicitudDevolucionSAP.DocNum + " creado exitosamente en SAP";
             _Response.data = solicitudDevolucionSAP;
             return Ok(_Response);
         }
 
+
+        [HttpPost("AnularSolicitud/{numero}")]
+        public IActionResult AnularSolicitud(int numero)
+        {
+
+          var cancelar =   SolicitudDevolucionRepo.cancelarSolicitud(numero);
+            _Response.mensaje = cancelar;
+            _Response.data = null;
+
+
+            return Ok(_Response);
+        }
 
     }
 }

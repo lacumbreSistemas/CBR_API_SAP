@@ -43,6 +43,15 @@ namespace SAP.Repositories.SolicitudesDevoliciones
             }
             throw new Exception("Entrada de mercancía Error [" + _MasterRepository.connection.GetLastErrorDescription() + "] ");
         }
-        
+
+
+        public int obtenerDocnum(int Docentry)
+        {
+          var docNumConsulta =   _MasterRepository.doQuery("select Docnum from OPRR where docentry ="+Docentry);
+            docNumConsulta.MoveFirst();
+
+            int docNum = docNumConsulta.Fields.Item("Docnum").Value;
+            return docNum;
+        }
     }
 }

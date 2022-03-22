@@ -12,6 +12,7 @@ namespace Domain.Models.SolicitudDevolucionModels
    public class SolicitudDevolucionModelSAP: SolicitudDevolucionModelMaster
     {
         public int DocEntry { get; set; }
+        public int DocNum { get; set; }
 
         public List<SolicitudDevolucionEntryResumenMaster> _solicitudDevolucionEntryResumenList = new List<SolicitudDevolucionEntryResumenMaster>();
 
@@ -44,6 +45,8 @@ namespace Domain.Models.SolicitudDevolucionModels
             });
 
             DocEntry = solicitudesDevolucionesRepo.generarSolicitudDevolicion(solicitudDevolucionSAP);
+
+            DocNum = solicitudesDevolucionesRepo.obtenerDocnum(DocEntry);
 
             solicitudDevolucionHeaderRepo.setDocEntry(numeroDevolucion,DocEntry);
 
