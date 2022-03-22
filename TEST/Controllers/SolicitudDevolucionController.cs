@@ -121,8 +121,8 @@ namespace TEST.Controllers
 
 
 
-        [HttpPost("GenerarSolicitudDevolucionSAP")]
-        public IActionResult generarSolicitudDevolucionSAP([FromHeader] int numero)
+        [HttpPost("GenerarSolicitudDevolucionSAP/{numero}")]
+        public IActionResult generarSolicitudDevolucionSAP(int numero)
         {
             var solicitudDevolucionSAP = SolicitudDevolucionRepo.generarSolicitudDevolucionSAP(numero);
 

@@ -56,6 +56,27 @@ namespace Intermedia_.Repositories
 
         }
 
+        public void cancelarSolicitud(int numero) {
+            var header = db.cbr_SolicitudDevolucionHeader.FirstOrDefault(i=> i.number == numero);
+            if (header != null) {
+                if ((bool)header.anulado)
+                    throw new Exception("ESte documento ya había sido anulado");
+
+                header.anulado = true;
+
+                db.SaveChanges();
+
+
+            }
+            else
+            {
+
+                //throw new Exception("");
+            }
+           
+
+        }
+
 
        
      
