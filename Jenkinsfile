@@ -48,6 +48,7 @@ pipeline {
 
     stage('Build') {
       steps {
+          bat "dotnet restore"
           script { 
             if (env.BRANCH_NAME == "develop") {                                          
               echo "------------>Build Pruebas<------------"
