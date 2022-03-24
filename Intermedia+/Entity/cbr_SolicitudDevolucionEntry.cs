@@ -13,13 +13,13 @@ namespace Intermedia_
         [StringLength(50)]
         public string itemCode { get; set; }
 
-        public double? quantity { get; set; }
+        public double quantity { get; set; }
 
-        public DateTime? fecha { get; set; }
+        public DateTime fecha { get; set; }
 
-        public bool? deleted { get; set; }
+        public bool deleted { get; set; }
 
-        public int? deletedId { get; set; }
+        public int deletedId { get; set; }
 
         [StringLength(50)]
         public string usuario { get; set; }
@@ -27,7 +27,5 @@ namespace Intermedia_
         public int number { get; set; }
 
         public bool cancelado { get; set; }
-
-
     }
 }

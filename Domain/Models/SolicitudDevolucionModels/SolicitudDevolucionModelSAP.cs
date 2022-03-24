@@ -13,6 +13,7 @@ namespace Domain.Models.SolicitudDevolucionModels
     {
         public int DocEntry { get; set; }
         public int DocNum { get; set; }
+      
 
         public List<SolicitudDevolucionEntryResumenMaster> _solicitudDevolucionEntryResumenList = new List<SolicitudDevolucionEntryResumenMaster>();
 
@@ -23,22 +24,24 @@ namespace Domain.Models.SolicitudDevolucionModels
         }
 
         public SolicitudDevolucionModelSAP generarSolicitudDevolucion() 
-        { 
-        
+        {
 
 
+            SolicitudDevolucionSalesPersonCodesRepo solicitudDevolucionSalesPersonCodesRepo = new SolicitudDevolucionSalesPersonCodesRepo();
             SolicitudDevolucionSAPEntity solicitudDevolucionSAP = new SolicitudDevolucionSAPEntity();
             SolicitudesDevolucionesRepo solicitudesDevolucionesRepo = new SolicitudesDevolucionesRepo();
             cbr_SolicitudDevolucionHeaderRepo solicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
             solicitudDevolucionSAP.CardCode = codigoProveedor;
             solicitudDevolucionSAP.WhsCode = codigoTienda;
+            solicitudDevolucionSAP.Comentario = comentario;
+            solicitudDevolucionSAP.codigoPersonaCompras = solicitudDevolucionSalesPersonCodesRepo.obtenerSolicitudDevolucionSalesPersonCode(codigoTienda);
 
             _solicitudDevolucionEntryResumenList.ForEach(i =>
             {
 
                 SolicitudDevolucionEntrySAPEntity solicitudDevolucionEntrySAPEntity = new SolicitudDevolucionEntrySAPEntity();
                 solicitudDevolucionEntrySAPEntity.ItemCode = i.CodigoProducto;
-                solicitudDevolucionEntrySAPEntity.Cantidad = (double)i.CantidadEscaneada;
+                solicitudDevolucionEntrySAPEntity.Cantidad = (double)i.CantidadEscaneada; ;
 
                 solicitudDevolucionSAP.solicitudDevolucionEntrySAPEntities.Add(solicitudDevolucionEntrySAPEntity);
 

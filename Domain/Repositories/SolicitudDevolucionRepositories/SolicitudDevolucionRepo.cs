@@ -79,6 +79,8 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
             solicitudDevolucionSAP.numeroDevolucion = solicitudDevolucionIntermedia.numeroDevolucion;
             solicitudDevolucionSAP.codigoProveedor = solicitudDevolucionIntermedia.codigoProveedor;
             solicitudDevolucionSAP.codigoTienda = solicitudDevolucionIntermedia.codigoTienda;
+            solicitudDevolucionSAP.comentario = solicitudDevolucionIntermedia.comentario;
+            
 
             if (solicitudDevolucionIntermedia.entries.Count == 0)
                 throw new Exception("No tiene items escaneados para subir");

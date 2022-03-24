@@ -13,6 +13,10 @@ namespace SAP.Models.SolicitudDevolicionEntrys
         public string CardCode { get; set; }
         public string WhsCode { get; set; }
 
+        public string Comentario { get; set; }
+
+        public int codigoPersonaCompras { get; set; }
+
         public DateTime Fecha { get; set; }
 
         public List<SolicitudDevolucionEntrySAPEntity> solicitudDevolucionEntrySAPEntities { get; set; }

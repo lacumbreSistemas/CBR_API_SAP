@@ -8,19 +8,15 @@ namespace Intermedia_
     public partial class Data : DbContext
     {
         public Data()
-            #if (Debug)
-                        : base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
-            #endif
-            #if (Pruebas)
-                        : base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
-
-            #endif
-
-             #if (Produccion)
-                        : base("data source=10.10.1.12;initial catalog=ApiSAP;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
-
-            #endif
-
+#if(Debug)
+            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+#endif
+            #if(Pruebas)
+            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+#endif
+            #if(Produccion)
+            : base("data source=10.10.1.12;initial catalog=ApiSAP;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+#endif
         {
         }
 
@@ -31,8 +27,11 @@ namespace Intermedia_
         public virtual DbSet<ErrorLog> ErrorLog { get; set; }
         public virtual DbSet<SolicitudDevolisionEscaneos> SolicitudDevolisionEscaneos { get; set; }
         public virtual DbSet<cbr_listaItemsRecepcionImportados> cbr_listaItemsRecepcionImportados { get; set; }
+        public virtual DbSet<cbr_TrasladosSAP_Entry> cbr_TrasladosSAP_Entry { get; set; }
+        public virtual DbSet<cbr_TrasladosSAP_Header> cbr_TrasladosSAP_Header { get; set; }
         public virtual DbSet<cbr_UsuariosApiSAP> cbr_UsuariosApiSAP { get; set; }
         public virtual DbSet<inventarioSAP> inventarioSAP { get; set; }
+        public virtual DbSet<SolicitudDevolucionSalesPersonCodes> SolicitudDevolucionSalesPersonCodes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -60,16 +59,16 @@ namespace Intermedia_
                 .Property(e => e.usuario)
                 .IsUnicode(false);
 
-            //modelBuilder.Entity<cbr_SolicitudDevolucionHeader>()
-            //    .Property(e => e.number)
-            //    .IsUnicode(false);
-
             modelBuilder.Entity<cbr_SolicitudDevolucionHeader>()
                 .Property(e => e.whsCode)
                 .IsUnicode(false);
 
             modelBuilder.Entity<cbr_SolicitudDevolucionHeader>()
                 .Property(e => e.cardCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_SolicitudDevolucionHeader>()
+                .Property(e => e.comentario)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ErrorLog>()
@@ -104,6 +103,30 @@ namespace Intermedia_
                 .Property(e => e.itemCode)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<cbr_TrasladosSAP_Entry>()
+                .Property(e => e.ItemCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_TrasladosSAP_Entry>()
+                .Property(e => e.usuario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_TrasladosSAP_Entry>()
+                .Property(e => e.Origen)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_TrasladosSAP_Entry>()
+                .Property(e => e.Destino)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_TrasladosSAP_Header>()
+                .Property(e => e.Origen)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_TrasladosSAP_Header>()
+                .Property(e => e.Destino)
+                .IsUnicode(false);
+
             modelBuilder.Entity<cbr_UsuariosApiSAP>()
                 .Property(e => e.usuario)
                 .IsUnicode(false);
@@ -122,6 +145,10 @@ namespace Intermedia_
 
             modelBuilder.Entity<inventarioSAP>()
                 .Property(e => e.Usuario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<SolicitudDevolucionSalesPersonCodes>()
+                .Property(e => e.tienda)
                 .IsUnicode(false);
         }
     }

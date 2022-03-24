@@ -10,7 +10,6 @@ namespace Intermedia_
     {
         public int id { get; set; }
 
-        //[StringLength(12)]
         public int number { get; set; }
 
         [StringLength(5)]
@@ -20,12 +19,12 @@ namespace Intermedia_
         public string cardCode { get; set; }
 
         public DateTime? fecha { get; set; }
+
         public int docEntry { get; set; }
 
-        public bool? anulado { get; set; }
+        public bool anulado { get; set; }
 
         [StringLength(800)]
         public string comentario { get; set; }
-
     }
 }

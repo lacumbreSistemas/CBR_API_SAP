@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Intermedia_.Repositories;
 using SAP.Models.SolicitudDevolicionEntrys;
 using SAPbobsCOM;
 
@@ -14,14 +15,24 @@ namespace SAP.Repositories.SolicitudesDevoliciones
       
 
         public int generarSolicitudDevolicion(SolicitudDevolucionSAPEntity solicitudDevolucionHeaderSAPEntity) {
+          
+
 
           int siDocumentoAgregado = 0;
-       string nuevaSolicitudDevolucion = "";
+          string nuevaSolicitudDevolucion = "";
+            string tienda = solicitudDevolucionHeaderSAPEntity.WhsCode;
+     
+
+
 
 
             Documents solicitudDevolicion = _MasterRepository.connection.GetBusinessObject(BoObjectTypes.oGoodsReturnRequest);
             solicitudDevolicion.CardCode = solicitudDevolucionHeaderSAPEntity.CardCode;
-            solicitudDevolicion.UserFields.Fields.Item("U_tiedest").Value = solicitudDevolucionHeaderSAPEntity.WhsCode;
+            solicitudDevolicion.UserFields.Fields.Item("U_tiedest").Value = tienda;
+            solicitudDevolicion.Comments = solicitudDevolucionHeaderSAPEntity.Comentario;
+            
+           
+            solicitudDevolicion.SalesPersonCode = solicitudDevolucionHeaderSAPEntity.codigoPersonaCompras;
 
             solicitudDevolucionHeaderSAPEntity.solicitudDevolucionEntrySAPEntities.ForEach(i=> {
                 Document_Lines solicitudDevolicionLines = solicitudDevolicion.Lines;
