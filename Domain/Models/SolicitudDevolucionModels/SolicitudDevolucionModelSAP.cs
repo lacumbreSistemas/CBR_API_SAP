@@ -35,7 +35,7 @@ namespace Domain.Models.SolicitudDevolucionModels
             solicitudDevolucionSAP.WhsCode = codigoTienda;
             solicitudDevolucionSAP.Comentario = comentario;
             solicitudDevolucionSAP.codigoPersonaCompras = solicitudDevolucionSalesPersonCodesRepo.obtenerSolicitudDevolucionSalesPersonCode(codigoTienda);
-
+            solicitudDevolucionSAP.EncargadoDevolucion = usuario;
             _solicitudDevolucionEntryResumenList.ForEach(i =>
             {
 

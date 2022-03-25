@@ -42,6 +42,7 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
                 solicitudDevolucion.codigoProveedor = i.cardCode;
                 solicitudDevolucion.codigoTienda = i.whsCode;
                 solicitudDevolucion.fechaCreacion = i.fecha;
+                solicitudDevolucion.usuario = i.usuario;
 
                 solicitudDevolucion.setNombreProveedor();
 
@@ -80,7 +81,8 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
             solicitudDevolucionSAP.codigoProveedor = solicitudDevolucionIntermedia.codigoProveedor;
             solicitudDevolucionSAP.codigoTienda = solicitudDevolucionIntermedia.codigoTienda;
             solicitudDevolucionSAP.comentario = solicitudDevolucionIntermedia.comentario;
-            
+            solicitudDevolucionSAP.usuario = solicitudDevolucionIntermedia.usuario;
+
 
             if (solicitudDevolucionIntermedia.entries.Count == 0)
                 throw new Exception("No tiene items escaneados para subir");

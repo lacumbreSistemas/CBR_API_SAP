@@ -29,6 +29,7 @@ namespace SAP.Repositories.SolicitudesDevoliciones
             Documents solicitudDevolicion = _MasterRepository.connection.GetBusinessObject(BoObjectTypes.oGoodsReturnRequest);
             solicitudDevolicion.CardCode = solicitudDevolucionHeaderSAPEntity.CardCode;
             solicitudDevolicion.UserFields.Fields.Item("U_tiedest").Value = tienda;
+            solicitudDevolicion.UserFields.Fields.Item("U_encargado_dev").Value = solicitudDevolucionHeaderSAPEntity.EncargadoDevolucion;
             solicitudDevolicion.Comments = solicitudDevolucionHeaderSAPEntity.Comentario;
             
            

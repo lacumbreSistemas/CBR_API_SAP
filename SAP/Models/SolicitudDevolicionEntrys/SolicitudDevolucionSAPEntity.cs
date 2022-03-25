@@ -17,6 +17,7 @@ namespace SAP.Models.SolicitudDevolicionEntrys
 
         public int codigoPersonaCompras { get; set; }
 
+        public string EncargadoDevolucion { get; set; }
         public DateTime Fecha { get; set; }
 
         public List<SolicitudDevolucionEntrySAPEntity> solicitudDevolucionEntrySAPEntities { get; set; }

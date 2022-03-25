@@ -30,7 +30,7 @@ namespace Domain.Models.SolicitudDevolucionModels
             codigoProveedor = solicitudDevolucion.codigoProveedor;
             fechaCreacion = DateTime.Now;
             comentario = solicitudDevolucion.comentario;
-
+            usuario = solicitudDevolucion.usuario;
 
             //TiendaCode = solicitudDevolucion.TiendaCode;
             //ProveedorCode = solicitudDevolucion.ProveedorCode;
@@ -55,8 +55,8 @@ namespace Domain.Models.SolicitudDevolucionModels
             _solicitudDevolucionHeader.fecha =fechaCreacion;
             _solicitudDevolucionHeader.number = numeroDevolucion;
             _solicitudDevolucionHeader.comentario = comentario;
-            _solicitudDevolucionHeader.anulado = false; 
-
+            _solicitudDevolucionHeader.anulado = false;
+            _solicitudDevolucionHeader.usuario = usuario;
             numeroDevolucion =  _SolicitudDevolucionHeaderRepo.crearCbr_SolicitudDevolucionHeader(_solicitudDevolucionHeader);
 
             return this;

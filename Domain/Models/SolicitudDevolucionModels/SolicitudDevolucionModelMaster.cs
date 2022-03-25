@@ -19,5 +19,7 @@ namespace Domain.Models.SolicitudDevolucionModels
         public string comentario { get; set; }
 
         public bool? anulado { get; set; }
+
+        public string usuario { get; set;}
     }
 }

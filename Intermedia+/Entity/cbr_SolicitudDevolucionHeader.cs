@@ -26,5 +26,8 @@ namespace Intermedia_
 
         [StringLength(800)]
         public string comentario { get; set; }
+
+        [StringLength(50)]
+        public string usuario { get; set; }
     }
 }

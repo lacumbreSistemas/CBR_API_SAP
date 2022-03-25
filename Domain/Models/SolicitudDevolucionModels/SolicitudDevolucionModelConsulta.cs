@@ -53,6 +53,7 @@ namespace Domain.Models.SolicitudDevolucionModels
             this.docEntry = solicitudHeader.docEntry;
             this.codigoProveedor = solicitudHeader.cardCode;
             this.codigoTienda = solicitudHeader.whsCode;
+            this.usuario = solicitudHeader.usuario;
             setNombreProveedor();
 
         }
