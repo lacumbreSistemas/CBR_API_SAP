@@ -45,7 +45,7 @@ namespace Domain.Models.SolicitudDevolucionModels
           
             var solicitudHeader = _SolicitudDevolucionHeaderRepo.obtenerSolicitudIntermediaNumber(numeroDevolucion);
 
-            this.id = solicitudHeader.id;
+            //this.id = solicitudHeader.id;
             this.anulado = solicitudHeader.anulado;
             this.comentario = solicitudHeader.comentario;
             this.anulado = solicitudHeader.anulado;

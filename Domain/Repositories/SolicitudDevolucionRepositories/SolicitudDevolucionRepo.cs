@@ -37,7 +37,7 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
             solicitudesDevolucionIntermedia.ForEach(i =>
             {
                 SolicitudDevolucionModelConsulta solicitudDevolucion = new SolicitudDevolucionModelConsulta();
-                solicitudDevolucion.id = i.id;
+                //solicitudDevolucion.id = i.id;
                 solicitudDevolucion.numeroDevolucion = i.number;
                 solicitudDevolucion.codigoProveedor = i.cardCode;
                 solicitudDevolucion.codigoTienda = i.whsCode;

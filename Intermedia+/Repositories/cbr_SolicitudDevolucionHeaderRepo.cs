@@ -19,13 +19,13 @@ namespace Intermedia_.Repositories
 
             solicitudDevolucionHeader.fecha = DateTime.Now;
 
-            if (!db.cbr_SolicitudDevolucionHeader.Any())
-            {
-                solicitudDevolucionHeader.number = 1;
-            }
-            else {
-                solicitudDevolucionHeader.number = db.cbr_SolicitudDevolucionHeader.Max(i => i.number) + 1;
-            }
+            //if (!db.cbr_SolicitudDevolucionHeader.Any())
+            //{
+            //    solicitudDevolucionHeader.number = 1;
+            //}
+            //else {
+            //    solicitudDevolucionHeader.number = db.cbr_SolicitudDevolucionHeader.Max(i => i.number) + 1;
+            //}
 
             solicitudDevolucionHeader.docEntry = 0;
 

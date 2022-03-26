@@ -8,8 +8,8 @@ namespace Intermedia_
 
     public partial class cbr_SolicitudDevolucionHeader
     {
-        public int id { get; set; }
 
+        [Key]
         public int number { get; set; }
 
         [StringLength(5)]

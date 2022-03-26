@@ -21,6 +21,10 @@ namespace HQ
                        : base("data source=10.10.1.15;initial catalog=hqdata;persist security info=True;user id=sa;password=colonial@2000;MultipleActiveResultSets=True;App=EntityFramework")
 
 #endif
+#if (Release)
+                       : base("data source=10.10.1.15;initial catalog=hqdata;persist security info=True;user id=sa;password=colonial@2000;MultipleActiveResultSets=True;App=EntityFramework")
+
+#endif
 
         {
 
