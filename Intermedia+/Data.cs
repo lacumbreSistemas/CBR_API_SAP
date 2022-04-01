@@ -8,34 +8,19 @@ namespace Intermedia_
     public partial class Data : DbContext
     {
         public Data()
-#if (Debug)
-            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
-#endif
-#if (Pruebas)
-            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
-#endif
-#if (Produccion)
-            : base("data source=10.10.1.12;initial catalog=ApiSAP;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
-#endif
-
-#if (Release)
-                        : base("data source=10.10.1.12;initial catalog=ApiSAPTest;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
-
-#endif
+            : base("name=Data3")
         {
         }
 
         public virtual DbSet<cbr_ComprasSAP_Escaneo> cbr_ComprasSAP_Escaneo { get; set; }
         public virtual DbSet<cbr_contenedoresInternacionalesCerrados> cbr_contenedoresInternacionalesCerrados { get; set; }
+        public virtual DbSet<cbr_MermasEntry> cbr_MermasEntry { get; set; }
+        public virtual DbSet<cbr_MermasHeader> cbr_MermasHeader { get; set; }
         public virtual DbSet<cbr_SolicitudDevolucionEntry> cbr_SolicitudDevolucionEntry { get; set; }
         public virtual DbSet<cbr_SolicitudDevolucionHeader> cbr_SolicitudDevolucionHeader { get; set; }
         public virtual DbSet<ErrorLog> ErrorLog { get; set; }
-        public virtual DbSet<SolicitudDevolisionEscaneos> SolicitudDevolisionEscaneos { get; set; }
         public virtual DbSet<cbr_listaItemsRecepcionImportados> cbr_listaItemsRecepcionImportados { get; set; }
-        public virtual DbSet<cbr_TrasladosSAP_Entry> cbr_TrasladosSAP_Entry { get; set; }
-        public virtual DbSet<cbr_TrasladosSAP_Header> cbr_TrasladosSAP_Header { get; set; }
         public virtual DbSet<cbr_UsuariosApiSAP> cbr_UsuariosApiSAP { get; set; }
-        public virtual DbSet<inventarioSAP> inventarioSAP { get; set; }
         public virtual DbSet<SolicitudDevolucionSalesPersonCodes> SolicitudDevolucionSalesPersonCodes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -53,6 +38,30 @@ namespace Intermedia_
                 .IsUnicode(false);
 
             modelBuilder.Entity<cbr_contenedoresInternacionalesCerrados>()
+                .Property(e => e.usuario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_MermasEntry>()
+                .Property(e => e.itemCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_MermasEntry>()
+                .Property(e => e.usuario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_MermasHeader>()
+                .Property(e => e.cardCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_MermasHeader>()
+                .Property(e => e.whsCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_MermasHeader>()
+                .Property(e => e.comentario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_MermasHeader>()
                 .Property(e => e.usuario)
                 .IsUnicode(false);
 
@@ -76,6 +85,10 @@ namespace Intermedia_
                 .Property(e => e.comentario)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<cbr_SolicitudDevolucionHeader>()
+                .Property(e => e.usuario)
+                .IsUnicode(false);
+
             modelBuilder.Entity<ErrorLog>()
                 .Property(e => e.mensaje)
                 .IsUnicode(false);
@@ -86,14 +99,6 @@ namespace Intermedia_
 
             modelBuilder.Entity<ErrorLog>()
                 .Property(e => e.detalle)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<SolicitudDevolisionEscaneos>()
-                .Property(e => e.itemCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<SolicitudDevolisionEscaneos>()
-                .Property(e => e.usuario)
                 .IsUnicode(false);
 
             modelBuilder.Entity<cbr_listaItemsRecepcionImportados>()
@@ -108,30 +113,6 @@ namespace Intermedia_
                 .Property(e => e.itemCode)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<cbr_TrasladosSAP_Entry>()
-                .Property(e => e.ItemCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<cbr_TrasladosSAP_Entry>()
-                .Property(e => e.usuario)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<cbr_TrasladosSAP_Entry>()
-                .Property(e => e.Origen)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<cbr_TrasladosSAP_Entry>()
-                .Property(e => e.Destino)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<cbr_TrasladosSAP_Header>()
-                .Property(e => e.Origen)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<cbr_TrasladosSAP_Header>()
-                .Property(e => e.Destino)
-                .IsUnicode(false);
-
             modelBuilder.Entity<cbr_UsuariosApiSAP>()
                 .Property(e => e.usuario)
                 .IsUnicode(false);
@@ -142,14 +123,6 @@ namespace Intermedia_
 
             modelBuilder.Entity<cbr_UsuariosApiSAP>()
                 .Property(e => e.contrasenia)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<inventarioSAP>()
-                .Property(e => e.ItemCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<inventarioSAP>()
-                .Property(e => e.Usuario)
                 .IsUnicode(false);
 
             modelBuilder.Entity<SolicitudDevolucionSalesPersonCodes>()

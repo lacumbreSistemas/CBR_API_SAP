@@ -53,7 +53,7 @@ namespace Intermedia_.Repositories
                
 
                 throw new Exception("Escaneo ya fue anulado por "+ escaneoAnulacion.usuario);
-            }else if (escaneoPorAnular.cancelado)
+            }else if ((bool) escaneoPorAnular.cancelado)
             {
                 throw new Exception("Item cancelado");
 

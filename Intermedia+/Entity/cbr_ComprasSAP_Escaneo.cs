@@ -22,7 +22,7 @@ namespace Intermedia_
 
         public DateTime fecha { get; set; }
 
-        public int entradaMercanciaDocEntry { get; set; }
+        public int? entradaMercanciaDocEntry { get; set; }
 
         public int baseLine { get; set; }
 
@@ -30,6 +30,6 @@ namespace Intermedia_
 
         public int escaneoAnuladoID { get; set; }
 
-        public bool matriculado { get; set; }
+        public bool? matriculado { get; set; }
     }
 }

@@ -74,14 +74,13 @@
     <Compile Include="Entity\cbr_ComprasSAP_Escaneo.cs" />
     <Compile Include="Entity\cbr_contenedoresInternacionalesCerrados.cs" />
     <Compile Include="Entity\cbr_listaItemsRecepcionImportados.cs" />
+    <Compile Include="Entity\cbr_MermasEntry.cs" />
+    <Compile Include="Entity\cbr_MermasHeader.cs" />
     <Compile Include="Entity\cbr_SolicitudDevolucionEntry.cs" />
     <Compile Include="Entity\cbr_SolicitudDevolucionHeader.cs" />
-    <Compile Include="Entity\cbr_TrasladosSAP_Entry.cs" />
-    <Compile Include="Entity\cbr_TrasladosSAP_Header.cs" />
     <Compile Include="Entity\cbr_UsuariosApiSAP.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Entity\ErrorLog.cs" />
-    <Compile Include="Entity\inventarioSAP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\cbr_ComprasSAP_Escaneo_Repository.cs" />
     <Compile Include="Repositories\cbr_ComprasSAP_NoMatriculados_Repository.cs" />
@@ -92,10 +91,7 @@
     <Compile Include="Repositories\ErrorLogRepository.cs" />
     <Compile Include="Repositories\MasterRespository.cs" />
     <Compile Include="Repositories\SolicitudDevolucionSalesPersonCodesRepo.cs" />
-    <Compile Include="ResilenciaEstrategia.cs" />
-    <Compile Include="RetryConfiguration.cs" />
-    <Compile Include="SolicitudDevolisionEscaneos.cs" />
-    <Compile Include="SolicitudDevolucionSalesPersonCodes.cs" />
+    <Compile Include="Entity\SolicitudDevolucionSalesPersonCodes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
