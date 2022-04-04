@@ -21,7 +21,7 @@ namespace Intermedia_
 
         public int? docEntry { get; set; }
 
-        public bool? anulado { get; set; }
+        public bool anulado { get; set; }
 
         [StringLength(800)]
         public string comentario { get; set; }
