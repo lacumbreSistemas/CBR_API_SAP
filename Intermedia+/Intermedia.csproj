@@ -91,7 +91,7 @@
     <Compile Include="Repositories\MasterRespository.cs" />
     <Compile Include="Repositories\Devoluciones\SolicitudDevolucionSalesPersonCodesRepo.cs" />
     <Compile Include="Entity\SolicitudDevolucionSalesPersonCodes.cs" />
-    <Compile Include="Repositories\MermaEntryRepo.cs" />
+    <Compile Include="Repositories\Mermas\MermaEntryRepo.cs" />
     <Compile Include="Repositories\Mermas\MermasHeaderRepo.cs" />
   </ItemGroup>
   <ItemGroup>

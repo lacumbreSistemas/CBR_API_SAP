@@ -16,13 +16,13 @@ namespace Intermedia_.Repositories
 
             return merma; 
         }
-        public cbr_MermasHeader crearDocumentoIntermedioMerma(cbr_MermasHeader merma) {
+        public int crearDocumentoIntermedioMerma(cbr_MermasHeader merma) {
 
             db.cbr_MermasHeader.Add(merma);
             db.SaveChanges();
 
 
-            return merma;
+            return merma.number;
         
         }
 

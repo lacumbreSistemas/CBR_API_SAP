@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Intermedia_.Repositories
 {
-  public  class MermaEntryRepo:MasterRespository
+  public  class MermasEntryRepo:MasterRespository
     {
         public cbr_MermasEntry crearEntryDocumentoIntermedioMerma(cbr_MermasEntry entryMerma)
         {

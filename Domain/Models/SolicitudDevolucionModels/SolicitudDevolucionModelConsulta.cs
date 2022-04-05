@@ -48,7 +48,7 @@ namespace Domain.Models.SolicitudDevolucionModels
             //this.id = solicitudHeader.id;
             this.anulado = solicitudHeader.anulado;
             this.comentario = solicitudHeader.comentario;
-            this.anulado = solicitudHeader.anulado;
+           
             this.fechaCreacion = solicitudHeader.fecha;
             this.docEntry = solicitudHeader.docEntry;
             this.codigoProveedor = solicitudHeader.cardCode;
