@@ -25,7 +25,6 @@ namespace Intermedia_.Repositories
         }
 
 
-
         public List<cbr_SolicitudDevolucionEntry> obtenerEntriesPorNumberItemCode(int number, string itemCode)
         {
 
@@ -102,5 +101,6 @@ namespace Intermedia_.Repositories
 
         }
 
+     
     }
 }

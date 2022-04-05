@@ -13,7 +13,7 @@ namespace Domain.Models.SolicitudDevolucionModels
 {
     public class SolicitudDevolucionModelConsulta: SolicitudDevolucionModelMaster
     {
-        public int id { get; set; }
+       
         public int docEntry { get; set;  }
         public string nombreProveedor { get; set; }
         public List<SolicitudDevolucionEntryResumenConsulta> entries { get; set; }
