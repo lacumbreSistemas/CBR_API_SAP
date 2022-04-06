@@ -31,7 +31,7 @@ namespace SAP.Repositories.SolicitudesDevoliciones
             solicitudDevolicion.UserFields.Fields.Item("U_tiedest").Value = tienda;
             solicitudDevolicion.UserFields.Fields.Item("U_encargado_dev").Value = solicitudDevolucionHeaderSAPEntity.EncargadoDevolucion;
             solicitudDevolicion.Comments = solicitudDevolucionHeaderSAPEntity.Comentario;
-            
+   
            
             solicitudDevolicion.SalesPersonCode = solicitudDevolucionHeaderSAPEntity.codigoPersonaCompras;
 
@@ -39,7 +39,7 @@ namespace SAP.Repositories.SolicitudesDevoliciones
                 Document_Lines solicitudDevolicionLines = solicitudDevolicion.Lines;
                 solicitudDevolicionLines.ItemCode = i.ItemCode;
                 solicitudDevolicionLines.Quantity = i.Cantidad;
-
+                solicitudDevolicionLines.WarehouseCode = tienda;
                 solicitudDevolicionLines.Add();
             });
 

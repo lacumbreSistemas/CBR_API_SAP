@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intermedia_.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,28 @@ namespace Domain.Models.Mermas
 
             this.numero = numero;
             this.codigoProducto = itemCode; 
+       
         }
 
+        public MermasEntryResumenActualizar() { 
+          
+        
+        }
+
+
+        public string anular() {
+
+            MermasEntryRepo mermasEntryRepo = new MermasEntryRepo();
+            bool itemsCancelados = mermasEntryRepo.cancelarItem(numero,codigoProducto);
+
+            if (itemsCancelados)
+            {
+                throw new Exception("El item " + descripcionProducto + " ya había sido cancelado");
+            }
+
+
+            return "Item " + this.descripcionProducto + " cancelado exitosamente";
+
+        }
     }
 }
