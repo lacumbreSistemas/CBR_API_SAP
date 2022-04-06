@@ -39,7 +39,7 @@ namespace SAP.Repositories.SolicitudesDevoliciones
                 Document_Lines solicitudDevolicionLines = solicitudDevolicion.Lines;
                 solicitudDevolicionLines.ItemCode = i.ItemCode;
                 solicitudDevolicionLines.Quantity = i.Cantidad;
-
+                solicitudDevolicionLines.WarehouseCode = tienda;
                 solicitudDevolicionLines.Add();
             });
 
