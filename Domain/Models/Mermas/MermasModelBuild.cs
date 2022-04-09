@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Models.Mermas
 {
-    public class MermasModelBuild:MermasModelMaster
+    public class MermasModelBuild : MermasModelMaster
     {
 
-        public MermasModelBuild() {  }
+        public MermasModelBuild() { }
 
         public MermasModelBuild(MermasModelBuild mermaModelBuild) {
 
@@ -19,9 +19,9 @@ namespace Domain.Models.Mermas
             codigoProveedor = mermaModelBuild.codigoProveedor;
             fechaCreacion = DateTime.Now;
             comentario = mermaModelBuild.comentario;
-            usuario = mermaModelBuild.usuario; 
+            usuario = mermaModelBuild.usuario;
 
-        
+
         }
 
 
@@ -36,7 +36,7 @@ namespace Domain.Models.Mermas
             mermasHeader.comentario = comentario;
             mermasHeader.anulado = false;
             mermasHeader.usuario = usuario;
-            mermasHeader.docEntry = 0;
+            mermasHeader.ifSAP = false;
             numero = mermasHeaderRepo.crearDocumentoIntermedioMerma(mermasHeader);
 
             return this;

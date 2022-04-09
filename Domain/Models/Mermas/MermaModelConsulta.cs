@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Domain.Models.Mermas
 {
-   public class MermaModelConsulta: MermasModelMaster
+    public class MermaModelConsulta : MermasModelMaster
     {
-      public int docEntry { get; set;  }
 
-     public string nombreProveedor { get; set; } 
 
-      public List<MermasEntryResumenConsulta> entries { get; set; }
+        public string nombreProveedor { get; set; }
 
+        public List<MermasEntryResumenConsulta> entries { get; set; }
+        public bool ifSAP {get; set;}
 
         public MermaModelConsulta() {
 
@@ -35,7 +35,7 @@ namespace Domain.Models.Mermas
             this.comentario = mermaHEader.comentario;
 
             this.fechaCreacion = mermaHEader.fecha;
-            this.docEntry = (int) mermaHEader.docEntry;
+            this.ifSAP =  mermaHEader.ifSAP;
             this.codigoProveedor = mermaHEader.cardCode;
             this.codigoTienda = mermaHEader.whsCode;
             this.usuario = mermaHEader.usuario;

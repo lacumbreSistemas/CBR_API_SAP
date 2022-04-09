@@ -18,6 +18,7 @@ namespace Domain.Models.Mermas
         public int numero { get; set; }
 
         public string NombreProducto { get; set; }
+        public bool ifSAP { get; set; }
         //private
 
         public MermasEntryModelMaster() { 

@@ -30,20 +30,20 @@ namespace Intermedia_.Repositories
 
             List<cbr_MermasHeader> mermas = new List<cbr_MermasHeader>();
 
-            mermas = db.cbr_MermasHeader.Where(i => i.docEntry == 0 && !i.anulado && i.whsCode == WhsCode).OrderByDescending(i=> i.number).ToList();
+            mermas = db.cbr_MermasHeader.Where(i => !i.ifSAP && !i.anulado && i.whsCode == WhsCode).OrderByDescending(i=> i.number).ToList();
 
             return mermas; 
         }
 
 
-        public void setDocEntry(int number, int docEnrty) {
+        public void setDocEntry(int number) {
 
             var header = db.cbr_MermasHeader.FirstOrDefault(i=> i.number == number);
 
-            header.docEntry = docEnrty;
+            
 
             db.SaveChanges();
-        
+       
         }
 
         public void cancelarDocumentoIntermedioMerma(int number) {
@@ -54,10 +54,10 @@ namespace Intermedia_.Repositories
             if (header != null)
             {
 
-                if (!header.anulado)
+                if (header.anulado)
                     throw new Exception("Este documento ya había sido anulado");
 
-                if (header.docEntry > 0)
+                if (header.ifSAP)
                     throw new Exception("Este documento ya fue subido a SAP, no se puede cancelar");
 
                 header.anulado = true;

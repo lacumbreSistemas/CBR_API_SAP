@@ -27,5 +27,7 @@ namespace Intermedia_
         public int? number { get; set; }
 
         public bool? cancelado { get; set; }
+
+        public bool ifSAP { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace Intermedia_
         [StringLength(2)]
         public string whsCode { get; set; }
 
-        public int? docEntry { get; set; }
+       
 
         public bool anulado { get; set; }
 
@@ -28,5 +28,6 @@ namespace Intermedia_
 
         [StringLength(50)]
         public string usuario { get; set; }
+        public bool ifSAP { get; set; }
     }
 }
