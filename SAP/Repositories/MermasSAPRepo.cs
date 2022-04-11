@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace SAP.Repositories
 {
-    class MermasSAPRepo
+   public class MermasSAPRepo
     {
+        MasterRepository _MasterRepository = MasterRepository.GetInstance();
+
+
+        //public generarMerma()
     }
 }

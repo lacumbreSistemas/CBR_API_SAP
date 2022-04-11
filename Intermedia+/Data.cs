@@ -66,9 +66,9 @@ namespace Intermedia_
                 .Property(e => e.usuario)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<cbr_MermasHeader>()
-                .Property(e => e.cardCode)
-                .IsUnicode(false);
+            //modelBuilder.Entity<cbr_MermasHeader>()
+            //    .Property(e => e.cardCode)
+            //    .IsUnicode(false);
 
             modelBuilder.Entity<cbr_MermasHeader>()
                 .Property(e => e.whsCode)

@@ -36,7 +36,7 @@ namespace Domain.Models.Mermas
 
             this.fechaCreacion = mermaHEader.fecha;
             this.ifSAP =  mermaHEader.ifSAP;
-            this.codigoProveedor = mermaHEader.cardCode;
+            //this.codigoProveedor = mermaHEader.cardCode;
             this.codigoTienda = mermaHEader.whsCode;
             this.usuario = mermaHEader.usuario;
 
@@ -45,8 +45,8 @@ namespace Domain.Models.Mermas
         public void setNombreProveedor() {
 
             ProveedorSAPRepository proveedorSAPRepository = new ProveedorSAPRepository();
-            var proveedor = proveedorSAPRepository.obtenerProveedorCodigo(codigoProveedor);
-            nombreProveedor = proveedor.Nombre;
+            //var proveedor = proveedorSAPRepository.obtenerProveedorCodigo(codigoProveedor);
+            //nombreProveedor = proveedor.Nombre;
    
         }
 

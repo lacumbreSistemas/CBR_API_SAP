@@ -37,7 +37,7 @@ namespace Domain.Repositories.Mermas
 
                 merma.numero = i.number;
 
-                merma.codigoProveedor = i.cardCode;
+                //merma.codigoProveedor = i.cardCode;
                 merma.codigoTienda = i.whsCode;
                 merma.fechaCreacion = i.fecha;
                 merma.usuario = i.usuario;

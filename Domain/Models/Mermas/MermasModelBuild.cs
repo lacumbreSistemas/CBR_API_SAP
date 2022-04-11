@@ -16,7 +16,7 @@ namespace Domain.Models.Mermas
         public MermasModelBuild(MermasModelBuild mermaModelBuild) {
 
             codigoTienda = mermaModelBuild.codigoTienda;
-            codigoProveedor = mermaModelBuild.codigoProveedor;
+            //codigoProveedor = mermaModelBuild.codigoProveedor;
             fechaCreacion = DateTime.Now;
             comentario = mermaModelBuild.comentario;
             usuario = mermaModelBuild.usuario;
@@ -29,7 +29,7 @@ namespace Domain.Models.Mermas
 
             cbr_MermasHeader mermasHeader = new cbr_MermasHeader();
             MermasHeaderRepo mermasHeaderRepo = new MermasHeaderRepo();
-            mermasHeader.cardCode = codigoProveedor;
+            //mermasHeader.cardCode = codigoProveedor;
             mermasHeader.whsCode = codigoTienda;
             mermasHeader.fecha = fechaCreacion;
             mermasHeader.number = numero;
