@@ -13,8 +13,7 @@ namespace Intermedia_
 
         public DateTime? fecha { get; set; }
 
-        [StringLength(40)]
-        public string cardCode { get; set; }
+ 
 
         [StringLength(2)]
         public string whsCode { get; set; }
