@@ -25,6 +25,7 @@ namespace Domain.Models.Mermas
         public MermasModelConsulta(int numero) {
             entries = new List<MermasEntryResumenConsulta>();
             this.numero = numero;
+            obtenerHeader();
         }
 
         public void obtenerHeader() {

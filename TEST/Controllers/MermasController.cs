@@ -59,6 +59,16 @@ namespace TEST.Controllers
         }
 
 
+        [HttpPost("GenerarMermaSAP/{numero}")]
+        public IActionResult generarSolicitudDevolucionSAP(int numero)
+        {
+            var mermaSAP = mermasRepo.generarMermaSAP(numero);
+
+            _Response.mensaje = "Documento de Merma " + mermaSAP.DocEntry + " creado exitosamente en SAP";
+            _Response.data = mermaSAP;
+            return Ok(_Response);
+        }
+
 
 
         [HttpPost]
