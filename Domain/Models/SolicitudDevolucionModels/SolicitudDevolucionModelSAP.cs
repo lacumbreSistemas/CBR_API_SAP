@@ -51,7 +51,7 @@ namespace Domain.Models.SolicitudDevolucionModels
 
             DocNum = solicitudesDevolucionesRepo.obtenerDocnum(DocEntry);
 
-            solicitudDevolucionHeaderRepo.setDocEntry(numeroDevolucion,DocEntry);
+            solicitudDevolucionHeaderRepo.setDocEntry(numero,DocEntry);
 
 
             return this;

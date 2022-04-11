@@ -22,18 +22,18 @@ namespace Domain.Repositories.Mermas
             return nuevoDocumentoIntermedioMerma.numero == 0 ? throw new Exception("No se creó solicitud de devolución") : nuevoDocumentoIntermedioMerma;
         }
 
-        public List<MermaModelConsulta> obtenerListaMermasIntermediaAbiertas(string WhsCode) {
+        public List<MermasModelConsulta> obtenerListaMermasIntermediaAbiertas(string WhsCode) {
 
             List<cbr_MermasHeader> documentoMermaIntermedio = new List<cbr_MermasHeader>();
 
             documentoMermaIntermedio = mermasHeaderRepo.obtenerDocumentoIntermedioMerma(WhsCode).ToList();
 
-            List<MermaModelConsulta> documentosMermas = new List<MermaModelConsulta>();
+            List<MermasModelConsulta> documentosMermas = new List<MermasModelConsulta>();
 
 
             documentoMermaIntermedio.ForEach(i => {
 
-                MermaModelConsulta merma = new MermaModelConsulta();
+                MermasModelConsulta merma = new MermasModelConsulta();
 
                 merma.numero = i.number;
 
@@ -51,8 +51,8 @@ namespace Domain.Repositories.Mermas
 
         }
 
-        public MermaModelConsulta resumenDocumentoIntermedioMerma(int numero) {
-            MermaModelConsulta mermaModelConsulta = new MermaModelConsulta(numero);
+        public MermasModelConsulta resumenDocumentoIntermedioMerma(int numero) {
+            MermasModelConsulta mermaModelConsulta = new MermasModelConsulta(numero);
             mermaModelConsulta.resumenEntries();
 
             return mermaModelConsulta; 

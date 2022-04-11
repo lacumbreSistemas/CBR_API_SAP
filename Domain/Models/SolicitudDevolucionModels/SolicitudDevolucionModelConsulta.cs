@@ -30,7 +30,7 @@ namespace Domain.Models.SolicitudDevolucionModels
         public SolicitudDevolucionModelConsulta(int numero) {
             proveedorSAPRepository = new ProveedorSAPRepository();
              entries = new List<SolicitudDevolucionEntryResumenConsulta>();
-            numeroDevolucion = numero;
+            base.numero = numero;
           
             obtenerHeader();
           
@@ -43,7 +43,7 @@ namespace Domain.Models.SolicitudDevolucionModels
             cbr_SolicitudDevolucionHeaderRepo _SolicitudDevolucionHeaderRepo = new cbr_SolicitudDevolucionHeaderRepo();
 
           
-            var solicitudHeader = _SolicitudDevolucionHeaderRepo.obtenerSolicitudIntermediaNumber(numeroDevolucion);
+            var solicitudHeader = _SolicitudDevolucionHeaderRepo.obtenerSolicitudIntermediaNumber(numero);
 
             //this.id = solicitudHeader.id;
             this.anulado = solicitudHeader.anulado;
@@ -70,10 +70,10 @@ namespace Domain.Models.SolicitudDevolucionModels
          
             cbr_SolicitudDevolucionEntryRepo _SolicitudDevolucionEntryRepo = new cbr_SolicitudDevolucionEntryRepo();
 
-            _SolicitudDevolucionEntryRepo.obtenerEntriesPornumber(numeroDevolucion).Where(i=> !i.cancelado).GroupBy(i => new { i.number, i.itemCode }).ToList().ForEach(i => {
+            _SolicitudDevolucionEntryRepo.obtenerEntriesPornumber(numero).Where(i=> !i.cancelado).GroupBy(i => new { i.number, i.itemCode }).ToList().ForEach(i => {
 
                 SolicitudDevolucionEntryResumenConsulta _solicitudDevolucionEntryResumen = new SolicitudDevolucionEntryResumenConsulta(i.FirstOrDefault().itemCode);
-                _solicitudDevolucionEntryResumen.Numero = this.numeroDevolucion;
+                _solicitudDevolucionEntryResumen.Numero = this.numero;
                 _solicitudDevolucionEntryResumen.CantidadEscaneada = i.Sum(i=> i.quantity);
                 entries.Add(_solicitudDevolucionEntryResumen);
 

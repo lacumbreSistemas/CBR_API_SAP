@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Models.Mermas
 {
-    public class MermaModelConsulta : MermasModelMaster
+    public class MermasModelConsulta : MermasModelMaster
     {
 
 
@@ -17,12 +17,12 @@ namespace Domain.Models.Mermas
         public List<MermasEntryResumenConsulta> entries { get; set; }
         public bool ifSAP {get; set;}
 
-        public MermaModelConsulta() {
+        public MermasModelConsulta() {
 
             entries = new List<MermasEntryResumenConsulta>();
         }
 
-        public MermaModelConsulta(int numero) {
+        public MermasModelConsulta(int numero) {
             entries = new List<MermasEntryResumenConsulta>();
             this.numero = numero;
         }

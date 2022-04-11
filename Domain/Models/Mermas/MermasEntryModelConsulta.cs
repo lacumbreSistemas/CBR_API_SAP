@@ -38,6 +38,7 @@ namespace Domain.Models.Mermas
             escaneoAnulado.cantidad = (double) escaneoAnuladoEntity.quantity;
             escaneoAnulado.usuario = escaneoAnuladoEntity.usuario;
             escaneoAnulado.deleted = escaneoAnuladoEntity.deleted;
+      
 
             return escaneoAnulado;
 

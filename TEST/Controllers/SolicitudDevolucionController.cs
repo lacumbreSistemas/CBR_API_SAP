@@ -76,7 +76,7 @@ namespace TEST.Controllers
 
           
 
-            _Response.mensaje = "Solicitud de traslado " + guardarSolicitudDevolucion.numeroDevolucion + " guardada con éxito";
+            _Response.mensaje = "Solicitud de traslado " + guardarSolicitudDevolucion.numero + " guardada con éxito";
             _Response.data = guardarSolicitudDevolucion;
 
 

@@ -53,11 +53,11 @@ namespace Domain.Models.SolicitudDevolucionModels
             _solicitudDevolucionHeader.whsCode = codigoTienda;
         
             _solicitudDevolucionHeader.fecha =fechaCreacion;
-            _solicitudDevolucionHeader.number = numeroDevolucion;
+            _solicitudDevolucionHeader.number = numero;
             _solicitudDevolucionHeader.comentario = comentario;
             _solicitudDevolucionHeader.anulado = false;
             _solicitudDevolucionHeader.usuario = usuario;
-            numeroDevolucion =  _SolicitudDevolucionHeaderRepo.crearCbr_SolicitudDevolucionHeader(_solicitudDevolucionHeader);
+            numero =  _SolicitudDevolucionHeaderRepo.crearCbr_SolicitudDevolucionHeader(_solicitudDevolucionHeader);
 
             return this;
         }

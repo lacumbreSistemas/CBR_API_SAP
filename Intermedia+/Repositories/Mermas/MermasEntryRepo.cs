@@ -60,7 +60,7 @@ namespace Intermedia_.Repositories
                 throw new Exception("Item cancelado");
             }
 
-
+            escaneoPorAnular.deleted = true;
             escaneoAnulacion.deletedid = escaneoPorAnular.id;
             escaneoAnulacion.itemCode = escaneoPorAnular.itemCode;
             escaneoAnulacion.deleted = escaneoAnulacion.deleted;
@@ -70,7 +70,7 @@ namespace Intermedia_.Repositories
             escaneoAnulacion.usuario = escaneoPorAnular.usuario;
             escaneoAnulacion.quantity = escaneoPorAnular.quantity * (-1);
             escaneoAnulacion.deleted = false;
-
+            escaneoAnulacion.cancelado = false; 
 
             db.cbr_MermasEntry.Add(escaneoAnulacion);
             db.SaveChanges();
@@ -88,7 +88,7 @@ namespace Intermedia_.Repositories
                 if ((bool)!i.cancelado)
                 {
 
-                    todosCAncelados = true;
+                    todosCAncelados = false;
                     i.cancelado = true; 
                 }
            
