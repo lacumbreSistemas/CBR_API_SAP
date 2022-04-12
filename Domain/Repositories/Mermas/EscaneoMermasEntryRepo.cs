@@ -40,7 +40,7 @@ namespace Domain.Repositories.Mermas
                 entrie.codigoProducto = i.itemCode;
                 entrie.numero = (int)i.number;
                 entrie.usuario = i.usuario;
-
+                entrie.setNombreProducto();
 
                 historialEntries.Add(entrie); 
 
