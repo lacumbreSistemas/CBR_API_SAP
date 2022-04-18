@@ -36,11 +36,11 @@ namespace Intermedia_.Repositories
         }
 
 
-        public void setDocEntry(int number) {
+        public void setIfSAP(int number) {
 
             var header = db.cbr_MermasHeader.FirstOrDefault(i=> i.number == number);
 
-            
+            header.ifSAP = true;
 
             db.SaveChanges();
        
