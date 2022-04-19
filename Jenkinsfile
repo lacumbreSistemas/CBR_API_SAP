@@ -61,6 +61,21 @@ pipeline {
         }
     }
 
+    stage('StopServices') {
+      steps {
+          script { 
+            if (env.BRANCH_NAME == "develop") {                                          
+              echo "------------>Iss Deploy CRBAPISAPTest<------------"
+              bat ( script: "msdeploy.exe -source:contentPath='${WORKSPACE}\\TEST\\release\\OfflineTemplate\\App_offline.htm' -dest:contentPath=CRBAPISAPTest/App_offline.htm,ComputerName=https://10.10.1.12:8172/msdeploy.axd?site=CRBAPISAPTest,UserName=Administrador,Password=Server#Sap_,AuthType=Basic -allowUntrusted=true -verb:sync")
+            } else {                                   
+              echo "------------>Iss Deploy APISAP<------------"
+              bat ( script: "msdeploy.exe -source:contentPath='${WORKSPACE}\\TEST\\release\\OfflineTemplate\\App_offline.htm' -dest:contentPath=APISAP/App_offline.htm,ComputerName=https://10.10.1.12:8172/msdeploy.axd?site=APISAP,UserName=Administrador,Password=Server#Sap_,AuthType=Basic -allowUntrusted=true -verb:sync")
+            }   
+          }   
+        sleep 30000       
+        }
+    }
+
     stage('Deploy') {
       steps {
           script { 
