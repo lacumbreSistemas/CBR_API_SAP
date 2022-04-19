@@ -44,6 +44,7 @@ namespace Domain.Models.Mermas
 
             });
             DocEntry = MermasDevolucionesRepo.generarMerma(MermasSAP);
+
             mermasHeaderRepo.setIfSAP(numero);
 
             return this;

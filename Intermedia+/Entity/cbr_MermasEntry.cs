@@ -28,6 +28,6 @@ namespace Intermedia_
 
         public bool? cancelado { get; set; }
 
-        public bool ifSAP { get; set; }
+        //public bool ifSAP { get; set; }
     }
 }

@@ -64,7 +64,7 @@ namespace TEST.Controllers
         {
             var mermaSAP = mermasRepo.generarMermaSAP(numero);
 
-            _Response.mensaje = "Documento de Merma " + mermaSAP.DocEntry + " creado exitosamente en SAP";
+            _Response.mensaje = "Documento preliminar de Merma " + mermaSAP.DocEntry + " creado exitosamente en SAP";
             _Response.data = mermaSAP;
             return Ok(_Response);
         }
