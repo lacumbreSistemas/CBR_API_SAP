@@ -61,7 +61,7 @@ pipeline {
         }
     }
 
-    stage('StopServices') {
+    stage('Stop Services') {
       steps {
           script { 
             if (env.BRANCH_NAME == "develop") {                                          
