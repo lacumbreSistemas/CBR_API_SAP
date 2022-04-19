@@ -72,7 +72,7 @@ pipeline {
               bat ( script: "msdeploy.exe -source:contentPath='${WORKSPACE}\\TEST\\release\\OfflineTemplate\\App_offline.htm' -dest:contentPath=APISAP/App_offline.htm,ComputerName=https://10.10.1.12:8172/msdeploy.axd?site=APISAP,UserName=Administrador,Password=Server#Sap_,AuthType=Basic -allowUntrusted=true -verb:sync")
             }   
           }   
-        sleep 30000       
+        sleep 30      
         }
     }
 
