@@ -76,6 +76,7 @@
     <Compile Include="Models\Mermas\MermasSAPEntity.cs" />
     <Compile Include="Models\Mermas\MermasSAPEntryEntity.cs" />
     <Compile Include="Models\ProveedorModelSAP.cs" />
+    <Compile Include="Models\Remarks.cs" />
     <Compile Include="Models\SolicitudDevolicionEntrys\SolicitudDevolucionEntrySAPEntity.cs" />
     <Compile Include="Models\SolicitudDevolicionEntrys\SolicitudDevolucionSAPEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

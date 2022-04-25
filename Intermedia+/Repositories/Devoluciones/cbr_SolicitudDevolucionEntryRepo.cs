@@ -85,7 +85,7 @@ namespace Intermedia_.Repositories
 
             var escaneosItems = db.cbr_SolicitudDevolucionEntry.Where(i => i.number == numero && i.itemCode == itemCode).ToList();
             escaneosItems.ForEach(i=> {
-                if (!i.cancelado)
+                if ((bool)!i.cancelado)
                 {
                     todosCancelados = false;
                     i.cancelado = true;

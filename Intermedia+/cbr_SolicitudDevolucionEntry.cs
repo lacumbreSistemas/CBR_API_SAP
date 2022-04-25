@@ -15,9 +15,9 @@ namespace Intermedia_
 
         public double quantity { get; set; }
 
-        public DateTime? fecha { get; set; }
+        public DateTime fecha { get; set; }
 
-        public bool deleted { get; set; }
+        public bool? deleted { get; set; }
 
         public int? deletedId { get; set; }
 

@@ -20,7 +20,7 @@ namespace Domain.Models.Mermas
             fechaCreacion = DateTime.Now;
             comentario = mermaModelBuild.comentario;
             usuario = mermaModelBuild.usuario;
-
+            remark = mermaModelBuild.remark;
 
         }
 
@@ -37,6 +37,7 @@ namespace Domain.Models.Mermas
             mermasHeader.anulado = false;
             mermasHeader.usuario = usuario;
             mermasHeader.ifSAP = false;
+            mermasHeader.remarkId = remark;
             numero = mermasHeaderRepo.crearDocumentoIntermedioMerma(mermasHeader);
 
             return this;

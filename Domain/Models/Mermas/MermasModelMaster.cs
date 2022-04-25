@@ -20,6 +20,8 @@ namespace Domain.Models.Mermas
         public bool? anulado { get; set; }
 
         public string usuario { get; set; }
+
+        public string remark { get; set;}
   
     }
 }

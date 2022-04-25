@@ -15,6 +15,7 @@ namespace SAP.Models.Mermas
 
         public DateTime Fecha { get; set; }
 
+        public string Remark {get; set;}
         public List<MermasSAPEntryEntity> mermasSAPEntryEntity { get; set; }
 
     

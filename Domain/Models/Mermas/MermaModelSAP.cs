@@ -30,8 +30,9 @@ namespace Domain.Models.Mermas
 
             MermasSAP.WhsCode = codigoTienda;
             MermasSAP.Comentario = comentario;
-
+            MermasSAP.Remark = remark;
             MermasSAP.JournalMemo = usuario;
+            //MermasSAP.Remark = remark;
 
             mermasEntryList.ForEach(i =>
             {

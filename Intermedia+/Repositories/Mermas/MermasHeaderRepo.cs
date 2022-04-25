@@ -54,10 +54,10 @@ namespace Intermedia_.Repositories
             if (header != null)
             {
 
-                if (header.anulado)
+                if ((bool)header.anulado)
                     throw new Exception("Este documento ya había sido anulado");
 
-                if (header.ifSAP)
+                if ((bool)header.ifSAP)
                     throw new Exception("Este documento ya fue subido a SAP, no se puede cancelar");
 
                 header.anulado = true;

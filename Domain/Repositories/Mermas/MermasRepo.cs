@@ -1,6 +1,8 @@
-﻿using Domain.Models.Mermas;
+﻿using Domain.Models;
+using Domain.Models.Mermas;
 using Intermedia_;
 using Intermedia_.Repositories;
+using SAP.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,7 +91,7 @@ namespace Domain.Repositories.Mermas
             MermaSAP.codigoTienda = MermaIntermedia.codigoTienda;
             MermaSAP.comentario = MermaIntermedia.comentario;
             MermaSAP.usuario = MermaIntermedia.usuario;
-
+            MermaSAP.remark = MermaIntermedia.remark;
 
             if (MermaIntermedia.entries.Count == 0)
                 throw new Exception("No tiene items escaneados para subir");
@@ -108,6 +110,26 @@ namespace Domain.Repositories.Mermas
 
             return MermaSAP.generarMermaDevolucion();
 
+        }
+
+
+        public List<RemarkModel> obtenerRemarks() {
+
+            MermasSAPRepo MermasDevolucionesRepo = new MermasSAPRepo();
+            List<RemarkModel> remarks = new List<RemarkModel>();
+
+            MermasDevolucionesRepo.obtenerRemarks().ForEach(i=> {
+                RemarkModel remark = new RemarkModel();
+
+                remark.code = i.code;
+                remark.remark = i.remark;
+
+                remarks.Add(remark);
+                    
+            });
+
+
+            return remarks;
         }
 
     }

@@ -117,6 +117,18 @@ namespace TEST.Controllers
         }
 
 
+        [HttpGet("obtenerRemarks")]
+        public IActionResult obtenerRemarks()
+        {
+
+            var remarks = mermasRepo.obtenerRemarks();
+            _Response.mensaje = "Lista de remarks";
+            _Response.data = remarks;
+
+
+            return Ok(_Response);
+
+        }
 
 
         [HttpPost("AnularSolicitud/{numero}")]

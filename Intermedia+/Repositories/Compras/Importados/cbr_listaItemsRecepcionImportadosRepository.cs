@@ -33,7 +33,7 @@ namespace Intermedia_.Repositories
         {
             var escaneo = db.cbr_listaItemsRecepcionImportados.FirstOrDefault(i => i.id == id);
 
-            if (escaneo.deleted)
+            if ((bool)escaneo.deleted)
                 throw new Exception("Escaneo ya fue eliminado");
             
             escaneo.deleted = true;

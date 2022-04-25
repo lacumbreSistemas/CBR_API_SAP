@@ -36,11 +36,11 @@ namespace Domain.Models.Mermas
             this.comentario = mermaHEader.comentario;
 
             this.fechaCreacion = mermaHEader.fecha;
-            this.ifSAP =  mermaHEader.ifSAP;
+            this.ifSAP =  (bool)mermaHEader.ifSAP;
             //this.codigoProveedor = mermaHEader.cardCode;
             this.codigoTienda = mermaHEader.whsCode;
             this.usuario = mermaHEader.usuario;
-
+            this.remark = mermaHEader.remarkId;
         }
 
         public void setNombreProveedor() {
