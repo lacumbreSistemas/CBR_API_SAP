@@ -1,4 +1,5 @@
 ﻿using Intermedia_.Repositories;
+using SAP.Repositories;
 using SAP.Repositories.Proveedor;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,10 @@ namespace Domain.Models.Mermas
 
         public string nombreProveedor { get; set; }
 
+      
         public List<MermasEntryResumenConsulta> entries { get; set; }
         public bool ifSAP {get; set;}
+
 
         public MermasModelConsulta() {
 
@@ -40,16 +43,20 @@ namespace Domain.Models.Mermas
             //this.codigoProveedor = mermaHEader.cardCode;
             this.codigoTienda = mermaHEader.whsCode;
             this.usuario = mermaHEader.usuario;
-            this.remark = mermaHEader.remarkId;
+            this.remarkCode = mermaHEader.remarkId;
         }
 
-        public void setNombreProveedor() {
+     
 
-            ProveedorSAPRepository proveedorSAPRepository = new ProveedorSAPRepository();
-            //var proveedor = proveedorSAPRepository.obtenerProveedorCodigo(codigoProveedor);
-            //nombreProveedor = proveedor.Nombre;
-   
+
+        public void setRemark() {
+            MermasSAPRepo mermaModelSAP = new MermasSAPRepo();
+
+            remark = mermaModelSAP.obgenerRemark(this.remarkCode);
+            
+
         }
+
 
         public void resumenEntries() {
             MermasEntryRepo mermaEntryRepo = new MermasEntryRepo();

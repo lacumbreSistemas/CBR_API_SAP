@@ -11,11 +11,13 @@ namespace SAP.Models.Mermas
         public int DocEntry { get; set; }
         public string WhsCode { get; set; }
         public string Comentario { get; set; }
-        public string JournalMemo { get; set; }
+        public string UsuarioEncargado { get; set; }
 
         public DateTime Fecha { get; set; }
 
-        public string Remark {get; set;}
+        public string RemarkID {get; set;}
+        public string Remark { get; set; }
+        public string CuentaContable { get; set; }
         public List<MermasSAPEntryEntity> mermasSAPEntryEntity { get; set; }
 
     

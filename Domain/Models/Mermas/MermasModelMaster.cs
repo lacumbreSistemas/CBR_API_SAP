@@ -21,7 +21,9 @@ namespace Domain.Models.Mermas
 
         public string usuario { get; set; }
 
-        public string remark { get; set;}
-  
+        public string remarkCode { get; set;}
+        public string remark { get; set; }
+
+     
     }
 }

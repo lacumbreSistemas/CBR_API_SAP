@@ -22,15 +22,19 @@ namespace SAP.Repositories
 
         Documents salidaMercancia = _MasterRepository.connection.GetBusinessObject(BoObjectTypes.oDrafts);
             salidaMercancia.Comments = mermasSAPEntity.Comentario;
-            salidaMercancia.JournalMemo = mermasSAPEntity.JournalMemo;
             salidaMercancia.DocObjectCode = BoObjectTypes.oInventoryGenExit;
-            salidaMercancia.UserFields.Fields.Item("U_remark").Value = mermasSAPEntity.Remark;
+           
 
+            salidaMercancia.UserFields.Fields.Item("U_remark").Value = mermasSAPEntity.RemarkID;
+            salidaMercancia.UserFields.Fields.Item("U_encargado_dev").Value = mermasSAPEntity.UsuarioEncargado;
+            salidaMercancia.UserFields.Fields.Item("U_Concep_Remark").Value = mermasSAPEntity.Remark;
+            salidaMercancia.UserFields.Fields.Item("U_almdest").Value =tienda;
             mermasSAPEntity.mermasSAPEntryEntity.ForEach(i => {
 
                 Document_Lines salidaMercanciaLines = salidaMercancia.Lines;
                 salidaMercanciaLines.ItemCode = i.ItemCode;
                 salidaMercanciaLines.Quantity = i.Cantidad;
+                salidaMercanciaLines.AccountCode = mermasSAPEntity.CuentaContable;
                 salidaMercanciaLines.WarehouseCode = tienda;
                 salidaMercanciaLines.Add();
             });
@@ -66,6 +70,23 @@ namespace SAP.Repositories
             return remarks; 
         }
 
+
+        public string obgenerRemark(string  code) { 
+            var consultaremark = _MasterRepository.doQuery("select U_Remark from [@REMARK1] where U_Codigo_Remark = '" + code+"'");
+            consultaremark.MoveFirst();
+            string remark = consultaremark.Fields.Item("U_Remark").Value;
+            return remark;
+        }
+
+        public string obgenerCuentaContable(string code)
+        {
+            var consultaremark = _MasterRepository.doQuery(@"	select U_Cuenta_Contable from [@oREMARK] c
+	                                                            inner join [@REMARK1] d on c.Code = d.Code
+	                                                            where U_Codigo_Remark = '" + code + "'");
+            consultaremark.MoveFirst();
+            string remark = consultaremark.Fields.Item("U_Cuenta_Contable").Value;
+            return remark;
+        }
 
     }
 }

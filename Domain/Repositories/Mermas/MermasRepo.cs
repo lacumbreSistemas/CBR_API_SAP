@@ -46,7 +46,8 @@ namespace Domain.Repositories.Mermas
                 merma.fechaCreacion = i.fecha;
                 merma.usuario = i.usuario;
                 merma.comentario = i.comentario;
-                merma.setNombreProveedor();
+                merma.remarkCode = i.remarkId;
+                merma.setRemark();
 
                 documentosMermas.Add(merma);
             });
@@ -59,7 +60,7 @@ namespace Domain.Repositories.Mermas
         {
             MermasModelConsulta mermaModelConsulta = new MermasModelConsulta(numero);
             mermaModelConsulta.resumenEntries();
-
+            mermaModelConsulta.setRemark();
             return mermaModelConsulta;
 
         }
@@ -78,11 +79,12 @@ namespace Domain.Repositories.Mermas
         }
 
 
-
+     
         public MermaModelSAP generarMermaSAP(int numero)
         {
 
             var MermaIntermedia = resumenDocumentoIntermedioMerma(numero);
+         
             MermaModelSAP MermaSAP = new MermaModelSAP();
 
 
@@ -91,7 +93,10 @@ namespace Domain.Repositories.Mermas
             MermaSAP.codigoTienda = MermaIntermedia.codigoTienda;
             MermaSAP.comentario = MermaIntermedia.comentario;
             MermaSAP.usuario = MermaIntermedia.usuario;
+            MermaSAP.remarkCode = MermaIntermedia.remarkCode;
             MermaSAP.remark = MermaIntermedia.remark;
+
+
 
             if (MermaIntermedia.entries.Count == 0)
                 throw new Exception("No tiene items escaneados para subir");

@@ -16,9 +16,16 @@ namespace Domain.Models.Mermas
         public int DocEntry { get; set; }
         public int DocNum { get; set; }
 
+        public string cuentaContable {get; set;}
+
         public List<MermaEntryResumenMaster> mermasEntryList = new List<MermaEntryResumenMaster>();
 
+        private void setCuentaContable() {
+            MermasSAPRepo MermasDevolucionesRepo = new MermasSAPRepo();
 
+            cuentaContable = MermasDevolucionesRepo.obgenerCuentaContable(remarkCode);
+
+        }
         public MermaModelSAP generarMermaDevolucion()
         {
 
@@ -26,12 +33,14 @@ namespace Domain.Models.Mermas
             MermasSAPEntity MermasSAP = new MermasSAPEntity();
             MermasSAPRepo MermasDevolucionesRepo = new MermasSAPRepo();
             MermasHeaderRepo mermasHeaderRepo = new MermasHeaderRepo();
-
+            setCuentaContable();
 
             MermasSAP.WhsCode = codigoTienda;
             MermasSAP.Comentario = comentario;
+            MermasSAP.RemarkID = remarkCode;
             MermasSAP.Remark = remark;
-            MermasSAP.JournalMemo = usuario;
+            MermasSAP.UsuarioEncargado = usuario;
+            MermasSAP.CuentaContable = cuentaContable;
             //MermasSAP.Remark = remark;
 
             mermasEntryList.ForEach(i =>
