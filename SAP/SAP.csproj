@@ -96,6 +96,7 @@
     <Compile Include="Repositories\Compras\PurchaseOrderEntryRespository.cs" />
     <Compile Include="Repositories\Compras\PurchaseOrderHeaderRepository.cs" />
     <Compile Include="Repositories\MermasSAPRepo.cs" />
+    <Compile Include="Repositories\OrdenProduccionSAP.cs" />
     <Compile Include="Repositories\Proveedor\ProveedorSAPRepository.cs" />
     <Compile Include="Repositories\SolicitudesDevoliciones\SolicitudesDevolucionesRepo.cs" />
     <Compile Include="Settings.cs" />
