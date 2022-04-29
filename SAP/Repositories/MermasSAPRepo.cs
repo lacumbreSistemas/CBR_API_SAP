@@ -56,12 +56,12 @@ namespace SAP.Repositories
 
         public List<Remarks> obtenerRemarks() {
           List<Remarks> remarks = new List<Remarks>();
-          var remarksSAP =   _MasterRepository.doQuery("select code,U_Remark from [@REMARK1]");
+          var remarksSAP =   _MasterRepository.doQuery("select U_Codigo_Remark,U_Remark from [@REMARK1]");
 
             while (!remarksSAP.EoF) {
                 Remarks remark = new Remarks();
 
-                remark.code = remarksSAP.Fields.Item("code").Value;
+                remark.code = remarksSAP.Fields.Item("U_Codigo_Remark").Value;
                 remark.remark = remarksSAP.Fields.Item("U_Remark").Value;
 
                 remarks.Add(remark);
