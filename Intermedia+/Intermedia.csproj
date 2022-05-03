@@ -82,11 +82,12 @@
     <Compile Include="cbr_TrasladosSAP_Entry.cs" />
     <Compile Include="cbr_TrasladosSAP_Header.cs" />
     <Compile Include="cbr_UsuariosApiSAP.cs" />
+    <Compile Include="centroCostoMap.cs" />
     <Compile Include="Data.cs" />
-    <Compile Include="Datos.cs" />
     <Compile Include="ErrorLog.cs" />
     <Compile Include="inventarioSAP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CentroCostoRepository.cs" />
     <Compile Include="Repositories\Compras\Nacionales\cbr_ComprasSAP_Escaneo_Repository.cs" />
     <Compile Include="Repositories\Compras\Importados\cbr_contenedoresInternacionalesCerradosRepo.cs" />
     <Compile Include="Repositories\Compras\Importados\cbr_listaItemsRecepcionImportadosRepository.cs" />

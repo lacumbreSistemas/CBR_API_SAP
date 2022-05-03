@@ -1,4 +1,5 @@
 ﻿using Intermedia_.Repositories;
+using SAP;
 using SAP.Repositories;
 using SAP.Repositories.Proveedor;
 using System;
@@ -50,11 +51,10 @@ namespace Domain.Models.Mermas
 
 
         public void setRemark() {
-            MermasSAPRepo mermaModelSAP = new MermasSAPRepo();
+            RemarksRepo mermaModelSAP = new RemarksRepo();
 
             remark = mermaModelSAP.obgenerRemark(this.remarkCode);
             
-
         }
 
 

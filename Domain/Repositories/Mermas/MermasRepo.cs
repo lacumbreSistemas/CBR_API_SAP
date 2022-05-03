@@ -2,6 +2,7 @@
 using Domain.Models.Mermas;
 using Intermedia_;
 using Intermedia_.Repositories;
+using SAP;
 using SAP.Repositories;
 using System;
 using System.Collections.Generic;
@@ -89,13 +90,13 @@ namespace Domain.Repositories.Mermas
 
 
             MermaSAP.numero = MermaIntermedia.numero;
-            MermaSAP.codigoProveedor = MermaIntermedia.codigoProveedor;
+     
             MermaSAP.codigoTienda = MermaIntermedia.codigoTienda;
             MermaSAP.comentario = MermaIntermedia.comentario;
             MermaSAP.usuario = MermaIntermedia.usuario;
             MermaSAP.remarkCode = MermaIntermedia.remarkCode;
             MermaSAP.remark = MermaIntermedia.remark;
-
+            
 
 
             if (MermaIntermedia.entries.Count == 0)
@@ -117,10 +118,11 @@ namespace Domain.Repositories.Mermas
 
         }
 
+       
 
         public List<RemarkModel> obtenerRemarks() {
 
-            MermasSAPRepo MermasDevolucionesRepo = new MermasSAPRepo();
+            RemarksRepo MermasDevolucionesRepo = new RemarksRepo();
             List<RemarkModel> remarks = new List<RemarkModel>();
 
             MermasDevolucionesRepo.obtenerRemarks().ForEach(i=> {
@@ -128,6 +130,7 @@ namespace Domain.Repositories.Mermas
 
                 remark.code = i.code;
                 remark.remark = i.remark;
+                remark.centroCosto = i.centroCosto;
 
                 remarks.Add(remark);
                     

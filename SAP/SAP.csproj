@@ -65,6 +65,7 @@
     <Compile Include="Contracts\IOCEntry.cs" />
     <Compile Include="Contracts\IOCEntryRepo.cs" />
     <Compile Include="Contracts\IOCHeader.cs" />
+    <Compile Include="Models\CentroCostoEntity.cs" />
     <Compile Include="Models\ComprasEntitys\EntradaDeMercancia.cs" />
     <Compile Include="Models\ComprasEntitys\EntradaMercanciaEntry.cs" />
     <Compile Include="Models\ComprasInternacionalesEntitys\ContenedorEntity.cs" />
@@ -85,6 +86,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="RemarksRepo.cs" />
+    <Compile Include="Repositories\CentroCostoRepository.cs" />
     <Compile Include="Repositories\ComprasInternacionalesContenedor\ComprasInternacionalesListaContenedorEntryRepository.cs" />
     <Compile Include="Repositories\ComprasInternacionalesContenedor\ComprasInternacionalesContenedorRepository.cs" />
     <Compile Include="Repositories\ComprasInternacionales\FacturaReservaEntryRepository.cs" />

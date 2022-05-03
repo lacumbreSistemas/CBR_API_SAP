@@ -8,18 +8,23 @@ namespace Intermedia_
     public partial class Data : DbContext
     {
         public Data()
-
-#if(Debug)
-            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
-#endif
 #if (Pruebas)
-            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+   
+: base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
 #endif
 
+#if (Release)
+   
+: base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+#endif
+#if (Debug)
+   
+: base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+#endif
 #if (Produccion)
-            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+   
+: base("data source=10.10.1.12;initial catalog=ApiSAP;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
 #endif
-
 
         {
         }
@@ -31,6 +36,7 @@ namespace Intermedia_
         public virtual DbSet<cbr_RemarksTemp> cbr_RemarksTemp { get; set; }
         public virtual DbSet<cbr_SolicitudDevolucionEntry> cbr_SolicitudDevolucionEntry { get; set; }
         public virtual DbSet<cbr_SolicitudDevolucionHeader> cbr_SolicitudDevolucionHeader { get; set; }
+        public virtual DbSet<centroCostoMap> centroCostoMap { get; set; }
         public virtual DbSet<ErrorLog> ErrorLog { get; set; }
         public virtual DbSet<SolicitudDevolisionEscaneos> SolicitudDevolisionEscaneos { get; set; }
         public virtual DbSet<cbr_listaItemsRecepcionImportados> cbr_listaItemsRecepcionImportados { get; set; }
@@ -78,7 +84,9 @@ namespace Intermedia_
                 .Property(e => e.usuario)
                 .IsUnicode(false);
 
-          
+            modelBuilder.Entity<cbr_MermasHeader>()
+                .Property(e => e.remarkId)
+                .IsUnicode(false);
 
             modelBuilder.Entity<cbr_RemarksTemp>()
                 .Property(e => e.Remark)
@@ -106,6 +114,14 @@ namespace Intermedia_
 
             modelBuilder.Entity<cbr_SolicitudDevolucionHeader>()
                 .Property(e => e.usuario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<centroCostoMap>()
+                .Property(e => e.WhsCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<centroCostoMap>()
+                .Property(e => e.CentroCosto)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ErrorLog>()

@@ -26,7 +26,7 @@ namespace Intermedia_
 
         public bool ifSAP { get; set; }
 
-       
+        [StringLength(14)]
         public string remarkId { get; set; }
     }
 }

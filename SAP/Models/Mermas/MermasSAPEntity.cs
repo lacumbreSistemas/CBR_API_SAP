@@ -17,6 +17,8 @@ namespace SAP.Models.Mermas
 
         public string RemarkID {get; set;}
         public string Remark { get; set; }
+        public string CentroCosto { get; set; }
+        public string CentroCosto3 { get; set; }
         public string CuentaContable { get; set; }
         public List<MermasSAPEntryEntity> mermasSAPEntryEntity { get; set; }
 

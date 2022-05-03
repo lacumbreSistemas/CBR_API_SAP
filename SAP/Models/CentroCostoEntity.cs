@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Models
+namespace SAP.Models
 {
-  public  class RemarkModel
+    public class CentroCostoEntity
     {
         public string code { get; set; }
-        public string remark { get; set; }
-        public string centroCosto { get; set; }
+        public string OcrName { get; set; }
     }
 }

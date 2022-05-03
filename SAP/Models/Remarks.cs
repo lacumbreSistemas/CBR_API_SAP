@@ -11,5 +11,6 @@ namespace SAP.Models
         public string code { get; set; }
 
         public string remark { get; set;     }
+        public string centroCosto { get; set; }
     }
 }

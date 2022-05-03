@@ -19,8 +19,13 @@ namespace SAP.Repositories
             int siDocumentoAgregado = 0;
             string nuevasalidaMercancia = "";
             string tienda = mermasSAPEntity.WhsCode;
+            string centroCosto1 =mermasSAPEntity.CentroCosto;
 
-        Documents salidaMercancia = _MasterRepository.connection.GetBusinessObject(BoObjectTypes.oDrafts);
+            string centroCosto3 = mermasSAPEntity.CentroCosto3;
+            
+
+
+            Documents salidaMercancia = _MasterRepository.connection.GetBusinessObject(BoObjectTypes.oDrafts);
             salidaMercancia.Comments = mermasSAPEntity.Comentario;
             salidaMercancia.DocObjectCode = BoObjectTypes.oInventoryGenExit;
            
@@ -29,6 +34,8 @@ namespace SAP.Repositories
             salidaMercancia.UserFields.Fields.Item("U_encargado_dev").Value = mermasSAPEntity.UsuarioEncargado;
             salidaMercancia.UserFields.Fields.Item("U_Concep_Remark").Value = mermasSAPEntity.Remark;
             salidaMercancia.UserFields.Fields.Item("U_almdest").Value =tienda;
+         
+            
             mermasSAPEntity.mermasSAPEntryEntity.ForEach(i => {
 
                 Document_Lines salidaMercanciaLines = salidaMercancia.Lines;
@@ -36,6 +43,8 @@ namespace SAP.Repositories
                 salidaMercanciaLines.Quantity = i.Cantidad;
                 salidaMercanciaLines.AccountCode = mermasSAPEntity.CuentaContable;
                 salidaMercanciaLines.WarehouseCode = tienda;
+                salidaMercanciaLines.CostingCode = centroCosto1;
+                salidaMercanciaLines.CostingCode3 = centroCosto3; 
                 salidaMercanciaLines.Add();
             });
          
@@ -54,29 +63,7 @@ namespace SAP.Repositories
         }
 
 
-        public List<Remarks> obtenerRemarks() {
-          List<Remarks> remarks = new List<Remarks>();
-          var remarksSAP =   _MasterRepository.doQuery("select U_Codigo_Remark,U_Remark from [@REMARK1]");
-
-            while (!remarksSAP.EoF) {
-                Remarks remark = new Remarks();
-
-                remark.code = remarksSAP.Fields.Item("U_Codigo_Remark").Value;
-                remark.remark = remarksSAP.Fields.Item("U_Remark").Value;
-
-                remarks.Add(remark);
-                remarksSAP.MoveNext();
-            }
-            return remarks; 
-        }
-
-
-        public string obgenerRemark(string  code) { 
-            var consultaremark = _MasterRepository.doQuery("select U_Remark from [@REMARK1] where U_Codigo_Remark = '" + code+"'");
-            consultaremark.MoveFirst();
-            string remark = consultaremark.Fields.Item("U_Remark").Value;
-            return remark;
-        }
+  
 
         public string obgenerCuentaContable(string code)
         {
