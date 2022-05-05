@@ -76,6 +76,8 @@
     <Compile Include="cbr_listaItemsRecepcionImportados.cs" />
     <Compile Include="cbr_MermasEntry.cs" />
     <Compile Include="cbr_MermasHeader.cs" />
+    <Compile Include="cbr_ProduccionEntry.cs" />
+    <Compile Include="cbr_ProduccionHeader.cs" />
     <Compile Include="cbr_RemarksTemp.cs" />
     <Compile Include="cbr_SolicitudDevolucionEntry.cs" />
     <Compile Include="cbr_SolicitudDevolucionHeader.cs" />

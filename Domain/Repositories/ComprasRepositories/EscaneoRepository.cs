@@ -41,7 +41,7 @@ namespace Domain.Repositories
                 historial.baseLine = i.baseLine;
                 historial.cantidad = i.cantidad;
                 historial.codigoProducto = i.itemCode;
-                historial.fecha = i.fecha;
+                historial.fecha = i.fecha; 
                 historial.entradaMercanciaDocEntry = i.entradaMercanciaDocEntry;
                 historial.usuario = i.nombreUsuario;
                 historial.setNombreProducto();

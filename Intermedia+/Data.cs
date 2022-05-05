@@ -9,21 +9,16 @@ namespace Intermedia_
     {
         public Data()
 #if (Pruebas)
-   
-: base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
-#endif
-
-#if (Release)
-   
-: base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
 #endif
 #if (Debug)
-   
-: base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
 #endif
 #if (Produccion)
-   
-: base("data source=10.10.1.12;initial catalog=ApiSAP;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+            : base("data source=10.10.1.12;initial catalog=ApiSAP;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+#endif
+#if (Release)
+            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
 #endif
 
         {
@@ -33,6 +28,8 @@ namespace Intermedia_
         public virtual DbSet<cbr_contenedoresInternacionalesCerrados> cbr_contenedoresInternacionalesCerrados { get; set; }
         public virtual DbSet<cbr_MermasEntry> cbr_MermasEntry { get; set; }
         public virtual DbSet<cbr_MermasHeader> cbr_MermasHeader { get; set; }
+        public virtual DbSet<cbr_ProduccionEntry> cbr_ProduccionEntry { get; set; }
+        public virtual DbSet<cbr_ProduccionHeader> cbr_ProduccionHeader { get; set; }
         public virtual DbSet<cbr_RemarksTemp> cbr_RemarksTemp { get; set; }
         public virtual DbSet<cbr_SolicitudDevolucionEntry> cbr_SolicitudDevolucionEntry { get; set; }
         public virtual DbSet<cbr_SolicitudDevolucionHeader> cbr_SolicitudDevolucionHeader { get; set; }
@@ -86,6 +83,26 @@ namespace Intermedia_
 
             modelBuilder.Entity<cbr_MermasHeader>()
                 .Property(e => e.remarkId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_ProduccionEntry>()
+                .Property(e => e.itemcode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_ProduccionEntry>()
+                .Property(e => e.usuario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_ProduccionHeader>()
+                .Property(e => e.whsCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_ProduccionHeader>()
+                .Property(e => e.comentario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_ProduccionHeader>()
+                .Property(e => e.usuario)
                 .IsUnicode(false);
 
             modelBuilder.Entity<cbr_RemarksTemp>()
