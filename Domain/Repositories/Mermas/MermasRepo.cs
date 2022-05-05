@@ -130,7 +130,7 @@ namespace Domain.Repositories.Mermas
 
                 remark.code = i.code;
                 remark.remark = i.remark;
-   
+              
 
                 remarks.Add(remark);
                     

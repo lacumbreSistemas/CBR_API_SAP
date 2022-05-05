@@ -10,6 +10,5 @@ namespace Domain.Models
     {
         public string code { get; set; }
         public string remark { get; set; }
-      
     }
 }

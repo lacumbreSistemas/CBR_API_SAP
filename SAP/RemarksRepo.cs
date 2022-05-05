@@ -15,7 +15,7 @@ namespace SAP
         {
 
             List<Remarks> remarks = new List<Remarks>();
-            var remarksSAP = _MasterRepository.doQuery("select U_Codigo_Remark,U_Remark,U_CecosDimen from [@REMARK1]");
+            var remarksSAP = _MasterRepository.doQuery("select U_Codigo_Remark,U_Remark from [@REMARK1]");
 
             while (!remarksSAP.EoF)
             {
@@ -23,7 +23,7 @@ namespace SAP
 
                 remark.code = remarksSAP.Fields.Item("U_Codigo_Remark").Value;
                 remark.remark = remarksSAP.Fields.Item("U_Remark").Value;
-                remark.centroCosto = remarksSAP.Fields.Item("U_CecosDimen").Value;
+          
 
 
                 remarks.Add(remark);
