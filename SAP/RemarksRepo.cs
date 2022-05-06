@@ -15,7 +15,7 @@ namespace SAP
         {
 
             List<Remarks> remarks = new List<Remarks>();
-            var remarksSAP = _MasterRepository.doQuery("select U_Codigo_Remark,U_Remak from [@REMARK1]");
+            var remarksSAP = _MasterRepository.doQuery("select U_Codigo_Remark,U_Remak from [@REMARK1] Where U_activo = 'Y' and U_Tipo_Documento = 60 ");
 
             while (!remarksSAP.EoF)
             {
