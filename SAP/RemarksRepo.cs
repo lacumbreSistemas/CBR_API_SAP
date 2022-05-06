@@ -15,14 +15,14 @@ namespace SAP
         {
 
             List<Remarks> remarks = new List<Remarks>();
-            var remarksSAP = _MasterRepository.doQuery("select U_Codigo_Remark,U_Remark from [@REMARK1]");
+            var remarksSAP = _MasterRepository.doQuery("select U_Codigo_Remark,U_Remak from [@REMARK1]");
 
             while (!remarksSAP.EoF)
             {
                 Remarks remark = new Remarks();
 
                 remark.code = remarksSAP.Fields.Item("U_Codigo_Remark").Value;
-                remark.remark = remarksSAP.Fields.Item("U_Remark").Value;
+                remark.remark = remarksSAP.Fields.Item("U_Remak").Value;
           
 
 
@@ -35,9 +35,9 @@ namespace SAP
 
         public string obgenerRemark(string code)
         {
-            var consultaremark = _MasterRepository.doQuery("select U_Remark from [@REMARK1] where U_Codigo_Remark = '" + code + "'");
+            var consultaremark = _MasterRepository.doQuery("select U_Remak from [@REMARK1] where U_Codigo_Remark = '" + code + "'");
             consultaremark.MoveFirst();
-            string remark = consultaremark.Fields.Item("U_Remark").Value;
+            string remark = consultaremark.Fields.Item("U_Remak").Value;
             return remark;
         }
 

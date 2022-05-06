@@ -35,7 +35,7 @@ namespace SAP.Repositories
 
             salidaMercancia.UserFields.Fields.Item("U_remark").Value = mermasSAPEntity.RemarkID;
             salidaMercancia.UserFields.Fields.Item("U_encargado_dev").Value = mermasSAPEntity.UsuarioEncargado;
-            salidaMercancia.UserFields.Fields.Item("U_Concep_Remark").Value = mermasSAPEntity.Remark;
+            salidaMercancia.UserFields.Fields.Item("U_Con_Remark").Value = mermasSAPEntity.Remark;
             salidaMercancia.UserFields.Fields.Item("U_almdest").Value =tienda;
          
             

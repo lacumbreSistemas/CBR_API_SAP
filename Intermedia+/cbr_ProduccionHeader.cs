@@ -11,7 +11,7 @@ namespace Intermedia_
         [Key]
         public int numero { get; set; }
 
-        public DateTime? fecha { get; set; }
+        public DateTime fecha { get; set; }
 
         [StringLength(3)]
         public string whsCode { get; set; }
@@ -27,5 +27,9 @@ namespace Intermedia_
         public int? entradaDocEntry { get; set; }
 
         public int? salidaDocEntry { get; set; }
+
+        [StringLength(50)]
+        public string codigoProducto { get; set; }
+        
     }
 }

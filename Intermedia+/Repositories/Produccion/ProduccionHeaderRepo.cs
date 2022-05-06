@@ -8,14 +8,14 @@ namespace Intermedia_.Repositories.Produccion
 {
     public class ProduccionHeaderRepo:MasterRespository
     {
-        public cbr_ProduccionHeader obtenerDocumentoIntermedioMerma(int numero)
+        public cbr_ProduccionHeader obtenerDocumentoIntermedioProduccion(int numero)
         {
 
             cbr_ProduccionHeader produccion = db.cbr_ProduccionHeader.FirstOrDefault(i => i.numero == numero);
 
             return produccion;
         }
-        public int crearDocumentoIntermedioMerma(cbr_ProduccionHeader produccion)
+        public int crearDocumentoIntermedioProduccion(cbr_ProduccionHeader produccion)
         {
 
             db.cbr_ProduccionHeader.Add(produccion);
@@ -27,7 +27,7 @@ namespace Intermedia_.Repositories.Produccion
         }
 
 
-        public List<cbr_ProduccionHeader> obtenerDocumentoIntermedioMerma(string WhsCode)
+        public List<cbr_ProduccionHeader> obtenerDocumentoIntermedioProduccion(string WhsCode)
         {
 
             List<cbr_ProduccionHeader> documentosIntermediosProduccion = new List<cbr_ProduccionHeader>();
@@ -38,7 +38,7 @@ namespace Intermedia_.Repositories.Produccion
         }
 
 
-        public void cancelarSolicitud(int numero)
+        public void cancelarDocumento(int numero)
         {
             var header = db.cbr_ProduccionHeader.FirstOrDefault(i => i.numero == numero);
             if (header != null)
@@ -57,7 +57,7 @@ namespace Intermedia_.Repositories.Produccion
             else
             {
 
-                throw new Exception("Solicitud de traslado no encontrada");
+                throw new Exception("Documento intermedio de producción no encontrada");
             }
 
 

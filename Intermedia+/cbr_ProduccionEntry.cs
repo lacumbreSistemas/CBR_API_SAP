@@ -17,7 +17,7 @@ namespace Intermedia_
 
         public DateTime? fecha { get; set; }
 
-        public bool? deleted { get; set; }
+        public bool deleted { get; set; }
 
         public int? deletedId { get; set; }
 
@@ -26,6 +26,6 @@ namespace Intermedia_
 
         public int? numero { get; set; }
 
-        public bool? cancelado { get; set; }
+        public bool cancelado { get; set; }
     }
 }

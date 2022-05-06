@@ -100,6 +100,8 @@
     <Compile Include="Repositories\Devoluciones\SolicitudDevolucionSalesPersonCodesRepo.cs" />
     <Compile Include="Repositories\Mermas\MermasEntryRepo.cs" />
     <Compile Include="Repositories\Mermas\MermasHeaderRepo.cs" />
+    <Compile Include="Repositories\Produccion\ProduccionEntryRepo.cs" />
+    <Compile Include="Repositories\Produccion\ProduccionHeaderRepo.cs" />
     <Compile Include="SolicitudDevolisionEscaneos.cs" />
     <Compile Include="SolicitudDevolucionSalesPersonCodes.cs" />
   </ItemGroup>
@@ -109,7 +111,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\Devoluciones\" />
-    <Folder Include="Repositories\Produccion\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
