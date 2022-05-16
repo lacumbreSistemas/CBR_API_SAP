@@ -34,7 +34,7 @@ namespace Domain.Models.Produccion
             cbr_ProduccionHeader.usuario = usuario;
             cbr_ProduccionHeader.whsCode = codigoTienda;
             cbr_ProduccionHeader.codigoProducto = codigoProducto;
-
+            cbr_ProduccionHeader.fecha = fechaCreacion;
             numero = produccionHeaderRepo.crearDocumentoIntermedioProduccion(cbr_ProduccionHeader);
 
             return this;

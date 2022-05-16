@@ -50,5 +50,15 @@ namespace SAP
 
 
         }
+
+        public string obgenerCuentaContable(string code)
+        {
+            var consultaremark = _MasterRepository.doQuery(@"	select U_Cuenta_Contable from [@oREMARK] c
+	                                                            inner join [@REMARK1] d on c.Code = d.Code
+	                                                            where U_Codigo_Remark = '" + code + "'");
+            consultaremark.MoveFirst();
+            string remark = consultaremark.Fields.Item("U_Cuenta_Contable").Value;
+            return remark;
+        }
     }
 }

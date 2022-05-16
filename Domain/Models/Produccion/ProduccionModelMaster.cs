@@ -19,5 +19,8 @@ namespace Domain.Models.Produccion
 
         public string codigoProducto { get; set; }
 
+        public string remarkCode { get; set; }
+        public string remark { get; set; }
+
     }
 }

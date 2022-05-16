@@ -13,7 +13,7 @@ namespace Intermedia_
         [StringLength(50)]
         public string itemcode { get; set; }
 
-        public double? quantity { get; set; }
+        public double quantity { get; set; }
 
         public DateTime? fecha { get; set; }
 
@@ -24,7 +24,7 @@ namespace Intermedia_
         [StringLength(50)]
         public string usuario { get; set; }
 
-        public int? numero { get; set; }
+        public int numero { get; set; }
 
         public bool cancelado { get; set; }
     }

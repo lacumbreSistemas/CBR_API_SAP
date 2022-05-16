@@ -16,7 +16,7 @@ namespace Intermedia_
         [StringLength(3)]
         public string whsCode { get; set; }
 
-        public bool? anulado { get; set; }
+        public bool anulado { get; set; }
 
         [StringLength(800)]
         public string comentario { get; set; }
@@ -24,12 +24,14 @@ namespace Intermedia_
         [StringLength(50)]
         public string usuario { get; set; }
 
-        public int? entradaDocEntry { get; set; }
+        public int entradaDocEntry { get; set; }
 
-        public int? salidaDocEntry { get; set; }
+        public int salidaDocEntry { get; set; }
 
         [StringLength(50)]
         public string codigoProducto { get; set; }
-        
+
+        [StringLength(14)]
+        public string remarkId { get; set; }
     }
 }

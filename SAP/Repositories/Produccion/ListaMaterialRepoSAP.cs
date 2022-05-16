@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace SAP.Repositories.Produccion
 {
-    public class ListaMaterialRepo
+    public class ListaMaterialRepoSAP
     {
 
         MasterRepository _MasterRepository = MasterRepository.GetInstance();
         public List<ListaMaterialEntity> obtenerListasMateriales() {
 
-           var recetas = _MasterRepository.doQuery("select code,Name from oitt");
-           List<ListaMaterialEntity> listasMateriales = new List<ListaMaterialEntity>();
+            var recetas = _MasterRepository.doQuery("select code,Name from oitt");
+            List<ListaMaterialEntity> listasMateriales = new List<ListaMaterialEntity>();
 
             while (!recetas.EoF) {
                 ListaMaterialEntity listaMaterialEntity = new ListaMaterialEntity();
@@ -23,7 +23,7 @@ namespace SAP.Repositories.Produccion
 
                 listasMateriales.Add(listaMaterialEntity);
 
-                recetas.MoveFirst();
+                recetas.MoveNext();
             }
 
             return listasMateriales;
@@ -32,14 +32,17 @@ namespace SAP.Repositories.Produccion
 
         public List<ListaMaterialesDetalleEntity> obtenerListaMaterialesDetalle(string code) {
 
-            var recetas = _MasterRepository.doQuery("select code,ItemName from oitt where Father ='"+code+"'");
+            var recetas = _MasterRepository.doQuery(@"select cabecera.Code,cabecera.Name from oitt cabecera inner join 
+                                                        ITT1 detalle on detalle.Father = cabecera.Code
+
+                                                        where cabecera.code ='" + code + "'");
             List<ListaMaterialesDetalleEntity> detalleReceta = new List<ListaMaterialesDetalleEntity>();
 
             while (!recetas.EoF) {
                 ListaMaterialesDetalleEntity listaMaterialesDetalleEntity = new ListaMaterialesDetalleEntity();
 
                 listaMaterialesDetalleEntity.Code = recetas.Fields.Item("code").Value;
-                listaMaterialesDetalleEntity.Name = recetas.Fields.Item("ItemName").Value;
+                listaMaterialesDetalleEntity.Name = recetas.Fields.Item("Name").Value;
 
                 detalleReceta.Add(listaMaterialesDetalleEntity);
 
@@ -48,6 +51,20 @@ namespace SAP.Repositories.Produccion
             }
 
             return detalleReceta;
+        }
+
+
+        public ListaMaterialEntity obtenerListaMaterialCabecera(string code) {
+            var listaMaterialConsulta = _MasterRepository.doQuery("select Name from oitt where code = '"+code+"'");
+           ListaMaterialEntity listasMaterial = new ListaMaterialEntity();
+
+            listaMaterialConsulta.MoveFirst();
+
+
+          
+            listasMaterial.Name = listaMaterialConsulta.Fields.Item("Name").Value;
+
+            return listasMaterial;
         }
 
     }

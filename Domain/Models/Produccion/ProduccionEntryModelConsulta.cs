@@ -1,4 +1,5 @@
 ﻿using Intermedia_;
+using Intermedia_.Repositories.Produccion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,31 +20,35 @@ namespace Domain.Models.Produccion
             setNombreProducto();
         }
 
+        public ProduccionEntryModelConsulta() { 
+        
+        
+        }
+
+        public ProduccionEntryModelConsulta anular()
+        {
+
+            ProduccionEntryRepo produccionEntryRepo = new ProduccionEntryRepo();
+
+            cbr_ProduccionEntry escaneoAnuladoEntity = produccionEntryRepo.anularEntrieEscaneo(this.id);
+
+            ProduccionEntryModelConsulta escaneoAnulado = new ProduccionEntryModelConsulta();
+
+            escaneoAnulado.id = escaneoAnuladoEntity.id;
+            escaneoAnulado.deletedId = escaneoAnuladoEntity.deletedId;
+            escaneoAnulado.fecha = escaneoAnuladoEntity.fecha;
+            escaneoAnulado.codigoProducto = escaneoAnuladoEntity.itemcode;
+            escaneoAnulado.numero = escaneoAnuladoEntity.numero;
+            escaneoAnulado.cantidad = escaneoAnuladoEntity.quantity;
+            escaneoAnulado.usuario = escaneoAnuladoEntity.usuario;
+            escaneoAnulado.deleted = escaneoAnuladoEntity.deleted;
 
 
-        //public ProduccionEntryModelConsulta anular()
-        //{
-
-
-        //    cbr_ProduccionEntry escaneoAnuladoEntity = _SolicitudDevolucionEntryRepo.anularEntrieEscaneo(this.id);
-
-        //    SolicitudDevolucionEntryModelConsulta escaneoAnulado = new SolicitudDevolucionEntryModelConsulta();
-
-        //    escaneoAnulado.id = escaneoAnuladoEntity.id;
-        //    escaneoAnulado.deletedId = escaneoAnuladoEntity.deletedId;
-        //    escaneoAnulado.fecha = escaneoAnuladoEntity.fecha;
-        //    escaneoAnulado.CodigoProducto = escaneoAnuladoEntity.itemCode;
-        //    escaneoAnulado.numero = escaneoAnuladoEntity.number;
-        //    escaneoAnulado.cantidad = escaneoAnuladoEntity.quantity;
-        //    escaneoAnulado.usuario = escaneoAnuladoEntity.usuario;
-        //    escaneoAnulado.deleted = escaneoAnuladoEntity.deleted;
-
-
-        //    return escaneoAnulado;
+            return escaneoAnulado;
 
 
 
-        //}
+        }
 
 
 
