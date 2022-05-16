@@ -33,7 +33,7 @@ namespace SAP
         }
 
 
-        public string obgenerRemark(string code)
+        public string obterRemark(string code)
         {
             var consultaremark = _MasterRepository.doQuery("select U_Remak from [@REMARK1] where U_Codigo_Remark = '" + code + "'");
             consultaremark.MoveFirst();

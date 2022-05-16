@@ -21,6 +21,7 @@ namespace Domain.Models.Produccion
 
         public string remarkCode { get; set; }
         public string remark { get; set; }
+        public double cantidad { get; set; }
 
     }
 }

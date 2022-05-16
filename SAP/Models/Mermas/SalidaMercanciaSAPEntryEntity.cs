@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAP.Models.Mermas
 {
-   public  class MermasSAPEntryEntity
+   public  class SalidaMercanciaSAPEntryEntity
     {
         public string ItemCode { get; set; }
         public double Cantidad { get; set; }

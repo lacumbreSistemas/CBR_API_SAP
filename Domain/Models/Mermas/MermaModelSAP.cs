@@ -30,7 +30,7 @@ namespace Domain.Models.Mermas
         public List<MermaEntryResumenMaster> mermasEntryList = new List<MermaEntryResumenMaster>();
 
         private void setCuentaContable() {
-            MermasSAPRepo MermasDevolucionesRepo = new MermasSAPRepo();
+            SalidaMercanciaSAPRepo MermasDevolucionesRepo = new SalidaMercanciaSAPRepo();
 
             cuentaContable = MermasDevolucionesRepo.obgenerCuentaContable(remarkCode);
 
@@ -44,8 +44,8 @@ namespace Domain.Models.Mermas
         }
         public MermaModelSAP generarMermaDevolucion()
         {
-            MermasSAPEntity MermasSAP = new MermasSAPEntity();
-            MermasSAPRepo MermasDevolucionesRepo = new MermasSAPRepo();
+            SalidaMercanciaSAPEntity MermasSAP = new SalidaMercanciaSAPEntity();
+            SalidaMercanciaSAPRepo MermasDevolucionesRepo = new SalidaMercanciaSAPRepo();
             MermasHeaderRepo mermasHeaderRepo = new MermasHeaderRepo();
             setCuentaContable();
             setCentroCosto();
@@ -62,14 +62,14 @@ namespace Domain.Models.Mermas
             mermasEntryList.ForEach(i =>
             {
 
-                MermasSAPEntryEntity solicitudDevolucionEntrySAPEntity = new MermasSAPEntryEntity();
+                SalidaMercanciaSAPEntryEntity solicitudDevolucionEntrySAPEntity = new SalidaMercanciaSAPEntryEntity();
                 solicitudDevolucionEntrySAPEntity.ItemCode = i.codigoProducto;
                 solicitudDevolucionEntrySAPEntity.Cantidad = (double)i.cantidadEscaneada;
 
                 MermasSAP.mermasSAPEntryEntity.Add(solicitudDevolucionEntrySAPEntity);
 
             });
-            DocEntry = MermasDevolucionesRepo.generarMerma(MermasSAP);
+            DocEntry = MermasDevolucionesRepo.generarSalidaMercancia(MermasSAP);
 
             mermasHeaderRepo.setIfSAP(numero);
 

@@ -53,7 +53,7 @@ namespace Domain.Models.Mermas
         public void setRemark() {
             RemarksRepo mermaModelSAP = new RemarksRepo();
 
-            remark = mermaModelSAP.obgenerRemark(this.remarkCode);
+            remark = mermaModelSAP.obterRemark(this.remarkCode);
             
         }
 

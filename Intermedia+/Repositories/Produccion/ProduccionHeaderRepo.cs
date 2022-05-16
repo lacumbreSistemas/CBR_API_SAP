@@ -63,7 +63,25 @@ namespace Intermedia_.Repositories.Produccion
 
         }
 
+        public void setSalidaDocEntry(int number, int docentry)
+        {
 
+            var header = db.cbr_ProduccionHeader.FirstOrDefault(i => i.numero == number);
+            header.salidaDocEntry = docentry;
+
+            db.SaveChanges();
+
+        }
+
+        public void setEntradaDocEntry(int number, int docentry)
+        {
+
+            var header = db.cbr_ProduccionHeader.FirstOrDefault(i => i.numero == number);
+            header.entradaDocEntry = docentry;
+
+            db.SaveChanges();
+
+        }
 
     }
 }

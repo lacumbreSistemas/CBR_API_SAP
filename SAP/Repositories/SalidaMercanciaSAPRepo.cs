@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace SAP.Repositories
 {
-   public class MermasSAPRepo
+   public class SalidaMercanciaSAPRepo
     {
         MasterRepository _MasterRepository = MasterRepository.GetInstance();
 
 
-        public int generarMerma(MermasSAPEntity mermasSAPEntity) {
+        public int generarSalidaMercancia(SalidaMercanciaSAPEntity mermasSAPEntity) {
 
             int siDocumentoAgregado = 0;
             string nuevasalidaMercancia = "";
@@ -28,9 +28,9 @@ namespace SAP.Repositories
           
 
 
-            Documents salidaMercancia = _MasterRepository.connection.GetBusinessObject(BoObjectTypes.oDrafts);
+            Documents salidaMercancia = _MasterRepository.connection.GetBusinessObject(BoObjectTypes.oInventoryGenExit);
             salidaMercancia.Comments = mermasSAPEntity.Comentario;
-            salidaMercancia.DocObjectCode = BoObjectTypes.oInventoryGenExit;
+            //salidaMercancia.DocObjectCode = BoObjectTypes.oInventoryGenExit;
            
 
             salidaMercancia.UserFields.Fields.Item("U_remark").Value = mermasSAPEntity.RemarkID;
