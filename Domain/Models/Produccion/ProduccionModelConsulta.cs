@@ -1,4 +1,5 @@
 ﻿using Intermedia_.Repositories.Produccion;
+using SAP;
 using SAP.Repositories.Produccion;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,9 @@ namespace Domain.Models.Produccion
             this.usuario = documentoproducion.usuario;
             this.comentario = documentoproducion.comentario;
             this.fechaCreacion = documentoproducion.fecha;
-            this.codigoProducto = documentoproducion.codigoProducto; 
+            this.remarkCode = documentoproducion.remarkId;
+            this.cantidad = documentoproducion.cantidad; 
+           
 
         
         }
@@ -50,7 +53,13 @@ namespace Domain.Models.Produccion
 
         }
 
+        public void setRemark()
+        {
+            RemarksRepo mermaModelSAP = new RemarksRepo();
 
+            remark = mermaModelSAP.obterRemark(this.remarkCode);
+
+        }
 
         public void resumenEntries(){
             ProduccionEntryRepo produccionEntryRepo = new ProduccionEntryRepo();

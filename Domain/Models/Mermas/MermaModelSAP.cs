@@ -30,7 +30,7 @@ namespace Domain.Models.Mermas
         public List<MermaEntryResumenMaster> mermasEntryList = new List<MermaEntryResumenMaster>();
 
         private void setCuentaContable() {
-            SalidaMercanciaSAPRepo MermasDevolucionesRepo = new SalidaMercanciaSAPRepo();
+            SalidaMercanciaPreliminarSAPRepo MermasDevolucionesRepo = new SalidaMercanciaPreliminarSAPRepo();
 
             cuentaContable = MermasDevolucionesRepo.obgenerCuentaContable(remarkCode);
 
@@ -45,7 +45,7 @@ namespace Domain.Models.Mermas
         public MermaModelSAP generarMermaDevolucion()
         {
             SalidaMercanciaSAPEntity MermasSAP = new SalidaMercanciaSAPEntity();
-            SalidaMercanciaSAPRepo MermasDevolucionesRepo = new SalidaMercanciaSAPRepo();
+            SalidaMercanciaPreliminarSAPRepo MermasDevolucionesRepo = new SalidaMercanciaPreliminarSAPRepo();
             MermasHeaderRepo mermasHeaderRepo = new MermasHeaderRepo();
             setCuentaContable();
             setCentroCosto();

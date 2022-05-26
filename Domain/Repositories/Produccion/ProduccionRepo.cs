@@ -48,6 +48,8 @@ namespace Domain.Repositories.Produccion
                 documentoProduccion.entradaDocEntry = i.entradaDocEntry;
                 documentoProduccion.salidaDocEntry = i.salidaDocEntry;
                 documentoProduccion.comentario = i.comentario;
+                documentoProduccion.cantidad = i.cantidad;
+                documentoProduccion.setRemark();
                 documentoProduccion.definirdescripcionReceta();
                 DocumentosIntermediosProduccion.Add(documentoProduccion);
 
@@ -60,7 +62,7 @@ namespace Domain.Repositories.Produccion
             ProduccionModelConsulta produccionModelConsulta = new ProduccionModelConsulta(numero);
 
             produccionModelConsulta.resumenEntries();
-
+            produccionModelConsulta.setRemark();
             return produccionModelConsulta;
         }
 
@@ -78,6 +80,47 @@ namespace Domain.Repositories.Produccion
             mermasEntryResumenActualizar.Anular();
         }
 
+        public ProduccionModelSAP generarSalidaSAP(int numero)
+        {
 
+            var DocumentoProduccionIntermedia = resumenDocumentoProduccion(numero);
+
+            ProduccionModelSAP _produccionModelSAP = new ProduccionModelSAP();
+
+
+            _produccionModelSAP.numero = DocumentoProduccionIntermedia.numero;
+
+            _produccionModelSAP.codigoTienda = DocumentoProduccionIntermedia.codigoTienda;
+            _produccionModelSAP.comentario = DocumentoProduccionIntermedia.comentario;
+            _produccionModelSAP.usuario = DocumentoProduccionIntermedia.usuario;
+            _produccionModelSAP.remarkCode = DocumentoProduccionIntermedia.remarkCode;
+            _produccionModelSAP.remark = DocumentoProduccionIntermedia.remark;
+            _produccionModelSAP.cantidad = DocumentoProduccionIntermedia.cantidad;
+            _produccionModelSAP.codigoProducto = DocumentoProduccionIntermedia.codigoProducto;
+
+
+            if (DocumentoProduccionIntermedia.entries.Count == 0)
+                throw new Exception("No tiene items escaneados para subir");
+
+            DocumentoProduccionIntermedia.entries.ForEach(i =>
+            {
+                ProduccionEntryResumenSAP produccionEntryResumenSAP = new ProduccionEntryResumenSAP();
+                produccionEntryResumenSAP.cantidadEscaneada = i.cantidadEscaneada;
+                produccionEntryResumenSAP.codigoProducto = i.codigoProducto;
+                produccionEntryResumenSAP.descripcionProducto = i.descripcionProducto;
+                produccionEntryResumenSAP.establecerPrecioVenta();
+                _produccionModelSAP.entrys.Add(produccionEntryResumenSAP);
+
+            });
+
+
+            //if (DocumentoProduccionIntermedia.salidaDocEntry != 0)
+            //    throw new Exception("Ya se generó un documento de salida en SAP para este documento intermedio ");
+
+
+
+            return _produccionModelSAP.generarSalidaMercancia();
+
+        }
     }
 }

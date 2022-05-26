@@ -1,6 +1,8 @@
-﻿using Intermedia_.Repositories.Produccion;
+﻿using HQ.Repositories;
+using Intermedia_.Repositories.Produccion;
 using SAP;
 using SAP.Models.Mermas;
+using SAP.Models.Produccion;
 using SAP.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Domain.Models.Produccion
 {
-    public class ProduccionModelSAP:ProduccionModelMaster
+    public class ProduccionModelSAP : ProduccionModelMaster
 
     {
 
-        public int docEntrySalida { get; set;  }
+        public int docEntrySalida { get; set; }
 
         public int docEntryEntrada { get; set; }
 
@@ -28,9 +30,14 @@ namespace Domain.Models.Produccion
         public string centroCostoTienda { get; set; }
         public string centroCosto3 { get; set; }
 
+   
 
-        //public List<ProduccionEntryResumenConsultaMaster> entrys { get; set; }
-     
+        public List<ProduccionEntryResumenSAP> entrys { get; set; }
+
+
+        public ProduccionModelSAP() {
+            entrys = new List<ProduccionEntryResumenSAP>();
+        }
         private void establecerCuentaContable() {
             RemarksRepo remarksRepo = new RemarksRepo();
             cuentaContable = remarksRepo.obgenerCuentaContable(remarkCode);
@@ -48,9 +55,14 @@ namespace Domain.Models.Produccion
 
         public ProduccionModelSAP generarSalidaMercancia()
         {
-            SalidaMercanciaSAPEntity salidaMercanciaSAP = new SalidaMercanciaSAPEntity();
+         
+            ProduccionSAPEntity salidaMercanciaSAP = new ProduccionSAPEntity();
+            ProduccionSAPEntity entradaMercanciaSAP = new ProduccionSAPEntity();
+
             SalidaMercanciaSAPRepo saliMercanciaRepo = new SalidaMercanciaSAPRepo();
-            ProduccionHeaderRepo  produccionHeaderRepo = new ProduccionHeaderRepo();
+            EntradaMercanciaSAPRepo entradaMercanciaSAPRepo = new EntradaMercanciaSAPRepo();
+
+            ProduccionHeaderRepo produccionHeaderRepo = new ProduccionHeaderRepo();
             establecerCuentaContable();
             setCentroCosto();
             salidaMercanciaSAP.WhsCode = codigoTienda;
@@ -62,31 +74,52 @@ namespace Domain.Models.Produccion
             salidaMercanciaSAP.Remark = remark;
             salidaMercanciaSAP.CentroCosto = centroCostoTienda;
             salidaMercanciaSAP.CentroCosto3 = centroCosto3;
+            salidaMercanciaSAP.itemCode = codigoProducto;
+            salidaMercanciaSAP.quantity = cantidad;
 
 
-            SalidaMercanciaSAPEntryEntity salidaMercanciaEntrys = new SalidaMercanciaSAPEntryEntity();
-            salidaMercanciaEntrys.ItemCode = codigoProducto;
-            salidaMercanciaEntrys.Cantidad = (double)i.cantidadEscaneada;
-
-            salidaMercanciaSAP.mermasSAPEntryEntity.Add(salidaMercanciaEntrys);
-
-            //entrys.ForEach(i =>
-            //{
-
-            //    SalidaMercanciaSAPEntryEntity salidaMercanciaEntrys = new SalidaMercanciaSAPEntryEntity();
-            //    salidaMercanciaEntrys.ItemCode = i.codigoProducto;
-            //    salidaMercanciaEntrys.Cantidad = (double)i.cantidadEscaneada;
-
-            //    salidaMercanciaSAP.mermasSAPEntryEntity.Add(salidaMercanciaEntrys);
-
-            //});
             docEntrySalida = saliMercanciaRepo.generarSalidaMercancia(salidaMercanciaSAP);
 
-            produccionHeaderRepo.setEntradaDocEntry(numero, docEntrySalida);
+            produccionHeaderRepo.setSalidaDocEntry(numero, docEntrySalida);
+
+
+            #region entradaMercancia
+        
+
+            decimal ventaTotalSuma = entrys.Sum(i=> i.ventaTotal);
+
+            entrys.ForEach(i=> {
+                ProduccionSAPEntryEntity produccionSAPEntryEntity = new ProduccionSAPEntryEntity();
+
+                decimal costoTotalPonderado =  saliMercanciaRepo.obtenerCostoPonderado(codigoTienda,codigoProducto) * (decimal) cantidad;
+
+                decimal costoTotal = (i.ventaTotal / ventaTotalSuma)* costoTotalPonderado;
+                decimal costoLibra = costoTotal / (decimal)i.cantidadEscaneada;
+
+                produccionSAPEntryEntity.ItemCode = i.codigoProducto;
+                produccionSAPEntryEntity.Cantidad = i.cantidadEscaneada;
+                produccionSAPEntryEntity.costoLibra = costoLibra;
+                salidaMercanciaSAP.produccionEntryEntrada.Add(produccionSAPEntryEntity);
+
+
+
+            });
+
+
+
+            docEntryEntrada = entradaMercanciaSAPRepo.generarEntradaMercancia(salidaMercanciaSAP, docEntrySalida);
+            #endregion
+
+
+
 
             return this;
 
         }
+
+
+
+
 
 
     }

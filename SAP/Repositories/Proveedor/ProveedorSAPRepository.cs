@@ -17,7 +17,7 @@ namespace SAP.Repositories.Proveedor
 
             List<ProveedorModelSAP> listaProveedores = new List<ProveedorModelSAP>();
 
-            var proveedores = masterRepo.doQuery("select CardCode,CardName from OCRD where CardCode like '%PN%' or  CardCode like '%PE%' order by CArdcode");
+            var proveedores = masterRepo.doQuery("select CardCode,CardName from OCRD where CardCode like '%PN%' or  CardCode like '%PE%' order by cardname");
 
             while (!proveedores.EoF)
             {

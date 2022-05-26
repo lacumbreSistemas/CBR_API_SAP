@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Models.Produccion
 {
-   public class ProduccionEntryResumenConsulta: ProduccionEntryResumenConsultaMaster
+   public class ProduccionEntryResumenConsulta: ProduccionEntryResumenMaster
     {
 
    

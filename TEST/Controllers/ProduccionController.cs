@@ -106,6 +106,17 @@ namespace TEST.Controllers
         }
 
 
+        [HttpPost("GenerarDocumentosSAP/{numero}")]
+        public IActionResult generarSolicitudDevolucionSAP(int numero)
+        {
+            var mermaSAP = produccionRepo.generarSalidaSAP(numero);
+
+            _Response.mensaje = "Creados documento de sálida " + mermaSAP.docEntrySalida;
+            _Response.data = mermaSAP;
+            return Ok(_Response);
+        }
+
+
         [HttpPost("Escaneo")]
         public IActionResult guardarSolicitudDevolusionEntry([FromBody] ProduccionEntryModelBuild produccionEntry)
         {

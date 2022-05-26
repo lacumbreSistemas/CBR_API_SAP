@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Models.Produccion
 {
-    public class ProduccionEntryResumenActualizar:ProduccionEntryResumenConsultaMaster
+    public class ProduccionEntryResumenActualizar:ProduccionEntryResumenMaster
     {
         public ProduccionEntryResumenActualizar(string itemCode, int numero) {
             this.numero = numero;

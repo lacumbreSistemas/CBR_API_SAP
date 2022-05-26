@@ -26,6 +26,7 @@ namespace Domain.Models.Produccion
             this.fecha = produccionEntryModelBuild.fecha;
             this.numero = produccionEntryModelBuild.numero;
             this.usuario = produccionEntryModelBuild.usuario;
+            this.cantidad = cantidad;
             setNombreProducto();
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SAP.Models.Mermas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,5 +21,19 @@ namespace SAP.Models.Produccion
         public string CentroCosto { get; set; }
         public string CentroCosto3 { get; set; }
         public string CuentaContable { get; set; }
+
+        public string itemCode { get; set; }
+
+        public double quantity { get; set; }
+
+        public List<ProduccionSAPEntryEntity> produccionEntryEntrada { get; set; }
+
+
+
+        public ProduccionSAPEntity()
+        {
+            produccionEntryEntrada = new List<ProduccionSAPEntryEntity>();
+        }
+
     }
 }

@@ -19,23 +19,27 @@ namespace Domain.Models.Produccion
             comentario = produccionModelBuild.comentario;
             fechaCreacion = DateTime.Now;
             codigoProducto = produccionModelBuild.codigoProducto;
+            cantidad = produccionModelBuild.cantidad;
+            remarkCode = produccionModelBuild.remarkCode;
         }
 
 
         public ProduccionModelBuild guardar() {
 
-            cbr_ProduccionHeader cbr_ProduccionHeader = new cbr_ProduccionHeader();
+            cbr_ProduccionHeader _cbr_ProduccionHeader = new cbr_ProduccionHeader();
             ProduccionHeaderRepo produccionHeaderRepo = new ProduccionHeaderRepo();
-            cbr_ProduccionHeader.numero = numero;
-            cbr_ProduccionHeader.comentario = comentario;
-            cbr_ProduccionHeader.entradaDocEntry = 0;
-            cbr_ProduccionHeader.salidaDocEntry = 0;
-            cbr_ProduccionHeader.anulado = false;
-            cbr_ProduccionHeader.usuario = usuario;
-            cbr_ProduccionHeader.whsCode = codigoTienda;
-            cbr_ProduccionHeader.codigoProducto = codigoProducto;
-            cbr_ProduccionHeader.fecha = fechaCreacion;
-            numero = produccionHeaderRepo.crearDocumentoIntermedioProduccion(cbr_ProduccionHeader);
+            _cbr_ProduccionHeader.numero = this.numero;
+            _cbr_ProduccionHeader.comentario = comentario;
+            _cbr_ProduccionHeader.entradaDocEntry = 0;
+            _cbr_ProduccionHeader.salidaDocEntry = 0;
+            _cbr_ProduccionHeader.anulado = false;
+            _cbr_ProduccionHeader.usuario = usuario;
+            _cbr_ProduccionHeader.whsCode = codigoTienda;
+            _cbr_ProduccionHeader.codigoProducto = codigoProducto;
+            _cbr_ProduccionHeader.fecha = fechaCreacion;
+            _cbr_ProduccionHeader.cantidad = cantidad;
+            _cbr_ProduccionHeader.remarkId = remarkCode;
+            numero = produccionHeaderRepo.crearDocumentoIntermedioProduccion(_cbr_ProduccionHeader);
 
             return this;
 

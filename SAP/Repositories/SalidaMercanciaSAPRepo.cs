@@ -1,5 +1,5 @@
-﻿using SAP.Models;
-using SAP.Models.Mermas;
+﻿using SAP.Models.Mermas;
+using SAP.Models.Produccion;
 using SAPbobsCOM;
 using System;
 using System.Collections.Generic;
@@ -9,44 +9,46 @@ using System.Threading.Tasks;
 
 namespace SAP.Repositories
 {
-   public class SalidaMercanciaSAPRepo
+    public class SalidaMercanciaSAPRepo
     {
         MasterRepository _MasterRepository = MasterRepository.GetInstance();
 
 
-        public int generarSalidaMercancia(SalidaMercanciaSAPEntity mermasSAPEntity) {
+        public int generarSalidaMercancia(ProduccionSAPEntity produccionSAPEntity)
+        {
 
             int siDocumentoAgregado = 0;
             string nuevasalidaMercancia = "";
-            string tienda = mermasSAPEntity.WhsCode;
-            string centroCosto1 =mermasSAPEntity.CentroCosto;
+            string tienda = produccionSAPEntity.WhsCode;
+            string centroCosto1 = produccionSAPEntity.CentroCosto;
 
-            string centroCosto3 = mermasSAPEntity.CentroCosto3;
-            
+            string centroCosto3 = produccionSAPEntity.CentroCosto3;
 
 
-          
+
+
 
 
             Documents salidaMercancia = _MasterRepository.connection.GetBusinessObject(BoObjectTypes.oInventoryGenExit);
-            salidaMercancia.Comments = mermasSAPEntity.Comentario;
+            salidaMercancia.Comments = produccionSAPEntity.Comentario;
             //salidaMercancia.DocObjectCode = BoObjectTypes.oInventoryGenExit;
-           
 
-            salidaMercancia.UserFields.Fields.Item("U_remark").Value = mermasSAPEntity.RemarkID;
-            salidaMercancia.UserFields.Fields.Item("U_encargado_dev").Value = mermasSAPEntity.UsuarioEncargado;
-            salidaMercancia.UserFields.Fields.Item("U_Con_Remark").Value = mermasSAPEntity.Remark;
-            salidaMercancia.UserFields.Fields.Item("U_almdest").Value =tienda;
-         
-            
-            mermasSAPEntity.mermasSAPEntryEntity.ForEach(i => {
+
+            salidaMercancia.UserFields.Fields.Item("U_remark").Value = produccionSAPEntity.RemarkID;
+            salidaMercancia.UserFields.Fields.Item("U_encargado_dev").Value = produccionSAPEntity.UsuarioEncargado;
+            salidaMercancia.UserFields.Fields.Item("U_Con_Remark").Value = produccionSAPEntity.Remark;
+            salidaMercancia.UserFields.Fields.Item("U_almdest").Value = tienda;
+
+            #region entry produccion
+
+ 
                 //costo promedio producto 
-                var consultaCostoProducto = _MasterRepository.doQuery("Select avgprice from oitw where Whscode = '"+tienda+"' and itemcode = '"+i.ItemCode+"'");
-              
+                var consultaCostoProducto = _MasterRepository.doQuery("Select avgprice from oitw where Whscode = '" + tienda + "' and itemcode = '" + produccionSAPEntity.itemCode + "'");
+
                 Document_Lines salidaMercanciaLines = salidaMercancia.Lines;
-                salidaMercanciaLines.ItemCode = i.ItemCode;
-                salidaMercanciaLines.Quantity = i.Cantidad;
-                salidaMercanciaLines.AccountCode = mermasSAPEntity.CuentaContable;
+                salidaMercanciaLines.ItemCode = produccionSAPEntity.itemCode;
+                salidaMercanciaLines.Quantity = produccionSAPEntity.quantity;
+                salidaMercanciaLines.AccountCode = produccionSAPEntity.CuentaContable;
                 salidaMercanciaLines.WarehouseCode = tienda;
                 salidaMercanciaLines.CostingCode = centroCosto1;
                 salidaMercanciaLines.CostingCode3 = centroCosto3;
@@ -54,20 +56,23 @@ namespace SAP.Repositories
                 if (consultaCostoProducto.RecordCount > 0)
                 {
                     consultaCostoProducto.MoveFirst();
-                    double costoProducto =  consultaCostoProducto.Fields.Item("avgprice").Value;
-                    salidaMercanciaLines.UserFields.Fields.Item("U_costoproduc").Value = costoProducto.ToString() ;
+                    double costoProducto = consultaCostoProducto.Fields.Item("avgprice").Value;
+                    salidaMercanciaLines.UserFields.Fields.Item("U_costoproduc").Value = costoProducto.ToString();
                 }
-                else {
+                else
+                {
 
                     throw new Exception("No se encontó costo del producto");
                 }
-               
-                
+
+
                 salidaMercanciaLines.Add();
-            });
-         
+       
+
+            #endregion
+
             siDocumentoAgregado = salidaMercancia.Add();
-           
+
 
             if (siDocumentoAgregado == 0)
             {
@@ -81,7 +86,7 @@ namespace SAP.Repositories
         }
 
 
-  
+
 
         public string obgenerCuentaContable(string code)
         {
@@ -91,6 +96,20 @@ namespace SAP.Repositories
             consultaremark.MoveFirst();
             string remark = consultaremark.Fields.Item("U_Cuenta_Contable").Value;
             return remark;
+        }
+
+
+        public decimal obtenerCostoPonderado(string tienda, string itemCode) {
+
+            var consultaCostoProducto = _MasterRepository.doQuery("Select avgprice from oitw where Whscode = '" + tienda + "' and itemcode = '" + itemCode + "'");
+            consultaCostoProducto.MoveFirst();
+            decimal costoPonderado = 0;
+
+            if (consultaCostoProducto.RecordCount > 0)
+             costoPonderado = (decimal) consultaCostoProducto.Fields.Item("avgprice").Value;
+
+
+            return costoPonderado;
         }
 
     }
