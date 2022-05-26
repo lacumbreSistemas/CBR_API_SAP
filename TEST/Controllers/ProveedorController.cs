@@ -27,5 +27,14 @@ namespace TEST.Controllers
 
             return Ok(_Response);
         }
+        [HttpGet("PagosBAC")]
+        public IActionResult listaProveedoresPagosBAC()
+        {
+
+            _Response.mensaje = "Lista de proveedores Pagos BAC";
+            _Response.data = _ProveedorRepository.listaProveeodresPagosBAC();
+
+            return Ok(_Response);
+        }
     }
 }

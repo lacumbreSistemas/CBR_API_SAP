@@ -34,6 +34,7 @@ namespace SAP.Repositories.Proveedor
             return listaProveedores;
         }
 
+
         public ProveedorModelSAP obtenerProveedorCodigo(string code)
         {
 
@@ -48,5 +49,28 @@ namespace SAP.Repositories.Proveedor
             return proveedorModel;
 
         }
+        public List<ProveedorModelSAP> listaProveeodresPagosBAC()
+        {
+
+            List<ProveedorModelSAP> listaProveedores = new List<ProveedorModelSAP>();
+
+            var proveedores = masterRepo.doQuery("select CardCode,CardName from OCRD where BankCode like '%BAC%' and len(DflAccount)>0 order by CardName");
+
+            while (!proveedores.EoF)
+            {
+                ProveedorModelSAP proveedor = new ProveedorModelSAP();
+                proveedor.Code = proveedores.Fields.Item("CardCode").Value;
+                proveedor.Nombre = proveedores.Fields.Item("CardName").Value;
+
+                listaProveedores.Add(proveedor);
+
+                proveedores.MoveNext();
+            }
+
+
+            return listaProveedores;
+        }
+
+
     }
 }
