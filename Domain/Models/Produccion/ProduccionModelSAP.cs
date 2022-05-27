@@ -87,11 +87,11 @@ namespace Domain.Models.Produccion
         
 
             decimal ventaTotalSuma = entrys.Sum(i=> i.ventaTotal);
-
+            decimal costoTotalPonderado = saliMercanciaRepo.obtenerCostoPonderado(codigoTienda, codigoProducto) * (decimal)cantidad;
             entrys.ForEach(i=> {
                 ProduccionSAPEntryEntity produccionSAPEntryEntity = new ProduccionSAPEntryEntity();
 
-                decimal costoTotalPonderado =  saliMercanciaRepo.obtenerCostoPonderado(codigoTienda,codigoProducto) * (decimal) cantidad;
+             
 
                 decimal costoTotal = (i.ventaTotal / ventaTotalSuma)* costoTotalPonderado;
                 decimal costoLibra = costoTotal / (decimal)i.cantidadEscaneada;
@@ -105,7 +105,22 @@ namespace Domain.Models.Produccion
 
             });
 
+            
+            double cantidadTotalEntrada =  salidaMercanciaSAP.produccionEntryEntrada.Sum(i=> i.Cantidad);
 
+
+
+
+            //if (this.cantidad > cantidadTotalEntrada)
+            //    throw new Exception("La cantidad a ingresar es menor a la cantidad del producto de la receta ");
+            //if (this.cantidad < cantidadTotalEntrada)
+            //    throw new Exception("La cantidad a ingresar es mayor a la cantidad del producto de la receta ");
+
+
+            //if (Math.Round(costoTotalPonderado) > Math.Round(costoTotalEntrada))
+            //    throw new Exception("El costo de la entrada  es menor al costo del producto de la receta ");
+            //if (Math.Round(costoTotalPonderado) < Math.Round(costoTotalEntrada))
+            //    throw new Exception("El costo de la entrada  es mayor al costo del producto de la receta ");
 
             docEntryEntrada = entradaMercanciaSAPRepo.generarEntradaMercancia(salidaMercanciaSAP, docEntrySalida);
             #endregion

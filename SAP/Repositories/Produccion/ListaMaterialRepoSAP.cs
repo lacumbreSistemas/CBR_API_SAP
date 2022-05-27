@@ -13,7 +13,7 @@ namespace SAP.Repositories.Produccion
         MasterRepository _MasterRepository = MasterRepository.GetInstance();
         public List<ListaMaterialEntity> obtenerListasMateriales() {
 
-            var recetas = _MasterRepository.doQuery("select code,Name from oitt");
+            var recetas = _MasterRepository.doQuery("select code,Name from oitt where u_tipo_Produccion = 1");
             List<ListaMaterialEntity> listasMateriales = new List<ListaMaterialEntity>();
 
             while (!recetas.EoF) {

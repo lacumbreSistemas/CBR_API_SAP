@@ -54,7 +54,7 @@ namespace SAP.Repositories.Proveedor
 
             List<ProveedorModelSAP> listaProveedores = new List<ProveedorModelSAP>();
 
-            var proveedores = masterRepo.doQuery("select CardCode,CardName from OCRD where BankCode like '%BAC%' and len(DflAccount)>0 order by CardName");
+            var proveedores = masterRepo.doQuery("select CardCode,CardName from SBO_COLONIAL_PRODUCTIVA.[dbo].OCRD where BankCode like '%BAC%' and len(DflAccount)>0 order by CardName");
 
             while (!proveedores.EoF)
             {

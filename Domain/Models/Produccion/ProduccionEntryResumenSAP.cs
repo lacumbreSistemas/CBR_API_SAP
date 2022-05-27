@@ -13,6 +13,7 @@ namespace Domain.Models.Produccion
         public decimal precioVenta { get; set; }
         public decimal ventaTotal { get; set; }
 
+        
         public void establecerPrecioVenta() {
             ItemRepository itemRepository = new ItemRepository();
             var item = itemRepository.getByItemLoockupCode(codigoProducto);
