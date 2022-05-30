@@ -49,6 +49,7 @@ namespace Domain.Repositories.Produccion
                 documentoProduccion.salidaDocEntry = i.salidaDocEntry;
                 documentoProduccion.comentario = i.comentario;
                 documentoProduccion.cantidad = i.cantidad;
+                documentoProduccion.remarkCode = i.remarkId;
                 documentoProduccion.setRemark();
                 documentoProduccion.definirdescripcionReceta();
                 DocumentosIntermediosProduccion.Add(documentoProduccion);
@@ -63,6 +64,7 @@ namespace Domain.Repositories.Produccion
 
             produccionModelConsulta.resumenEntries();
             produccionModelConsulta.setRemark();
+            produccionModelConsulta.definirdescripcionReceta();
             return produccionModelConsulta;
         }
 
