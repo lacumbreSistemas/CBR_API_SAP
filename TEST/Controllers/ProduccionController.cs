@@ -111,7 +111,7 @@ namespace TEST.Controllers
         {
             var mermaSAP = produccionRepo.generarSalidaSAP(numero);
 
-            _Response.mensaje = "Creados documento de sálida " + mermaSAP.docEntrySalida;
+            _Response.mensaje = "Creados documento de sálida " + mermaSAP.docEntrySalida + " Documento de entrada "+mermaSAP.docEntryEntrada;
             _Response.data = mermaSAP;
             return Ok(_Response);
         }
