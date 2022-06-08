@@ -118,10 +118,10 @@ namespace TEST.Controllers
 
 
         [HttpGet("obtenerRemarks")]
-        public IActionResult obtenerRemarks()
+        public IActionResult obtenerRemarks([FromHeader] string WhsCode)
         {
 
-            var remarks = mermasRepo.obtenerRemarks();
+            var remarks = mermasRepo.obtenerRemarks(WhsCode);
             _Response.mensaje = "Lista de remarks";
             _Response.data = remarks;
 

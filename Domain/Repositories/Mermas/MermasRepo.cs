@@ -120,12 +120,17 @@ namespace Domain.Repositories.Mermas
 
        
 
-        public List<RemarkModel> obtenerRemarks() {
+        public List<RemarkModel> obtenerRemarks(string WhsCode) {
+
+
 
             RemarksRepo MermasDevolucionesRepo = new RemarksRepo();
             List<RemarkModel> remarks = new List<RemarkModel>();
+            Intermedia_.Repositories.CentroCostoRepository centroCostoRepository = new Intermedia_.Repositories.CentroCostoRepository();
+           var centroCosto = centroCostoRepository.obtenerCentroCostoTienda(WhsCode);
 
-            MermasDevolucionesRepo.obtenerRemarks().ForEach(i=> {
+
+            MermasDevolucionesRepo.obtenerRemarks(centroCosto).ForEach(i=> {
                 RemarkModel remark = new RemarkModel();
 
                 remark.code = i.code;

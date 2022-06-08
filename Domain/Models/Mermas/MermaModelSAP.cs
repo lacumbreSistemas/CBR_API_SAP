@@ -24,7 +24,7 @@ namespace Domain.Models.Mermas
 
         //centro de costo 
 
-        public string centroCostoTienda { get; set; }
+        public string CentroCostoTienda { get; set; }
         public string centroCosto3 { get; set; }
 
         public List<MermaEntryResumenMaster> mermasEntryList = new List<MermaEntryResumenMaster>();
@@ -38,9 +38,27 @@ namespace Domain.Models.Mermas
 
         private void setCentroCosto() {
             RemarksRepo remarksRepo = new RemarksRepo();
-            Intermedia_.Repositories.CentroCostoRepository centroCostoRepository = new Intermedia_.Repositories.CentroCostoRepository();
-            centroCostoTienda =   centroCostoRepository.obtenerCentroCostoTienda(codigoTienda);
-            centroCosto3 =  remarksRepo.obtenerCentroCosto(remarkCode);
+         
+            //centroCosto3 =  remarksRepo.obtenerCentroCosto(remarkCode);
+
+            var CentroCosto = remarksRepo.obtenerCentroCosto(remarkCode);
+
+            var centrosCostosSeparados = CentroCosto.ToString().Split(';');
+            int index = 1; 
+            foreach (string centrocosto in centrosCostosSeparados) {
+
+
+                if (CentroCostoTienda != "" && index == 1) 
+                    CentroCostoTienda = centrocosto;
+
+                if (CentroCostoTienda != "" && index == 3)
+                    centroCosto3 = centrocosto;
+
+                index++;
+            }
+
+
+
         }
         public MermaModelSAP generarMermaDevolucion()
         {
@@ -56,7 +74,7 @@ namespace Domain.Models.Mermas
             MermasSAP.UsuarioEncargado = usuario;
             MermasSAP.CuentaContable = cuentaContable;
             MermasSAP.Remark = remark;
-            MermasSAP.CentroCosto = centroCostoTienda;
+            MermasSAP.CentroCosto = CentroCostoTienda;
             MermasSAP.CentroCosto3 = centroCosto3;
 
             mermasEntryList.ForEach(i =>
