@@ -53,7 +53,7 @@ namespace SAP.Repositories.SolicitudesDevoliciones
                 return Convert.ToInt32(nuevaSolicitudDevolucion);
 
             }
-            throw new Exception("Entrada de mercancía Error [" + _MasterRepository.connection.GetLastErrorDescription() + "] ");
+            throw new Exception("Solicitud de devolucion Error [" + _MasterRepository.connection.GetLastErrorDescription() + "] ");
         }
 
 

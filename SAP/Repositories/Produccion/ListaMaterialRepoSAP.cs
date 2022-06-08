@@ -32,7 +32,7 @@ namespace SAP.Repositories.Produccion
 
         public List<ListaMaterialesDetalleEntity> obtenerListaMaterialesDetalle(string code) {
 
-            var recetas = _MasterRepository.doQuery(@"select cabecera.Code,cabecera.Name from oitt cabecera inner join 
+            var recetas = _MasterRepository.doQuery(@"select detalle.Code,detalle.ItemName from oitt cabecera inner join 
                                                         ITT1 detalle on detalle.Father = cabecera.Code
 
                                                         where cabecera.code ='" + code + "'");
@@ -42,7 +42,7 @@ namespace SAP.Repositories.Produccion
                 ListaMaterialesDetalleEntity listaMaterialesDetalleEntity = new ListaMaterialesDetalleEntity();
 
                 listaMaterialesDetalleEntity.Code = recetas.Fields.Item("code").Value;
-                listaMaterialesDetalleEntity.Name = recetas.Fields.Item("Name").Value;
+                listaMaterialesDetalleEntity.Name = recetas.Fields.Item("ItemName").Value;
 
                 detalleReceta.Add(listaMaterialesDetalleEntity);
 
