@@ -21,7 +21,7 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
             SolicitudDevolucionModelBuild nuevaSolicitudDevolucionModel = new SolicitudDevolucionModelBuild(solicitudDevolucion);
             nuevaSolicitudDevolucionModel.codigoTienda = WhsCode;
            nuevaSolicitudDevolucionModel.guardar();
-           return nuevaSolicitudDevolucionModel.numeroDevolucion == 0 ? throw new Exception("No se creó solicitud de devolución"): nuevaSolicitudDevolucionModel;
+           return nuevaSolicitudDevolucionModel.numero == 0 ? throw new Exception("No se creó solicitud de devolución"): nuevaSolicitudDevolucionModel;
 
         }
 
@@ -38,7 +38,7 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
             {
                 SolicitudDevolucionModelConsulta solicitudDevolucion = new SolicitudDevolucionModelConsulta();
                 //solicitudDevolucion.id = i.id;
-                solicitudDevolucion.numeroDevolucion = i.number;
+                solicitudDevolucion.numero = i.number;
                 solicitudDevolucion.codigoProveedor = i.cardCode;
                 solicitudDevolucion.codigoTienda = i.whsCode;
                 solicitudDevolucion.fechaCreacion = i.fecha;
@@ -77,7 +77,7 @@ namespace Domain.Repositories.SolicitudDevolucionRepositories
 
             SolicitudDevolucionModelSAP solicitudDevolucionSAP = new SolicitudDevolucionModelSAP();
 
-            solicitudDevolucionSAP.numeroDevolucion = solicitudDevolucionIntermedia.numeroDevolucion;
+            solicitudDevolucionSAP.numero = solicitudDevolucionIntermedia.numero;
             solicitudDevolucionSAP.codigoProveedor = solicitudDevolucionIntermedia.codigoProveedor;
             solicitudDevolucionSAP.codigoTienda = solicitudDevolucionIntermedia.codigoTienda;
             solicitudDevolucionSAP.comentario = solicitudDevolucionIntermedia.comentario;

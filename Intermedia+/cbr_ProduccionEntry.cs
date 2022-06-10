@@ -6,25 +6,25 @@ namespace Intermedia_
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class cbr_SolicitudDevolucionEntry
+    public partial class cbr_ProduccionEntry
     {
         public int id { get; set; }
 
         [StringLength(50)]
-        public string itemCode { get; set; }
+        public string itemcode { get; set; }
 
         public double quantity { get; set; }
 
-        public DateTime fecha { get; set; }
+        public DateTime? fecha { get; set; }
 
         public bool deleted { get; set; }
 
-        public int deletedId { get; set; }
+        public int? deletedId { get; set; }
 
         [StringLength(50)]
         public string usuario { get; set; }
 
-        public int number { get; set; }
+        public int numero { get; set; }
 
         public bool cancelado { get; set; }
     }

@@ -24,7 +24,7 @@ namespace Domain.Models.SolicitudDevolucionModels
         public SolicitudDevolucionEntryResumenActualizar()
         {
 
-            this.Numero = Numero;
+           
             _SolicitudDevolucionEntryRepo = new cbr_SolicitudDevolucionEntryRepo();
         }
 

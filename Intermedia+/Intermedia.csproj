@@ -71,29 +71,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\cbr_ComprasSAP_Escaneo.cs" />
-    <Compile Include="Entity\cbr_contenedoresInternacionalesCerrados.cs" />
-    <Compile Include="Entity\cbr_listaItemsRecepcionImportados.cs" />
-    <Compile Include="Entity\cbr_SolicitudDevolucionEntry.cs" />
-    <Compile Include="Entity\cbr_SolicitudDevolucionHeader.cs" />
-    <Compile Include="Entity\cbr_TrasladosSAP_Entry.cs" />
-    <Compile Include="Entity\cbr_TrasladosSAP_Header.cs" />
-    <Compile Include="Entity\cbr_UsuariosApiSAP.cs" />
+    <Compile Include="cbr_ComprasSAP_Escaneo.cs" />
+    <Compile Include="cbr_contenedoresInternacionalesCerrados.cs" />
+    <Compile Include="cbr_listaItemsRecepcionImportados.cs" />
+    <Compile Include="cbr_MermasEntry.cs" />
+    <Compile Include="cbr_MermasHeader.cs" />
+    <Compile Include="cbr_ProduccionEntry.cs" />
+    <Compile Include="cbr_ProduccionHeader.cs" />
+    <Compile Include="cbr_RemarksTemp.cs" />
+    <Compile Include="cbr_SolicitudDevolucionEntry.cs" />
+    <Compile Include="cbr_SolicitudDevolucionHeader.cs" />
+    <Compile Include="cbr_TrasladosSAP_Entry.cs" />
+    <Compile Include="cbr_TrasladosSAP_Header.cs" />
+    <Compile Include="cbr_UsuariosApiSAP.cs" />
+    <Compile Include="centroCostoMap.cs" />
     <Compile Include="Data.cs" />
-    <Compile Include="Entity\ErrorLog.cs" />
-    <Compile Include="Entity\inventarioSAP.cs" />
+    <Compile Include="ErrorLog.cs" />
+    <Compile Include="inventarioSAP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\cbr_ComprasSAP_Escaneo_Repository.cs" />
-    <Compile Include="Repositories\cbr_ComprasSAP_NoMatriculados_Repository.cs" />
-    <Compile Include="Repositories\cbr_contenedoresInternacionalesCerradosRepo.cs" />
-    <Compile Include="Repositories\cbr_listaItemsRecepcionImportadosRepository.cs" />
-    <Compile Include="Repositories\cbr_SolicitudDevolucionEntryRepo.cs" />
-    <Compile Include="Repositories\cbr_SolicitudDevolucionHeaderRepo.cs" />
+    <Compile Include="Repositories\CentroCostoRepository.cs" />
+    <Compile Include="Repositories\Compras\Nacionales\cbr_ComprasSAP_Escaneo_Repository.cs" />
+    <Compile Include="Repositories\Compras\Importados\cbr_contenedoresInternacionalesCerradosRepo.cs" />
+    <Compile Include="Repositories\Compras\Importados\cbr_listaItemsRecepcionImportadosRepository.cs" />
+    <Compile Include="Repositories\Devoluciones\cbr_SolicitudDevolucionEntryRepo.cs" />
+    <Compile Include="Repositories\Devoluciones\cbr_SolicitudDevolucionHeaderRepo.cs" />
     <Compile Include="Repositories\ErrorLogRepository.cs" />
     <Compile Include="Repositories\MasterRespository.cs" />
-    <Compile Include="Repositories\SolicitudDevolucionSalesPersonCodesRepo.cs" />
-    <Compile Include="ResilenciaEstrategia.cs" />
-    <Compile Include="RetryConfiguration.cs" />
+    <Compile Include="Repositories\Devoluciones\SolicitudDevolucionSalesPersonCodesRepo.cs" />
+    <Compile Include="Repositories\Mermas\MermasEntryRepo.cs" />
+    <Compile Include="Repositories\Mermas\MermasHeaderRepo.cs" />
+    <Compile Include="Repositories\Produccion\ProduccionEntryRepo.cs" />
+    <Compile Include="Repositories\Produccion\ProduccionHeaderRepo.cs" />
     <Compile Include="SolicitudDevolisionEscaneos.cs" />
     <Compile Include="SolicitudDevolucionSalesPersonCodes.cs" />
   </ItemGroup>
@@ -101,7 +109,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Entity\Devoluciones\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

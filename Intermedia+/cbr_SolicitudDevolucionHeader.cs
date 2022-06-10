@@ -8,10 +8,6 @@ namespace Intermedia_
 
     public partial class cbr_SolicitudDevolucionHeader
     {
-
-        [Key]
-        public int number { get; set; }
-
         [StringLength(5)]
         public string whsCode { get; set; }
 
@@ -29,5 +25,8 @@ namespace Intermedia_
 
         [StringLength(50)]
         public string usuario { get; set; }
+
+        [Key]
+        public int number { get; set; }
     }
 }

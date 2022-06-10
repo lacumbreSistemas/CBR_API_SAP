@@ -62,7 +62,7 @@ namespace Intermedia_.Repositories
 
 
         public void GuardarEscaneoNacional(cbr_ComprasSAP_Escaneo Entry) {
-            if (Entry.matriculado)
+            if ((bool) Entry.matriculado)
             {
                 db.cbr_ComprasSAP_Escaneo.Add(Entry);
                 db.SaveChanges();

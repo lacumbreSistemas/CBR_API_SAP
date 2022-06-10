@@ -33,6 +33,21 @@ namespace Domain.Repositories
 
             return proveedores; 
         }
+        public List<ProveedorModel> listaProveeodresPagosBAC()
+        {
+            List<ProveedorModel> proveedores = new List<ProveedorModel>();
 
+            _ProveedorSAPRepository.listaProveeodresPagosBAC().ForEach(i => {
+
+                ProveedorModel proveedor = new ProveedorModel();
+                proveedor.Code = i.Code;
+                proveedor.Nombre = i.Nombre;
+
+                proveedores.Add(proveedor);
+
+            });
+
+            return proveedores;
+        }
     }
 }

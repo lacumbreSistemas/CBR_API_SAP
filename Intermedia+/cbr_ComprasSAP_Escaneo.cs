@@ -20,7 +20,7 @@ namespace Intermedia_
 
         public double cantidad { get; set; }
 
-        public DateTime fecha { get; set; }
+        public DateTime? fecha { get; set; }
 
         public int entradaMercanciaDocEntry { get; set; }
 

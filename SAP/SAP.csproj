@@ -65,6 +65,7 @@
     <Compile Include="Contracts\IOCEntry.cs" />
     <Compile Include="Contracts\IOCEntryRepo.cs" />
     <Compile Include="Contracts\IOCHeader.cs" />
+    <Compile Include="Models\CentroCostoEntity.cs" />
     <Compile Include="Models\ComprasEntitys\EntradaDeMercancia.cs" />
     <Compile Include="Models\ComprasEntitys\EntradaMercanciaEntry.cs" />
     <Compile Include="Models\ComprasInternacionalesEntitys\ContenedorEntity.cs" />
@@ -73,7 +74,14 @@
     <Compile Include="Models\ItemSAP.cs" />
     <Compile Include="Models\ComprasEntitys\PurchaseOrderEntry.cs" />
     <Compile Include="Models\ComprasEntitys\PurchaseOrderHeader.cs" />
+    <Compile Include="Models\Mermas\SalidaMercanciaSAPEntity.cs" />
+    <Compile Include="Models\Mermas\SalidaMercanciaSAPEntryEntity.cs" />
+    <Compile Include="Models\Produccion\ListaMaterialEntity.cs" />
+    <Compile Include="Models\Produccion\ListaMaterialesDetalleEntity.cs" />
+    <Compile Include="Models\Produccion\ProduccionSAPEntity.cs" />
+    <Compile Include="Models\Produccion\ProduccionSAPEntryEntity.cs" />
     <Compile Include="Models\ProveedorModelSAP.cs" />
+    <Compile Include="Models\Remarks.cs" />
     <Compile Include="Models\SolicitudDevolicionEntrys\SolicitudDevolucionEntrySAPEntity.cs" />
     <Compile Include="Models\SolicitudDevolicionEntrys\SolicitudDevolucionSAPEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,17 +90,24 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="RemarksRepo.cs" />
+    <Compile Include="Repositories\CentroCostoRepository.cs" />
     <Compile Include="Repositories\ComprasInternacionalesContenedor\ComprasInternacionalesListaContenedorEntryRepository.cs" />
     <Compile Include="Repositories\ComprasInternacionalesContenedor\ComprasInternacionalesContenedorRepository.cs" />
     <Compile Include="Repositories\ComprasInternacionales\FacturaReservaEntryRepository.cs" />
     <Compile Include="Repositories\ComprasInternacionales\FacturaReservaHeaderRepository.cs" />
     <Compile Include="Repositories\Compras\EntradaDeMercanciaEntryRepository.cs" />
     <Compile Include="Repositories\Compras\EntradaDeMercanciaRepository.cs" />
+    <Compile Include="Repositories\EntradaMercanciaSAPRepo.cs" />
     <Compile Include="Repositories\Item\ItemSAPRepository.cs" />
+    <Compile Include="Repositories\ListaMeterialesRepo.cs" />
     <Compile Include="Repositories\MasterRepository.cs" />
     <Compile Include="Repositories\Compras\PurchaseOrderEntryRespository.cs" />
     <Compile Include="Repositories\Compras\PurchaseOrderHeaderRepository.cs" />
+    <Compile Include="Repositories\SalidaMercanciaPreliminarSAPRepo.cs" />
+    <Compile Include="Repositories\Produccion\ListaMaterialRepoSAP.cs" />
     <Compile Include="Repositories\Proveedor\ProveedorSAPRepository.cs" />
+    <Compile Include="Repositories\SalidaMercanciaSAPRepo.cs" />
     <Compile Include="Repositories\SolicitudesDevoliciones\SolicitudesDevolucionesRepo.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
@@ -120,6 +135,7 @@
       <Name>Intermedia</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -25,7 +25,6 @@ namespace Intermedia_.Repositories
         }
 
 
-
         public List<cbr_SolicitudDevolucionEntry> obtenerEntriesPorNumberItemCode(int number, string itemCode)
         {
 
@@ -53,7 +52,7 @@ namespace Intermedia_.Repositories
                
 
                 throw new Exception("Escaneo ya fue anulado por "+ escaneoAnulacion.usuario);
-            }else if (escaneoPorAnular.cancelado)
+            }else if ((bool) escaneoPorAnular.cancelado)
             {
                 throw new Exception("Item cancelado");
 
@@ -86,7 +85,7 @@ namespace Intermedia_.Repositories
 
             var escaneosItems = db.cbr_SolicitudDevolucionEntry.Where(i => i.number == numero && i.itemCode == itemCode).ToList();
             escaneosItems.ForEach(i=> {
-                if (!i.cancelado)
+                if ((bool)!i.cancelado)
                 {
                     todosCancelados = false;
                     i.cancelado = true;
@@ -102,5 +101,6 @@ namespace Intermedia_.Repositories
 
         }
 
+     
     }
 }

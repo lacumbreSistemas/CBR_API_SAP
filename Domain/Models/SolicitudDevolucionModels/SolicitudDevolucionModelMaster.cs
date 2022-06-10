@@ -9,7 +9,7 @@ namespace Domain.Models.SolicitudDevolucionModels
    public class SolicitudDevolucionModelMaster
     {
 
-        public int numeroDevolucion { get; set; }
+        public int numero { get; set; }
         
         public string codigoTienda { get; set; }
         public string codigoProveedor { get; set; }

@@ -76,7 +76,7 @@ namespace TEST.Controllers
 
           
 
-            _Response.mensaje = "Solicitud de traslado " + guardarSolicitudDevolucion.numeroDevolucion + " guardada con éxito";
+            _Response.mensaje = "Solicitud de traslado " + guardarSolicitudDevolucion.numero + " guardada con éxito";
             _Response.data = guardarSolicitudDevolucion;
 
 
@@ -85,11 +85,11 @@ namespace TEST.Controllers
 
 
         [HttpPost("Escaneo")]
-        public IActionResult guardarSolicitudDevolusionEntry([FromBody] SolicitudDevolucionEntryModelBuild solicitudTraslado)
+        public IActionResult guardarSolicitudDevolusionEntry([FromBody] SolicitudDevolucionEntryModelBuild solicitudDevolucion)
         {
 
             _Response.mensaje = "Escaneo guardada con éxito";
-            _Response.data = _EscaneoEntrysRepo.crearSolicitudDevolusionEntry(solicitudTraslado);
+            _Response.data = _EscaneoEntrysRepo.crearSolicitudDevolusionEntry(solicitudDevolucion);
 
             return Ok(_Response);
         }

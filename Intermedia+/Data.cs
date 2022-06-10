@@ -8,27 +8,32 @@ namespace Intermedia_
     public partial class Data : DbContext
     {
         public Data()
-#if (Debug)
-            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
-#endif
 #if (Pruebas)
-            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+#endif
+#if (Debug)
+            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
 #endif
 #if (Produccion)
-            : base("data source=10.10.1.12;initial catalog=ApiSAP;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
+            : base("data source=10.10.1.12;initial catalog=ApiSAP;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
 #endif
-
 #if (Release)
-                        : base("data source=10.10.1.12;initial catalog=ApiSAPTest;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
-
+            : base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
 #endif
+
         {
         }
 
         public virtual DbSet<cbr_ComprasSAP_Escaneo> cbr_ComprasSAP_Escaneo { get; set; }
         public virtual DbSet<cbr_contenedoresInternacionalesCerrados> cbr_contenedoresInternacionalesCerrados { get; set; }
+        public virtual DbSet<cbr_MermasEntry> cbr_MermasEntry { get; set; }
+        public virtual DbSet<cbr_MermasHeader> cbr_MermasHeader { get; set; }
+        public virtual DbSet<cbr_ProduccionEntry> cbr_ProduccionEntry { get; set; }
+        public virtual DbSet<cbr_ProduccionHeader> cbr_ProduccionHeader { get; set; }
+        public virtual DbSet<cbr_RemarksTemp> cbr_RemarksTemp { get; set; }
         public virtual DbSet<cbr_SolicitudDevolucionEntry> cbr_SolicitudDevolucionEntry { get; set; }
         public virtual DbSet<cbr_SolicitudDevolucionHeader> cbr_SolicitudDevolucionHeader { get; set; }
+        public virtual DbSet<centroCostoMap> centroCostoMap { get; set; }
         public virtual DbSet<ErrorLog> ErrorLog { get; set; }
         public virtual DbSet<SolicitudDevolisionEscaneos> SolicitudDevolisionEscaneos { get; set; }
         public virtual DbSet<cbr_listaItemsRecepcionImportados> cbr_listaItemsRecepcionImportados { get; set; }
@@ -56,6 +61,54 @@ namespace Intermedia_
                 .Property(e => e.usuario)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<cbr_MermasEntry>()
+                .Property(e => e.itemCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_MermasEntry>()
+                .Property(e => e.usuario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_MermasHeader>()
+                .Property(e => e.whsCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_MermasHeader>()
+                .Property(e => e.comentario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_MermasHeader>()
+                .Property(e => e.usuario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_MermasHeader>()
+                .Property(e => e.remarkId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_ProduccionEntry>()
+                .Property(e => e.itemcode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_ProduccionEntry>()
+                .Property(e => e.usuario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_ProduccionHeader>()
+                .Property(e => e.whsCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_ProduccionHeader>()
+                .Property(e => e.comentario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_ProduccionHeader>()
+                .Property(e => e.usuario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_RemarksTemp>()
+                .Property(e => e.Remark)
+                .IsUnicode(false);
+
             modelBuilder.Entity<cbr_SolicitudDevolucionEntry>()
                 .Property(e => e.itemCode)
                 .IsUnicode(false);
@@ -74,6 +127,18 @@ namespace Intermedia_
 
             modelBuilder.Entity<cbr_SolicitudDevolucionHeader>()
                 .Property(e => e.comentario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_SolicitudDevolucionHeader>()
+                .Property(e => e.usuario)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<centroCostoMap>()
+                .Property(e => e.WhsCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<centroCostoMap>()
+                .Property(e => e.CentroCosto)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ErrorLog>()

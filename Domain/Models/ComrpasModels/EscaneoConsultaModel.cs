@@ -14,7 +14,7 @@ namespace Domain.Models
 
         public int id { get; set; } 
 
-        public int entradaMercanciaDocEntry { get; set; } 
+        public int? entradaMercanciaDocEntry { get; set; } 
 
         public bool elimnado { get; set; }
 

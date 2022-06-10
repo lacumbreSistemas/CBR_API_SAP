@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Intermedia_.Repositories
+namespace Domain.Repositories
 {
-    public class cbr_ComprasSAP_NoMatriculados_Repository
+    public class OrdenProduccionSAP
     {
-
+       
 
     }
 }

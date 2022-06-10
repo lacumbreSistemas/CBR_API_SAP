@@ -31,7 +31,7 @@ namespace SAP.Repositories.SolicitudesDevoliciones
             solicitudDevolicion.UserFields.Fields.Item("U_tiedest").Value = tienda;
             solicitudDevolicion.UserFields.Fields.Item("U_encargado_dev").Value = solicitudDevolucionHeaderSAPEntity.EncargadoDevolucion;
             solicitudDevolicion.Comments = solicitudDevolucionHeaderSAPEntity.Comentario;
-            
+   
            
             solicitudDevolicion.SalesPersonCode = solicitudDevolucionHeaderSAPEntity.codigoPersonaCompras;
 
@@ -53,7 +53,7 @@ namespace SAP.Repositories.SolicitudesDevoliciones
                 return Convert.ToInt32(nuevaSolicitudDevolucion);
 
             }
-            throw new Exception("Entrada de mercancía Error [" + _MasterRepository.connection.GetLastErrorDescription() + "] ");
+            throw new Exception("Solicitud de devolucion Error [" + _MasterRepository.connection.GetLastErrorDescription() + "] ");
         }
 
 
