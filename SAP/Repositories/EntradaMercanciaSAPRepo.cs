@@ -35,7 +35,7 @@ namespace SAP.Repositories
             salidaMercancia.UserFields.Fields.Item("U_encargado_dev").Value = produccionSAPEntity.UsuarioEncargado;
             salidaMercancia.UserFields.Fields.Item("U_Con_Remark").Value = produccionSAPEntity.Remark;
             salidaMercancia.UserFields.Fields.Item("U_almdest").Value = tienda;
-            salidaMercancia.UserFields.Fields.Item("U_Cant_Merma").Value = docEntrySalidaMercancia;
+            salidaMercancia.UserFields.Fields.Item("U_Cant_Merma").Value = docEntrySalidaMercancia.ToString();
 
             produccionSAPEntity.produccionEntryEntrada.ForEach(i => {
                 //costo promedio producto 

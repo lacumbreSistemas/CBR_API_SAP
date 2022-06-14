@@ -47,9 +47,26 @@ namespace Domain.Models.Produccion
         private void setCentroCosto()
         {
             RemarksRepo remarksRepo = new RemarksRepo();
-            Intermedia_.Repositories.CentroCostoRepository centroCostoRepository = new Intermedia_.Repositories.CentroCostoRepository();
-            centroCostoTienda = centroCostoRepository.obtenerCentroCostoTienda(codigoTienda);
-            centroCosto3 = remarksRepo.obtenerCentroCosto(remarkCode);
+            var CentroCosto = remarksRepo.obtenerCentroCosto(remarkCode);
+
+            var centrosCostosSeparados = CentroCosto.ToString().Split(';');
+            int index = 1;
+            foreach (string centrocosto in centrosCostosSeparados)
+            {
+
+
+                if (centroCostoTienda != "" && index == 1)
+                    centroCostoTienda = centrocosto;
+
+                if (centroCostoTienda != "" && index == 3)
+                    centroCosto3 = centrocosto;
+
+                index++;
+            }
+
+            //Intermedia_.Repositories.CentroCostoRepository centroCostoRepository = new Intermedia_.Repositories.CentroCostoRepository();
+            //centroCostoTienda = centroCostoRepository.obtenerCentroCostoTienda(codigoTienda);
+            //centroCosto3 = remarksRepo.obtenerCentroCosto(remarkCode);
         }
 
 
@@ -91,8 +108,6 @@ namespace Domain.Models.Produccion
             entrys.ForEach(i=> {
                 ProduccionSAPEntryEntity produccionSAPEntryEntity = new ProduccionSAPEntryEntity();
 
-             
-
                 decimal costoTotal = (i.ventaTotal / ventaTotalSuma)* costoTotalPonderado;
                 decimal costoLibra = costoTotal / (decimal)i.cantidadEscaneada;
 
@@ -100,27 +115,11 @@ namespace Domain.Models.Produccion
                 produccionSAPEntryEntity.Cantidad = i.cantidadEscaneada;
                 produccionSAPEntryEntity.costoLibra = costoLibra;
                 salidaMercanciaSAP.produccionEntryEntrada.Add(produccionSAPEntryEntity);
-
-
-
             });
 
             
             double cantidadTotalEntrada =  salidaMercanciaSAP.produccionEntryEntrada.Sum(i=> i.Cantidad);
-
-
-
-
-            //if (this.cantidad > cantidadTotalEntrada)
-            //    throw new Exception("La cantidad a ingresar es menor a la cantidad del producto de la receta ");
-            //if (this.cantidad < cantidadTotalEntrada)
-            //    throw new Exception("La cantidad a ingresar es mayor a la cantidad del producto de la receta ");
-
-
-            //if (Math.Round(costoTotalPonderado) > Math.Round(costoTotalEntrada))
-            //    throw new Exception("El costo de la entrada  es menor al costo del producto de la receta ");
-            //if (Math.Round(costoTotalPonderado) < Math.Round(costoTotalEntrada))
-            //    throw new Exception("El costo de la entrada  es mayor al costo del producto de la receta ");
+         
 
             docEntryEntrada = entradaMercanciaSAPRepo.generarEntradaMercancia(salidaMercanciaSAP, docEntrySalida);
             #endregion
