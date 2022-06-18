@@ -20,7 +20,6 @@ namespace Intermedia_
 #if (Release)
             : base("data source=10.10.1.12;initial catalog=ApiSAPTest;persist security info=True;user id=sa;password=SAP#Sql_;MultipleActiveResultSets=True;App=EntityFramework")
 #endif
-
         {
         }
 
@@ -37,6 +36,7 @@ namespace Intermedia_
         public virtual DbSet<ErrorLog> ErrorLog { get; set; }
         public virtual DbSet<SolicitudDevolisionEscaneos> SolicitudDevolisionEscaneos { get; set; }
         public virtual DbSet<cbr_listaItemsRecepcionImportados> cbr_listaItemsRecepcionImportados { get; set; }
+        public virtual DbSet<cbr_MapAlmacenesProduccion> cbr_MapAlmacenesProduccion { get; set; }
         public virtual DbSet<cbr_TrasladosSAP_Entry> cbr_TrasladosSAP_Entry { get; set; }
         public virtual DbSet<cbr_TrasladosSAP_Header> cbr_TrasladosSAP_Header { get; set; }
         public virtual DbSet<cbr_UsuariosApiSAP> cbr_UsuariosApiSAP { get; set; }
@@ -105,6 +105,14 @@ namespace Intermedia_
                 .Property(e => e.usuario)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<cbr_ProduccionHeader>()
+                .Property(e => e.codigoProducto)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_ProduccionHeader>()
+                .Property(e => e.remarkId)
+                .IsUnicode(false);
+
             modelBuilder.Entity<cbr_RemarksTemp>()
                 .Property(e => e.Remark)
                 .IsUnicode(false);
@@ -171,6 +179,14 @@ namespace Intermedia_
 
             modelBuilder.Entity<cbr_listaItemsRecepcionImportados>()
                 .Property(e => e.itemCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_MapAlmacenesProduccion>()
+                .Property(e => e.almacenTienda)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cbr_MapAlmacenesProduccion>()
+                .Property(e => e.almacenProduccion)
                 .IsUnicode(false);
 
             modelBuilder.Entity<cbr_TrasladosSAP_Entry>()

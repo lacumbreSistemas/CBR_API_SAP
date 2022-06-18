@@ -58,6 +58,7 @@ namespace SAP.Repositories
                     consultaCostoProducto.MoveFirst();
                     double costoProducto = consultaCostoProducto.Fields.Item("avgprice").Value;
                     salidaMercanciaLines.UserFields.Fields.Item("U_costoproduc").Value = costoProducto.ToString();
+                salidaMercanciaLines.UnitPrice = costoProducto;
                 }
                 else
                 {

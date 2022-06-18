@@ -14,7 +14,7 @@ namespace Intermedia_
         [StringLength(30)]
         public string cardCode { get; set; }
 
-        public DateTime? fecha { get; set; }
+        public DateTime fecha { get; set; }
 
         public int docEntry { get; set; }
 

@@ -80,6 +80,9 @@ namespace Domain.Models.Produccion
             EntradaMercanciaSAPRepo entradaMercanciaSAPRepo = new EntradaMercanciaSAPRepo();
 
             ProduccionHeaderRepo produccionHeaderRepo = new ProduccionHeaderRepo();
+
+            string almacenProduccion = produccionHeaderRepo.getAlmacenProduccion(codigoTienda);
+
             establecerCuentaContable();
             setCentroCosto();
             salidaMercanciaSAP.WhsCode = codigoTienda;
@@ -119,9 +122,9 @@ namespace Domain.Models.Produccion
 
             
             double cantidadTotalEntrada =  salidaMercanciaSAP.produccionEntryEntrada.Sum(i=> i.Cantidad);
-         
+            salidaMercanciaSAP.WhsCode = almacenProduccion;
 
-            docEntryEntrada = entradaMercanciaSAPRepo.generarEntradaMercancia(salidaMercanciaSAP, docEntrySalida);
+              docEntryEntrada = entradaMercanciaSAPRepo.generarEntradaMercancia(salidaMercanciaSAP, docEntrySalida);
             #endregion
 
 

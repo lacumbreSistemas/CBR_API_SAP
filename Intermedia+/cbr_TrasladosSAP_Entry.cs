@@ -10,14 +10,14 @@ namespace Intermedia_
     {
         public int id { get; set; }
 
-        public int DocEntry { get; set; }
+        public int? DocEntry { get; set; }
 
         public DateTime? fecha { get; set; }
 
         [StringLength(255)]
         public string ItemCode { get; set; }
 
-        public double quantity { get; set; }
+        public double? quantity { get; set; }
 
         [StringLength(255)]
         public string usuario { get; set; }
@@ -28,12 +28,12 @@ namespace Intermedia_
         [StringLength(10)]
         public string Destino { get; set; }
 
-        public int code { get; set; }
+        public int? code { get; set; }
 
-        public int BaseLine { get; set; }
+        public int? BaseLine { get; set; }
 
-        public bool ifSap { get; set; }
+        public bool? ifSap { get; set; }
 
-        public bool deleted { get; set; }
+        public bool? deleted { get; set; }
     }
 }
