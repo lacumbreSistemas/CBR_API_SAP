@@ -53,18 +53,11 @@ namespace SAP.Repositories
                 salidaMercanciaLines.CostingCode = centroCosto1;
                 salidaMercanciaLines.CostingCode3 = centroCosto3;
 
-                if (consultaCostoProducto.RecordCount > 0)
-                {
+               
                     consultaCostoProducto.MoveFirst();
-                    double costoProducto = consultaCostoProducto.Fields.Item("avgprice").Value;
-                    salidaMercanciaLines.UserFields.Fields.Item("U_costoproduc").Value = costoProducto.ToString();
-                salidaMercanciaLines.UnitPrice = costoProducto;
-                }
-                else
-                {
+                    salidaMercanciaLines.UserFields.Fields.Item("U_costoproduc").Value = produccionSAPEntity.costoPonderado.ToString();
+                salidaMercanciaLines.UnitPrice = produccionSAPEntity.costoPonderado;
 
-                    throw new Exception("No se encontó costo del producto");
-                }
 
 
                 salidaMercanciaLines.Add();
@@ -111,6 +104,18 @@ namespace SAP.Repositories
 
 
             return costoPonderado;
+        }
+
+        public double obtenerCostoSalida(int docentry) {
+
+            double costoSalida = 0;
+            var consultaCostoProducto = _MasterRepository.doQuery("Select doctotal from oige where docentry = " + docentry);
+            consultaCostoProducto.MoveFirst();
+
+             costoSalida = Convert.ToDouble(consultaCostoProducto.Fields.Item("doctotal").Value);
+
+            return costoSalida;
+
         }
 
     }
