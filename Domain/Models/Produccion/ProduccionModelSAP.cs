@@ -30,7 +30,7 @@ namespace Domain.Models.Produccion
         public string centroCostoTienda { get; set; }
         public string centroCosto3 { get; set; }
 
-        public double cantidadMerma { get; set;  }
+        public double cantidadMerma { get; set; } = 0;
    
 
         public List<ProduccionEntryResumenSAP> entrys { get; set; }
@@ -113,26 +113,26 @@ namespace Domain.Models.Produccion
         
 
             decimal ventaTotalSuma = entrys.Sum(i=> i.ventaTotal);
-            decimal costoTotalPonderado = saliMercanciaRepo.obtenerCostoPonderado(codigoTienda, codigoProducto) * (decimal)cantidad;
+            decimal costoTotalPonderado = Math.Round((saliMercanciaRepo.obtenerCostoPonderado(codigoTienda, codigoProducto) * (decimal)cantidad),2);
 
         
 
             entrys.ForEach(i=> {
                 ProduccionSAPEntryEntity produccionSAPEntryEntity = new ProduccionSAPEntryEntity();
 
-                decimal costoTotal = (i.ventaTotal / ventaTotalSuma)* costoTotalPonderado;
-                decimal costoLibra = costoTotal / (decimal)i.cantidadEscaneada;
+                decimal costoTotal = (Math.Round(i.ventaTotal,2) / Math.Round(ventaTotalSuma,2))* costoTotalPonderado;
+                decimal costoLibra =Math.Round(costoTotal) / (decimal)i.cantidadEscaneada;
 
                 produccionSAPEntryEntity.ItemCode = i.codigoProducto;
                 produccionSAPEntryEntity.Cantidad = i.cantidadEscaneada;
-                produccionSAPEntryEntity.costoLibra = costoLibra;
+                produccionSAPEntryEntity.costoLibra = Math.Round(costoLibra,2);
                 salidaMercanciaSAP.produccionEntryEntrada.Add(produccionSAPEntryEntity);
 
                 cantidadMerma = cantidadMerma + i.cantidadEscaneada;
             });
 
-       
 
+            cantidadMerma = cantidadMerma - cantidad;
 
             salidaMercanciaSAP.cantidadMerma = cantidadMerma;
             double cantidadTotalEntrada =  salidaMercanciaSAP.produccionEntryEntrada.Sum(i=> i.Cantidad);
