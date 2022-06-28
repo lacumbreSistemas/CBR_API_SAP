@@ -20,7 +20,7 @@ namespace Intermedia_
 
         public double cantidad { get; set; }
 
-        public DateTime? fecha { get; set; }
+        public DateTime fecha { get; set; }
 
         public int entradaMercanciaDocEntry { get; set; }
 
@@ -30,6 +30,6 @@ namespace Intermedia_
 
         public int escaneoAnuladoID { get; set; }
 
-        public bool matriculado { get; set; }
+        public bool? matriculado { get; set; }
     }
 }

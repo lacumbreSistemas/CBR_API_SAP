@@ -30,6 +30,7 @@ namespace Domain.Models.Produccion
         public string centroCostoTienda { get; set; }
         public string centroCosto3 { get; set; }
 
+        public double cantidadMerma { get; set; } = 0;
    
 
         public List<ProduccionEntryResumenSAP> entrys { get; set; }
@@ -47,9 +48,26 @@ namespace Domain.Models.Produccion
         private void setCentroCosto()
         {
             RemarksRepo remarksRepo = new RemarksRepo();
-            Intermedia_.Repositories.CentroCostoRepository centroCostoRepository = new Intermedia_.Repositories.CentroCostoRepository();
-            centroCostoTienda = centroCostoRepository.obtenerCentroCostoTienda(codigoTienda);
-            centroCosto3 = remarksRepo.obtenerCentroCosto(remarkCode);
+            var CentroCosto = remarksRepo.obtenerCentroCosto(remarkCode);
+
+            var centrosCostosSeparados = CentroCosto.ToString().Split(';');
+            int index = 1;
+            foreach (string centrocosto in centrosCostosSeparados)
+            {
+
+
+                if (centroCostoTienda != "" && index == 1)
+                    centroCostoTienda = centrocosto;
+
+                if (centroCostoTienda != "" && index == 3)
+                    centroCosto3 = centrocosto;
+
+                index++;
+            }
+
+            //Intermedia_.Repositories.CentroCostoRepository centroCostoRepository = new Intermedia_.Repositories.CentroCostoRepository();
+            //centroCostoTienda = centroCostoRepository.obtenerCentroCostoTienda(codigoTienda);
+            //centroCosto3 = remarksRepo.obtenerCentroCosto(remarkCode);
         }
 
 
@@ -63,6 +81,10 @@ namespace Domain.Models.Produccion
             EntradaMercanciaSAPRepo entradaMercanciaSAPRepo = new EntradaMercanciaSAPRepo();
 
             ProduccionHeaderRepo produccionHeaderRepo = new ProduccionHeaderRepo();
+
+            string almacenProduccion = produccionHeaderRepo.getAlmacenProduccion(codigoTienda);
+            var costoPonderado = Convert.ToDouble(saliMercanciaRepo.obtenerCostoPonderado(codigoTienda, codigoProducto));
+
             establecerCuentaContable();
             setCentroCosto();
             salidaMercanciaSAP.WhsCode = codigoTienda;
@@ -76,9 +98,13 @@ namespace Domain.Models.Produccion
             salidaMercanciaSAP.CentroCosto3 = centroCosto3;
             salidaMercanciaSAP.itemCode = codigoProducto;
             salidaMercanciaSAP.quantity = cantidad;
-
+            salidaMercanciaSAP.costoPonderado = costoPonderado;
+            salidaMercanciaSAP.almacenProduccion = almacenProduccion;
 
             docEntrySalida = saliMercanciaRepo.generarSalidaMercancia(salidaMercanciaSAP);
+
+
+            salidaMercanciaSAP.costoTotalSalida = saliMercanciaRepo.obtenerCostoSalida(docEntrySalida);
 
             produccionHeaderRepo.setSalidaDocEntry(numero, docEntrySalida);
 
@@ -87,42 +113,34 @@ namespace Domain.Models.Produccion
         
 
             decimal ventaTotalSuma = entrys.Sum(i=> i.ventaTotal);
-            decimal costoTotalPonderado = saliMercanciaRepo.obtenerCostoPonderado(codigoTienda, codigoProducto) * (decimal)cantidad;
+            decimal costoTotalPonderado = Math.Round((saliMercanciaRepo.obtenerCostoPonderado(codigoTienda, codigoProducto) * (decimal)cantidad),8);
+
+        
+
             entrys.ForEach(i=> {
                 ProduccionSAPEntryEntity produccionSAPEntryEntity = new ProduccionSAPEntryEntity();
 
-             
-
-                decimal costoTotal = (i.ventaTotal / ventaTotalSuma)* costoTotalPonderado;
-                decimal costoLibra = costoTotal / (decimal)i.cantidadEscaneada;
+                decimal costoTotal = (Math.Round(i.ventaTotal,8) / Math.Round(ventaTotalSuma,8))* costoTotalPonderado;
+                decimal costoLibra =Math.Round(costoTotal,8) / (decimal)i.cantidadEscaneada;
 
                 produccionSAPEntryEntity.ItemCode = i.codigoProducto;
                 produccionSAPEntryEntity.Cantidad = i.cantidadEscaneada;
-                produccionSAPEntryEntity.costoLibra = costoLibra;
+                produccionSAPEntryEntity.costoLibra = Math.Round(costoLibra,8);
                 salidaMercanciaSAP.produccionEntryEntrada.Add(produccionSAPEntryEntity);
 
-
-
+                cantidadMerma = cantidadMerma + i.cantidadEscaneada;
             });
 
-            
+
+            cantidadMerma = cantidadMerma - cantidad;
+
+            salidaMercanciaSAP.cantidadMerma = cantidadMerma;
             double cantidadTotalEntrada =  salidaMercanciaSAP.produccionEntryEntrada.Sum(i=> i.Cantidad);
+            salidaMercanciaSAP.WhsCode = almacenProduccion;
 
+              docEntryEntrada = entradaMercanciaSAPRepo.generarEntradaMercancia(salidaMercanciaSAP, docEntrySalida);
 
-
-
-            //if (this.cantidad > cantidadTotalEntrada)
-            //    throw new Exception("La cantidad a ingresar es menor a la cantidad del producto de la receta ");
-            //if (this.cantidad < cantidadTotalEntrada)
-            //    throw new Exception("La cantidad a ingresar es mayor a la cantidad del producto de la receta ");
-
-
-            //if (Math.Round(costoTotalPonderado) > Math.Round(costoTotalEntrada))
-            //    throw new Exception("El costo de la entrada  es menor al costo del producto de la receta ");
-            //if (Math.Round(costoTotalPonderado) < Math.Round(costoTotalEntrada))
-            //    throw new Exception("El costo de la entrada  es mayor al costo del producto de la receta ");
-
-            docEntryEntrada = entradaMercanciaSAPRepo.generarEntradaMercancia(salidaMercanciaSAP, docEntrySalida);
+                produccionHeaderRepo.setEntradaDocEntry(numero, docEntryEntrada);
             #endregion
 
 

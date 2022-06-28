@@ -24,7 +24,13 @@ namespace SAP.Models.Produccion
 
         public string itemCode { get; set; }
 
+        public double costoPonderado { get; set; }
+        public double cantidadMerma { get; set; }
+
         public double quantity { get; set; }
+        public double costoTotalSalida { get; set; }
+
+        public string almacenProduccion {get; set; }
 
         public List<ProduccionSAPEntryEntity> produccionEntryEntrada { get; set; }
 

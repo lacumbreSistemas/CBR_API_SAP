@@ -74,6 +74,7 @@
     <Compile Include="cbr_ComprasSAP_Escaneo.cs" />
     <Compile Include="cbr_contenedoresInternacionalesCerrados.cs" />
     <Compile Include="cbr_listaItemsRecepcionImportados.cs" />
+    <Compile Include="cbr_MapAlmacenesProduccion.cs" />
     <Compile Include="cbr_MermasEntry.cs" />
     <Compile Include="cbr_MermasHeader.cs" />
     <Compile Include="cbr_ProduccionEntry.cs" />

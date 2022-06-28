@@ -12,7 +12,7 @@ namespace Intermedia_.Repositories
         {
             var centroCostoTienda = db.centroCostoMap.FirstOrDefault(i=> i.WhsCode == WhsCode);
 
-            return  centroCostoTienda.CentroCosto == null ? throw new Exception("no hay centro de costo registrado para esta tienda"): centroCostoTienda.CentroCosto;
+            return  centroCostoTienda == null ? throw new Exception("no hay centro de costo registrado para esta tienda"): centroCostoTienda.CentroCosto;
 
         }
     }

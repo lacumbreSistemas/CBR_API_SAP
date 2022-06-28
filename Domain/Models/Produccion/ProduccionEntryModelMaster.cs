@@ -12,7 +12,7 @@ namespace Domain.Models.Produccion
         public string codigoProducto { get; set; }
         public double cantidad { get; set; }
 
-        public DateTime? fecha { get; set; }
+        public DateTime fecha { get; set; }
     
         public bool? deleted { get; set; }
         public int? deletedId { get; set; }

@@ -108,17 +108,12 @@ namespace Domain.Repositories.Mermas
 
             });
 
-
             if (MermaIntermedia.ifSAP)
                 throw new Exception("Ya se generó un documento de SAP para esta devolucion");
-
-
 
             return MermaSAP.generarMermaDevolucion();
 
         }
-
-       
 
         public List<RemarkModel> obtenerRemarks(string WhsCode) {
 

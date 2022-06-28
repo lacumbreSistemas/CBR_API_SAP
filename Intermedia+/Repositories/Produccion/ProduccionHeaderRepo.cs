@@ -83,5 +83,13 @@ namespace Intermedia_.Repositories.Produccion
 
         }
 
+        public string getAlmacenProduccion(string WhsCode) {
+
+            var almacen = db.cbr_MapAlmacenesProduccion.FirstOrDefault(i=> i.almacenProduccion == WhsCode);
+
+            return almacen.almacenTienda;
+        
+        }
+
     }
 }

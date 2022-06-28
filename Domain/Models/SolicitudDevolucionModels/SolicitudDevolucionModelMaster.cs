@@ -14,7 +14,7 @@ namespace Domain.Models.SolicitudDevolucionModels
         public string codigoTienda { get; set; }
         public string codigoProveedor { get; set; }
       
-        public DateTime? fechaCreacion { get; set; }
+        public DateTime fechaCreacion { get; set; }
 
         public string comentario { get; set; }
 

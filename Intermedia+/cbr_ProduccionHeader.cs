@@ -34,6 +34,6 @@ namespace Intermedia_
         [StringLength(14)]
         public string remarkId { get; set; }
 
-        public double cantidad {get; set;}
+        public double cantidad { get; set; }
     }
 }
