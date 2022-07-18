@@ -12,33 +12,36 @@ namespace Domain.Repositories.Produccion
     public class ProduccionRepo
     {
 
-    
+        
 
-        public ProduccionModelBuild crearDocumentoProduccionIntermedia(ProduccionModelBuild documentoIntermedioProduccion, string WhsCode) {
+        public ProcesosModelBuild crearDocumentoProduccionIntermedia(ProcesosModelBuild documentoIntermedioProduccion, string WhsCode) {
 
-            ProduccionModelBuild nuevoDocumentoIntermedioProduccion = new ProduccionModelBuild(documentoIntermedioProduccion);
+
+            ProcesoProduccionHeaderBuildEstrategy estrategy = new ProcesoProduccionHeaderBuildEstrategy();
+
+            ProcesosModelBuild nuevoDocumentoIntermedioProduccion = new ProcesosModelBuild(documentoIntermedioProduccion, estrategy);
             nuevoDocumentoIntermedioProduccion.codigoTienda = WhsCode;
             nuevoDocumentoIntermedioProduccion.guardar();
-            return nuevoDocumentoIntermedioProduccion.numero == 0 ? throw new Exception("No se creó solicitud de devolución") : nuevoDocumentoIntermedioProduccion;
+            return nuevoDocumentoIntermedioProduccion.numero == 0 ? throw new Exception("No se creó documento intermedio de producción") : nuevoDocumentoIntermedioProduccion;
 
         }
 
 
 
-        public List<ProduccionModelConsulta> obtenerListaDocumentosIntermediosProduccion(string WhsCode)
+        public List<ProcesosModelConsulta> obtenerListaDocumentosIntermediosProduccion(string WhsCode)
         {
          ProduccionHeaderRepo produccionHeaderRepo = new ProduccionHeaderRepo();
+            ProcesoProduccionHeaderConsultaEstrategy estrategy = new ProcesoProduccionHeaderConsultaEstrategy();
 
-
-        List<cbr_ProduccionHeader> DocumentosIntermediosProduccionEntity = new List<cbr_ProduccionHeader>();
+            List<cbr_ProduccionHeader> DocumentosIntermediosProduccionEntity = new List<cbr_ProduccionHeader>();
 
             DocumentosIntermediosProduccionEntity = produccionHeaderRepo.obtenerDocumentoIntermedioProduccion(WhsCode).ToList();
 
-            List<ProduccionModelConsulta> DocumentosIntermediosProduccion = new List<ProduccionModelConsulta>();
+            List<ProcesosModelConsulta> DocumentosIntermediosProduccion = new List<ProcesosModelConsulta>();
 
             DocumentosIntermediosProduccionEntity.ForEach(i =>
             {
-                ProduccionModelConsulta documentoProduccion = new ProduccionModelConsulta();
+                ProcesosModelConsulta documentoProduccion = new ProcesosModelConsulta(estrategy);
                 //solicitudDevolucion.id = i.id;
                 documentoProduccion.numero = i.numero;
                 documentoProduccion.codigoProducto = i.codigoProducto;
@@ -59,8 +62,10 @@ namespace Domain.Repositories.Produccion
             return DocumentosIntermediosProduccion;
         }
 
-        public ProduccionModelConsulta resumenDocumentoProduccion(int numero) {
-            ProduccionModelConsulta produccionModelConsulta = new ProduccionModelConsulta(numero);
+        public ProcesosModelConsulta resumenDocumentoProduccion(int numero) {
+
+            ProcesoProduccionHeaderConsultaEstrategy estrategy = new ProcesoProduccionHeaderConsultaEstrategy();
+            ProcesosModelConsulta produccionModelConsulta = new ProcesosModelConsulta(numero, estrategy);
 
             produccionModelConsulta.resumenEntries();
             produccionModelConsulta.setRemark();
@@ -73,21 +78,23 @@ namespace Domain.Repositories.Produccion
 
             ProduccionHeaderRepo produccionHeaderRepo = new ProduccionHeaderRepo();
             produccionHeaderRepo.cancelarDocumento(numero);
-            return "Solicitud cancelada";
+            return "Documento cancelado";
         }
 
-        public void anularEscaneosItemCodeNumero(ProduccionEntryResumenActualizar mermasEntryResumenActualizar)
+        public void anularEscaneosItemCodeNumero(ProcesosEntryResumenActualizar mermasEntryResumenActualizar)
         {
 
+            ProcesoProduccionEntryResumenActualizarEstrategy estrategy = new ProcesoProduccionEntryResumenActualizarEstrategy();
+            mermasEntryResumenActualizar.Estrategia = estrategy;
             mermasEntryResumenActualizar.Anular();
         }
 
-        public ProduccionModelSAP generarSalidaSAP(int numero)
+        public ProcesosModelSAP generarSalidaSAP(int numero)
         {
 
             var DocumentoProduccionIntermedia = resumenDocumentoProduccion(numero);
 
-            ProduccionModelSAP _produccionModelSAP = new ProduccionModelSAP();
+            ProcesosModelSAP _produccionModelSAP = new ProcesosModelSAP();
 
 
             _produccionModelSAP.numero = DocumentoProduccionIntermedia.numero;
@@ -106,7 +113,7 @@ namespace Domain.Repositories.Produccion
 
             DocumentoProduccionIntermedia.entries.ForEach(i =>
             {
-                ProduccionEntryResumenSAP produccionEntryResumenSAP = new ProduccionEntryResumenSAP();
+                ProcesosEntryResumenSAP produccionEntryResumenSAP = new ProcesosEntryResumenSAP();
                 produccionEntryResumenSAP.cantidadEscaneada = i.cantidadEscaneada;
                 produccionEntryResumenSAP.codigoProducto = i.codigoProducto;
                 produccionEntryResumenSAP.descripcionProducto = i.descripcionProducto;

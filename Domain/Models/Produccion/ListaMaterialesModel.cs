@@ -13,6 +13,8 @@ namespace Domain.Models.Produccion
 
         public string descriptionReceta { get; set; }
 
+        public double cantidad { get; set; }
+
         public List<ListaMaterialesEntryModel> materiales = new List<ListaMaterialesEntryModel>();
 
 

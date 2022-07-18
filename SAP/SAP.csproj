@@ -104,11 +104,14 @@
     <Compile Include="Repositories\MasterRepository.cs" />
     <Compile Include="Repositories\Compras\PurchaseOrderEntryRespository.cs" />
     <Compile Include="Repositories\Compras\PurchaseOrderHeaderRepository.cs" />
+    <Compile Include="Interfaces\IListaMaterialesSAP.cs" />
+    <Compile Include="Repositories\Produccion\ListaMaterialesProduccionEstrategia.cs" />
     <Compile Include="Repositories\SalidaMercanciaPreliminarSAPRepo.cs" />
-    <Compile Include="Repositories\Produccion\ListaMaterialRepoSAP.cs" />
+    <Compile Include="Repositories\Produccion\ListaMaterialProduccionRepoSAP.cs" />
     <Compile Include="Repositories\Proveedor\ProveedorSAPRepository.cs" />
     <Compile Include="Repositories\SalidaMercanciaSAPRepo.cs" />
     <Compile Include="Repositories\SolicitudesDevoliciones\SolicitudesDevolucionesRepo.cs" />
+    <Compile Include="Repositories\Transformaciones\ListaMaterialTransformacionEstrategia.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>

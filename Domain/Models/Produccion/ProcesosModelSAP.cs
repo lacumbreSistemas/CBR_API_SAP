@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Models.Produccion
 {
-    public class ProduccionModelSAP : ProduccionModelMaster
+    public class ProcesosModelSAP : ProcesosModelMaster
 
     {
 
@@ -33,11 +33,11 @@ namespace Domain.Models.Produccion
         public double cantidadMerma { get; set; } = 0;
    
 
-        public List<ProduccionEntryResumenSAP> entrys { get; set; }
+        public List<ProcesosEntryResumenSAP> entrys { get; set; }
 
 
-        public ProduccionModelSAP() {
-            entrys = new List<ProduccionEntryResumenSAP>();
+        public ProcesosModelSAP() {
+            entrys = new List<ProcesosEntryResumenSAP>();
         }
         private void establecerCuentaContable() {
             RemarksRepo remarksRepo = new RemarksRepo();
@@ -71,7 +71,7 @@ namespace Domain.Models.Produccion
         }
 
 
-        public ProduccionModelSAP generarSalidaMercancia()
+        public ProcesosModelSAP generarSalidaMercancia()
         {
          
             ProduccionSAPEntity salidaMercanciaSAP = new ProduccionSAPEntity();

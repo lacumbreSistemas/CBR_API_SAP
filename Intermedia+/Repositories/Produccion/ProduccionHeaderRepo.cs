@@ -32,7 +32,7 @@ namespace Intermedia_.Repositories.Produccion
 
             List<cbr_ProduccionHeader> documentosIntermediosProduccion = new List<cbr_ProduccionHeader>();
 
-            documentosIntermediosProduccion = db.cbr_ProduccionHeader.Where(i => i.entradaDocEntry == 0 && i.salidaDocEntry == 0 && i.whsCode == WhsCode && !i.anulado).OrderByDescending(i => i.numero).ToList();
+            documentosIntermediosProduccion = db.cbr_ProduccionHeader.Where(i => i.entradaDocEntry == 0 && i.salidaDocEntry == 0 && i.whsCode == WhsCode && !(bool)i.anulado).OrderByDescending(i => i.numero).ToList();
 
             return documentosIntermediosProduccion;
         }

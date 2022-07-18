@@ -37,6 +37,7 @@ namespace SAP.Repositories
             salidaMercancia.UserFields.Fields.Item("U_Con_Remark").Value = produccionSAPEntity.Remark;
             salidaMercancia.UserFields.Fields.Item("U_almdest").Value = tienda;
             salidaMercancia.UserFields.Fields.Item("U_Num_Salida").Value = docEntrySalidaMercancia.ToString();
+            salidaMercancia.UserFields.Fields.Item("U_NumSalidaVinc").Value = docEntrySalidaMercancia.ToString();
             salidaMercancia.UserFields.Fields.Item("U_Total_Merma").Value = produccionSAPEntity.cantidadMerma.ToString();
             salidaMercancia.UserFields.Fields.Item("U_Costo_Salida").Value = produccionSAPEntity.costoTotalSalida.ToString();
 

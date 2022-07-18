@@ -4,32 +4,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Intermedia_.Repositories.Produccion
+namespace Intermedia_.Repositories.Transformaciones
 {
-    public class ProduccionEntryRepo : MasterRespository
+    public class TransformacionEntryRepo : MasterRespository
     {
-        public cbr_ProduccionEntry crearDocumentoIntermedioProduccion(cbr_ProduccionEntry Entry)
+        public cbr_TransformacionesEntry crearDocumentoIntermedioProduccion(cbr_TransformacionesEntry Entry)
         {
 
-            db.cbr_ProduccionEntry.Add(Entry);
+            db.cbr_TransformacionesEntry.Add(Entry);
             db.SaveChanges();
 
             return Entry;
         }
 
 
-        public List<cbr_ProduccionEntry> obtenerEntriesPornumber(int numero)
+        public List<cbr_TransformacionesEntry> obtenerEntriesPornumber(int numero)
         {
 
-            return db.cbr_ProduccionEntry.Where(i => i.numero == numero).ToList();
+            return db.cbr_TransformacionesEntry.Where(i => i.numero == numero).ToList();
 
         }
 
 
-        public List<cbr_ProduccionEntry> obtenerEntriesPorNumberItemCode(int numero, string itemCode)
+        public List<cbr_TransformacionesEntry> obtenerEntriesPorNumberItemCode(int numero, string itemCode)
         {
 
-            return db.cbr_ProduccionEntry.Where(i => i.numero == numero && i.itemcode == itemCode && !(bool)i.cancelado).ToList();
+            return db.cbr_TransformacionesEntry.Where(i => i.numero == numero && i.itemcode == itemCode && !(bool)i.cancelado).ToList();
 
         }
 
@@ -37,7 +37,7 @@ namespace Intermedia_.Repositories.Produccion
         {
             bool todosCAncelados = true;
 
-            var escaneosItems = db.cbr_ProduccionEntry.Where(i => i.numero == numero && i.itemcode == itemCode).ToList();
+            var escaneosItems = db.cbr_TransformacionesEntry.Where(i => i.numero == numero && i.itemcode == itemCode).ToList();
 
             escaneosItems.ForEach(i =>
             {
@@ -58,11 +58,11 @@ namespace Intermedia_.Repositories.Produccion
         }
 
 
-        public cbr_ProduccionEntry anularEntrieEscaneo(int id)
+        public cbr_TransformacionesEntry anularEntrieEscaneo(int id)
         {
 
-            cbr_ProduccionEntry escaneoPorAnular = db.cbr_ProduccionEntry.FirstOrDefault(i => i.id == id);
-            cbr_ProduccionEntry escaneoAnulacion = new cbr_ProduccionEntry();
+            cbr_TransformacionesEntry escaneoPorAnular = db.cbr_TransformacionesEntry.FirstOrDefault(i => i.id == id);
+            cbr_TransformacionesEntry escaneoAnulacion = new cbr_TransformacionesEntry();
 
             if (escaneoPorAnular == null)
             {
@@ -71,7 +71,7 @@ namespace Intermedia_.Repositories.Produccion
             else if ((bool)escaneoPorAnular.deleted)
             {
 
-                escaneoAnulacion = db.cbr_ProduccionEntry.FirstOrDefault(i => i.deletedId == escaneoPorAnular.id);
+                escaneoAnulacion = db.cbr_TransformacionesEntry.FirstOrDefault(i => i.deletedId == escaneoPorAnular.id);
 
 
                 throw new Exception("Escaneo ya fue anulado por " + escaneoAnulacion.usuario);
@@ -93,9 +93,9 @@ namespace Intermedia_.Repositories.Produccion
             escaneoAnulacion.itemcode = escaneoPorAnular.itemcode;
             escaneoAnulacion.usuario = escaneoPorAnular.usuario;
             escaneoAnulacion.quantity = escaneoPorAnular.quantity * (-1);
-         
+            escaneoAnulacion.cancelado = false;
 
-            db.cbr_ProduccionEntry.Add(escaneoAnulacion);
+            db.cbr_TransformacionesEntry.Add(escaneoAnulacion);
 
             db.SaveChanges();
 
@@ -104,4 +104,4 @@ namespace Intermedia_.Repositories.Produccion
 
 
     }
-    }
+}

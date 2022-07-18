@@ -19,7 +19,7 @@ namespace Intermedia_
 
         public bool deleted { get; set; }
 
-        public int? deletedId { get; set; }
+        public int deletedId { get; set; }
 
         [StringLength(50)]
         public string usuario { get; set; }

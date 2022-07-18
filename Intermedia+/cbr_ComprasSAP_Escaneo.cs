@@ -30,6 +30,6 @@ namespace Intermedia_
 
         public int escaneoAnuladoID { get; set; }
 
-        public bool? matriculado { get; set; }
+        public bool matriculado { get; set; }
     }
 }

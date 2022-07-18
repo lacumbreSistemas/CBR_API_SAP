@@ -1,37 +1,42 @@
 ﻿using Domain.Models.Produccion;
-using Intermedia_.Repositories.Produccion;
+using Domain.Repositories.Produccion;
+using Intermedia_.Repositories.Transformaciones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Repositories.Produccion
+namespace Domain.Repositories.Transformaciones
 {
-    public class EscaneoProduccionRepo
+   public class EscaneoTransformacionRepo
     {
-        private ProduccionEntryRepo produccionEntryRepo = new ProduccionEntryRepo();
 
-        public ProcesosEntryModelBuild crearEntryProduccion(ProcesosEntryModelBuild newproduccionEntryModelBuild) {
-            ProcesoProduccionEntryBuildEstrategy estrategia = new ProcesoProduccionEntryBuildEstrategy();
+        private TransformacionEntryRepo transformacionEntryRepo = new TransformacionEntryRepo();
+
+        public ProcesosEntryModelBuild crearEntryProduccion(ProcesosEntryModelBuild newproduccionEntryModelBuild)
+        {
+            ProcesoTransformacionEntryBuildEstrategy estrategia = new ProcesoTransformacionEntryBuildEstrategy();
             ProcesosEntryModelBuild produccionEntryModelBuild = new ProcesosEntryModelBuild(newproduccionEntryModelBuild,estrategia);
 
 
             return produccionEntryModelBuild.guardar();
         }
+
+
         public List<ProcesosEntryModelConsulta> historialEntries(int number, string itemCode)
         {
 
             List<ProcesosEntryModelConsulta> historialEntries = new List<ProcesosEntryModelConsulta>();
 
-            produccionEntryRepo.obtenerEntriesPorNumberItemCode(number, itemCode).ForEach(i => {
+            transformacionEntryRepo.obtenerEntriesPorNumberItemCode(number, itemCode).ForEach(i => {
 
                 ProcesosEntryModelConsulta entrie = new ProcesosEntryModelConsulta();
 
                 entrie.cantidad = (double)i.quantity;
                 entrie.deleted = i.deleted;
                 entrie.deletedId = i.deletedId;
-                entrie.fecha = i.fecha;
+                entrie.fecha = (DateTime)i.fecha;
                 entrie.id = i.id;
                 entrie.codigoProducto = i.itemcode;
                 entrie.numero = (int)i.numero;
@@ -47,10 +52,9 @@ namespace Domain.Repositories.Produccion
 
         public ProcesosEntryModelConsulta anularEscaneo(ProcesosEntryModelConsulta procesoEntryModelConsulta)
         {
-            ProcesoProduccionEntryConsultaEstrategy estrategia = new ProcesoProduccionEntryConsultaEstrategy();
-            ProcesosEntryModelConsulta escaneo = new ProcesosEntryModelConsulta(estrategia);
-            escaneo = procesoEntryModelConsulta;
-            return escaneo.anular();
+            ProcesoTransformacionEntryConsultaEstrategy estrategia = new ProcesoTransformacionEntryConsultaEstrategy();
+            procesoEntryModelConsulta.Estrategia = estrategia;
+            return procesoEntryModelConsulta.anular();
 
         }
 

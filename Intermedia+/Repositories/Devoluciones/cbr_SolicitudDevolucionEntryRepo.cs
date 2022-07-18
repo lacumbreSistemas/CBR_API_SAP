@@ -28,7 +28,7 @@ namespace Intermedia_.Repositories
         public List<cbr_SolicitudDevolucionEntry> obtenerEntriesPorNumberItemCode(int number, string itemCode)
         {
 
-            return db.cbr_SolicitudDevolucionEntry.Where(i => i.number == number && i.itemCode == itemCode && !i.cancelado).ToList();
+            return db.cbr_SolicitudDevolucionEntry.Where(i => i.number == number && i.itemCode == itemCode && !(bool)i.cancelado).ToList();
 
         }
 

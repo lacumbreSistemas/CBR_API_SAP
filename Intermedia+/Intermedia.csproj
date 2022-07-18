@@ -82,6 +82,8 @@
     <Compile Include="cbr_RemarksTemp.cs" />
     <Compile Include="cbr_SolicitudDevolucionEntry.cs" />
     <Compile Include="cbr_SolicitudDevolucionHeader.cs" />
+    <Compile Include="cbr_TransformacionesEntry.cs" />
+    <Compile Include="cbr_transformacionesHeader.cs" />
     <Compile Include="cbr_TrasladosSAP_Entry.cs" />
     <Compile Include="cbr_TrasladosSAP_Header.cs" />
     <Compile Include="cbr_UsuariosApiSAP.cs" />
@@ -103,6 +105,8 @@
     <Compile Include="Repositories\Mermas\MermasHeaderRepo.cs" />
     <Compile Include="Repositories\Produccion\ProduccionEntryRepo.cs" />
     <Compile Include="Repositories\Produccion\ProduccionHeaderRepo.cs" />
+    <Compile Include="Repositories\Transformaciones\TransformacionEntryRepo.cs" />
+    <Compile Include="Repositories\Transformaciones\TransformacionesHeaderRepo.cs" />
     <Compile Include="SolicitudDevolisionEscaneos.cs" />
     <Compile Include="SolicitudDevolucionSalesPersonCodes.cs" />
   </ItemGroup>

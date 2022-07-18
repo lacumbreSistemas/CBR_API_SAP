@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Models.Produccion
+namespace Domain.Models.Transformacion
 {
-    public class ProduccionModelMaster
+    public class TransformacionModelMaster
     {
         public int numero { get; set; }
         public string codigoTienda { get; set; }
 
         public string usuario { get; set; }
-        
+
         public string comentario { get; set; }
 
         public DateTime fechaCreacion { get; set; }
@@ -22,6 +22,5 @@ namespace Domain.Models.Produccion
         public string remarkCode { get; set; }
         public string remark { get; set; }
         public double cantidad { get; set; }
-
     }
 }

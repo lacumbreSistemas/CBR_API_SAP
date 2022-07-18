@@ -14,10 +14,10 @@ namespace TEST.Controllers
         public Response _Response { get; set; }
         public EscaneoProduccionRepo escaneoProduccionRepo { get; set;}
 
-        private ListaMaterialesRepo listaMaterialesRepo { get; set; }
+        private ListaMaterialesProduccionRepo listaMaterialesRepo { get; set; }
         private ProduccionRepo produccionRepo { get; set; }
         public ProduccionController() {
-            listaMaterialesRepo = new ListaMaterialesRepo();
+            listaMaterialesRepo = new ListaMaterialesProduccionRepo();
             produccionRepo = new ProduccionRepo();
             escaneoProduccionRepo = new EscaneoProduccionRepo();
             _Response = new Response();
@@ -39,7 +39,7 @@ namespace TEST.Controllers
 
 
         [HttpGet("Resumen/{numero}")]
-        public IActionResult resumenSolicitudDevolucion(int numero)
+        public IActionResult resumenDocumentosProduccion(int numero)
         {
 
 
@@ -92,7 +92,7 @@ namespace TEST.Controllers
         #region funciones  post
 
         [HttpPost]
-        public IActionResult crearDocumentoIntermedio([FromBody] ProduccionModelBuild  documentoIntermedioProduccion, [FromHeader] string WhsCode) {
+        public IActionResult crearDocumentoIntermedio([FromBody] ProcesosModelBuild  documentoIntermedioProduccion, [FromHeader] string WhsCode) {
 
             var guardarDocumentoIntermedioProduccion = produccionRepo.crearDocumentoProduccionIntermedia(documentoIntermedioProduccion, WhsCode);
 
@@ -107,7 +107,7 @@ namespace TEST.Controllers
 
 
         [HttpPost("GenerarDocumentosSAP/{numero}")]
-        public IActionResult generarSolicitudDevolucionSAP(int numero)
+        public IActionResult generarDocumentoSAP(int numero)
         {
             var mermaSAP = produccionRepo.generarSalidaSAP(numero);
 
@@ -118,7 +118,7 @@ namespace TEST.Controllers
 
 
         [HttpPost("Escaneo")]
-        public IActionResult guardarSolicitudDevolusionEntry([FromBody] ProduccionEntryModelBuild produccionEntry)
+        public IActionResult guardarDocumentoProduccionEntry([FromBody] ProcesosEntryModelBuild produccionEntry)
         {
 
             _Response.mensaje = "Escaneo guardada con éxito";
@@ -150,7 +150,7 @@ namespace TEST.Controllers
 
 
         [HttpDelete("AnularItem")]
-        public IActionResult anularEscaneosItem([FromBody] ProduccionEntryResumenActualizar produccionEntryResumenActualizar)
+        public IActionResult anularEscaneosItem([FromBody] ProcesosEntryResumenActualizar produccionEntryResumenActualizar)
         {
 
 
@@ -161,7 +161,7 @@ namespace TEST.Controllers
         }
 
         [HttpDelete("AnularEscaneo")]
-        public IActionResult anularEscaneo([FromBody] ProduccionEntryModelConsulta produccionEntryModelConsulta)
+        public IActionResult anularEscaneo([FromBody] ProcesosEntryModelConsulta produccionEntryModelConsulta)
         {
 
 
@@ -171,7 +171,6 @@ namespace TEST.Controllers
             return Ok(_Response);
         
         }
-
 
         #endregion
 

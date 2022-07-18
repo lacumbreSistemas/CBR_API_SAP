@@ -41,15 +41,15 @@ namespace Domain.Models
 
           var escaneo = ComprasSAPEscaneoRepository.obtenerEscaneoPorID(id);
             this.id = escaneo.id;
-            this.fecha = escaneo.fecha;
-            this.escaneoAnuladoID = escaneo.escaneoAnuladoID;
-            this.elimnado = escaneo.deleted;
+            this.fecha = (DateTime)escaneo.fecha;
+            this.escaneoAnuladoID = (int) escaneo.escaneoAnuladoID;
+            this.elimnado = (bool) escaneo.deleted;
             this.entradaMercanciaDocEntry = escaneo.entradaMercanciaDocEntry;
             this.codigoProducto = escaneo.itemCode;
-            this.baseLine = escaneo.baseLine;
-            this.cantidad = escaneo.cantidad;
+            this.baseLine = (int)escaneo.baseLine;
+            this.cantidad = (double) escaneo.cantidad;
             this.setNombreProducto();
-            this.ordenCompraDocEntry = escaneo.baseEntry;
+            this.ordenCompraDocEntry = (int)escaneo.baseEntry;
             this.usuario = escaneo.nombreUsuario;
   
 

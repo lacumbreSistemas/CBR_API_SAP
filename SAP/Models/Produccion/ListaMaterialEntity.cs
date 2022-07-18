@@ -10,6 +10,7 @@ namespace SAP.Models.Produccion
     {
         public string Code { get; set;}
         public string Name { get; set; }
-     
+        public double Quantity { get; set; }
+
     }
 }

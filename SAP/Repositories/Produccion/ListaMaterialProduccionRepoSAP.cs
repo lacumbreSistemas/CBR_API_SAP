@@ -7,29 +7,29 @@ using System.Threading.Tasks;
 
 namespace SAP.Repositories.Produccion
 {
-    public class ListaMaterialRepoSAP
+    public class ListaMaterialProduccionRepoSAP : IListaMaterialesSAP
     {
 
+        public ListaMaterialProduccionRepoSAP() { }
+     
+
         MasterRepository _MasterRepository = MasterRepository.GetInstance();
+        IListaMaterialesSAP estrategia;
         public List<ListaMaterialEntity> obtenerListasMateriales() {
 
-            var recetas = _MasterRepository.doQuery("select code,Name from oitt where u_tipo_Produccion = 1");
-            List<ListaMaterialEntity> listasMateriales = new List<ListaMaterialEntity>();
+            
 
-            while (!recetas.EoF) {
-                ListaMaterialEntity listaMaterialEntity = new ListaMaterialEntity();
-                listaMaterialEntity.Code = recetas.Fields.Item("code").Value;
-                listaMaterialEntity.Name = recetas.Fields.Item("Name").Value;
-
-                listasMateriales.Add(listaMaterialEntity);
-
-                recetas.MoveNext();
-            }
-
-            return listasMateriales;
+            return estrategia.obtenerListasMateriales();
 
         }
 
+        public ListaMaterialProduccionRepoSAP(IListaMaterialesSAP estrategia) {
+
+
+            this.estrategia = estrategia;
+
+
+        }
         public List<ListaMaterialesDetalleEntity> obtenerListaMaterialesDetalle(string code) {
 
             var recetas = _MasterRepository.doQuery(@"select detalle.Code,detalle.ItemName from oitt cabecera inner join 
@@ -57,10 +57,7 @@ namespace SAP.Repositories.Produccion
         public ListaMaterialEntity obtenerListaMaterialCabecera(string code) {
             var listaMaterialConsulta = _MasterRepository.doQuery("select Name from oitt where code = '"+code+"'");
            ListaMaterialEntity listasMaterial = new ListaMaterialEntity();
-
             listaMaterialConsulta.MoveFirst();
-
-
           
             listasMaterial.Name = listaMaterialConsulta.Fields.Item("Name").Value;
 

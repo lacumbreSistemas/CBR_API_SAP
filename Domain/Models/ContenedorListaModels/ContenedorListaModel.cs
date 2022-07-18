@@ -48,12 +48,12 @@ namespace Domain.Models
 
             entries.ForEach(entrie=> {
                 ListaEscaneosImportados escaneo = new ListaEscaneosImportados();
-                escaneo.fecha = entrie.fecha;
+                escaneo.fecha = (DateTime)entrie.fecha;
                 escaneo.codigoProducto = entrie.itemCode;
-                escaneo.cantidad = entrie.cantidad;
+                escaneo.cantidad = (double) entrie.cantidad;
                 escaneo.numeroContenedor = entrie.numeroContenedor;
                 escaneo.usuario = entrie.usuario;
-                escaneo.eliminado = entrie.deleted;
+                escaneo.eliminado = (bool) entrie.deleted;
 
                 escaneo.setNombreProducto();
 

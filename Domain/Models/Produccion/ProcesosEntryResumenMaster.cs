@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Models.Produccion
 {
-   public class ProduccionEntryResumenMaster
+   public class ProcesosEntryResumenMaster
     {
         public int numero { get; set; }
         public string codigoProducto { get; set; }

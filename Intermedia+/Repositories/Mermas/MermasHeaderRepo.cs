@@ -30,7 +30,7 @@ namespace Intermedia_.Repositories
 
             List<cbr_MermasHeader> mermas = new List<cbr_MermasHeader>();
 
-            mermas = db.cbr_MermasHeader.Where(i => !i.ifSAP && !i.anulado && i.whsCode == WhsCode).OrderByDescending(i=> i.number).ToList();
+            mermas = db.cbr_MermasHeader.Where(i => !(bool)i.ifSAP && !(bool)i.anulado && i.whsCode == WhsCode).OrderByDescending(i=> i.number).ToList();
 
             return mermas; 
         }

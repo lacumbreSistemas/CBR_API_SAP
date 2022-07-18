@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Models.Produccion
 {
-   public class ProduccionEntryResumenSAP: ProduccionEntryResumenMaster
+   public class ProcesosEntryResumenSAP: ProcesosEntryResumenMaster
     {
 
         public decimal precioVenta { get; set; }
@@ -21,7 +21,7 @@ namespace Domain.Models.Produccion
             precioVenta = item.Price;
             ventaTotal = (decimal)cantidadEscaneada * precioVenta;
         }
-        public ProduccionEntryResumenSAP() {
+        public ProcesosEntryResumenSAP() {
          
          
         }

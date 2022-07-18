@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Domain.Repositories.Produccion
 {
-  public  class ListaMaterialesRepo
+  public  class ListaMaterialesProduccionRepo
     {
         public List<ListaMaterialesModel> obtenerListaMateriales() {
-
-            ListaMaterialRepoSAP listaMaterialRepoSAP = new ListaMaterialRepoSAP();
+            ListaMaterialesProduccionEstrategia estrategia = new ListaMaterialesProduccionEstrategia();
+            ListaMaterialProduccionRepoSAP listaMaterialRepoSAP = new ListaMaterialProduccionRepoSAP(estrategia);
             List<ListaMaterialesModel> ListaMateriales = new List<ListaMaterialesModel>();
 
 
@@ -35,8 +35,8 @@ namespace Domain.Repositories.Produccion
 
         public List<ListaMaterialesEntryModel> obtenerListaMaterialesCode(string code)
         {
-
-            ListaMaterialRepoSAP listaMaterialRepoSAP = new ListaMaterialRepoSAP(); 
+            ListaMaterialesProduccionEstrategia estrategia = new ListaMaterialesProduccionEstrategia();
+            ListaMaterialProduccionRepoSAP listaMaterialRepoSAP = new ListaMaterialProduccionRepoSAP(estrategia); 
           List<ListaMaterialesEntryModel> listaMaterialesEntries = new List<ListaMaterialesEntryModel>();
 
 
