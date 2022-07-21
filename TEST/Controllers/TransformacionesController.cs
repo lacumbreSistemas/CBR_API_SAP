@@ -41,7 +41,7 @@ namespace TEST.Controllers
         }
 
 
-        [HttpGet]
+     
         [HttpGet("Empaques")]
         public IActionResult obtenerListaEmpaques()
         {
