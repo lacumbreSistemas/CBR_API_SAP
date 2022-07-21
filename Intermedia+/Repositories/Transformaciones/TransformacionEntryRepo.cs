@@ -21,7 +21,7 @@ namespace Intermedia_.Repositories.Transformaciones
         public List<cbr_TransformacionesEntry> obtenerEntriesPornumber(int numero)
         {
 
-            return db.cbr_TransformacionesEntry.Where(i => i.numero == numero).ToList();
+            return db.cbr_TransformacionesEntry.Where(i => i.numero == numero).OrderBy(i=> i.id).ToList();
 
         }
 

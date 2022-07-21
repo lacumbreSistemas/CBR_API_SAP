@@ -1,4 +1,5 @@
-﻿using HQ.Repositories;
+﻿using Domain.Interfaces;
+using HQ.Repositories;
 using Intermedia_.Repositories.Produccion;
 using SAP;
 using SAP.Models.Mermas;
@@ -31,21 +32,31 @@ namespace Domain.Models.Produccion
         public string centroCosto3 { get; set; }
 
         public double cantidadMerma { get; set; } = 0;
-   
+
+
+        private IModelSAProcesos Estrategia; 
+
 
         public List<ProcesosEntryResumenSAP> entrys { get; set; }
 
 
-        public ProcesosModelSAP() {
+        public ProcesosModelSAP(IModelSAProcesos estrategia) {
+
+            Estrategia = estrategia;
             entrys = new List<ProcesosEntryResumenSAP>();
         }
-        private void establecerCuentaContable() {
+        public ProcesosModelSAP()
+        {
+            entrys = new List<ProcesosEntryResumenSAP>();
+        }
+
+        public void establecerCuentaContable() {
             RemarksRepo remarksRepo = new RemarksRepo();
             cuentaContable = remarksRepo.obgenerCuentaContable(remarkCode);
 
         }
 
-        private void setCentroCosto()
+        public void setCentroCosto()
         {
             RemarksRepo remarksRepo = new RemarksRepo();
             var CentroCosto = remarksRepo.obtenerCentroCosto(remarkCode);
@@ -71,82 +82,85 @@ namespace Domain.Models.Produccion
         }
 
 
-        public ProcesosModelSAP generarSalidaMercancia()
+        public ProcesosModelSAP generarDocumentoSAP()
         {
-         
-            ProduccionSAPEntity salidaMercanciaSAP = new ProduccionSAPEntity();
-            ProduccionSAPEntity entradaMercanciaSAP = new ProduccionSAPEntity();
 
-            SalidaMercanciaSAPRepo saliMercanciaRepo = new SalidaMercanciaSAPRepo();
-            EntradaMercanciaSAPRepo entradaMercanciaSAPRepo = new EntradaMercanciaSAPRepo();
+            //ProduccionSAPEntity salidaMercanciaSAP = new ProduccionSAPEntity();
+            //ProduccionSAPEntity entradaMercanciaSAP = new ProduccionSAPEntity();
 
-            ProduccionHeaderRepo produccionHeaderRepo = new ProduccionHeaderRepo();
+            //SalidaMercanciaSAPRepo saliMercanciaRepo = new SalidaMercanciaSAPRepo();
+            //EntradaMercanciaSAPRepo entradaMercanciaSAPRepo = new EntradaMercanciaSAPRepo();
 
-            string almacenProduccion = produccionHeaderRepo.getAlmacenProduccion(codigoTienda);
-            var costoPonderado = Convert.ToDouble(saliMercanciaRepo.obtenerCostoPonderado(codigoTienda, codigoProducto));
+            //ProduccionHeaderRepo produccionHeaderRepo = new ProduccionHeaderRepo();
 
-            establecerCuentaContable();
-            setCentroCosto();
-            salidaMercanciaSAP.WhsCode = codigoTienda;
-            salidaMercanciaSAP.Comentario = comentario;
-            salidaMercanciaSAP.RemarkID = remarkCode;
-            salidaMercanciaSAP.Remark = remark;
-            salidaMercanciaSAP.UsuarioEncargado = usuario;
-            salidaMercanciaSAP.CuentaContable = cuentaContable;
-            salidaMercanciaSAP.Remark = remark;
-            salidaMercanciaSAP.CentroCosto = centroCostoTienda;
-            salidaMercanciaSAP.CentroCosto3 = centroCosto3;
-            salidaMercanciaSAP.itemCode = codigoProducto;
-            salidaMercanciaSAP.quantity = cantidad;
-            salidaMercanciaSAP.costoPonderado = costoPonderado;
-            salidaMercanciaSAP.almacenProduccion = almacenProduccion;
+            //string almacenProduccion = produccionHeaderRepo.getAlmacenProduccion(codigoTienda);
+            //var costoPonderado = Convert.ToDouble(saliMercanciaRepo.obtenerCostoPonderado(codigoTienda, codigoProducto));
 
-            docEntrySalida = saliMercanciaRepo.generarSalidaMercancia(salidaMercanciaSAP);
+            //establecerCuentaContable();
+            //setCentroCosto();
+            //salidaMercanciaSAP.WhsCode = codigoTienda;
+            //salidaMercanciaSAP.Comentario = comentario;
+            //salidaMercanciaSAP.RemarkID = remarkCode;
+            //salidaMercanciaSAP.Remark = remark;
+            //salidaMercanciaSAP.UsuarioEncargado = usuario;
+            //salidaMercanciaSAP.CuentaContable = cuentaContable;
+            //salidaMercanciaSAP.Remark = remark;
+            //salidaMercanciaSAP.CentroCosto = centroCostoTienda;
+            //salidaMercanciaSAP.CentroCosto3 = centroCosto3;
+            //salidaMercanciaSAP.itemCode = codigoProducto;
+            //salidaMercanciaSAP.quantity = cantidad;
+            //salidaMercanciaSAP.costoPonderado = costoPonderado;
+            //salidaMercanciaSAP.almacenProduccion = almacenProduccion;
 
-
-            salidaMercanciaSAP.costoTotalSalida = saliMercanciaRepo.obtenerCostoSalida(docEntrySalida);
-
-            produccionHeaderRepo.setSalidaDocEntry(numero, docEntrySalida);
+            //docEntrySalida = saliMercanciaRepo.generarSalidaMercancia(salidaMercanciaSAP);
 
 
-            #region entradaMercancia
-        
+            //salidaMercanciaSAP.costoTotalSalida = saliMercanciaRepo.obtenerCostoSalida(docEntrySalida);
 
-            decimal ventaTotalSuma = entrys.Sum(i=> i.ventaTotal);
-            decimal costoTotalPonderado = Math.Round((saliMercanciaRepo.obtenerCostoPonderado(codigoTienda, codigoProducto) * (decimal)cantidad),8);
-
-        
-
-            entrys.ForEach(i=> {
-                ProduccionSAPEntryEntity produccionSAPEntryEntity = new ProduccionSAPEntryEntity();
-
-                decimal costoTotal = (Math.Round(i.ventaTotal,8) / Math.Round(ventaTotalSuma,8))* costoTotalPonderado;
-                decimal costoLibra =Math.Round(costoTotal,8) / (decimal)i.cantidadEscaneada;
-
-                produccionSAPEntryEntity.ItemCode = i.codigoProducto;
-                produccionSAPEntryEntity.Cantidad = i.cantidadEscaneada;
-                produccionSAPEntryEntity.costoLibra = Math.Round(costoLibra,8);
-                salidaMercanciaSAP.produccionEntryEntrada.Add(produccionSAPEntryEntity);
-
-                cantidadMerma = cantidadMerma + i.cantidadEscaneada;
-            });
+            //produccionHeaderRepo.setSalidaDocEntry(numero, docEntrySalida);
 
 
-            cantidadMerma = cantidadMerma - cantidad;
+            //#region entradaMercancia
 
-            salidaMercanciaSAP.cantidadMerma = cantidadMerma;
-            double cantidadTotalEntrada =  salidaMercanciaSAP.produccionEntryEntrada.Sum(i=> i.Cantidad);
-            salidaMercanciaSAP.WhsCode = almacenProduccion;
 
-              docEntryEntrada = entradaMercanciaSAPRepo.generarEntradaMercancia(salidaMercanciaSAP, docEntrySalida);
-
-                produccionHeaderRepo.setEntradaDocEntry(numero, docEntryEntrada);
-            #endregion
+            //decimal ventaTotalSuma = entrys.Sum(i=> i.ventaTotal);
+            //decimal costoTotalPonderado = Math.Round((saliMercanciaRepo.obtenerCostoPonderado(codigoTienda, codigoProducto) * (decimal)cantidad),8);
 
 
 
+            //entrys.ForEach(i=> {
+            //    ProduccionSAPEntryEntity produccionSAPEntryEntity = new ProduccionSAPEntryEntity();
 
-            return this;
+            //    decimal costoTotal = (Math.Round(i.ventaTotal,8) / Math.Round(ventaTotalSuma,8))* costoTotalPonderado;
+            //    decimal costoLibra =Math.Round(costoTotal,8) / (decimal)i.cantidadEscaneada;
+
+            //    produccionSAPEntryEntity.ItemCode = i.codigoProducto;
+            //    produccionSAPEntryEntity.Cantidad = i.cantidadEscaneada;
+            //    produccionSAPEntryEntity.costoLibra = Math.Round(costoLibra,8);
+            //    salidaMercanciaSAP.produccionEntryEntrada.Add(produccionSAPEntryEntity);
+
+            //    cantidadMerma = cantidadMerma + i.cantidadEscaneada;
+            //});
+
+
+            //cantidadMerma = cantidadMerma - cantidad;
+
+            //salidaMercanciaSAP.cantidadMerma = cantidadMerma;
+            //double cantidadTotalEntrada =  salidaMercanciaSAP.produccionEntryEntrada.Sum(i=> i.Cantidad);
+            //salidaMercanciaSAP.WhsCode = almacenProduccion;
+
+            //  docEntryEntrada = entradaMercanciaSAPRepo.generarEntradaMercancia(salidaMercanciaSAP, docEntrySalida);
+
+            //    produccionHeaderRepo.setEntradaDocEntry(numero, docEntryEntrada);
+            //#endregion
+
+
+
+
+            //return this;
+
+
+            return Estrategia.generarDocumentoSAP(this);
 
         }
 

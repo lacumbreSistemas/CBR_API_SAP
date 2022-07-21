@@ -25,13 +25,18 @@ namespace Domain.Models.Produccion
         
         
         }
-        
+
+
+       
+
          public ProcesosEntryModelConsulta(IModelEntryConsulta estrategia)
         {
 
             Estrategia = estrategia;
         }
 
+
+        
 
         public ProcesosEntryModelConsulta anular()
         {

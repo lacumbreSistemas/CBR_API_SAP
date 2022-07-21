@@ -12,12 +12,16 @@ namespace Domain.Models.Produccion
    public class ProcesosModelBuild:ProcesosModelMaster
     {
         public ProcesosModelBuild() {
-       
+          
         }
+
+        
+
+
 
         private IModelHeaderBuildProcesos BuildEstrategy;
 
-        public ProcesosModelBuild(ProcesosModelBuild produccionModelBuild, IModelHeaderBuildProcesos buildEstrategy) {
+        public ProcesosModelBuild(ProcesosModelBuild produccionModelBuild, IModelHeaderBuildProcesos buildEstrategy, bool isEmpaque = false) {
 
             codigoTienda = produccionModelBuild.codigoTienda;
             usuario = produccionModelBuild.usuario;
@@ -26,7 +30,7 @@ namespace Domain.Models.Produccion
             codigoProducto = produccionModelBuild.codigoProducto;
             cantidad = produccionModelBuild.cantidad;
             remarkCode = produccionModelBuild.remarkCode;
-
+            establecerEmpaque(isEmpaque);
             BuildEstrategy = buildEstrategy;
         }
 

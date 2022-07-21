@@ -40,6 +40,19 @@ namespace TEST.Controllers
             return Ok(_Response);
         }
 
+
+        [HttpGet]
+        [HttpGet("Empaques")]
+        public IActionResult obtenerListaEmpaques()
+        {
+
+            _Response.mensaje = "Lista de empaques";
+            _Response.data = transformacionRepo.obtenerListaEmpaques();
+
+
+            return Ok(_Response);
+        }
+
         [HttpGet("Resumen/{numero}")]
         public IActionResult resumenDocumentosTransformacion(int numero)
         {
@@ -100,10 +113,10 @@ namespace TEST.Controllers
 
         #region funciones post
         [HttpPost]
-        public IActionResult crearDocumentoIntermedio([FromBody] ProcesosModelBuild documentoIntermedioProduccion, [FromHeader] string WhsCode)
+        public IActionResult crearDocumentoIntermedio([FromBody] ProcesosModelBuild documentoIntermedioProduccion, [FromHeader] string WhsCode, [FromHeader] bool empaque)
         {
 
-            var guardarDocumentoIntermedioProduccion = transformacionRepo.crearDocumentoProduccionIntermedia(documentoIntermedioProduccion, WhsCode);
+            var guardarDocumentoIntermedioProduccion = transformacionRepo.crearDocumentoProduccionIntermedia(documentoIntermedioProduccion, WhsCode, empaque);
 
 
 

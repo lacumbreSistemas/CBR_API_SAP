@@ -1,7 +1,9 @@
-﻿using Domain.Models.Produccion;
+﻿using Domain.Models.ItemModels;
+using Domain.Models.Produccion;
 using Domain.Repositories.Produccion;
 using Intermedia_;
 using Intermedia_.Repositories.Transformaciones;
+using SAP.Repositories.Transformaciones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,20 +16,20 @@ namespace Domain.Repositories.Transformaciones
     {
 
 
-        public ProcesosModelBuild crearDocumentoProduccionIntermedia(ProcesosModelBuild documentoIntermedioProduccion, string WhsCode)
+        public ProcesosModelBuild crearDocumentoProduccionIntermedia(ProcesosModelBuild documentoIntermedioProduccion, string WhsCode, bool empaque)
         {
 
 
             ProcesosTransformacionesHeaderBuildEstrategy estrategy = new ProcesosTransformacionesHeaderBuildEstrategy();
 
-            ProcesosModelBuild nuevoDocumentoIntermedioProduccion = new ProcesosModelBuild(documentoIntermedioProduccion, estrategy);
+            ProcesosModelBuild nuevoDocumentoIntermedioProduccion = new ProcesosModelBuild(documentoIntermedioProduccion, estrategy, empaque);
             nuevoDocumentoIntermedioProduccion.codigoTienda = WhsCode;
             nuevoDocumentoIntermedioProduccion.guardar();
             return nuevoDocumentoIntermedioProduccion.numero == 0 ? throw new Exception("No se creó documento intermedio de producción") : nuevoDocumentoIntermedioProduccion;
 
         }
 
-
+         
         public List<ProcesosModelConsulta> obtenerListaDocumentosIntermediosTransformacion(string WhsCode)
         {
             TransformacionesHeaderRepo transformacionesHeaderRepo = new TransformacionesHeaderRepo();
@@ -96,7 +98,8 @@ namespace Domain.Repositories.Transformaciones
 
             var DocumentoTransformacionIntermedia = resumenDocumentoTransformacion(numero);
 
-            ProcesosModelSAP _transformacionModelSAP = new ProcesosModelSAP();
+          
+                ProcesosModelSAP _transformacionModelSAP = new ProcesosModelSAP();
 
 
             _transformacionModelSAP.numero = DocumentoTransformacionIntermedia.numero;
@@ -130,8 +133,29 @@ namespace Domain.Repositories.Transformaciones
 
 
 
-            return _transformacionModelSAP.generarSalidaMercancia();
+            return _transformacionModelSAP.generarDocumentoSAP();
 
         }
+
+        public List<ItemConsultaModel> obtenerListaEmpaques() {
+            SalidaMercanciaTransformacionSAPRepo salidaMercanciaTransformacionSAPRepo = new SalidaMercanciaTransformacionSAPRepo();
+            List<ItemConsultaModel> empaques = new List<ItemConsultaModel>();
+           var empaquesEntity =  salidaMercanciaTransformacionSAPRepo.ListaEmpaques();
+
+            empaquesEntity.ForEach(i => {
+                ItemConsultaModel empaque = new ItemConsultaModel();
+                empaque.Codigo = i.ItemCode;
+                empaque.Descripcion = i.ItemName;
+
+                empaques.Add(empaque);
+
+            });
+
+            return empaques;
+
+
+        }
+
+
     }
 }

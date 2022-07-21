@@ -35,9 +35,11 @@ namespace Domain.Repositories.Transformaciones
             TransformacionEntryRepo produccionEntryRepo = new TransformacionEntryRepo();
             produccionEntryRepo.obtenerEntriesPornumber(numero).Where(i => (bool) !i.cancelado).GroupBy(i => new { i.numero, i.itemcode }).ToList().ForEach(i =>
             {
+
                 ProduccionEntryResumenConsulta produccionModelConsulta = new ProduccionEntryResumenConsulta(i.FirstOrDefault().itemcode);
                 produccionModelConsulta.numero = numero;
                 produccionModelConsulta.cantidadEscaneada = i.Sum(i => (double)i.quantity);
+            
                 entries.Add(produccionModelConsulta);
             });
 

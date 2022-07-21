@@ -109,9 +109,10 @@
     <Compile Include="Repositories\SalidaMercanciaPreliminarSAPRepo.cs" />
     <Compile Include="Repositories\Produccion\ListaMaterialProduccionRepoSAP.cs" />
     <Compile Include="Repositories\Proveedor\ProveedorSAPRepository.cs" />
-    <Compile Include="Repositories\SalidaMercanciaSAPRepo.cs" />
+    <Compile Include="Repositories\Produccion\SalidaMercanciaProduccionSAPRepo.cs" />
     <Compile Include="Repositories\SolicitudesDevoliciones\SolicitudesDevolucionesRepo.cs" />
     <Compile Include="Repositories\Transformaciones\ListaMaterialTransformacionEstrategia.cs" />
+    <Compile Include="Repositories\Transformaciones\SalidaMercanciaTransformacionSAPRepo.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>

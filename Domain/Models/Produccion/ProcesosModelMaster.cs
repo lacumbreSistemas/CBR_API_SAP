@@ -23,5 +23,22 @@ namespace Domain.Models.Produccion
         public string remark { get; set; }
         public double cantidad { get; set; }
 
+
+        private bool IsEmpaque = false;
+
+
+
+        public bool obtenerIsEmpaque()
+        {
+
+            return IsEmpaque;
+        }
+
+        public void establecerEmpaque(bool isEmpaque)
+        {
+
+            IsEmpaque = isEmpaque;
+        }
+
     }
 }

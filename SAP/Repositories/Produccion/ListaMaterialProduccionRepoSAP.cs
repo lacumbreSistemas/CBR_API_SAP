@@ -55,11 +55,15 @@ namespace SAP.Repositories.Produccion
 
 
         public ListaMaterialEntity obtenerListaMaterialCabecera(string code) {
-            var listaMaterialConsulta = _MasterRepository.doQuery("select Name from oitt where code = '"+code+"'");
+            var listaMaterialConsulta = _MasterRepository.doQuery("select Name,Code,Qauntity from oitt where code = '"+code+"'");
            ListaMaterialEntity listasMaterial = new ListaMaterialEntity();
             listaMaterialConsulta.MoveFirst();
           
             listasMaterial.Name = listaMaterialConsulta.Fields.Item("Name").Value;
+            listasMaterial.Code = listaMaterialConsulta.Fields.Item("Code").Value;
+            listasMaterial.Quantity = listaMaterialConsulta.Fields.Item("Qauntity").Value;
+
+
 
             return listasMaterial;
         }

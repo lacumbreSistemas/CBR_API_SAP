@@ -13,7 +13,6 @@ namespace SAP.Repositories
         public ItemSAP ObtenerItemPorItemCode(string ItemCode) {
 
 
-
             var recordSet = masterRepo.doQuery("select ItemCode, ItemName from Oitm where itemCode = '"+ ItemCode+"'");
             ItemSAP Item = new ItemSAP();
            

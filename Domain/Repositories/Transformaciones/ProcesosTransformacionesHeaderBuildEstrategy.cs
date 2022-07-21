@@ -29,8 +29,10 @@ namespace Domain.Repositories.Transformaciones
             _cbr_transformacionesHeader.fecha = procesosModelBuild.fechaCreacion;
             _cbr_transformacionesHeader.cantidad = procesosModelBuild.cantidad;
             _cbr_transformacionesHeader.remarkId = procesosModelBuild.remarkCode;
-            procesosModelBuild.numero = TransformacionesRepo.crearDocumentoIntermedioTransformacion(_cbr_transformacionesHeader);
 
+            _cbr_transformacionesHeader.isEmpaque = procesosModelBuild.obtenerIsEmpaque();
+            procesosModelBuild.numero = TransformacionesRepo.crearDocumentoIntermedioTransformacion(_cbr_transformacionesHeader);
+            
             return procesosModelBuild;
 
         }

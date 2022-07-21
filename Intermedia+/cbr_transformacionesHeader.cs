@@ -35,5 +35,7 @@ namespace Intermedia_
         public string remarkId { get; set; }
 
         public double cantidad { get; set; }
+
+        public bool isEmpaque { get; set; }
     }
 }

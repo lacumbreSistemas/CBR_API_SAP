@@ -1,4 +1,4 @@
-﻿using SAP.Models.Mermas;
+﻿using SAP.Models;
 using SAP.Models.Produccion;
 using SAPbobsCOM;
 using System;
@@ -7,13 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SAP.Repositories
+namespace SAP.Repositories.Transformaciones
 {
-    public class SalidaMercanciaSAPRepo
+    public class SalidaMercanciaTransformacionSAPRepo
     {
         MasterRepository _MasterRepository = MasterRepository.GetInstance();
-
-
         public int generarSalidaMercancia(ProduccionSAPEntity produccionSAPEntity)
         {
 
@@ -41,8 +39,12 @@ namespace SAP.Repositories
 
             #region entry produccion
 
- 
-                //costo promedio producto 
+
+            //costo promedio producto 
+
+
+            produccionSAPEntity.produccionEntryEntrada.ForEach(i=> {
+
                 var consultaCostoProducto = _MasterRepository.doQuery("Select avgprice from oitw where Whscode = '" + tienda + "' and itemcode = '" + produccionSAPEntity.itemCode + "'");
 
                 Document_Lines salidaMercanciaLines = salidaMercancia.Lines;
@@ -53,15 +55,22 @@ namespace SAP.Repositories
                 salidaMercanciaLines.CostingCode = centroCosto1;
                 salidaMercanciaLines.CostingCode3 = centroCosto3;
 
-               
-                    consultaCostoProducto.MoveFirst();
-                    salidaMercanciaLines.UserFields.Fields.Item("U_costoproduc").Value = produccionSAPEntity.costoPonderado.ToString();
+
+                consultaCostoProducto.MoveFirst();
+                salidaMercanciaLines.UserFields.Fields.Item("U_costoproduc").Value = produccionSAPEntity.costoPonderado.ToString();
                 salidaMercanciaLines.UnitPrice = produccionSAPEntity.costoPonderado;
 
 
-
                 salidaMercanciaLines.Add();
-       
+
+
+            });
+
+           
+
+
+            
+
 
             #endregion
 
@@ -79,42 +88,24 @@ namespace SAP.Repositories
 
         }
 
+        public List<ItemSAP> ListaEmpaques() {
 
 
-
-        public string obgenerCuentaContable(string code)
-        {
-            var consultaremark = _MasterRepository.doQuery(@"	select U_Cuenta_Contable from [@oREMARK] c
-	                                                            inner join [@REMARK1] d on c.Code = d.Code
-	                                                            where U_Codigo_Remark = '" + code + "'");
-            consultaremark.MoveFirst();
-            string remark = consultaremark.Fields.Item("U_Cuenta_Contable").Value;
-            return remark;
-        }
+            var recordSet = _MasterRepository.doQuery("select ItemCode, ItemName from Oitm where FrgnName = 'UT'");
+            List<ItemSAP> empaques = new List<ItemSAP>();
 
 
-        public decimal obtenerCostoPonderado(string tienda, string itemCode) {
+            while (!recordSet.EoF)
+            {
+                ItemSAP Item = new ItemSAP();
+                Item.ItemCode = recordSet.Fields.Item("ItemCode").Value;
+                Item.ItemName = recordSet.Fields.Item("ItemName").Value;
+                empaques.Add(Item);
+                recordSet.MoveNext();
+            }
 
-            var consultaCostoProducto = _MasterRepository.doQuery("Select avgprice from oitw where Whscode = '" + tienda + "' and itemcode = '" + itemCode + "'");
-            consultaCostoProducto.MoveFirst();
-            decimal costoPonderado = 0;
+            return recordSet.RecordCount == 0 ? null : empaques;
 
-            if (consultaCostoProducto.RecordCount > 0)
-             costoPonderado = (decimal) consultaCostoProducto.Fields.Item("avgprice").Value;
-
-
-            return costoPonderado;
-        }
-
-        public double obtenerCostoSalida(int docentry) {
-
-            double costoSalida = 0;
-            var consultaCostoProducto = _MasterRepository.doQuery("Select doctotal from oige where docentry = " + docentry);
-            consultaCostoProducto.MoveFirst();
-
-             costoSalida = Convert.ToDouble(consultaCostoProducto.Fields.Item("doctotal").Value);
-
-            return costoSalida;
 
         }
 

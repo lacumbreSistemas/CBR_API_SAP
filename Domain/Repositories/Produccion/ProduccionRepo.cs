@@ -94,7 +94,10 @@ namespace Domain.Repositories.Produccion
 
             var DocumentoProduccionIntermedia = resumenDocumentoProduccion(numero);
 
-            ProcesosModelSAP _produccionModelSAP = new ProcesosModelSAP();
+
+            ProcesoProduccionSAPEstrategy estrategia = new ProcesoProduccionSAPEstrategy();
+
+            ProcesosModelSAP _produccionModelSAP = new ProcesosModelSAP(estrategia);
 
 
             _produccionModelSAP.numero = DocumentoProduccionIntermedia.numero;
@@ -128,7 +131,7 @@ namespace Domain.Repositories.Produccion
 
 
 
-            return _produccionModelSAP.generarSalidaMercancia();
+            return _produccionModelSAP.generarDocumentoSAP();
 
         }
     }
